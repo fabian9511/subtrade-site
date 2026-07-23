@@ -60,19 +60,46 @@ const day = [
   },
 ];
 
-const features = [
-  ['Field', '⏱️', 'Time Tracking', 'GPS clock-in with live job costing per project.'],
-  ['Field', '📝', 'Daily Logs', 'Two-minute site reports with weather and manpower.'],
-  ['Field', '📷', 'Photos', 'GPS-tagged and timestamped, organized by project.'],
-  ['Field', '🛡️', 'Safety & Custom Forms', 'FLHAs, toolbox talks and your own forms, signed on the phone.'],
-  ['Money', '🧾', 'Change Orders', 'Price, send and track extras before the work is done.'],
-  ['Money', '💵', 'Progress Billing', 'Draws built from real field data, with holdback handled.'],
-  ['Money', '🧰', 'Purchase Orders', 'Commit costs against budgets and see burn instantly.'],
-  ['Office', '📅', 'Crew Scheduling', 'Drag crews between jobs, notify them automatically.'],
-  ['Office', '✅', 'Tasks & Punch Lists', 'Kanban boards for deficiencies and closeout.'],
-  ['Office', '📐', 'Drawings & Markups', 'Current set on every phone, marked up in the field.'],
-  ['Office', '📄', 'Submittals & RFIs', 'Track what is out, what is late and who is holding it.'],
-  ['Office', '📊', 'Project Dashboard', 'Every job, its hours, costs and status on one screen.'],
+const featureGroups = [
+  {
+    key: 'field',
+    label: 'Field',
+    shot: '/subtrade-field-operations-command-center.webp',
+    alt: 'SubTrade field operations dashboard showing projects that need attention and a live map of crews on site',
+    caption: 'The field command centre: every active job, what needs action, and where your crews are right now.',
+    tools: [
+      ['⏱️', 'Time Tracking', 'GPS clock-in with live job costing per project.'],
+      ['📝', 'Daily Logs', 'Two-minute site reports with weather and manpower.'],
+      ['📷', 'Photos', 'GPS-tagged and timestamped, organized by project.'],
+      ['🛡️', 'Safety & Custom Forms', 'FLHAs, toolbox talks and your own forms, signed on the phone.'],
+    ],
+  },
+  {
+    key: 'money',
+    label: 'Money',
+    shot: '/subtrade-dashboard-project-overview.webp',
+    alt: 'SubTrade project dashboard showing financial performance: contract value, change orders, margin and budget used',
+    caption: 'Costs, change orders and margin update themselves from the field data your crew already entered.',
+    tools: [
+      ['🧾', 'Change Orders', 'Price, send and track extras before the work is done.'],
+      ['💵', 'Progress Billing', 'Draws built from real field data, with holdback handled.'],
+      ['🧰', 'Purchase Orders', 'Commit costs against budgets and see burn instantly.'],
+    ],
+  },
+  {
+    key: 'office',
+    label: 'Office',
+    shot: '/subtrade-field-operations-live-view.webp',
+    alt: 'SubTrade project view showing task progress, the project team and the latest site photos',
+    caption: 'Schedules, tasks, drawings and submittals for every job: the whole office on one screen.',
+    tools: [
+      ['📅', 'Crew Scheduling', 'Drag crews between jobs, notify them automatically.'],
+      ['✅', 'Tasks & Punch Lists', 'Kanban boards for deficiencies and closeout.'],
+      ['📐', 'Drawings & Markups', 'Current set on every phone, marked up in the field.'],
+      ['📄', 'Submittals & RFIs', 'Track what is out, what is late and who is holding it.'],
+      ['📊', 'Project Dashboard', 'Every job, its hours, costs and status on one screen.'],
+    ],
+  },
 ];
 
 export default function Home() {
@@ -172,7 +199,7 @@ export default function Home() {
 
       <Reviews />
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section featureset" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <div className="section-head">
             <p className="eyebrow">The full set</p>
@@ -182,14 +209,80 @@ export default function Home() {
               whole platform.
             </p>
           </div>
-          <div className="grid">
-            {features.map(([tag, icon, title, body]) => (
-              <div className={`cell cat-${tag.toLowerCase()}`} key={title}>
-                <span className="tag">{tag}</span>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </div>
+
+          <div className="fset">
+            {featureGroups.map((g, i) => (
+              <input
+                key={`r-${g.key}`}
+                type="radio"
+                name="fset"
+                id={`fset-${g.key}`}
+                className="fset-radio"
+                defaultChecked={i === 0}
+              />
             ))}
+
+            <div className="fset-tabs" role="tablist" aria-label="Feature categories">
+              {featureGroups.map((g) => (
+                <label
+                  key={`t-${g.key}`}
+                  htmlFor={`fset-${g.key}`}
+                  className={`fset-tab cat-${g.key}`}
+                >
+                  <span className="fset-dot" aria-hidden="true" />
+                  {g.label}
+                  <b>{g.tools.length}</b>
+                </label>
+              ))}
+            </div>
+
+            <div className="fset-body">
+              <div className="fset-screen">
+                <figure className="fbrowser">
+                  <span className="fbrowser-bar" aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                    <em>app.subtrade.ca</em>
+                  </span>
+                  <div className="fbrowser-view">
+                    {featureGroups.map((g) => (
+                      <img
+                        key={`s-${g.key}`}
+                        className={`fset-shot shot-${g.key}`}
+                        src={g.shot}
+                        alt={g.alt}
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                </figure>
+              </div>
+
+              <div className="fset-lists">
+                {featureGroups.map((g) => (
+                  <div
+                    key={`p-${g.key}`}
+                    className={`fset-panel panel-${g.key} cat-${g.key}`}
+                  >
+                    <ul className="fset-list">
+                      {g.tools.map(([ico, title, body]) => (
+                        <li className="fset-item" key={title}>
+                          <span className="fset-ico" aria-hidden="true">
+                            {ico}
+                          </span>
+                          <div className="fset-text">
+                            <h3>{title}</h3>
+                            <p>{body}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="fset-cap">{g.caption}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
