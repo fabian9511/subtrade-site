@@ -42,7 +42,7 @@ const orgSchema = {
   publisher: {
     '@type': 'Organization',
     name: 'SubTrade Software Ltd.',
-    url: 'https://subtradesoftware.com',
+    url: 'https://subtradesoftware.com/',
   },
 };
 
