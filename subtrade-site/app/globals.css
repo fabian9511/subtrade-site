@@ -1069,8 +1069,8 @@ main > section.section { padding: 96px 0; }
   box-shadow: 0 1px 3px rgba(21, 24, 28, 0.06);
 }
 .founder-card img, .founder-ph {
-  width: 96px;
-  height: 96px;
+  width: 128px;
+  height: 128px;
   border-radius: 12px;
   object-fit: cover;
   display: block;
