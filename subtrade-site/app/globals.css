@@ -1433,3 +1433,162 @@ main > section.section { padding: 96px 0; }
 @media (max-width: 900px) {
   .fset-cols { grid-template-columns: 1fr; gap: 16px; }
 }
+
+/* ---------- compare pages ---------- */
+.cmp-short { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.cmp-ans {
+  background: #fff;
+  border: 1px solid var(--steel-800);
+  border-radius: 8px;
+  padding: 26px 28px;
+  box-shadow: 0 1px 3px rgba(21, 24, 28, .06);
+}
+.cmp-ans-h {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--steel-500);
+  margin-bottom: 10px;
+}
+.cmp-ans p { color: var(--steel-400); font-size: 16px; line-height: 1.5; }
+.cmp-ans-us { border-color: var(--chalk); border-top: 3px solid var(--chalk); background: var(--chalk-soft); }
+.cmp-ans-us .cmp-ans-h { color: var(--chalk-dim); }
+.cmp-ans-us p { color: var(--gypsum); }
+
+/* spec table */
+.cmp-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--steel-800);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(21, 24, 28, .06);
+  -webkit-overflow-scrolling: touch;
+}
+.cmp-table { width: 100%; border-collapse: collapse; min-width: 620px; }
+.cmp-table th, .cmp-table td {
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 15px;
+  vertical-align: top;
+  border-top: 1px solid var(--steel-850);
+}
+.cmp-table thead th {
+  border-top: none;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: var(--gypsum);
+  border-bottom: 2px solid var(--steel-800);
+}
+.cmp-table tbody th[scope="row"] {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--steel-400);
+  font-weight: 500;
+  width: 27%;
+}
+.cmp-table td { color: var(--steel-400); }
+.cmp-table .us { background: var(--chalk-soft); }
+.cmp-table thead th.us { color: var(--chalk-dim); }
+.cmp-table td.us { color: var(--gypsum); font-weight: 500; }
+.cmp-table td.us .tick { color: var(--office); font-weight: 700; margin-right: 8px; }
+.cmp-table tbody tr:hover td, .cmp-table tbody tr:hover th[scope="row"] { background: var(--steel-850); }
+.cmp-table tbody tr:hover td.us { background: rgba(232, 84, 43, 0.14); }
+.cmp-fineprint { margin-top: 16px; font-size: 13px; color: var(--steel-500); line-height: 1.5; }
+
+/* SubTrade wins grid */
+.cmp-wins { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+.cmp-win {
+  background: #fff;
+  border: 1px solid var(--steel-800);
+  border-top: 3px solid var(--chalk);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(21, 24, 28, .06);
+}
+.cmp-win h3 {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  margin-bottom: 8px;
+}
+.cmp-win p { font-size: 15px; color: var(--steel-400); line-height: 1.5; }
+
+/* fair credit callout */
+.cmp-credit {
+  background: var(--steel-850);
+  border: 1px solid var(--steel-800);
+  border-left: 4px solid var(--steel-500);
+  border-radius: 8px;
+  padding: 30px 34px;
+  max-width: 840px;
+}
+.cmp-credit p:last-child { color: var(--steel-400); font-size: 17px; line-height: 1.55; }
+
+/* pricing */
+.cmp-pricing { max-width: 760px; }
+.cmp-pricing p { font-size: 17px; color: var(--steel-400); line-height: 1.55; margin-bottom: 16px; }
+.cmp-pricing-tag {
+  font-size: 14px !important;
+  color: var(--steel-500) !important;
+  border-top: 1px dashed var(--steel-700);
+  padding-top: 16px;
+  margin-top: 4px;
+}
+
+/* who should choose */
+.cmp-choose {
+  background: #fff;
+  border: 1px solid var(--steel-800);
+  border-radius: 12px;
+  padding: 36px 40px;
+  box-shadow: 0 1px 3px rgba(21, 24, 28, .06);
+  max-width: 840px;
+}
+.cmp-choose ul { list-style: none; display: grid; gap: 12px; margin-bottom: 28px; }
+.cmp-choose li { position: relative; padding-left: 30px; font-size: 16px; color: var(--steel-300); line-height: 1.45; }
+.cmp-choose li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--office);
+  font-weight: 700;
+}
+
+/* faq */
+.cmp-faq {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--steel-800);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  max-width: 860px;
+  box-shadow: 0 1px 3px rgba(21, 24, 28, .06);
+}
+.cmp-qa { padding: 24px 28px; border-top: 1px solid var(--steel-850); }
+.cmp-qa:first-child { border-top: none; }
+.cmp-qa h3 {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  margin-bottom: 8px;
+}
+.cmp-qa p { color: var(--steel-400); font-size: 16px; line-height: 1.55; }
+
+@media (max-width: 760px) {
+  .cmp-short { grid-template-columns: 1fr; }
+}
