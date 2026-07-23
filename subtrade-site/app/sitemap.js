@@ -30,7 +30,7 @@ export default function sitemap() {
   const comparePaths = compares.map((c) => `/compare/${c.slug}`);
   const tutorialPaths = tutorials.map((t) => `/tutorials/${t.slug}`);
   return [...staticPaths, ...featurePaths, ...tradePaths, ...comparePaths, ...tutorialPaths].map((p) => ({
-    url: `${base}${p}`,
+    url: p === '' ? `${base}/` : `${base}${p}/`,
     changeFrequency: 'weekly',
     priority: p === '' ? 1 : 0.8,
     ...(pageImages[p] ? { images: pageImages[p] } : {}),
