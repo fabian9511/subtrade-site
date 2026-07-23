@@ -73,7 +73,6 @@ export default function RootLayout({ children }) {
             <nav className="nav" aria-label="Main">
               <span className="hide-m"><MegaMenu /></span>
               <Link href="/pricing-plans">Pricing</Link>
-              <Link href="/about" className="hide-m">About</Link>
               <a href={PORTAL}>Log in</a>
               <a href={SIGNUP} className="btn btn-primary">
                 Start free trial
