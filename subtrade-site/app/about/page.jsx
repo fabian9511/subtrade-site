@@ -12,7 +12,7 @@ export default function About() {
     <>
       <section className="section" style={{ paddingTop: 100 }}>
         <div className="wrap prose">
-          <p className="eyebrow">Why SubTrade exists</p>
+          <p className="eyebrow">Why SubTrade began</p>
           <h1 className="display">
             Built between
             <br />
