@@ -15,7 +15,7 @@ export function generateMetadata({ params }) {
   return {
     title,
     description: (c.positioning || '').slice(0, 155),
-    alternates: { canonical: `/compare/${c.slug}` },
+    alternates: { canonical: `/compare/${c.slug}/` },
   };
 }
 
