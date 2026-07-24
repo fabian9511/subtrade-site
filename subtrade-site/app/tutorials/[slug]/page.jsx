@@ -36,6 +36,16 @@ export function generateMetadata({ params }) {
 export default function TutorialPage({ params }) {
   const t = tutorials.find((x) => x.slug === params.slug);
   if (!t) notFound();
+  const videoSchema = t.videoId && {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: t.title,
+    description: t.blurb,
+    thumbnailUrl: `https://i.ytimg.com/vi/${t.videoId}/hqdefault.jpg`,
+    embedUrl: `https://www.youtube-nocookie.com/embed/${t.videoId}`,
+    uploadDate: '2026-01-01',
+    publisher: { '@type': 'Organization', name: 'SubTrade Software Ltd.' },
+  };
   const feat = FEATURE_FOR[t.slug];
   const relatedGroups = [
     ...(feat ? [{ label: 'Related feature', links: [{ href: feat[0], label: feat[1] }] }] : []),
@@ -50,6 +60,12 @@ export default function TutorialPage({ params }) {
   ];
   return (
     <>
+    {videoSchema && (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
+    )}
     <section className="section" style={{ paddingTop: 90 }}>
       <div className="wrap" style={{ maxWidth: 860 }}>
         <p className="eyebrow">SubTrade tutorial</p>
