@@ -121,6 +121,7 @@ export default function RootLayout({ children }) {
                 <Link href="/pricing-plans">Pricing</Link>
                 <Link href="/compare">Compare</Link>
                 <Link href="/construction-templates">Templates</Link>
+                <Link href="/construction-holdback-calculator">Holdback calculator</Link>
                 <Link href="/how-to-tutorials">Tutorials</Link>
                 <Link href="/blog">Blog</Link>
               </div>
