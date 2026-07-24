@@ -26,6 +26,15 @@ export function generateMetadata({ params }) {
 export default function ComparePage({ params }) {
   const c = compares.find((x) => x.slug === params.slug);
   if (!c) notFound();
+  const faqSchema = c.faq && {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: c.faq.map(([q, a]) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
   const relatedGroups = [
     {
       label: 'Compare SubTrade with other tools',
@@ -48,6 +57,12 @@ export default function ComparePage({ params }) {
 
   return (
     <>
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <section className="hero" style={{ paddingBottom: 40 }}>
         <div className="wrap hero-inner">
           <p className="eyebrow">{c.eyebrow || 'Comparison'}</p>
