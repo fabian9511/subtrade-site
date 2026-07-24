@@ -1,6 +1,7 @@
 import './globals.css';
 import Link from 'next/link';
 import MegaMenu from '../components/MegaMenu';
+import MobileMenu from '../components/MobileMenu';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/barlow-condensed/700.css';
@@ -72,11 +73,12 @@ export default function RootLayout({ children }) {
             </Link>
             <nav className="nav" aria-label="Main">
               <span className="hide-m"><MegaMenu /></span>
-              <Link href="/pricing-plans">Pricing</Link>
-              <a href={PORTAL}>Log in</a>
+              <Link href="/pricing-plans" className="hide-m">Pricing</Link>
+              <a href={PORTAL} className="hide-m">Log in</a>
               <a href={SIGNUP} className="btn btn-primary">
                 Start free trial
               </a>
+              <MobileMenu />
             </nav>
           </div>
         </header>
