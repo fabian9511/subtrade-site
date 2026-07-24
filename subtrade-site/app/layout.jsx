@@ -1,5 +1,6 @@
 import './globals.css';
 import Link from 'next/link';
+import Script from 'next/script';
 import MegaMenu from '../components/MegaMenu';
 import MobileMenu from '../components/MobileMenu';
 import '@fontsource/barlow-condensed/500.css';
@@ -133,6 +134,12 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </footer>
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6907f49ab6673f496c392c6e"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
