@@ -24,7 +24,7 @@ export default function About() {
             software that had never met one.
           </p>
           <p>
-            Fabian Vargas Garcia runs Quality Gypsum Services, a commercial
+            Fabian V. runs Quality Gypsum Services, a commercial
             drywall and steel stud subcontractor in Calgary. Estimating,
             supervising, chasing draws, managing crews across multiple sites.
             The same week-to-week reality as every sub reading this page.
@@ -60,7 +60,7 @@ export default function About() {
                   alt="Fabian Vargas Garcia, Co-Founder of SubTrade Software"
                   loading="lazy"
                 />
-                <b>Fabian Vargas Garcia</b>
+                <b>Fabian Vargas</b>
                 <span>Co-Founder · The Field</span>
                 <p>
                   President of Quality Gypsum Services, a Calgary commercial
