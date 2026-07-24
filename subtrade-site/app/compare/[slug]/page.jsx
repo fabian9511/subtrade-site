@@ -1,6 +1,10 @@
 import { compares, SIGNUP } from '../../../lib/data';
+import RelatedLinks from '../../../components/RelatedLinks';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+const GUIDE = '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight';
+const BEST = '/best-software-for-subcontractors-comparing-top-tools-for-2025-to-boost-efficiency-and-project-management';
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -22,6 +26,22 @@ export function generateMetadata({ params }) {
 export default function ComparePage({ params }) {
   const c = compares.find((x) => x.slug === params.slug);
   if (!c) notFound();
+  const relatedGroups = [
+    {
+      label: 'Compare SubTrade with other tools',
+      links: compares
+        .filter((x) => x.slug !== c.slug)
+        .map((o) => ({ href: `/compare/${o.slug}`, label: `vs ${o.competitor}` })),
+    },
+    {
+      label: 'Go deeper',
+      links: [
+        { href: BEST, label: 'Best software for subs' },
+        { href: GUIDE, label: 'How to choose' },
+        { href: '/pricing-plans', label: 'Pricing' },
+      ],
+    },
+  ];
   const heroTitle = c.headline
     ? `SubTrade vs ${c.competitor}: ${c.headline}`
     : `SubTrade vs ${c.competitor}`;
@@ -220,6 +240,8 @@ export default function ComparePage({ params }) {
           </div>
         </section>
       )}
+
+      <RelatedLinks groups={relatedGroups} />
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
