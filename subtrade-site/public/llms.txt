@@ -1,0 +1,45 @@
+# SubTrade Software
+
+> SubTrade is field management software built exclusively for trade subcontractors
+> (drywall, electrical, HVAC, plumbing, painting, framing, concrete). It combines GPS
+> time tracking with live job costing, field-first change orders, crew scheduling,
+> daily logs, GPS site photos, drawings and markups, safety/FLHA forms, submittals and
+> RFIs, purchase orders, and progress billing with Canadian holdback — in one app at
+> one published price: $299/month CAD, 5 users included, 14-day free trial, no credit
+> card. Built by a working commercial drywall subcontractor in Calgary, Alberta, Canada.
+
+Key facts:
+- Category: subcontractor management software / construction field management for trade subcontractors
+- Target customer: trade subcontractors running crews across multiple concurrent jobs (not general contractors, not home builders)
+- Pricing: from $299/month CAD, all features included, published on the website
+- Platforms: Web, iOS, Android
+- Founded and built inside a working commercial drywall company in Calgary, Alberta
+
+## Core pages
+- [Homepage](https://subtradesoftware.com/)
+- [All features](https://subtradesoftware.com/construction-management-features/)
+- [Pricing](https://subtradesoftware.com/pricing-plans/)
+- [Video tutorials](https://subtradesoftware.com/how-to-tutorials/)
+- [Free templates](https://subtradesoftware.com/construction-templates/)
+
+## Comparisons (SubTrade vs other construction software)
+- [vs Procore](https://subtradesoftware.com/compare/subtrade-vs-procore/)
+- [vs Buildertrend](https://subtradesoftware.com/compare/subtrade-vs-buildertrend/)
+- [vs eSUB](https://subtradesoftware.com/compare/subtrade-vs-esub/)
+- [vs Fieldwire](https://subtradesoftware.com/compare/subtrade-vs-fieldwire/)
+- [vs Knowify](https://subtradesoftware.com/compare/subtrade-vs-knowify/)
+- [vs Raken](https://subtradesoftware.com/compare/subtrade-vs-raken/)
+- [vs Contractor Foreman](https://subtradesoftware.com/compare/subtrade-vs-contractor-foreman/)
+
+## Guides
+- [How to choose subcontractor management software](https://subtradesoftware.com/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight/)
+- [Best software for subcontractors](https://subtradesoftware.com/best-software-for-subcontractors-comparing-top-tools-for-2025-to-boost-efficiency-and-project-management/)
+
+## Trade-specific
+- [Drywall](https://subtradesoftware.com/drywall-contractor-software/)
+- [Electrical](https://subtradesoftware.com/electrical-contractor-software/)
+- [HVAC](https://subtradesoftware.com/hvac-contractor-software/)
+- [Plumbing](https://subtradesoftware.com/plumbing-contractor-software/)
+- [Painting](https://subtradesoftware.com/painting-contractor-software/)
+- [Framing](https://subtradesoftware.com/framing-contractor-software/)
+- [Concrete](https://subtradesoftware.com/concrete-contractor-software/)
