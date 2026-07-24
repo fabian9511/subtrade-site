@@ -1,7 +1,24 @@
 import { tutorials } from '../../../lib/tutorials';
 import { SIGNUP } from '../../../lib/data';
+import RelatedLinks from '../../../components/RelatedLinks';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+const F = '/construction-management-features';
+const FEATURE_FOR = {
+  'how-to-create-a-project-subtrade-software': [`${F}/field-operations`, 'Field Operations'],
+  'setup-new-employees-fast-in-subtrade-software': ['/time-tracking', 'Time Tracking'],
+  'workflow-efficiency-with-employee-time-sheets': ['/time-tracking', 'Time Tracking'],
+  'time-tracking-approval-and-the-time-splitting': ['/time-tracking', 'Time Tracking'],
+  'manage-time-tracking-and-approvals': ['/time-tracking', 'Time Tracking'],
+  'manage-change-orders-subtrade-software': [`${F}/change-order-management`, 'Change Orders'],
+  'purchase-orders-approval': [`${F}/change-order-management`, 'Change Orders'],
+  'subtrade-tutorial-auto-naming-construction-drawings': [`${F}/drawings-markups`, 'Drawings & Markups'],
+  'scheduling-feature-workflow-construction-drawings-upload': [`${F}/construction-crew-scheduling`, 'Crew Scheduling'],
+  'custom-notifications': [`${F}/field-operations`, 'Field Operations'],
+  'creating-and-submitting-a-daily-report': [`${F}/daily-logs`, 'Daily Logs'],
+  'introducing-field-operations': [`${F}/field-operations`, 'Field Operations'],
+};
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -19,7 +36,20 @@ export function generateMetadata({ params }) {
 export default function TutorialPage({ params }) {
   const t = tutorials.find((x) => x.slug === params.slug);
   if (!t) notFound();
+  const feat = FEATURE_FOR[t.slug];
+  const relatedGroups = [
+    ...(feat ? [{ label: 'Related feature', links: [{ href: feat[0], label: feat[1] }] }] : []),
+    {
+      label: 'Keep learning',
+      links: [
+        { href: '/how-to-tutorials', label: 'All tutorials' },
+        { href: '/construction-management-features', label: 'All features' },
+        { href: '/pricing-plans', label: 'Pricing' },
+      ],
+    },
+  ];
   return (
+    <>
     <section className="section" style={{ paddingTop: 90 }}>
       <div className="wrap" style={{ maxWidth: 860 }}>
         <p className="eyebrow">SubTrade tutorial</p>
@@ -71,5 +101,7 @@ export default function TutorialPage({ params }) {
         </div>
       </div>
     </section>
+    <RelatedLinks groups={relatedGroups} />
+    </>
   );
 }
