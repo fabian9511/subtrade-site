@@ -1,6 +1,17 @@
-import { trades, SIGNUP } from '../../lib/data';
+import { trades, features, SIGNUP } from '../../lib/data';
+import RelatedLinks from '../../components/RelatedLinks';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+const GUIDE = '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight';
+const CORE_FEATURES = [
+  'field-operations',
+  'change-order-management',
+  'construction-crew-scheduling',
+  'daily-logs',
+  'project-dashboard',
+  'site-photos',
+];
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -15,6 +26,22 @@ export function generateMetadata({ params }) {
 export default function TradePage({ params }) {
   const t = trades.find((x) => x.slug === params.trade);
   if (!t) notFound();
+  const featureLinks = [{ href: '/time-tracking', label: 'Time Tracking' }];
+  CORE_FEATURES.forEach((s) => {
+    const fe = features.find((x) => x.slug === s);
+    if (fe) featureLinks.push({ href: `/construction-management-features/${s}`, label: fe.name });
+  });
+  const relatedGroups = [
+    { label: `Features ${t.trade.toLowerCase()} crews use most`, links: featureLinks },
+    {
+      label: 'Compare & learn',
+      links: [
+        { href: '/compare', label: 'Compare SubTrade' },
+        { href: GUIDE, label: 'Buying guide' },
+        { href: '/pricing-plans', label: 'Pricing' },
+      ],
+    },
+  ];
   return (
     <>
       <section className="hero" style={{ paddingBottom: 40 }}>
@@ -68,6 +95,7 @@ export default function TradePage({ params }) {
           </p>
         </div>
       </section>
+      <RelatedLinks groups={relatedGroups} />
       <section className="cta-band">
         <div className="wrap">
           <h2 className="display">Run your next {t.trade.toLowerCase()} job on it</h2>
