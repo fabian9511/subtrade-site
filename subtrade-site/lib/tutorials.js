@@ -37,6 +37,20 @@ export const tutorials = [
     title: 'Purchase orders and approval',
     blurb: 'Create POs from the field and run them through approval.',
     videoId: 'TOlQrawWAaE',
+    content: {
+      lead: `Learn how to set up and manage the full purchase order approval workflow in SubTrade — from configuring company settings to collecting signatures and sending approved POs.`,
+      learnTitle: `In this tutorial you'll learn how to:`,
+      learn: [
+        `Enable purchase order approvals in your company settings`,
+        `Assign an approver to your PO workflow`,
+        `Create a purchase order inside a project`,
+        `Request approval and manage signature requests`,
+        `Confirm signatures and send approved purchase orders`,
+      ],
+      body: [
+        `SubTrade is built specifically for trade subcontractors — drywall, electrical, plumbing, HVAC, roofing, and more. Stop chasing paper approvals and run your jobs with a system that actually fits how you work in the field.`,
+      ],
+    },
   },
   {
     slug: 'subtrade-tutorial-auto-naming-construction-drawings',
@@ -67,11 +81,28 @@ export const tutorials = [
     title: 'Create and submit a daily report',
     blurb: 'File a detailed daily report with weather, manpower and photos.',
     videoId: 'YiYaNBgRVRY',
+    content: {
+      lead: `Learn how to create and submit a daily report in SubTrade Software, step by step. This tutorial walks you through the complete daily reporting workflow, from logging general notes and site conditions to tracking manpower, equipment, materials, and activity progress.`,
+    },
   },
   {
     slug: 'introducing-field-operations',
     title: 'Introducing Field Operations',
     blurb: 'A tour of the Field Operations dashboard: live crews, alerts and sites.',
     videoId: '8eddsG-K56Y',
+    content: {
+      lead: `We just dropped something big. Introducing Field Operations: one screen that shows you everything happening across all your active jobs, right now.`,
+      learnTitle: `What Field Operations gives you:`,
+      learn: [
+        `Priority alerts ranked by what needs action first`,
+        `Live job site map — see who's on site, who's late, who didn't show up`,
+        `Crew status per site in real time`,
+        `Change orders, timesheets and signatures waiting on you`,
+        `Full 7-day manpower view across every project`,
+      ],
+      body: [
+        `No more jumping between jobs to figure out what's on fire. It's all in one place, and it's live today for every SubTrade account, at no extra cost.`,
+      ],
+    },
   },
 ];
