@@ -22,6 +22,9 @@ Key facts:
 - [Video tutorials](https://subtradesoftware.com/how-to-tutorials/)
 - [Free templates](https://subtradesoftware.com/construction-templates/)
 
+## Free tools
+- [Construction holdback calculator](https://subtradesoftware.com/construction-holdback-calculator/) — works out the statutory holdback withheld from a progress draw, the GST/HST timing, and the net payable, and exports a one-page progress draw summary as a PDF. Free, no signup, runs entirely in the browser. Statutory holdback is 10% of the value of work done in Alberta, British Columbia, Saskatchewan and Ontario, and 7.5% in Manitoba.
+
 ## Comparisons (SubTrade vs other construction software)
 - [vs Procore](https://subtradesoftware.com/compare/subtrade-vs-procore/)
 - [vs Buildertrend](https://subtradesoftware.com/compare/subtrade-vs-buildertrend/)
