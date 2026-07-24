@@ -1,6 +1,7 @@
 import { features, trades, SIGNUP } from '../../../lib/data';
 import RichFeature from '../../../components/RichFeature';
 import RelatedLinks from '../../../components/RelatedLinks';
+import OpsFeed from '../../../components/OpsFeed';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -40,9 +41,29 @@ export default function FeaturePage({ params }) {
       ],
     },
   ];
+  const opsDemo = f.slug === 'field-operations' && (
+    <section className="section ops-section">
+      <div className="wrap ops-split">
+        <div className="section-head" style={{ marginBottom: 0 }}>
+          <p className="eyebrow">Live demo</p>
+          <h2 className="display">This is what your office sees</h2>
+          <p>
+            Clock-ins, photos, signed extras and draws stream in from every
+            site as they happen. No status calls, no end-of-week surprises —
+            the whole company on one live feed.
+          </p>
+          <div className="hero-ctas" style={{ marginTop: 26 }}>
+            <a href={SIGNUP} className="btn btn-primary">Start free trial</a>
+          </div>
+        </div>
+        <OpsFeed />
+      </div>
+    </section>
+  );
   return (
     <>
       {f.rich && <RichFeature f={f} />}
+      {opsDemo}
       {!f.rich && (
         <>
       <section className="hero" style={{ paddingBottom: 40 }}>
