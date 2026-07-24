@@ -2015,3 +2015,40 @@ main > section.section { padding: 96px 0; }
 .related-pill .related-arrow { color: var(--steel-500); font-weight: 400; }
 .related-pill:hover .related-arrow { color: var(--chalk); }
 @media (max-width: 700px) { .related-box { padding: 4px 20px; } }
+
+/* ---------- templates page ---------- */
+.tpl-ico {
+  display: inline-grid; place-items: center;
+  width: 40px; height: 40px;
+  font-size: 19px;
+  background: var(--steel-850);
+  border-radius: 9px;
+  margin-bottom: 12px;
+}
+.tpl-form-split {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+}
+.tpl-form-copy { position: sticky; top: 110px; }
+.tpl-form-copy h2 { font-size: clamp(30px, 4vw, 44px); margin: 16px 0 14px; }
+.tpl-form-copy > p { color: var(--steel-400); font-size: 17px; margin-bottom: 16px; }
+.tpl-form-note {
+  font-size: 15px !important;
+  color: var(--steel-500) !important;
+  border-top: 1px dashed var(--steel-700);
+  padding-top: 16px;
+}
+.tpl-form-embed {
+  background: #fff;
+  border: 1px solid var(--steel-800);
+  border-top: 3px solid var(--chalk);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(21, 24, 28, .06);
+}
+@media (max-width: 900px) {
+  .tpl-form-split { grid-template-columns: 1fr; gap: 28px; }
+  .tpl-form-copy { position: static; }
+}
