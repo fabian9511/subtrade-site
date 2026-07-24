@@ -15,7 +15,7 @@ const cols = [
   {
     title: 'Field Operations',
     items: [
-      ['📡', 'Live Overview', 'Everything happening, live', '/construction-management-features/field-operations'],
+      ['📡', 'Field Operations', 'Everything happening, live', '/construction-management-features/field-operations'],
       ['📷', 'Photos', 'GPS-tagged site photos', '/construction-management-features/site-photos'],
       ['⏱️', 'Time Tracking', 'GPS clock-in & job costing', '/time-tracking'],
       ['📅', 'Scheduling', 'Drag-and-drop crew timelines', '/construction-management-features/construction-crew-scheduling'],
