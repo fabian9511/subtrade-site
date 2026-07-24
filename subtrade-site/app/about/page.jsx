@@ -24,7 +24,7 @@ export default function About() {
             software that had never met one.
           </p>
           <p>
-            Fabian V. runs Quality Gypsum Services, a commercial
+            Fabian runs Quality Gypsum Services, a commercial
             drywall and steel stud subcontractor in Calgary. Estimating,
             supervising, chasing draws, managing crews across multiple sites.
             The same week-to-week reality as every sub reading this page.
