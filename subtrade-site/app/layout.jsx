@@ -45,6 +45,18 @@ const orgSchema = {
     '@type': 'Organization',
     name: 'SubTrade Software Ltd.',
     url: 'https://subtradesoftware.com/',
+    logo: 'https://subtradesoftware.com/logo-horizontal.png',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Calgary',
+      addressRegion: 'AB',
+      addressCountry: 'CA',
+    },
+    sameAs: [
+      'https://apps.apple.com/ca/app/subtrade/id6752587413',
+      'https://play.google.com/store/apps/details?id=com.subtradesoftware.subtrade.app',
+      'https://www.youtube.com/@subtradesoftware',
+    ],
   },
 };
 
