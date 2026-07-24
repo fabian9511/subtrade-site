@@ -46,6 +46,25 @@ export default function TutorialPage({ params }) {
             .
           </p>
         )}
+
+        {t.content && (
+          <div className="tut-content">
+            {t.content.lead && <p className="tut-lead">{t.content.lead}</p>}
+            {t.content.learn && t.content.learn.length > 0 && (
+              <>
+                {t.content.learnTitle && <h2>{t.content.learnTitle}</h2>}
+                <ul className="tut-learn">
+                  {t.content.learn.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {t.content.body &&
+              t.content.body.map((p, i) => <p key={i}>{p}</p>)}
+          </div>
+        )}
+
         <div style={{ marginTop: 36, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           <Link href="/how-to-tutorials" className="btn btn-ghost">All tutorials</Link>
           <a href={SIGNUP} className="btn btn-primary">Start free trial</a>
