@@ -6,6 +6,8 @@ tag: "Getting paid"
 date: "2026-07-25"
 updated: "2026-07-25"
 read: "7 min read"
+image: "/progress-billing-template-canadian-subcontractor.webp"
+imageAlt: "A subcontractor filling in a progress billing template on a laptop, showing contract amount, previous billing, current billing and holdback columns."
 ---
 
 Most subcontractors do not have a pricing problem. They have a billing problem. The work goes in, the invoice goes out, and six weeks later there is still a number sitting on the accounts receivable page that nobody can explain. Almost always it comes down to the same three things: how the draw was calculated, how much holdback came off it, and when the tax on that holdback was supposed to be paid.
