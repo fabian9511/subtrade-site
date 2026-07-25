@@ -21,6 +21,7 @@ export default function sitemap() {
     '', '/construction-management-features', '/time-tracking', '/pricing-plans',
     '/compare', '/blog', '/about', '/construction-templates',
     '/construction-holdback-calculator',
+    '/construction-retainage-calculator',
     '/construction-software-15min-demo', '/contact-us', '/how-to-tutorials',
     '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight',
     '/best-software-for-subcontractors-comparing-top-tools-for-2025-to-boost-efficiency-and-project-management',

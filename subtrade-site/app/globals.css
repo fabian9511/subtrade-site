@@ -2318,3 +2318,64 @@ main > section.section { padding: 96px 0; }
   .hb-dl-fields { grid-template-columns: 1fr; }
   .hb-dl-fields .hb-field { margin-bottom: 10px; }
 }
+
+/* ---------- US retainage mode ---------- */
+
+/* Public / private segmented control. Which side of that line a job falls on
+   changes the statutory cap in most states, so it gets a real control rather
+   than being buried in the state dropdown. */
+.hb-seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--steel-700);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--steel-900);
+}
+.hb-seg button {
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  font-size: 14px;
+  color: var(--steel-400);
+  background: transparent;
+  border: 0;
+  padding: 12px 10px;
+  transition: background .15s ease, color .15s ease;
+}
+.hb-seg button + button { border-left: 1px solid var(--steel-700); }
+.hb-seg button:hover { color: var(--gypsum); }
+.hb-seg button.is-on { background: var(--gypsum); color: var(--steel-950); }
+.hb-seg button:focus-visible { outline: 2px solid var(--chalk); outline-offset: -2px; }
+
+.hb-seghint {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--steel-500);
+  margin: 8px 0 0;
+}
+
+/* Stacked notes read as one block rather than four ruled boxes. */
+.hb-note + .hb-note {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 10px;
+}
+
+/* "No cap" is a warning, not a missing value. */
+.hb-nocap {
+  font-style: normal;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: 12.5px;
+  color: var(--chalk);
+  white-space: nowrap;
+}
+
+.hb-table.wide { min-width: 720px; }
