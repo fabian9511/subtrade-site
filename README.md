@@ -102,6 +102,16 @@ formatting and is skipped by the build, so it never appears on the site.
 Add `draft: true` to the front matter to keep a post in the repo but off the
 live site.
 
+**Pictures.** Upload a roughly 1200px-wide `.webp` to `subtrade-site/public/`,
+name the file after what is in it, and point at it from the front matter with
+`image: "/that-filename.webp"` plus a one-sentence `imageAlt:`. That one line
+puts a hero image at the top of the article, a thumbnail on the blog index card
+and a preview image on shared links, and feeds the `BlogPosting` structured
+data. Posts without an `image:` render exactly as before and get a plain
+branded panel on their index card, so the grid stays even. An optional
+`cardImage:` overrides just the index thumbnail. `TEMPLATE.md` spells all of
+this out.
+
 The two original guides — the "ultimate guide" and the "best software"
 comparison — are still hand-built React pages at their own root-level URLs.
 That is deliberate: Google has those URLs indexed, and moving them under
