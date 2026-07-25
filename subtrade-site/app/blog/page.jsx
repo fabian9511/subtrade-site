@@ -28,6 +28,18 @@ export default function Blog() {
         <div className="blog-grid">
           {posts.map((p) => (
             <Link href={p.href} key={p.href} className="blog-card">
+              {/* Every card gets a picture panel so the grid stays even.
+                  Posts with a `cardImage:` or `image:` in their front matter
+                  show the photo; the rest fall back to a branded panel. */}
+              <span className="blog-card-media">
+                {p.cardImage ? (
+                  <img src={p.cardImage} alt="" loading="lazy" />
+                ) : (
+                  <span className="blog-card-fallback" aria-hidden="true">
+                    <img src="/logo-mark.png" alt="" loading="lazy" />
+                  </span>
+                )}
+              </span>
               <span className="blog-card-top">
                 <span className="blog-tag">{p.tag}</span>
                 <span className="blog-read">{p.read}</span>
