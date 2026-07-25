@@ -2,15 +2,8 @@
 
 import { useState } from 'react';
 import { PROVINCES } from '../lib/holdback';
+import { STATES } from '../lib/retainage';
 import { drawSummaryPdf, downloadPdf } from '../lib/holdbackPdf';
-
-const money = (n) =>
-  (isFinite(n) ? n : 0).toLocaleString('en-CA', {
-    style: 'currency',
-    currency: 'CAD',
-    maximumFractionDigits: 2,
-    minimumFractionDigits: 2,
-  });
 
 // Strip anything that isn't a digit or a decimal point, keep one decimal point.
 function clean(raw) {
@@ -19,8 +12,18 @@ function clean(raw) {
   return parts.length > 2 ? parts[0] + '.' + parts.slice(1).join('') : s;
 }
 
-export default function HoldbackCalc() {
+/**
+ * One engine, two jurisdictions.
+ *
+ * country="CA"  statutory holdback + GST/HST timing (the Canadian default)
+ * country="US"  state retainage, public vs private, no tax line
+ */
+export default function HoldbackCalc({ country = 'CA' }) {
+  const us = country === 'US';
+
   const [prov, setProv] = useState('AB');
+  const [usState, setUsState] = useState('CA');
+  const [ptype, setPtype] = useState('private');
   const [contract, setContract] = useState('180000');
   const [complete, setComplete] = useState(45);
   const [billed, setBilled] = useState('54000');
@@ -29,13 +32,34 @@ export default function HoldbackCalc() {
   const [project, setProject] = useState('');
   const [drawNo, setDrawNo] = useState('');
 
-  const p = PROVINCES.find((x) => x.code === prov) || PROVINCES[0];
-  const custom = prov === 'XX';
+  const money = (n) =>
+    (isFinite(n) ? n : 0).toLocaleString(us ? 'en-US' : 'en-CA', {
+      style: 'currency',
+      currency: us ? 'USD' : 'CAD',
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+    });
 
-  const hbPct = custom
-    ? Number(pctOverride === '' ? p.pct : pctOverride)
-    : p.pct;
-  const taxPct = p.tax;
+  const list = us ? STATES : PROVINCES;
+  const code = us ? usState : prov;
+  const p = list.find((x) => x.code === code) || list[0];
+  const custom = code === 'XX';
+  const isPublic = ptype === 'public';
+
+  // In the US the ceiling depends on who owns the job. null means there is no
+  // statutory ceiling at all, which is a different thing from zero.
+  const statutoryPct = us ? (isPublic ? p.publicPct : p.privatePct) : p.pct;
+  const uncapped = us && !custom && statutoryPct === null;
+  const openRate = custom || uncapped;
+
+  const fallbackPct = us ? 10 : p.pct;
+  const hbPct = openRate
+    ? Number(pctOverride === '' ? fallbackPct : pctOverride)
+    : statutoryPct;
+
+  const days = us ? (isPublic ? p.publicDays : p.privateDays) : p.days;
+  const taxPct = us ? 0 : p.tax;
+  const taxLabel = taxPct === 13 ? 'HST' : 'GST';
 
   const contractVal = Number(contract || 0);
   const billedVal = Number(billed || 0);
@@ -51,13 +75,15 @@ export default function HoldbackCalc() {
   // CRA position (Excise Tax Act s.168(7)): GST/HST on a holdback is not
   // payable until the holdback is released or the lien period expires.
   const taxBase = taxOnHoldback ? draw : afterHoldback;
-  const tax = taxBase * (taxPct / 100);
+  const tax = us ? 0 : taxBase * (taxPct / 100);
 
   const netNow = afterHoldback + tax;
   const holdbackToDate = toDate * (hbPct / 100);
-  const taxLater = taxOnHoldback ? 0 : holdback * (taxPct / 100);
+  const taxLater = us || taxOnHoldback ? 0 : holdback * (taxPct / 100);
 
-  const taxLabel = taxPct === 13 ? 'HST' : 'GST';
+  const TERM = us ? 'retainage' : 'holdback';
+  const Term = us ? 'Retainage' : 'Holdback';
+  const rateWord = openRate ? 'Contract' : 'Statutory';
 
   function handleDownload() {
     const now = new Date();
@@ -68,17 +94,27 @@ export default function HoldbackCalc() {
     ].join('-');
 
     const pdf = drawSummaryPdf({
+      country,
       project: project.trim(),
       drawNo: drawNo.trim(),
-      date: now.toLocaleDateString('en-CA', {
+      date: now.toLocaleDateString(us ? 'en-US' : 'en-CA', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
       }),
       province: custom ? 'Not specified' : p.name,
-      act: custom ? null : p.act,
-      days: p.days,
+      projectType: isPublic ? 'Public / government-owned' : 'Private',
+      act: custom ? null : us ? p.statute : p.act,
+      // Step-down rules are written for the side of the job that actually has a
+      // statutory cap. Showing Arizona's public step-down to someone on private
+      // work, where Arizona caps nothing, would read as a protection they do
+      // not have.
+      reduction: us && !custom && !uncapped ? p.reduction : '',
+      stateNote: us && !custom ? p.note : '',
+      uncapped,
+      days,
       hbPct,
+      rateWord,
       taxLabel,
       taxPct,
       contract: money(contractVal),
@@ -116,34 +152,69 @@ export default function HoldbackCalc() {
         {/* ------------------------------------------------ inputs */}
         <div className="hb-inputs">
           <div className="hb-field">
-            <label htmlFor="hb-prov">Province</label>
+            <label htmlFor="hb-prov">{us ? 'State' : 'Province'}</label>
             <select
               id="hb-prov"
-              value={prov}
-              onChange={(e) => setProv(e.target.value)}
+              value={code}
+              onChange={(e) => (us ? setUsState(e.target.value) : setProv(e.target.value))}
             >
-              {PROVINCES.map((x) => (
+              {list.map((x) => (
                 <option key={x.code} value={x.code}>
                   {x.name}
-                  {x.code !== 'XX' ? ` — ${x.pct}%` : ''}
+                  {!us && x.code !== 'XX' ? ` — ${x.pct}%` : ''}
                 </option>
               ))}
             </select>
           </div>
 
-          {custom && (
+          {us && !custom && (
             <div className="hb-field">
-              <label htmlFor="hb-pct">Holdback percentage</label>
+              <label htmlFor="hb-ptype">Who owns the job</label>
+              <div className="hb-seg" id="hb-ptype" role="group">
+                <button
+                  type="button"
+                  className={ptype === 'private' ? 'is-on' : ''}
+                  aria-pressed={ptype === 'private'}
+                  onClick={() => setPtype('private')}
+                >
+                  Private
+                </button>
+                <button
+                  type="button"
+                  className={ptype === 'public' ? 'is-on' : ''}
+                  aria-pressed={ptype === 'public'}
+                  onClick={() => setPtype('public')}
+                >
+                  Public
+                </button>
+              </div>
+              <p className="hb-seghint">
+                Retainage caps in the US are set separately for publicly funded
+                and privately funded work, and they are often not the same
+                number.
+              </p>
+            </div>
+          )}
+
+          {openRate && (
+            <div className="hb-field">
+              <label htmlFor="hb-pct">{Term} percentage</label>
               <div className="hb-suffix">
                 <input
                   id="hb-pct"
                   inputMode="decimal"
                   value={pctOverride}
-                  placeholder="10"
+                  placeholder={String(fallbackPct)}
                   onChange={(e) => setPctOverride(clean(e.target.value))}
                 />
                 <span>%</span>
               </div>
+              {uncapped && (
+                <p className="hb-seghint">
+                  {p.name} sets no statutory ceiling on {ptype} retainage. Put in
+                  the rate your contract actually says.
+                </p>
+              )}
             </div>
           )}
 
@@ -193,21 +264,23 @@ export default function HoldbackCalc() {
             </div>
           </div>
 
-          <label className="hb-check">
-            <input
-              type="checkbox"
-              checked={taxOnHoldback}
-              onChange={(e) => setTaxOnHoldback(e.target.checked)}
-            />
-            <span>
-              Charge {taxPct === 13 ? 'HST' : 'GST'} on the holdback now
-              <em>
-                Off by default. CRA treats tax on a holdback as payable when the
-                holdback is released or the lien period expires, whichever comes
-                first.
-              </em>
-            </span>
-          </label>
+          {!us && (
+            <label className="hb-check">
+              <input
+                type="checkbox"
+                checked={taxOnHoldback}
+                onChange={(e) => setTaxOnHoldback(e.target.checked)}
+              />
+              <span>
+                Charge {taxLabel} on the holdback now
+                <em>
+                  Off by default. CRA treats tax on a holdback as payable when the
+                  holdback is released or the lien period expires, whichever comes
+                  first.
+                </em>
+              </span>
+            </label>
+          )}
         </div>
 
         {/* ------------------------------------------------ results */}
@@ -223,21 +296,23 @@ export default function HoldbackCalc() {
             <b className="mono">− {money(billedVal)}</b>
           </div>
           <div className="hb-row hb-sub">
-            <span>This draw, before holdback</span>
+            <span>This draw, before {TERM}</span>
             <b className="mono">{money(draw)}</b>
           </div>
           <div className="hb-row hb-neg">
             <span>
-              Statutory holdback <i>{hbPct}%</i>
+              {rateWord} {TERM} <i>{hbPct}%</i>
             </span>
             <b className="mono">− {money(holdback)}</b>
           </div>
-          <div className="hb-row">
-            <span>
-              {taxPct === 13 ? 'HST' : 'GST'} <i>{taxPct}%</i>
-            </span>
-            <b className="mono">+ {money(tax)}</b>
-          </div>
+          {!us && (
+            <div className="hb-row">
+              <span>
+                {taxLabel} <i>{taxPct}%</i>
+              </span>
+              <b className="mono">+ {money(tax)}</b>
+            </div>
+          )}
 
           <div className="hb-total">
             <span>Net payable now</span>
@@ -246,29 +321,73 @@ export default function HoldbackCalc() {
 
           <div className="hb-aside">
             <div className="hb-row">
-              <span>Holdback accumulated to date</span>
+              <span>{Term} accumulated to date</span>
               <b className="mono">{money(holdbackToDate)}</b>
             </div>
             {taxLater > 0 && (
               <div className="hb-row">
-                <span>{taxPct === 13 ? 'HST' : 'GST'} payable on release</span>
+                <span>{taxLabel} payable on release</span>
                 <b className="mono">{money(taxLater)}</b>
               </div>
             )}
-            <p className="hb-note">
-              {custom ? (
-                <>
-                  Using a {hbPct}% holdback. Check the lien legislation in your
-                  jurisdiction for the correct rate and retention period.
-                </>
-              ) : (
-                <>
-                  Under {p.name}&rsquo;s <i>{p.act}</i>, that holdback is
-                  normally retained for {p.days} days after substantial
-                  performance before it can be released.
-                </>
-              )}
-            </p>
+
+            {us ? (
+              <>
+                <p className="hb-note">
+                  {custom ? (
+                    <>
+                      Using a {hbPct}% retainage. Check your state statute for the
+                      ceiling that applies and the release clock that goes with it.
+                    </>
+                  ) : uncapped ? (
+                    <>
+                      <b>{p.name} sets no statutory ceiling</b> on {ptype} retainage
+                      — {p.statute === 'No retainage statute' ? 'there is no retainage statute to fall back on' : `${p.statute} does not cap it`}. The {hbPct}% above is whatever your
+                      contract says, not a legal limit.
+                    </>
+                  ) : statutoryPct === 0 ? (
+                    <>
+                      <b>{p.name} prohibits retainage</b> on {ptype} work under{' '}
+                      <i>{p.statute}</i>. If someone is withholding it anyway, that
+                      is the conversation to have.
+                    </>
+                  ) : (
+                    <>
+                      {p.name} caps {ptype} retainage at {statutoryPct}% under{' '}
+                      <i>{p.statute}</i>.
+                      {days
+                        ? ` Release normally runs about ${days} days after completion or acceptance.`
+                        : ' The statute sets no release deadline, so the contract controls the timing.'}
+                    </>
+                  )}
+                </p>
+                {!custom && !uncapped && p.reduction && (
+                  <p className="hb-note">{p.reduction}</p>
+                )}
+                {!custom && p.note && <p className="hb-note">{p.note}</p>}
+                <p className="hb-note">
+                  There is no tax line here on purpose. In most states sales tax on
+                  a construction contract attaches to materials when you buy them,
+                  not to the progress draw you bill — so a retainage calculation
+                  has no tax to defer.
+                </p>
+              </>
+            ) : (
+              <p className="hb-note">
+                {custom ? (
+                  <>
+                    Using a {hbPct}% holdback. Check the lien legislation in your
+                    jurisdiction for the correct rate and retention period.
+                  </>
+                ) : (
+                  <>
+                    Under {p.name}&rsquo;s <i>{p.act}</i>, that holdback is
+                    normally retained for {p.days} days after substantial
+                    performance before it can be released.
+                  </>
+                )}
+              </p>
+            )}
           </div>
 
           <div className="hb-dl">
@@ -317,13 +436,24 @@ export default function HoldbackCalc() {
         </div>
       </div>
 
-      <p className="hb-disclaimer">
-        This calculator is a planning tool, not legal or tax advice. Holdback
-        rates, retention periods and tax treatment vary by jurisdiction, by
-        contract, and by project type — Alberta alone holds 90 days rather than
-        60 on concrete and on oil and gas work. Confirm the numbers for your
-        project with your lawyer and your accountant before you invoice.
-      </p>
+      {us ? (
+        <p className="hb-disclaimer">
+          This calculator is a planning tool, not legal or tax advice. Retainage
+          law is moving quickly — California, New York, Mississippi, Washington,
+          Ohio, Iowa and Kentucky have all changed inside the last three years,
+          and several caps turn on contract size, project type or the date you
+          signed. Confirm the figures for your project with your attorney before
+          you invoice.
+        </p>
+      ) : (
+        <p className="hb-disclaimer">
+          This calculator is a planning tool, not legal or tax advice. Holdback
+          rates, retention periods and tax treatment vary by jurisdiction, by
+          contract, and by project type — Alberta alone holds 90 days rather than
+          60 on concrete and on oil and gas work. Confirm the numbers for your
+          project with your lawyer and your accountant before you invoice.
+        </p>
+      )}
     </div>
   );
 }
