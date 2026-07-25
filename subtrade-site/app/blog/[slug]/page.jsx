@@ -114,6 +114,16 @@ export default function Post({ params }) {
               {post.read}
             </p>
 
+            {/* Hero image. Entirely optional: add `image:` to the post's
+                front matter and it shows up here, in the social preview and
+                in the structured data. Leave it out and the post opens
+                straight into the text, exactly as before. */}
+            {post.image ? (
+              <figure className="post-hero">
+                <img src={post.image} alt={post.imageAlt || post.title} />
+              </figure>
+            ) : null}
+
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
 
             <div className="article-cta">
