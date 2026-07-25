@@ -82,9 +82,9 @@ const relatedGroups = [
   {
     label: 'Free for subcontractors',
     links: [
+      { href: '/construction-retainage-calculator', label: 'US retainage calculator' },
       { href: '/construction-templates', label: 'Free templates' },
       { href: '/how-to-tutorials', label: 'Video tutorials' },
-      { href: '/pricing-plans', label: 'Pricing' },
     ],
   },
 ];
@@ -117,6 +117,11 @@ export default function HoldbackCalculatorPage() {
           <p className="hero-note">
             Alberta, BC, Saskatchewan, Manitoba and Ontario rates built in.
             Download the draw summary as a PDF — nothing leaves your browser.
+            Working in the States?{' '}
+            <a href="/construction-retainage-calculator/">
+              Use the retainage calculator instead
+            </a>
+            .
           </p>
         </div>
       </section>
