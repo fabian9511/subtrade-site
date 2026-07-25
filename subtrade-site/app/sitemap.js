@@ -1,5 +1,6 @@
 import { features, trades, compares } from '../lib/data';
 import { tutorials } from '../lib/tutorials';
+import { getAllPosts } from '../lib/posts';
 
 const base = 'https://subtradesoftware.com';
 const img = (p) => `${base}${p}`;
@@ -31,7 +32,9 @@ export default function sitemap() {
   const tradePaths = trades.map((t) => `/${t.slug}`);
   const comparePaths = compares.map((c) => `/compare/${c.slug}`);
   const tutorialPaths = tutorials.map((t) => `/tutorials/${t.slug}`);
-  return [...staticPaths, ...featurePaths, ...tradePaths, ...comparePaths, ...tutorialPaths].map((p) => ({
+  // Markdown blog posts add themselves — publishing never means editing this file.
+  const postPaths = getAllPosts().map((p) => `/blog/${p.slug}`);
+  return [...staticPaths, ...featurePaths, ...tradePaths, ...comparePaths, ...tutorialPaths, ...postPaths].map((p) => ({
     url: p === '' ? `${base}/` : `${base}${p}/`,
     changeFrequency: 'weekly',
     priority: p === '' ? 1 : 0.8,
