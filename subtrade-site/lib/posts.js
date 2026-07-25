@@ -58,7 +58,15 @@ function readAll() {
         tag: data.tag || 'Article',
         date: data.date || '',
         updated: data.updated || data.date || '',
+        // image      -> the big picture at the top of the post. Also what
+        //               Google and social previews use.
+        // cardImage  -> optional wider crop for the blog index card. Leave it
+        //               out and the card just reuses `image`.
+        // imageAlt   -> one sentence describing the picture, for screen
+        //               readers and for Google Images.
         image: data.image || '',
+        cardImage: data.cardImage || data.image || '',
+        imageAlt: data.imageAlt || '',
         draft: data.draft === true,
         read: data.read || readingTime(body),
         href: `/blog/${slug}`,
