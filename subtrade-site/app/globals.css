@@ -1823,6 +1823,40 @@ main > section.section { padding: 96px 0; }
   transition: transform .15s, box-shadow .15s, border-color .15s;
 }
 .blog-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(21, 24, 28, .1); }
+/* Card picture panel. Bleeds to the card edges via negative margins that
+   cancel the card's own padding. Every card gets one — a photo when the post
+   has an `image:`, a branded panel when it does not — so the grid never goes
+   ragged with some cards taller than others. */
+.blog-card-media {
+  display: block;
+  flex: 0 0 auto;
+  margin: -28px -26px 20px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--steel-850);
+  border-bottom: 1px solid var(--steel-800);
+  border-radius: 7px 7px 0 0;
+}
+.blog-card-media > img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+.blog-card:hover .blog-card-media > img { transform: scale(1.03); }
+.blog-card-fallback {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(90% 120% at 28% 12%, rgba(232, 84, 43, .10), transparent 62%),
+    repeating-linear-gradient(135deg, transparent 0 13px, rgba(21, 24, 28, .028) 13px 14px),
+    var(--steel-850);
+}
+.blog-card-fallback > img {
+  width: 54px; height: 54px;
+  opacity: .55;
+  transform: none;
+}
 .blog-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .blog-tag {
   font-family: var(--font-mono), monospace;
@@ -2437,6 +2471,28 @@ main > section.section { padding: 96px 0; }
   border-radius: 10px;
   border: 1px solid var(--steel-800);
   margin: 8px 0 26px;
+}
+/* Hero image at the top of a post. Only renders when the post's front matter
+   has an `image:`. The fixed aspect ratio reserves the space before the file
+   loads, so the headline never jumps down the page as it arrives. */
+.post-hero {
+  margin: 26px 0 34px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--steel-800);
+  background: var(--steel-850);
+  box-shadow: 0 6px 20px rgba(21, 24, 28, .07);
+}
+.post-hero img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  /* the shared .post-body img rule adds a border and radius; the figure
+     already provides both, so cancel them here */
+  border: 0;
+  border-radius: 0;
+  margin: 0;
 }
 .post-body code {
   font-family: var(--font-mono), monospace;
