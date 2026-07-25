@@ -153,7 +153,7 @@ class Canvas {
 
 // ------------------------------------------------------------------ assembler
 
-function assemble(content, title) {
+function assemble(content, title, producer) {
   const objs = [];
   objs[1] = '<< /Type /Catalog /Pages 2 0 R >>';
   objs[2] = '<< /Type /Pages /Kids [3 0 R] /Count 1 >>';
@@ -166,7 +166,7 @@ function assemble(content, title) {
   objs[6] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>';
   objs[7] = '<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>';
   objs[8] = '<< /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold /Encoding /WinAnsiEncoding >>';
-  objs[9] = `<< /Title (${esc(title)}) /Producer (SubTrade construction holdback calculator) >>`;
+  objs[9] = `<< /Title (${esc(title)}) /Producer (${esc(producer || 'SubTrade construction holdback calculator')}) >>`;
 
   let out = '%PDF-1.4\n';
   const offsets = [];
@@ -188,14 +188,26 @@ function assemble(content, title) {
 
 /**
  * d = {
+ *   country,                             // 'CA' (default) or 'US'
  *   project, drawNo, date, province, act, days, hbPct, taxLabel, taxPct,
  *   contract, complete, billed,          // formatted display strings
  *   toDate, less, draw, holdback, tax, net,
  *   holdbackToDate, taxLater,            // taxLater may be ''
- *   taxOnHoldback                        // boolean
+ *   taxOnHoldback,                       // boolean
+ *
+ *   // US only
+ *   projectType,                         // 'Private' | 'Public / government-owned'
+ *   rateWord,                            // 'Statutory' | 'Contract'
+ *   uncapped,                            // true where the state sets no ceiling
+ *   reduction, stateNote                 // may be ''
  * }
  */
 export function drawSummaryPdf(d) {
+  const us = d.country === 'US';
+  const TERM = us ? 'retainage' : 'holdback';
+  const Term = us ? 'Retainage' : 'Holdback';
+  const rateWord = d.rateWord || 'Statutory';
+  const typeWord = /Public/.test(d.projectType || '') ? 'public' : 'private';
   const c = new Canvas();
 
   c.text('PROGRESS DRAW SUMMARY', M, c.y, 'H2', 19, '0.08');
@@ -207,6 +219,7 @@ export function drawSummaryPdf(d) {
   if (d.drawNo) c.line('Draw number', d.drawNo);
   c.line('Prepared', d.date, { mono: false });
   c.line('Jurisdiction', d.province, { mono: false });
+  if (us) c.line('Project type', d.projectType, { mono: false });
 
   c.heading('CONTRACT');
   c.line('Contract value', d.contract, { hint: 'including approved change orders' });
@@ -218,11 +231,13 @@ export function drawSummaryPdf(d) {
   c.line('Less previously billed', d.less);
   c.y -= 6;
   c.rule(c.y + 1, '0.78', 0.6);
-  c.line('This draw, before holdback', d.draw, { bold: true, labelGray: '0.2' });
-  c.line(`Statutory holdback`, d.holdback, { hint: `${d.hbPct}%` });
-  c.line(`${d.taxLabel}`, d.tax, {
-    hint: d.taxOnHoldback ? `${d.taxPct}% on the full draw` : `${d.taxPct}% on the amount payable now`,
-  });
+  c.line(`This draw, before ${TERM}`, d.draw, { bold: true, labelGray: '0.2' });
+  c.line(`${rateWord} ${TERM}`, d.holdback, { hint: `${d.hbPct}%` });
+  if (!us) {
+    c.line(`${d.taxLabel}`, d.tax, {
+      hint: d.taxOnHoldback ? `${d.taxPct}% on the full draw` : `${d.taxPct}% on the amount payable now`,
+    });
+  }
 
   c.y -= 12;
   c.rule(c.y + 2, '0.2', 1.4);
@@ -232,46 +247,81 @@ export function drawSummaryPdf(d) {
   c.y -= 22;
   c.rule(c.y, '0.78', 0.6);
 
-  c.heading('HOLDBACK POSITION');
-  c.line('Holdback accumulated to date', d.holdbackToDate);
-  if (d.taxLater) {
+  c.heading(us ? 'RETAINAGE POSITION' : 'HOLDBACK POSITION');
+  c.line(`${Term} accumulated to date`, d.holdbackToDate);
+  if (!us && d.taxLater) {
     c.line(`${d.taxLabel} payable when the holdback is released`, d.taxLater);
   }
 
   c.y -= 10;
-  if (d.act) {
-    c.paragraph(
-      `Under ${d.province}'s ${d.act}, that holdback is normally retained for ${d.days} days after ` +
-        'substantial performance before it can be released.',
-      9.5,
-      '0.32',
-      15
+
+  // Notes stop rather than run into the footer. The US branch has more to say
+  // than there is always room for, so the order here is deliberate: the rule
+  // that changes the number first, then the fine print.
+  const para = (s) => {
+    if (s && c.y > M + 108) c.paragraph(s, 9.5, '0.32', 15);
+  };
+
+  if (us) {
+    if (d.uncapped) {
+      para(
+        `${d.province} sets no statutory ceiling on ${typeWord} retainage, so the ${d.hbPct}% used here ` +
+          'comes from the contract rather than from statute. Read the payment clause before you sign it.'
+      );
+    } else if (d.act && Number(d.hbPct) === 0) {
+      para(
+        `${d.province} prohibits retainage on ${typeWord} work under ${d.act}. If it is being withheld ` +
+          'anyway, that is a conversation to have before the next draw rather than at closeout.'
+      );
+    } else if (d.act) {
+      para(
+        `${d.province} caps ${typeWord} retainage at ${d.hbPct}% under ${d.act}.` +
+          (d.days
+            ? ` Release normally runs about ${d.days} days after completion or acceptance.`
+            : ' The statute sets no release deadline, so the contract controls the timing.')
+      );
+    }
+    para(d.reduction);
+    para(d.stateNote);
+    para(
+      'No sales tax has been added. In most states sales tax on a construction contract attaches to ' +
+        'materials at the time of purchase rather than to the progress draw, so there is no tax on this ' +
+        'claim to defer. Confirm the treatment in your state.'
     );
-  }
-  if (!d.taxOnHoldback) {
-    c.paragraph(
-      `${d.taxLabel} has been calculated on the amount payable now rather than on the full draw. ` +
-        'Under the Excise Tax Act, tax on a holdback becomes payable on the earlier of the day the ' +
-        'holdback is paid out and the day the holdback period expires.',
-      9.5,
-      '0.32',
-      15
-    );
+  } else {
+    if (d.act) {
+      para(
+        `Under ${d.province}'s ${d.act}, that holdback is normally retained for ${d.days} days after ` +
+          'substantial performance before it can be released.'
+      );
+    }
+    if (!d.taxOnHoldback) {
+      para(
+        `${d.taxLabel} has been calculated on the amount payable now rather than on the full draw. ` +
+          'Under the Excise Tax Act, tax on a holdback becomes payable on the earlier of the day the ' +
+          'holdback is paid out and the day the holdback period expires.'
+      );
+    }
   }
 
   // Footer, anchored to the bottom of the page rather than to the flow.
   c.rule(M + 66, '0.78', 0.6);
-  const disclaimer =
-    'This summary is a planning tool, not legal or tax advice. Holdback rates, retention periods and tax ' +
-    'treatment vary by jurisdiction, by contract and by project type. Confirm the figures for your project ' +
-    'with your lawyer and your accountant before you invoice.';
+  const disclaimer = us
+    ? 'This summary is a planning tool, not legal or tax advice. Retainage caps, release deadlines and ' +
+      'step-down rules vary by state, by contract size and by the date the contract was signed, and several ' +
+      'states have changed theirs recently. Confirm the figures for your project with your attorney before you invoice.'
+    : 'This summary is a planning tool, not legal or tax advice. Holdback rates, retention periods and tax ' +
+      'treatment vary by jurisdiction, by contract and by project type. Confirm the figures for your project ' +
+      'with your lawyer and your accountant before you invoice.';
   let fy = M + 52;
   for (const l of wrap(disclaimer, 8, RIGHT - M)) {
     c.text(l, M, fy, 'H1', 8, '0.5');
     fy -= 11;
   }
   c.text(
-    'Built with the free holdback calculator at subtradesoftware.com/construction-holdback-calculator/',
+    us
+      ? 'Built with the free retainage calculator at subtradesoftware.com/construction-retainage-calculator/'
+      : 'Built with the free holdback calculator at subtradesoftware.com/construction-holdback-calculator/',
     M,
     M - 4,
     'H1',
@@ -279,7 +329,13 @@ export function drawSummaryPdf(d) {
     '0.5'
   );
 
-  return assemble(c.stream(), d.project ? `Draw summary - ${ascii(d.project)}` : 'Progress draw summary');
+  return assemble(
+    c.stream(),
+    d.project ? `Draw summary - ${ascii(d.project)}` : 'Progress draw summary',
+    us
+      ? 'SubTrade construction retainage calculator'
+      : 'SubTrade construction holdback calculator'
+  );
 }
 
 export function downloadPdf(pdfString, filename) {
