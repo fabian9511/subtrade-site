@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getAllPosts, legacyPosts } from '../../lib/posts';
 
 export const metadata = {
   title: 'Blog',
@@ -6,24 +7,13 @@ export const metadata = {
   alternates: { canonical: '/blog/' },
 };
 
-const posts = [
-  {
-    href: '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight',
-    tag: 'Buying guide',
-    read: '5 min read',
-    title: 'How to choose subcontractor management software',
-    blurb: 'The features that matter, the traps to avoid, and the one-week evaluation that beats every demo.',
-  },
-  {
-    href: '/best-software-for-subcontractors-comparing-top-tools-for-2025-to-boost-efficiency-and-project-management',
-    tag: 'Comparison',
-    read: '4 min read',
-    title: 'Best software for subcontractors: comparing the top tools',
-    blurb: 'GC tools, builder tools and sub tools are different products. An honest map of the category.',
-  },
-];
-
 export default function Blog() {
+  // Markdown posts and the two original guides sit in one list, newest first.
+  // Adding a .md file to content/posts/ is all it takes to appear here.
+  const posts = [...getAllPosts(), ...legacyPosts].sort((a, b) =>
+    String(b.date || '').localeCompare(String(a.date || ''))
+  );
+
   return (
     <section className="section" style={{ paddingTop: 90 }}>
       <div className="wrap">
