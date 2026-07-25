@@ -1,0 +1,137 @@
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { SIGNUP } from '../../../lib/data';
+import { getAllPosts, getPost } from '../../../lib/posts';
+import ArticleToc from '../../../components/ArticleToc';
+import RelatedLinks from '../../../components/RelatedLinks';
+
+const BASE = 'https://subtradesoftware.com';
+
+// Every post is known at build time, so each one is prerendered as static
+// HTML — same as the hand-built pages were.
+export function generateStaticParams() {
+  return getAllPosts().map((p) => ({ slug: p.slug }));
+}
+
+export function generateMetadata({ params }) {
+  const post = getPost(params.slug);
+  if (!post) return {};
+  const path = `/blog/${post.slug}/`;
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: { canonical: path },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: `${BASE}${path}`,
+      type: 'article',
+      publishedTime: post.date || undefined,
+      modifiedTime: post.updated || undefined,
+      ...(post.image ? { images: [`${BASE}${post.image}`] } : {}),
+    },
+  };
+}
+
+function prettyDate(iso) {
+  if (!iso) return '';
+  const d = new Date(`${iso}T12:00:00Z`);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('en-CA', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
+export default function Post({ params }) {
+  const post = getPost(params.slug);
+  if (!post) notFound();
+
+  const path = `/blog/${post.slug}/`;
+
+  const schema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.description,
+      author: { '@type': 'Organization', name: 'SubTrade Software Ltd.', url: `${BASE}/` },
+      publisher: {
+        '@type': 'Organization',
+        name: 'SubTrade Software Ltd.',
+        logo: { '@type': 'ImageObject', url: `${BASE}/logo-horizontal.png` },
+      },
+      mainEntityOfPage: `${BASE}${path}`,
+      ...(post.date ? { datePublished: post.date } : {}),
+      ...(post.updated ? { dateModified: post.updated } : {}),
+      ...(post.image ? { image: `${BASE}${post.image}` } : {}),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Blog', item: `${BASE}/blog/` },
+        { '@type': 'ListItem', position: 2, name: post.title, item: `${BASE}${path}` },
+      ],
+    },
+  ];
+
+  const related = [
+    {
+      label: 'Free for subcontractors',
+      links: [
+        { href: '/construction-holdback-calculator', label: 'Holdback calculator' },
+        { href: '/construction-retainage-calculator', label: 'US retainage calculator' },
+        { href: '/construction-templates', label: 'Construction templates' },
+      ],
+    },
+    {
+      label: 'Keep reading',
+      links: [
+        { href: '/blog', label: 'All articles' },
+        { href: '/construction-management-features', label: 'What SubTrade does' },
+      ],
+    },
+  ];
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <div className="section article-page" style={{ paddingTop: 80 }}>
+        <div className="wrap article-wrap">
+          <article className="prose article-body post-body">
+            <Link href="/blog" className="article-back">← All articles</Link>
+            <p className="eyebrow">{post.tag}</p>
+            <h1 className="display">{post.title}</h1>
+            <p className="article-meta">
+              {prettyDate(post.date)}
+              {post.date ? <span className="dot"> · </span> : null}
+              {post.read}
+            </p>
+
+            <div dangerouslySetInnerHTML={{ __html: post.html }} />
+
+            <div className="article-cta">
+              <div>
+                <b>Built by a subcontractor, for subcontractors</b>
+                <p>
+                  SubTrade runs time tracking, change orders, daily logs and progress
+                  billing on one plan. 14-day trial, no credit card.
+                </p>
+              </div>
+              <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
+            </div>
+          </article>
+
+          {post.headings.length > 1 ? <ArticleToc items={post.headings} /> : null}
+        </div>
+      </div>
+      <RelatedLinks groups={related} />
+    </>
+  );
+}
