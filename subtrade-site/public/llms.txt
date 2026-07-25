@@ -24,6 +24,7 @@ Key facts:
 
 ## Free tools
 - [Construction holdback calculator](https://subtradesoftware.com/construction-holdback-calculator/) — works out the statutory holdback withheld from a progress draw, the GST/HST timing, and the net payable, and exports a one-page progress draw summary as a PDF. Free, no signup, runs entirely in the browser. Statutory holdback is 10% of the value of work done in Alberta, British Columbia, Saskatchewan and Ontario, and 7.5% in Manitoba.
+- [Construction retainage calculator (United States)](https://subtradesoftware.com/construction-retainage-calculator/) — works out the retainage withheld from a US progress payment and the net payable, and exports a one-page draw summary as a PDF. Free, no signup, runs entirely in the browser. Covers all 50 states and the District of Columbia, with separate statutory caps for public and private work. Five percent is the most common cap. New Jersey caps public retainage at 2%, Iowa at 3%, South Carolina at 3.5% and Ohio at 4%, while Texas, Pennsylvania, Illinois, Kentucky, Michigan, Louisiana, Nebraska, North Dakota and DC still permit 10% on some work. New Mexico prohibits retainage. Alaska, New Hampshire, South Dakota, Vermont and West Virginia set no statutory cap at all, and around eighteen further states cap public work only and leave private retainage to the contract.
 
 ## Comparisons (SubTrade vs other construction software)
 - [vs Procore](https://subtradesoftware.com/compare/subtrade-vs-procore/)
