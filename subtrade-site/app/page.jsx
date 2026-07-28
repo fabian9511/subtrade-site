@@ -96,6 +96,23 @@ const featureGroups = [
 export default function Home() {
   return (
     <>
+      {/* Preload the hero background (LCP element). As a CSS background-image it is
+          otherwise only discovered after the stylesheet is parsed, which serialized
+          the request chain and pushed mobile LCP past 8s on slow 4G. */}
+      <link
+        rel="preload"
+        as="image"
+        href="/subtrade-commercial-construction-site-mobile.webp"
+        media="(max-width: 700px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/subtrade-commercial-construction-site.webp"
+        media="(min-width: 700.1px)"
+        fetchPriority="high"
+      />
       <section className="hero hero-photo">
         <div className="wrap hero-split">
           <div className="hero-inner">
