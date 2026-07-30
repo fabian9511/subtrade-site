@@ -359,6 +359,100 @@ export const features = [
     ],
   },
   {
+    slug: 'progress-billing',
+    image: '/subtrade-schedule-of-values-progress-billing.webp',
+    imageAlt: 'Schedule of values in SubTrade showing percent complete, this claim, previously invoiced and invoiced to date for progress billing',
+
+    name: 'Progress Billing',
+    rich: {
+      heroTitle: ['Bill the work.', 'Get the draw paid.'],
+      heroSub:
+        'Progress billing software built for trade subcontractors: a schedule of values per contract, percent complete backed by field data, holdback handled the Canadian way, and a claim your GC approves instead of questions.',
+      stats: [
+        ['SOV', 'Per contract'],
+        ['Auto', 'Holdback math'],
+        ['COs', 'On every draw'],
+        ['PDF', 'Claim in one click'],
+      ],
+      sections: [
+        {
+          eyebrow: 'The schedule of values',
+          title: 'Every draw starts from the same table',
+          body:
+            'Set up your schedule of values once, straight from the contract. From then on, every draw is the same four columns: percent complete, this claim, previously invoiced and invoiced to date. No rebuilt spreadsheets, no formulas to break, no wondering what you billed last month.',
+          checks: [
+            'Schedule of values built once per contract',
+            'Percent complete, this claim, previously invoiced, invoiced to date',
+            'Previous draws carry forward automatically',
+            'Overbilling impossible: the math will not let a line exceed 100%',
+            'Every claim stored with its project, forever',
+          ],
+          images: ['/subtrade-schedule-of-values-progress-billing.webp'],
+          imageAlt: 'Schedule of values in SubTrade showing percent complete, this claim, previously invoiced and invoiced to date columns for a progress claim',
+          browser: true,
+        },
+        {
+          eyebrow: 'Holdback and extras',
+          title: 'Holdback the Canadian way, extras on every draw',
+          body:
+            'Statutory holdback is calculated on every claim automatically, tracked per project, and ready to release when the lien period runs out. Approved change orders carry straight from the field into the draw, priced and documented, so extras get billed the month they happen instead of fought over at closeout.',
+          checks: [
+            'Statutory holdback deducted and tracked automatically',
+            'Holdback receivable visible per project, not lost in a spreadsheet',
+            'Approved change orders appear alongside the schedule of values',
+            'Every extra billed with its photos and approval attached',
+            'Release claims ready when the lien period expires',
+          ],
+          metaCard: [
+            ['This claim', '$48,200.00 work completed'],
+            ['Change orders', '+ $6,450.00 approved this period'],
+            ['Holdback (10%)', '\u2212 $5,465.00 retained'],
+            ['Net claim', '$49,185.00 payable'],
+            ['Holdback to date', '$21,340.00 receivable'],
+          ],
+          flip: true,
+        },
+        {
+          eyebrow: 'Out the door',
+          title: 'A claim your GC approves, not questions',
+          body:
+            'One click turns the draw into a clean PDF progress claim with the schedule of values, change orders and holdback laid out the way GCs expect. Behind every percent complete sits the field record: daily logs, photos and signed extras. Send it, track it, and know at a glance which draws are draft, sent or paid.',
+          checks: [
+            'One-click PDF progress claim, formatted for GCs',
+            'Draw status per project: draft, sent, paid',
+            'Percent complete backed by logs and GPS-tagged photos',
+            'Email the claim or share a live project link',
+            'Full billing history per contract, always one tap away',
+          ],
+          images: ['/subtrade-progress-claim-pdf.webp'],
+          imageAlt: 'PDF progress claim generated in SubTrade with schedule of values, approved change orders and statutory holdback ready to send to the general contractor',
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['What is progress billing in construction?', 'Progress billing means invoicing a percentage of the contract as work completes, usually monthly, instead of billing everything at the end. Each draw claims the value of work done that period against a schedule of values, minus statutory holdback.'],
+        ['How does SubTrade handle holdback?', 'Statutory holdback is deducted from every claim automatically and tracked as a receivable per project. When the lien period runs out, the amount owed to you is already calculated and ready to claim.'],
+        ['Do change orders show up on the draw?', 'Yes. Approved change orders carry into progress billing automatically and appear alongside your schedule of values, priced and documented, so every extra lands on the next claim instead of waiting for closeout.'],
+        ['Can I send the progress claim to my GC?', 'Yes. One click generates a clean PDF progress claim with the schedule of values, change orders and holdback laid out the way GCs expect. Email it directly or share a live project link.'],
+        ['How do I back up my percent complete?', 'Every project carries its daily logs, GPS-tagged photos and signed change orders in the same system, so when a GC questions a line, the field record that proves it is one tap away.'],
+        ['Does SubTrade replace my accounting software?', 'No. SubTrade builds and tracks the progress claim, the draw history and the holdback receivable. Your accountant keeps working in your accounting system; you just stop building draws in spreadsheets.'],
+      ],
+    },
+    keyword: 'progress billing software for subcontractors',
+    title: 'Progress Billing Software for Subcontractors',
+    description:
+      'Progress billing built for trade contractors: schedule of values, automatic holdback, change orders on every draw, one-click PDF claims. Part of SubTrade.',
+    h1: 'Draws without the spreadsheet',
+    intro:
+      'Progress billing built for subs: a schedule of values per contract, automatic holdback, approved change orders on every draw, and a PDF claim your GC approves instead of questions.',
+    points: [
+      ['Schedule of values, once', 'Set it up from the contract and every draw uses the same table. Previous claims carry forward automatically.'],
+      ['Holdback, handled', 'Statutory holdback deducted on every claim and tracked as a receivable per project until release.'],
+      ['Extras billed, not forgotten', 'Approved change orders carry into the draw automatically, priced and documented.'],
+      ['Backed by the field', 'Percent complete sits on top of daily logs, photos and signed extras, so claims survive scrutiny.'],
+    ],
+  },
+  {
     slug: 'daily-logs',
     image: '/subtrade-daily-log-foreman-end-of-day.webp',
     imageAlt: 'Foreman filing a daily log in the SubTrade app at end of day on a commercial site',
