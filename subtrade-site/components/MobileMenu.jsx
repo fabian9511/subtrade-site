@@ -37,7 +37,7 @@ const cols = [
       ['🧾', 'Change Orders', 'Draft, submit & invoice COs', '/construction-management-features/change-order-management'],
       ['🧰', 'Purchase Orders', 'Track material orders & costs', '/construction-management-features/change-order-management'],
       ['📄', 'Submittals & RFIs', 'Shop drawings & RFI tracking', '/construction-management-features/submittals'],
-      ['💵', 'Progress Billing', 'Draws with holdback handled', '/pricing-plans'],
+      ['💵', 'Progress Billing', 'Draws with holdback handled', '/construction-management-features/progress-billing'],
     ],
   },
 ];
