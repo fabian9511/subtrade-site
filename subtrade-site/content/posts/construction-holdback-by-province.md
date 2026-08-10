@@ -1,10 +1,10 @@
 ---
-title: "Construction holdback by province: a subcontractor's guide"
+title: "Construction holdback by province explained"
 description: "Holdback percentages and release periods differ by province. Here is what Alberta, BC, Saskatchewan, Manitoba and Ontario require, in one table."
 blurb: "Ten percent almost everywhere, 7.5% in one place, and release periods that range from 40 to 60 days. The province-by-province rundown for subs."
 tag: "Getting paid"
 date: "2026-08-14"
-image: "/construction-holdback-by-province-map-invoice.webp"
+image: "/construction-holdback-by-province-draw-invoice-desk.webp"
 imageAlt: "A subcontractor's desk with a progress draw invoice, a calculator and a hard hat, lit by morning light through an office window."
 ---
 
