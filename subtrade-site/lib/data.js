@@ -424,7 +424,7 @@ export const features = [
             'Email the claim or share a live project link',
             'Full billing history per contract, always one tap away',
           ],
-          images: ['/subtrade-progress-claim-pdf.webp'],
+          images: ['/progress-billing-template-canadian-subcontractor.webp'],
           imageAlt: 'PDF progress claim generated in SubTrade with schedule of values, approved change orders and statutory holdback ready to send to the general contractor',
           browser: true,
         },
