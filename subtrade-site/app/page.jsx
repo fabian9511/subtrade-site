@@ -5,6 +5,7 @@ import Reviews from '../components/Reviews';
 import AppDownload from '../components/AppDownload';
 
 export const metadata = {
+  alternates: { canonical: '/' },
   title: 'Subcontractor Software for Trade Contractors | SubTrade',
   description:
     'All-in-one subcontractor software for electrical, plumbing, HVAC, drywall & concrete trades. GPS time tracking, change orders, daily logs. 14-day free trial.',
