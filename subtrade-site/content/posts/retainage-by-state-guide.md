@@ -5,8 +5,8 @@ blurb: "Everyone says retainage varies by state. Almost nobody shows you the act
 tag: "Getting paid"
 date: "2026-08-20"
 updated: "2026-08-20"
-image: "/retainage-by-state-map-subcontractor.webp"
-imageAlt: "A subcontractor's project manager reviewing a US map and retainage figures on a laptop at an office desk while preparing a final billing package."
+image: "/retainage-commercial-jobsite-crane-tablet.webp"
+imageAlt: "A subcontractor in high-visibility gear checking figures on a tablet in front of a large commercial construction site with a tower crane against a dramatic dusk sky."
 ---
 
 "It depends on your state" is the single most expensive sentence in retainage. Every guide repeats it, then leaves you to go find the actual number yourself. This is the reference that gives you the number: the retainage cap and release rules for all 50 states and the District of Columbia, split by private and public work, as they stand in 2026.
