@@ -5,8 +5,8 @@ blurb: "The payment rules changed in three provinces at once, and most subs have
 tag: "Getting paid"
 date: "2026-08-18"
 updated: "2026-08-18"
-image: "/prompt-payment-canada-invoice-review-desk.webp"
-imageAlt: "A subcontractor reviewing a construction invoice and a laptop calendar at an office desk, tracking payment deadlines under Canada's prompt payment rules."
+image: "/prompt-payment-foreman-highrise-goldenhour.webp"
+imageAlt: "A commercial subcontractor foreman on an upper floor of a steel and glass high-rise at golden hour, checking the job on a tablet with a city skyline behind him."
 ---
 
 The payment clock changed in three provinces at once, and most subcontractors have not caught up. Ontario's Construction Act amendments came into force on January 1, 2026. British Columbia passed a prompt payment act that received Royal Assent on November 27, 2025 and is waiting on regulations to set its start date. Alberta amended its prompt payment regulation on November 26, 2025. If you work in any of these provinces, the rules about when you have to be paid, and when your holdback comes back, are not the rules you learned three years ago.
