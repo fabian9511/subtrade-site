@@ -1,6 +1,6 @@
 ---
-title: "Jobsite photo documentation: a subcontractor's system"
-description: "How subcontractors document a jobsite with photos that hold up: what to shoot, how to name and organize it, and turning photos into proof for extras and disputes."
+title: "Jobsite photo documentation for subs"
+description: "How subcontractors document a jobsite with photos that hold up: what to shoot, how to organize it, and turning photos into proof for extras and disputes."
 blurb: "A phone full of photos nobody can find is not documentation. The five shots that win disputes, and how to store them so you can produce one in ten seconds."
 tag: "Field operations"
 date: "2026-08-22"
