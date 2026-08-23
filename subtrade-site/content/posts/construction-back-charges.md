@@ -1,6 +1,6 @@
 ---
-title: "Construction back-charges: how subcontractors fight them"
-description: "What a construction back-charge is, when it is legitimate, and how a subcontractor disputes an improper one with documentation, notice, and a clean paper trail."
+title: "Construction back-charges: how subs fight them"
+description: "What a construction back-charge is, when it is legitimate, and how a subcontractor disputes an improper one with documentation, notice, and a paper trail."
 blurb: "A line item on your invoice you never agreed to. What a back-charge really is, when you actually owe it, and the paperwork that gets a bogus one reversed."
 tag: "Getting paid"
 date: "2026-08-24"
