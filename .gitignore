@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+next-env.d.ts
+
+# Environment files — never commit secrets
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Zipped bundles: source files belong in the repo unpacked, not archived.
+# A stale subtrade-seo-edits.zip sat here for months shadowing the real files.
+*.zip
