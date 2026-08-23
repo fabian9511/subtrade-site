@@ -90,9 +90,9 @@ export function getPost(slug) {
   return readAll().find((p) => p.slug === slug) || null;
 }
 
-// The two long-form guides published before the Markdown system existed.
-// They keep their original root-level URLs because Google has them indexed
-// and moving them would throw away that history for nothing.
+// The long-form guide published before the Markdown system existed. It keeps
+// its original root-level URL because Google has it indexed and moving it would
+// throw away that history for nothing.
 export const legacyPosts = [
   {
     href: '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight',
@@ -102,14 +102,5 @@ export const legacyPosts = [
     title: 'How to choose subcontractor management software',
     blurb:
       'The features that matter, the traps to avoid, and the one-week evaluation that beats every demo.',
-  },
-  {
-    href: '/best-software-for-subcontractors-comparing-top-tools-for-2025-to-boost-efficiency-and-project-management',
-    tag: 'Comparison',
-    read: '4 min read',
-    date: '2026-01-08',
-    title: 'Best software for subcontractors: comparing the top tools',
-    blurb:
-      'GC tools, builder tools and sub tools are different products. An honest map of the category.',
   },
 ];

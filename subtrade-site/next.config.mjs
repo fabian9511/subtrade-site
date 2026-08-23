@@ -71,6 +71,10 @@ const nextConfig = {
       { source: '/fsm-software', destination: '/', permanent: true },
       { source: '/real-profitability', destination: '/', permanent: true },
       { source: '/instagram-home-page', destination: '/', permanent: true },
+
+      // Consolidated / mis-named URLs
+      { source: '/best-software-for-subcontractors-comparing-top-tools-for-2025-to-boost-efficiency-and-project-management', destination: GUIDE, permanent: true },
+      { source: '/blog/what-is-a-sub-trade_1', destination: '/blog/what-is-a-sub-trade/', permanent: true },
     ];
   },
 };

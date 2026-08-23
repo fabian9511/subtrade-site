@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const GUIDE = '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight';
-const BEST = '/best-software-for-subcontractors-comparing-top-tools-for-2025-to-boost-efficiency-and-project-management';
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -45,7 +44,6 @@ export default function ComparePage({ params }) {
     {
       label: 'Go deeper',
       links: [
-        { href: BEST, label: 'Best software for subs' },
         { href: GUIDE, label: 'How to choose' },
         { href: '/pricing-plans', label: 'Pricing' },
       ],

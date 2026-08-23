@@ -20,6 +20,7 @@ const toc = [
   { id: 'features-worth-having', title: 'Features worth having' },
   { id: 'the-traps', title: 'The traps' },
   { id: 'sub-vs-gc', title: 'Sub-first vs GC platforms' },
+  { id: 'the-shortlist', title: 'The tools people shortlist' },
   { id: 'what-it-should-cost', title: 'What it should cost' },
   { id: 'run-the-evaluation', title: 'How to run the evaluation' },
   { id: 'faq', title: 'Frequently asked questions' },
@@ -346,6 +347,58 @@ export default function Guide() {
               <Link href="/compare/subtrade-vs-fieldwire">Fieldwire</Link> and the
               rest of the field on the{' '}
               <Link href="/compare">compare hub</Link>.
+            </p>
+
+            <h2 id="the-shortlist">The tools people shortlist, honestly framed</h2>
+            <p>
+              Most &ldquo;best software for subcontractors&rdquo; lists mix three
+              different products together: tools for GCs, tools for residential
+              builders, and tools for the trade subcontractors doing the actual work.
+              Here is the same shortlist separated by who each one was really built
+              for.
+            </p>
+            <p>
+              <b>SubTrade</b> is built exclusively for trade subcontractors: GPS time
+              tracking with live job costing, change orders from the field, crew
+              scheduling across concurrent jobs, daily logs, drawings, safety forms,
+              submittals, purchase orders and progress billing with Canadian holdback.
+              One published plan, five users included, field-first design. Its focus
+              is its edge: it does not try to be accounting or payroll.
+            </p>
+            <p>
+              <b>Fieldwire</b> is strong on plans and task coordination and is widely
+              used on large project teams. Subs on big jobs often like it; the money
+              side of subcontracting is not its center of gravity.{' '}
+              <Link href="/compare/subtrade-vs-fieldwire">Full comparison</Link>.
+            </p>
+            <p>
+              <b>Buildertrend</b> serves residential builders and remodelers well,
+              with homeowner-facing features subs rarely need.{' '}
+              <Link href="/compare/subtrade-vs-buildertrend">Full comparison</Link>.
+            </p>
+            <p>
+              <b>eSUB</b> also targets trade subs, with deep document workflows and a
+              more enterprise-weight rollout.{' '}
+              <Link href="/compare/subtrade-vs-esub">Full comparison</Link>.
+            </p>
+            <p>
+              <b>Contractor Foreman</b> offers a very broad module list at an
+              aggressive price across many contractor types; breadth over depth.{' '}
+              <Link href="/compare/subtrade-vs-contractor-foreman">Full comparison</Link>.
+            </p>
+            <p>
+              <b>Raken</b> is best known for daily reporting and field data capture,
+              often paired with other systems for the rest.{' '}
+              <Link href="/compare/subtrade-vs-raken">Full comparison</Link>.
+            </p>
+            <p>
+              <b>Knowify</b> is a capable specialty-contractor platform with strong
+              contract and back-office workflows.{' '}
+              <Link href="/compare/subtrade-vs-knowify">Full comparison</Link>.
+            </p>
+            <p>
+              Ignore feature-count comparisons; every vendor wins its own chart. The
+              week-long trial below settles it faster than any list can.
             </p>
 
             <h2 id="what-it-should-cost">What subcontractor software should cost</h2>
