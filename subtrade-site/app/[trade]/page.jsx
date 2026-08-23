@@ -20,7 +20,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const t = trades.find((x) => x.slug === params.trade);
   if (!t) return {};
-  return { title: `${t.title} | SubTrade`, description: t.description };
+  return { title: { absolute: `${t.title} | SubTrade` }, description: t.description };
 }
 
 export default function TradePage({ params }) {
