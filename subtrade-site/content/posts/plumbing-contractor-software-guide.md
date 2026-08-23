@@ -1,5 +1,5 @@
 ---
-title: "Plumbing contractor estimating and job costing guide"
+title: "Plumbing contractor estimating guide"
 description: "How plumbing subcontractors estimate jobs and hold margin: production rates, labour tracking, and a job cost view that catches a losing job before it closes."
 blurb: "Pipe by the foot, fixtures by the count, and labour that eats your margin if you can't see it. How a plumbing sub estimates and then protects that estimate."
 tag: "Estimating"
