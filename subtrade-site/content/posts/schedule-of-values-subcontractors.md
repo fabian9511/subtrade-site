@@ -1,5 +1,5 @@
 ---
-title: "Schedule of values for subcontractors: build one that gets paid"
+title: "Schedule of values for subcontractors"
 description: "How subcontractors structure a schedule of values that bills cleanly: right line items, front-loaded cash flow, stored materials, and holdback handled."
 blurb: "The SOV is how you turn a lump-sum contract into monthly cash. Break it down right and billing is easy. Break it down wrong and every draw is a fight."
 tag: "Getting paid"

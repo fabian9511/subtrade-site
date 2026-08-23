@@ -1,5 +1,5 @@
 ---
-title: "Subcontractor software vs. general contractor software: what's actually different"
+title: "Subcontractor vs. general contractor software"
 description: "GC software is built to manage subs. Subcontractor software is built to run one. Here's the real difference — and which one your trade business needs."
 blurb: "Same demos, same buzzwords, different job. Why GC platforms keep failing subs, and the five things a sub's system has to do well."
 tag: "Choosing software"

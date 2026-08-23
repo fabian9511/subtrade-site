@@ -1,6 +1,6 @@
 ---
-title: "Progress billing and holdback: how Canadian subcontractors actually get paid"
-description: "How progress draws, statutory holdback and GST timing fit together on a Canadian job — with the provincial rates, the accumulation math, and the mistakes that cost subs money."
+title: "Progress billing and holdback in Canada"
+description: "How progress draws, statutory holdback and GST timing fit together on a Canadian job: the rates, the math, and the mistakes that cost subs money."
 blurb: "Draws, holdback and the GST timing trap — the three things that decide whether your billing gets you paid or gets you an email back."
 tag: "Getting paid"
 date: "2026-07-25"

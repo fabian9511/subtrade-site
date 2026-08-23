@@ -1,6 +1,6 @@
 ---
-title: "Subcontractor dashboards: what to track when you're on twenty jobs"
-description: "What a subcontractor dashboard should show, which numbers actually predict a bad job, and how to get visibility across every active site without another spreadsheet."
+title: "Subcontractor dashboards: what to track"
+description: "What a subcontractor dashboard should show, which numbers predict a bad job, and how to see every active site without another spreadsheet."
 blurb: "Twenty active jobs, two people in the office. The four numbers a sub's dashboard has to surface before Thursday — and the ones that are just decoration."
 tag: "Choosing software"
 date: "2026-08-02"

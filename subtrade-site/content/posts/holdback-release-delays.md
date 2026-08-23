@@ -1,6 +1,6 @@
 ---
 title: "7 reasons your holdback is released late"
-description: "Holdback release is where a profitable job turns into a cash crunch. Here are the seven things that delay it, and the paperwork habits that get you paid on time."
+description: "Holdback release is where a profitable job turns into a cash crunch. The seven things that delay it, and the paperwork habits that get you paid on time."
 blurb: "Ten percent of every invoice, tied up and released late. The seven reasons holdback stalls, each with the fix that gets your money moving."
 tag: "Getting paid"
 date: "2026-08-13"

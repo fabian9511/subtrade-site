@@ -1,5 +1,5 @@
 ---
-title: "Electrical estimating software for subcontractors, explained"
+title: "Electrical estimating software for subs"
 description: "Electrical estimating runs on device counts and assemblies, not square feet. How estimating software prices electrical work off your own labour units."
 blurb: "Devices, homeruns and panel schedules — not square feet. Why electrical estimating needs its own method, and how the count-and-assembly loop makes every bid sharper."
 tag: "Estimating"

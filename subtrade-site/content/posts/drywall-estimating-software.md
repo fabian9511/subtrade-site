@@ -1,5 +1,5 @@
 ---
-title: "Drywall estimating software: how to price jobs faster (without guessing)"
+title: "Drywall estimating software: price jobs faster"
 description: "Stop bidding drywall off gut feel and old spreadsheets. How drywall estimating software cuts takeoff time and prices jobs off your own production rates."
 blurb: "Takeoff you don't redo, assemblies you build once, and production rates from your own completed jobs. The loop that makes every bid sharper than the last."
 tag: "Estimating"

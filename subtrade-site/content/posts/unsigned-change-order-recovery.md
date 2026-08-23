@@ -1,5 +1,5 @@
 ---
-title: "Unsigned change order recovery: getting paid for extras"
+title: "Unsigned change order recovery"
 description: "Most subs lose more to unsigned change orders than to bad estimating. Here is how to recover the ones you already did, and stop creating new ones."
 blurb: "The work is done, the money is real, and nobody signed. A practical way to chase unsigned extras and close the gap for good."
 tag: "Getting paid"

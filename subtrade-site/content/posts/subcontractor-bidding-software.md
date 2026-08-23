@@ -1,5 +1,5 @@
 ---
-title: "Subcontractor bidding software: run the pipeline, not a list"
+title: "Subcontractor bidding software for subs"
 description: "Bidding is a pipeline, not a spreadsheet. How subcontractor bidding software tracks invitations, bid/no-bid decisions and follow-up so nothing slips."
 blurb: "Invitations pile up, deadlines pass, and nobody chases the ones you sent. How subs run bidding as a pipeline — and stop losing work to a full inbox."
 tag: "Estimating"

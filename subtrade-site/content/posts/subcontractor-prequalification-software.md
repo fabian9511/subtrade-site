@@ -1,5 +1,5 @@
 ---
-title: "Subcontractor prequalification software: staying bid-ready"
+title: "Subcontractor prequalification software"
 description: "Prequalification is how you get invited to bid. Here's what general contractors check, why subs get filtered out early, and how to keep your package current."
 blurb: "The bid you never got invited to is the one you lost at prequal. What GCs check before they let you quote — and how to answer in an hour, not a week."
 tag: "Getting started"

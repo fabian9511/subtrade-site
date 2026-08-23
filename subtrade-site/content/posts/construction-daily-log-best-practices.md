@@ -1,5 +1,5 @@
 ---
-title: "Construction daily log best practices for subcontractors"
+title: "Construction daily log best practices"
 description: "What a daily log needs to protect a subcontractor: headcount, hours, weather, delays, and dated photos. A two-minute field routine that wins disputes."
 blurb: "The cheapest insurance a sub owns is a daily log nobody skipped. What to capture, why it matters, and how to make the field actually do it."
 tag: "Field operations"

@@ -1,6 +1,6 @@
 ---
-title: "PPE tracking by trade and subcontractor: a field system"
-description: "Who's got the right PPE, on which crew, on which site? Here's how to track personal protective equipment by trade and by sub without a spreadsheet that's already wrong."
+title: "PPE tracking by trade and subcontractor"
+description: "Who has the right PPE, on which crew, on which site? How to track it by trade and by sub without a spreadsheet that is already out of date."
 blurb: "The clipboard on the gang box is always out of date. A simple system for tracking PPE by trade, by sub, and by site — so the right gear is on the right crew."
 tag: "Field operations"
 date: "2026-08-08"

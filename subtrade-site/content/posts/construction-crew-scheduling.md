@@ -1,5 +1,5 @@
 ---
-title: "Construction crew scheduling: how subs actually plan the week"
+title: "Construction crew scheduling for subs"
 description: "Crew scheduling for subcontractors running multiple sites. How to plan the week, handle the Monday reshuffle, and stop losing hours to travel and standby."
 blurb: "Three sites, one crew, and a GC who moved the date. How sub trades actually schedule field labour — and where the hours quietly disappear."
 tag: "Field operations"

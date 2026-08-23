@@ -1,6 +1,6 @@
 ---
-title: "Material cost increase change order: getting paid in 2026"
-description: "Prices jumped after you signed. Here is how subcontractors recover a material cost increase, with an escalation clause up front or a documented change order after."
+title: "Material cost increase change orders"
+description: "Prices jumped after you signed. How subcontractors recover a material cost increase, with an escalation clause up front or a documented change order after."
 blurb: "Everyone is telling you how to buy materials cheaper in 2026. Almost nobody tells you how to get paid when prices jump mid-project. This is the money side."
 tag: "Getting paid"
 date: "2026-08-22"

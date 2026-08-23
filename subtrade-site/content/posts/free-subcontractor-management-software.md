@@ -1,5 +1,5 @@
 ---
-title: "Free subcontractor management software: what it really costs"
+title: "Free subcontractor management software"
 description: "Free tools and spreadsheets look like they cost nothing. Here's the honest math on what free subcontractor management software actually costs a trade business."
 blurb: "Free isn't zero — it's paid in rekeyed hours, lost extras, and invoices that go out late. The real math on free tools, and where a spreadsheet still wins."
 tag: "Choosing software"

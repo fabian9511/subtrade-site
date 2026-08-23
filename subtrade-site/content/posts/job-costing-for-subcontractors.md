@@ -1,5 +1,5 @@
 ---
-title: "Job costing for subcontractors: a field-first setup"
+title: "Job costing for subcontractors"
 description: "Job costing tells you which jobs make money while you can still do something about it. Here is how a sub sets it up, from cost codes to cost-to-complete."
 blurb: "Not accounting after the fact. A live picture of where each job stands, built from the hours your crew is already clocking."
 tag: "Getting paid"

@@ -1,6 +1,6 @@
 ---
-title: "What is a sub trade? A plain answer for construction"
-description: "A sub trade is a specialty contractor hired to perform one scope of work on a project. Here's what the term means, how it's used in Canada, and how it differs from a subcontractor."
+title: "What is a sub trade? A plain answer"
+description: "A sub trade is a specialty contractor hired for one scope of work. What the term means, how it is used in Canada, and how it differs from a subcontractor."
 blurb: "Sub trade, subtrade, subcontractor — three spellings, one job. What the term actually means on a Canadian jobsite, and who does what."
 tag: "Getting started"
 date: "2026-07-31"

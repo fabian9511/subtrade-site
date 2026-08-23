@@ -1,5 +1,5 @@
 ---
-title: "What sub-trades actually need from software (a field checklist)"
+title: "What sub-trades actually need from software"
 description: "Forget the feature lists. Here are the seven things a sub-trade's software has to do well — and the honest test to run on any vendor before you sign."
 blurb: "Seven jobs a sub's system has to do, in the order they matter. Skip the demo theatre and score any tool against what the field actually touches."
 tag: "Choosing software"

@@ -1,6 +1,6 @@
 ---
 title: "Construction adjudication in Canada"
-description: "When you are not getting paid, adjudication is the fast-track alternative to a lawsuit. Here is what construction adjudication is and how a subcontractor starts one."
+description: "When you are not getting paid, adjudication is the fast-track alternative to a lawsuit. What construction adjudication is and how a subcontractor starts one."
 blurb: "The prompt-payment era gave subs a real enforcement tool. What adjudication is, what it can decide, and how you actually start one."
 tag: "Getting paid"
 date: "2026-08-15"

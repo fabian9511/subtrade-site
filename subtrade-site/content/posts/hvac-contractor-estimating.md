@@ -1,5 +1,5 @@
 ---
-title: "HVAC contractor estimating: a faster, more accurate method"
+title: "HVAC contractor estimating: a faster method"
 description: "How HVAC contractors build estimates that hold up: production rates for ductwork and equipment, labour first, and where generic square-foot pricing fails."
 blurb: "Duct by the pound, equipment by the unit, labour by your own history. A field-tested way to price HVAC work without the guesswork."
 tag: "Estimating"
