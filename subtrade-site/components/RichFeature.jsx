@@ -1,4 +1,7 @@
 import { SIGNUP } from '../lib/data';
+import VideoEmbed from './VideoEmbed';
+
+const SITE = 'https://subtradesoftware.com';
 
 /**
  * Alt text for image `j` of a section. A section with one image uses
@@ -19,9 +22,31 @@ export default function RichFeature({ f }) {
       acceptedAnswer: { '@type': 'Answer', text: a },
     })),
   };
+  // A feature that has a walkthrough on YouTube describes it to search engines
+  // and answer engines as well as showing it.
+  const v = r.video;
+  const videoSchema = v && {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: v.title,
+    description: v.description,
+    thumbnailUrl: [`${SITE}${v.poster}`],
+    uploadDate: v.uploadDate,
+    duration: v.duration,
+    embedUrl: `https://www.youtube.com/embed/${v.id}`,
+    contentUrl: `https://youtu.be/${v.id}`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'SubTrade Software',
+      url: SITE,
+    },
+  };
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      {v && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }} />
+      )}
       <section className="hero">
         <div className="wrap hero-inner" style={{ maxWidth: 900 }}>
           <p className="eyebrow">{f.name} · SubTrade feature</p>
@@ -45,6 +70,20 @@ export default function RichFeature({ f }) {
           <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
         </div>
       </section>
+
+      {v && (
+        <section className="section" style={{ paddingTop: 8 }}>
+          <div className="wrap" style={{ maxWidth: 900 }}>
+            <div className="section-head" style={{ textAlign: 'center', marginBottom: 26 }}>
+              <p className="eyebrow">{v.eyebrow}</p>
+              <h2 className="display" style={{ fontSize: 'clamp(30px,4.4vw,46px)', margin: '14px 0 0' }}>
+                {v.heading}
+              </h2>
+            </div>
+            <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} />
+          </div>
+        </section>
+      )}
 
       {r.sections.map((s, i) => (
         <section className="section" key={s.title}>

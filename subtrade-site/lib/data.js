@@ -198,6 +198,19 @@ export const features = [
         ['QR labels', 'Printed on Avery sheets'],
         ['Service alerts', 'Before it goes overdue'],
       ],
+      video: {
+        id: 'ZPfsfgjeNok',
+        eyebrow: 'Watch it work',
+        heading: 'The whole thing in 50 seconds',
+        title: 'Track Every Tool, Vehicle and Machine — SubTrade Asset Management',
+        description:
+          'A walkthrough of Asset Management in SubTrade: the register of every tool, vehicle and machine you own, adding a unit, deploying it to a job site with the crew member who took it, the deployment history, the live map of your gear, and printable QR labels.',
+        poster: '/subtrade-asset-management-video-poster.webp',
+        posterAlt:
+          'Play the SubTrade Asset Management walkthrough — the asset register on screen behind the words who has your tools',
+        uploadDate: '2026-08-29',
+        duration: 'PT51S',
+      },
       sections: [
         {
           eyebrow: 'New in SubTrade',
