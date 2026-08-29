@@ -1,6 +1,6 @@
 ---
 title: "Tool and equipment tracking for subcontractors"
-description: "Most subs cannot say who has their tools or where the equipment is. Here is how to build a tracking system that survives contact with a jobsite — and what we just shipped in SubTrade."
+description: "Most subs cannot say who has their tools or where the equipment is. Here is how to build a tracking system that survives contact with a jobsite — and what we just launched in SubTrade."
 blurb: "Nobody knows who has the laser. A practical system for tracking tools, vehicles and equipment across sites — plus Asset Management, new in SubTrade."
 tag: "Field operations"
 date: "2026-08-29"
@@ -56,7 +56,7 @@ Most subs who do this exercise find the number is not a rounding error, and that
 
 ## Asset Management, new in SubTrade
 
-This is the part we just shipped. [Asset Management](/construction-management-features/asset-management/) is now live in SubTrade, and it does the five things above.
+This is the part we just launched. [Asset Management](/construction-management-features/asset-management/) is now live in SubTrade, and it does the five things above.
 
 Every tool, vehicle and piece of equipment goes on one register, with manufacturer, model number, serial number, barcode, quantity, condition and notes. Ownership is recorded per asset, so rented gear sits alongside what you own. The top of the page counts total units, what is in use, what is in the warehouse and what is due for service, and the header carries a running book value across everything.
 
@@ -72,7 +72,7 @@ Each asset also carries the money and the maintenance: purchase price, purchase 
 
 Service reminders run on thresholds you choose — fourteen days before due, three days before, whatever fits how you work — and a unit whose status blocks deployment simply cannot go back out until someone clears it. That is the part that stops an overdue truck quietly leaving the yard.
 
-One thing to be straight about: **assets are managed on the web today.** The mobile side of Asset Management is still in development. When it ships it will be included in every plan, like the rest of the platform — SubTrade does not sell features as add-on modules.
+One thing to be straight about: **assets are managed on the web today.** The mobile side of Asset Management is still in development. When it launches it will be included in every plan, like the rest of the platform — SubTrade does not sell features as add-on modules.
 
 ## Where to start if you have nothing today
 

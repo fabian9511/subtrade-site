@@ -326,7 +326,7 @@ export const features = [
         ['Can I see where my equipment is on a map?', 'Yes. An asset’s position is recorded when it is loaned, transferred or returned from a device with location enabled, and the map view shows every asset with a known position across all your sites.'],
         ['Does it track servicing and calibration?', 'Yes. Each asset can carry a next service date, a calibration date and a repeating service interval. Service reminders fire on thresholds you set \u2014 14 days before due, 3 days before, or whatever suits \u2014 and a unit whose status blocks deployment cannot go out until that status is cleared.'],
         ['Can I track rented equipment too?', 'Yes. Ownership is recorded per asset, so rented and owned gear sit on the same register. Purchase or rental details, the vendor and the warranty or return date live on the asset record.'],
-        ['Can I manage assets from my phone?', 'Assets are added and managed on the web today. The mobile side of Asset Management is still in development, and when it ships it will be included in every plan like the rest of the platform.'],
+        ['Can I manage assets from my phone?', 'Assets are added and managed on the web today. The mobile side of Asset Management is still in development, and when it launches it will be included in every plan like the rest of the platform.'],
         ['Does Asset Management cost extra?', 'No. It is part of SubTrade on every plan, the same as time tracking, change orders and progress billing. No add-on module and no separate per-asset fee.'],
       ],
     },
