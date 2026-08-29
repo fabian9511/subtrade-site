@@ -173,6 +173,153 @@ export const features = [
     ],
   },
   {
+    slug: 'asset-management',
+    name: 'Asset Management',
+    keyword: 'construction equipment and tool tracking software',
+    title: 'Tool & Equipment Tracking Software for Contractors',
+    description:
+      'Track every tool, vehicle and piece of equipment you own: who is holding it, which site it is on, a live map, printable QR labels and service due dates. New in SubTrade.',
+    h1: 'Know exactly who has your tools',
+    intro:
+      'Asset Management tracks every tool, vehicle and piece of equipment your company owns, down to the person holding it and the site it is sitting on. Print a QR label, stick it on the tool, and stop losing gear between jobs.',
+    points: [
+      ['Every unit on one register', 'Tools, vehicles, trailers and equipment with make, model, serial number, condition and value.'],
+      ['Loaned, transferred, returned', 'Every move is recorded against the asset, so the current holder is never in dispute.'],
+      ['A map of your gear', 'Positions are captured as assets move, so you can see what is parked on a job that finished three weeks ago.'],
+      ['QR labels you can print', 'A label for every asset on standard Avery sheets, thirty to a page.'],
+    ],
+    rich: {
+      heroTitle: ['Know exactly who', 'has your tools'],
+      heroSub:
+        'Every tool, vehicle and piece of equipment your company owns, tracked to a job site and to the person holding it. Print a QR label, stick it on the tool, and "who took the laser?" stops being a phone call.',
+      stats: [
+        ['Every unit', 'Tools, vehicles, equipment'],
+        ['Deploy', 'To a site and a person'],
+        ['QR labels', 'Printed on Avery sheets'],
+        ['Service alerts', 'Before it goes overdue'],
+      ],
+      sections: [
+        {
+          eyebrow: 'New in SubTrade',
+          title: 'Every tool you own, on one register',
+          isNew: true,
+          body:
+            'Asset Management is the register the whiteboard in the shop was never going to be. Tools, vehicles, trailers, lifts and small equipment in one list, each with its make, model, serial number and condition, and a running total of what the whole fleet is worth.',
+          checks: [
+            'Total units, in use, in the warehouse and service due, counted at the top of the page',
+            'An asset tag on every unit, plus manufacturer, model, serial number and quantity',
+            'Owned and rented gear tracked side by side, so rentals stop quietly running on',
+            'Condition and notes, so nobody re-reports the same broken chop saw twice',
+            'A running book value in the header, so you know what the fleet is worth without adding it up',
+          ],
+          images: ['/subtrade-asset-management-register.webp'],
+          imageAlt: 'SubTrade Asset Management register listing tools, vehicles and equipment with the crew member holding each one and the job site it is on, counts for total units, in use, in warehouse and service due, and a reminder flagging a truck overdue for service',
+          browser: true,
+        },
+        {
+          eyebrow: 'Adding a unit',
+          title: 'On the register in about a minute',
+          flip: true,
+          body:
+            'Adding a tool is one dialog with four tabs, and only the first one is required. Put the name, category and serial in, and you have a tracked asset. Fill in the rest when you have the invoice in front of you.',
+          checks: [
+            'Details: name, category, ownership, make, model, serial, barcode, quantity and condition',
+            'Purchase & rental: what it cost, who supplied it, warranty expiry and a charge-out rate',
+            'Service: next service due, calibration due and a repeating interval',
+            'Photos & docs: the manual, the certificate, a photo of the plate',
+            'Owned, rented or leased, set per unit',
+          ],
+          images: ['/subtrade-add-asset-details.webp'],
+          imageAlt: 'The Add Asset dialog in SubTrade on its Details tab, with asset name, category, ownership, manufacturer, model number, serial number, barcode, quantity, condition and notes filled in for a rotary hammer',
+          browser: true,
+        },
+        {
+          eyebrow: 'Who has it',
+          title: 'Deploy it to a site. Record who took it.',
+          flip: true,
+          body:
+            'Deploy a unit to a job site and record who took it, how many went out, when it is due back and what condition it left in. Every movement lands on that asset\u2019s deployment history, so "where is it and who has it?" is one filter, not three phone calls and a guess.',
+          checks: [
+            'Deploy to a job site, with the crew member who took it on the record',
+            'Partial quantities: send three of six screwguns out, the rest stay on the shelf',
+            'Date out and estimated return on every deployment',
+            'Condition photos going out, so a damage dispute has a before',
+            'A deployment history per asset, and a held-by filter across the whole register',
+            'Search by name, tag, model, site or crew',
+          ],
+          images: ['/subtrade-deploy-equipment-to-site.webp'],
+          imageAlt: 'The Deploy equipment dialog in SubTrade assigning a scissor lift to a job site and a named crew member, with quantity, date out, estimated return, delivery notes and condition photos',
+          browser: true,
+        },
+        {
+          eyebrow: 'The map',
+          title: 'See where your equipment actually is',
+          body:
+            'Positions are captured as assets move between sites, so the map view shows your gear spread across your jobs the way it really is. The generator that has been sitting on a finished job for three weeks is obvious at a glance instead of turning up on next month’s rental bill.',
+          checks: [
+            'A map of every asset with a known position, across every site',
+            'Location recorded when an asset is loaned, transferred or returned',
+            'Spot idle equipment parked on a job that closed out',
+            'Plan the next move without calling every foreman',
+          ],
+          images: ['/subtrade-asset-map-equipment-locations.webp'],
+          imageAlt: 'The map view in SubTrade Asset Management showing a located piece of equipment pinned on a job site across a city-wide view, with six units counted as in use',
+          browser: true,
+        },
+        {
+          eyebrow: 'QR labels',
+          title: 'Print a tag, stick it on the tool',
+          body:
+            'SubTrade generates a QR label for every asset and lays them out on standard Avery 5160 sheets, thirty to a page. Print, peel, stick. From then on the tag is the tool’s identity, so four identical hammer drills stop being interchangeable on paper.',
+          checks: [
+            'A QR label generated for every asset automatically',
+            'Avery 5160 sheets, 30 labels per page, on any office printer',
+            'Select the assets you want and print only those',
+            'Tag identical units so returns are never ambiguous',
+            'No scanner hardware and no third-party tagging service to buy',
+          ],
+          images: ['/subtrade-asset-qr-labels-avery-sheet.webp'],
+          imageAlt: 'The print asset labels view in SubTrade with every asset selected, each showing its own QR code and asset tag, set to Avery 5160 sheets at thirty labels per page',
+          browser: true,
+        },
+        {
+          eyebrow: 'Service and money',
+          title: 'Serviced before it fails. Costed onto the job.',
+          flip: true,
+          body:
+            'Each asset carries what it cost, who you bought it from, when the warranty runs out, when it is next due for service or calibration, and what you charge it out at. The compressor gets serviced on schedule, and the equipment you bill for carries a rate instead of being forgotten.',
+          checks: [
+            'Next service due, calibration due and a repeating service interval',
+            'Service reminders on your own thresholds \u2014 14 days out, 3 days out, whatever you set',
+            'A status that blocks deployment, so an overdue unit cannot go back out',
+            'Purchase price, purchase date, vendor and warranty expiry on the record',
+            'A charge-out rate, with its own unit, for equipment you bill',
+            'Photos, manuals and certificates attached to the asset itself',
+          ],
+          images: [
+            '/subtrade-add-asset-service.webp',
+            '/subtrade-add-asset-purchase-rental.webp',
+          ],
+          imageAlts: [
+            'The Service tab of the SubTrade asset dialog showing next service due, calibration due and a repeating service interval in days',
+            'The Purchase and rental tab of the SubTrade asset dialog showing purchase price, purchase date, warranty expiry and a charge-out rate billed to a project',
+          ],
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['What is Asset Management in SubTrade?', 'It is a register of every tool, vehicle and piece of equipment your company owns, showing who is holding each one, which site it is on, when it is next due for service and what it is worth. It replaces the spreadsheet and the whiteboard in the shop.'],
+        ['How do I know who has a tool?', 'You deploy a unit to a job site and record who took it, so the current holder sits on the asset. Every movement is kept in that asset\u2019s deployment history, and you can filter the whole register by who is holding something to see everything one person or one crew is carrying.'],
+        ['Do I need special scanners or tags?', 'No. SubTrade generates a QR label for each asset and prints them on standard Avery 5160 label sheets, thirty to a page, on any office printer. There is no scanner hardware to buy and no third-party tagging service.'],
+        ['Can I see where my equipment is on a map?', 'Yes. An asset’s position is recorded when it is loaned, transferred or returned from a device with location enabled, and the map view shows every asset with a known position across all your sites.'],
+        ['Does it track servicing and calibration?', 'Yes. Each asset can carry a next service date, a calibration date and a repeating service interval. Service reminders fire on thresholds you set \u2014 14 days before due, 3 days before, or whatever suits \u2014 and a unit whose status blocks deployment cannot go out until that status is cleared.'],
+        ['Can I track rented equipment too?', 'Yes. Ownership is recorded per asset, so rented and owned gear sit on the same register. Purchase or rental details, the vendor and the warranty or return date live on the asset record.'],
+        ['Can I manage assets from my phone?', 'Assets are added and managed on the web today. The mobile side of Asset Management is still in development, and when it ships it will be included in every plan like the rest of the platform.'],
+        ['Does Asset Management cost extra?', 'No. It is part of SubTrade on every plan, the same as time tracking, change orders and progress billing. No add-on module and no separate per-asset fee.'],
+      ],
+    },
+  },
+  {
     slug: 'construction-crew-scheduling',
     image: '/subtrade-crew-scheduling-jobsite.webp',
     imageAlt: 'Two workers reviewing the SubTrade crew schedule on a phone at a truck tailgate',

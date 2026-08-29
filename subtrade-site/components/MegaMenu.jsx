@@ -14,6 +14,7 @@ const cols = [
       ['⏱️', 'Time Tracking', 'GPS clock-in & job costing', '/time-tracking'],
       ['📅', 'Scheduling', 'Drag-and-drop crew timelines', '/construction-management-features/construction-crew-scheduling'],
       ['🛡️', 'Safety & Forms', 'Hazard reports & custom forms', '/construction-management-features/safety-custom-forms'],
+      ['🔧', 'Asset Management', 'Tools, vehicles & equipment', '/construction-management-features/asset-management'],
     ],
   },
   {

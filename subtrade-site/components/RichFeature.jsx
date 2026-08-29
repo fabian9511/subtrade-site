@@ -1,5 +1,13 @@
 import { SIGNUP } from '../lib/data';
 
+/**
+ * Alt text for image `j` of a section. A section with one image uses
+ * `imageAlt`; a section stacking several passes `imageAlts`, one per image.
+ * Falling back to an empty alt on the extras is only right when they are
+ * decorative, which a second screenshot of a different screen is not.
+ */
+const alt = (s, j) => (s.imageAlts ? s.imageAlts[j] || '' : j === 0 ? s.imageAlt : '');
+
 export default function RichFeature({ f }) {
   const r = f.rich;
   const faqSchema = {
@@ -62,14 +70,14 @@ export default function RichFeature({ f }) {
                     <i>app.subtradesoftware.com</i>
                   </div>
                   {s.images.map((img, j) => (
-                    <img key={img} src={img} alt={j === 0 ? s.imageAlt : ''} loading="lazy" />
+                    <img key={img} src={img} alt={alt(s, j)} loading="lazy" />
                   ))}
                 </div>
               )}
               {s.images && !s.browser && (
                 <div className={s.tablet ? `tablet tablet-${s.tablet}` : 'fimg-stack'}>
                   {s.images.map((img, j) => (
-                    <img key={img} src={img} alt={j === 0 ? s.imageAlt : ''} loading="lazy" />
+                    <img key={img} src={img} alt={alt(s, j)} loading="lazy" />
                   ))}
                 </div>
               )}

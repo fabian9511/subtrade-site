@@ -17,7 +17,7 @@ export default function FeaturesHub() {
             Built for how<br />subs actually work
           </h1>
           <p className="lede">
-            Thirteen tools, one login, no add-on pricing. Field, money and office
+            Fourteen tools, one login, no add-on pricing. Field, money and office
             covered for trade contractors.
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function FeaturesHub() {
         <div className="wrap">
           <div className="head-split">
             <div className="section-head">
-              <p className="eyebrow">Thirteen tools, one login</p>
+              <p className="eyebrow">Fourteen tools, one login</p>
               <h2 className="display">Everything on one screen</h2>
             </div>
             <img
