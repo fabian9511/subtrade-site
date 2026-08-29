@@ -200,8 +200,7 @@ export const features = [
       ],
       video: {
         id: 'ZPfsfgjeNok',
-        eyebrow: 'Watch it work',
-        heading: 'The whole thing in 50 seconds',
+        caption: 'The whole thing in 50 seconds — register, deploy, map and QR labels.',
         title: 'Track Every Tool, Vehicle and Machine — SubTrade Asset Management',
         description:
           'A walkthrough of Asset Management in SubTrade: the register of every tool, vehicle and machine you own, adding a unit, deploying it to a job site with the crew member who took it, the deployment history, the live map of your gear, and printable QR labels.',

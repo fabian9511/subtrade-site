@@ -68,22 +68,14 @@ export default function RichFeature({ f }) {
             <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
           </div>
           <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
+          {v && (
+            <div style={{ marginTop: 44 }}>
+              <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} />
+              <p className="hero-note" style={{ marginTop: 14 }}>{v.caption}</p>
+            </div>
+          )}
         </div>
       </section>
-
-      {v && (
-        <section className="section" style={{ paddingTop: 8 }}>
-          <div className="wrap" style={{ maxWidth: 900 }}>
-            <div className="section-head" style={{ textAlign: 'center', marginBottom: 26 }}>
-              <p className="eyebrow">{v.eyebrow}</p>
-              <h2 className="display" style={{ fontSize: 'clamp(30px,4.4vw,46px)', margin: '14px 0 0' }}>
-                {v.heading}
-              </h2>
-            </div>
-            <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} />
-          </div>
-        </section>
-      )}
 
       {r.sections.map((s, i) => (
         <section className="section" key={s.title}>
