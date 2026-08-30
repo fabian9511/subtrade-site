@@ -4,6 +4,8 @@ import { SIGNUP } from '../../../lib/data';
 import { getAllPosts, getPost, getRelatedPosts } from '../../../lib/posts';
 import ArticleToc from '../../../components/ArticleToc';
 import RelatedLinks from '../../../components/RelatedLinks';
+import { AUTHOR, authorSchema } from '../../../lib/author';
+import { breadcrumbs } from '../../../lib/breadcrumbs';
 
 const BASE = 'https://subtradesoftware.com';
 
@@ -57,7 +59,7 @@ export default function Post({ params }) {
       '@type': 'BlogPosting',
       headline: post.title,
       description: post.description,
-      author: { '@type': 'Organization', name: 'SubTrade Software Ltd.', url: `${BASE}/` },
+      author: authorSchema(post.author),
       publisher: {
         '@type': 'Organization',
         name: 'SubTrade Software Ltd.',
@@ -68,14 +70,10 @@ export default function Post({ params }) {
       ...(post.updated ? { dateModified: post.updated } : {}),
       ...(post.image ? { image: `${BASE}${post.image}` } : {}),
     },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Blog', item: `${BASE}/blog/` },
-        { '@type': 'ListItem', position: 2, name: post.title, item: `${BASE}${path}` },
-      ],
-    },
+    breadcrumbs([
+      ['Blog', '/blog/'],
+      [post.title, path],
+    ]),
   ];
 
   // Three sibling articles, chosen by tag. This is what gives every post more
@@ -120,7 +118,17 @@ export default function Post({ params }) {
             <Link href="/blog" className="article-back">← All articles</Link>
             <p className="eyebrow">{post.tag}</p>
             <h1 className="display">{post.title}</h1>
+            {/* Visible byline. The same name goes into the structured data, and
+                Google is explicit that an author it cannot see on the page is
+                worth little — so these two must never drift apart. */}
             <p className="article-meta">
+              By{' '}
+              {post.author ? (
+                post.author
+              ) : (
+                <Link href={AUTHOR.path}>{AUTHOR.name}</Link>
+              )}
+              <span className="dot"> · </span>
               {prettyDate(post.date)}
               {post.date ? <span className="dot"> · </span> : null}
               {post.read}

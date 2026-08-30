@@ -1,3 +1,5 @@
+import { breadcrumbs } from '../../lib/breadcrumbs';
+
 export const metadata = {
   alternates: { canonical: '/about/' },
   title: 'About',
@@ -8,9 +10,15 @@ export const metadata = {
 const PORTAL = 'https://portal.subtradesoftware.com';
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 
+const crumbs = breadcrumbs([['About', '/about/']]);
+
 export default function About() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <section className="section" style={{ paddingTop: 100 }}>
         <div className="wrap prose">
           <p className="eyebrow">Why SubTrade began</p>

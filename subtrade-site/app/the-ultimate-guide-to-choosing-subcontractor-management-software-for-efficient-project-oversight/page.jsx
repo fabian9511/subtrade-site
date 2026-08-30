@@ -1,6 +1,8 @@
 import { SIGNUP } from '../../lib/data';
 import Link from 'next/link';
 import ArticleToc from '../../components/ArticleToc';
+import { AUTHOR, authorSchema } from '../../lib/author';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 const PATH =
   '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight/';
@@ -34,7 +36,7 @@ const schema = [
     headline: 'The ultimate guide to choosing subcontractor management software',
     description:
       'How to choose subcontractor management software as a trade contractor: the features that matter, real pricing, the traps to avoid, and a one-week evaluation that works.',
-    author: { '@type': 'Organization', name: 'SubTrade Software Ltd.', url: `${BASE}/` },
+    author: authorSchema(),
     publisher: {
       '@type': 'Organization',
       name: 'SubTrade Software Ltd.',
@@ -44,19 +46,10 @@ const schema = [
     datePublished: '2026-01-15',
     dateModified: '2026-08-04',
   },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Blog', item: `${BASE}/blog/` },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'How to choose subcontractor management software',
-        item: `${BASE}${PATH}`,
-      },
-    ],
-  },
+  breadcrumbs([
+    ['Blog', '/blog/'],
+    ['How to choose subcontractor management software', PATH],
+  ]),
   {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -129,7 +122,7 @@ export default function Guide() {
               The ultimate guide to choosing subcontractor management software
             </h1>
             <div className="article-meta">
-              <span>Guide</span>
+              <span>By <Link href={AUTHOR.path}>{AUTHOR.name}</Link></span>
               <span className="dot">•</span>
               <span>9 min read</span>
               <span className="dot">•</span>

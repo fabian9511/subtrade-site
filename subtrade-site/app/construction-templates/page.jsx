@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 export const metadata = {
   title: 'Free Construction Templates for Subcontractors',
@@ -16,9 +17,15 @@ const templates = [
   ['💵', 'Progress Billing Template', 'Percent-complete invoice layout with holdback line.'],
 ];
 
+const crumbs = breadcrumbs([['Templates', '/construction-templates/']]);
+
 export default function Templates() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <section className="hero" style={{ paddingBottom: 40 }}>
         <div className="wrap hero-inner">
           <p className="eyebrow">Free downloads</p>

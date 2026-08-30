@@ -4,6 +4,7 @@ import RelatedLinks from '../../../components/RelatedLinks';
 import OpsFeed from '../../../components/OpsFeed';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { breadcrumbs } from '../../../lib/breadcrumbs';
 
 const GUIDE = '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight';
 
@@ -64,8 +65,17 @@ export default function FeaturePage({ params }) {
       </div>
     </section>
   );
+  const crumbs = breadcrumbs([
+    ['Features', '/construction-management-features/'],
+    [f.title, `/construction-management-features/${f.slug}/`],
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       {f.rich && <RichFeature f={f} />}
       {opsDemo}
       {!f.rich && (

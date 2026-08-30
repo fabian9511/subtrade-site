@@ -1,5 +1,6 @@
 import { tutorials } from '../../lib/tutorials';
 import Link from 'next/link';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 export const metadata = {
   alternates: { canonical: '/how-to-tutorials/' },
@@ -8,9 +9,15 @@ export const metadata = {
     'Step-by-step SubTrade video tutorials: projects, time tracking, change orders, purchase orders, scheduling, drawings and notifications.',
 };
 
+const crumbs = breadcrumbs([['Tutorials', '/how-to-tutorials/']]);
+
 export default function Tutorials() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <section className="hero" style={{ paddingBottom: 40 }}>
         <div className="wrap hero-inner">
           <p className="eyebrow">Learn the platform</p>

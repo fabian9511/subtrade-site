@@ -1,4 +1,5 @@
 import Calculator from '../../components/Calculator';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 export const metadata = {
   alternates: { canonical: '/pricing-plans/' },
@@ -10,9 +11,15 @@ export const metadata = {
 const PORTAL = 'https://portal.subtradesoftware.com';
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 
+const crumbs = breadcrumbs([['Pricing', '/pricing-plans/']]);
+
 export default function Pricing() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <section className="hero" style={{ paddingBottom: 40 }}>
         <div className="wrap hero-inner">
           <p className="eyebrow">Pricing that is on the page</p>

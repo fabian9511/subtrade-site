@@ -2,6 +2,7 @@ import HoldbackCalc from '../../components/HoldbackCalc';
 import { PROVINCES } from '../../lib/holdback';
 import RelatedLinks from '../../components/RelatedLinks';
 import { SIGNUP } from '../../lib/data';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 export const metadata = {
   title: 'Construction Holdback Calculator (Canada)',
@@ -92,9 +93,15 @@ const relatedGroups = [
   },
 ];
 
+const crumbs = breadcrumbs([['Construction Holdback Calculator', '/construction-holdback-calculator/']]);
+
 export default function HoldbackCalculatorPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

@@ -2,6 +2,7 @@ import HoldbackCalc from '../../components/HoldbackCalc';
 import { STATES, releaseLabel } from '../../lib/retainage';
 import RelatedLinks from '../../components/RelatedLinks';
 import { SIGNUP } from '../../lib/data';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 export const metadata = {
   title: 'Construction Retainage Calculator (All 50 States)',
@@ -100,11 +101,17 @@ function cap(v) {
   return <span className="mono">{v}%</span>;
 }
 
+const crumbs = breadcrumbs([['Construction Retainage Calculator', '/construction-retainage-calculator/']]);
+
 export default function RetainageCalculatorPage() {
   const rows = STATES.filter((s) => s.statute);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

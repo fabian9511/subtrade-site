@@ -1,5 +1,6 @@
 import { compares, SIGNUP } from '../../lib/data';
 import Link from 'next/link';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 export const metadata = {
   alternates: { canonical: '/compare/' },
@@ -8,9 +9,15 @@ export const metadata = {
     'How SubTrade compares to Fieldwire, Buildertrend, eSUB, Contractor Foreman, Raken and Knowify for trade subcontractors.',
 };
 
+const crumbs = breadcrumbs([['Compare', '/compare/']]);
+
 export default function CompareHub() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <section className="hero" style={{ paddingBottom: 40 }}>
         <div className="wrap hero-inner">
           <p className="eyebrow">Honest comparisons</p>

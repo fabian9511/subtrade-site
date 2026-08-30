@@ -3,6 +3,7 @@ import { SIGNUP } from '../../../lib/data';
 import RelatedLinks from '../../../components/RelatedLinks';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { breadcrumbs } from '../../../lib/breadcrumbs';
 
 const F = '/construction-management-features';
 const FEATURE_FOR = {
@@ -72,8 +73,17 @@ export default function TutorialPage({ params }) {
       ],
     },
   ];
+  const crumbs = breadcrumbs([
+    ['Tutorials', '/how-to-tutorials/'],
+    [t.title, `/tutorials/${t.slug}/`],
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
     {videoSchema && (
       <script
         type="application/ld+json"

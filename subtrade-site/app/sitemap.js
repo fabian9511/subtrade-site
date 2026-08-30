@@ -32,11 +32,26 @@ export default function sitemap() {
   const comparePaths = compares.map((c) => `/compare/${c.slug}`);
   const tutorialPaths = tutorials.map((t) => `/tutorials/${t.slug}`);
   // Markdown blog posts add themselves — publishing never means editing this file.
-  const postPaths = getAllPosts().map((p) => `/blog/${p.slug}`);
+  const posts = getAllPosts();
+  const postPaths = posts.map((p) => `/blog/${p.slug}`);
+
+  // <lastmod>, but only where the date is real. Posts carry `date` and
+  // `updated` in their front matter, so those are honest. Nothing else on the
+  // site records when it last changed, and Google's guidance is explicit that a
+  // lastmod it learns to distrust is worse than no lastmod at all — so the rest
+  // of the pages simply do not claim one. Give a feature, trade or tutorial an
+  // `updated` field in its data file and it will appear here too.
+  const lastMod = {};
+  for (const p of posts) {
+    const d = p.updated || p.date;
+    if (d) lastMod[`/blog/${p.slug}`] = d;
+  }
+
   return [...staticPaths, ...featurePaths, ...tradePaths, ...comparePaths, ...tutorialPaths, ...postPaths].map((p) => ({
     url: p === '' ? `${base}/` : `${base}${p}/`,
     changeFrequency: 'weekly',
     priority: p === '' ? 1 : 0.8,
+    ...(lastMod[p] ? { lastModified: lastMod[p] } : {}),
     ...(pageImages[p] ? { images: pageImages[p] } : {}),
   }));
 }

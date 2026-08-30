@@ -1,4 +1,5 @@
 import RichFeature from '../../components/RichFeature';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 import { timeTrackingRich } from '../../lib/data';
 
 export const metadata = {
@@ -8,6 +9,16 @@ export const metadata = {
     'GPS time tracking built for construction: crews clock in from their phones, hours land on the right job and cost code, and payroll prep takes minutes. Free trial.',
 };
 
+const crumbs = breadcrumbs([['Time Tracking', '/time-tracking/']]);
+
 export default function TimeTrackingPage() {
-  return <RichFeature f={timeTrackingRich} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
+      <RichFeature f={timeTrackingRich} />
+    </>
+  );
 }

@@ -2,6 +2,7 @@ import { compares, SIGNUP } from '../../../lib/data';
 import RelatedLinks from '../../../components/RelatedLinks';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { breadcrumbs } from '../../../lib/breadcrumbs';
 
 const GUIDE = '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight';
 
@@ -53,8 +54,17 @@ export default function ComparePage({ params }) {
     ? `SubTrade vs ${c.competitor}: ${c.headline}`
     : `SubTrade vs ${c.competitor}`;
 
+  const crumbs = breadcrumbs([
+    ['Compare', '/compare/'],
+    [`SubTrade vs ${c.competitor}`, `/compare/${c.slug}/`],
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       {faqSchema && (
         <script
           type="application/ld+json"

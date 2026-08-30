@@ -149,6 +149,8 @@ the job — for this site, it usually will.
 | Features, trades, comparisons, signup URL | `lib/data.js` |
 | Tutorial library content | `lib/tutorials.js` |
 | Customer reviews (carousel **and** home page markup) | `lib/reviews.js` |
+| Who gets the byline on articles | `lib/author.js` |
+| BreadcrumbList markup, one builder for every page | `lib/breadcrumbs.js` |
 | Every 301 redirect from the WordPress days | `next.config.mjs` |
 | Sitemap (posts add themselves) | `app/sitemap.js` |
 | All styling, one file | `app/globals.css` |
@@ -184,6 +186,19 @@ second copy of it instead of replacing the original. That has happened four
 times. If you see `something_1.md` in `content/posts/`, it is almost certainly
 the *newer* text: move it onto the original filename, delete the `_1`, and add a
 redirect from the `_1` URL in `next.config.mjs`.
+
+**Articles carry a human byline.** `lib/author.js` holds the default author,
+and both the visible "By ..." line and the `author` in the structured data read
+from it — Google gives little weight to an author it cannot see on the page, so
+the two must never drift apart. A post can override the name with `author:` in
+its front matter, and it should whenever someone else actually wrote it: the
+byline is a claim about a real person.
+
+**`<lastmod>` in the sitemap is only ever a real date.** It comes from a post's
+`date`/`updated` front matter. Pages that do not record when they changed do not
+claim a lastmod at all, because a lastmod Google learns to distrust is worse
+than none. Give a feature, trade or tutorial an `updated` field in its data file
+and `app/sitemap.js` will start publishing one for it.
 
 **IndexNow, if Ahrefs Site Audit is nagging about it.** IndexNow tells Bing,
 Yandex and Naver about changed pages — Google does not use it, so this is not

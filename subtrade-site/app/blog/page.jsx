@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 import { getAllPosts, legacyPosts } from '../../lib/posts';
 
 export const metadata = {
@@ -6,6 +7,8 @@ export const metadata = {
   description: 'Guides and practical writing for trade subcontractors from SubTrade.',
   alternates: { canonical: '/blog/' },
 };
+
+const crumbs = breadcrumbs([['Blog', '/blog/']]);
 
 export default function Blog() {
   // Markdown posts and the two original guides sit in one list, newest first.
@@ -16,6 +19,10 @@ export default function Blog() {
 
   return (
     <section className="section" style={{ paddingTop: 90 }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <div className="wrap">
         <p className="eyebrow">Writing for the trades</p>
         <h1 className="display" style={{ fontSize: 'clamp(40px,6vw,72px)', margin: '18px 0 14px' }}>

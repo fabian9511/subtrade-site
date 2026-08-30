@@ -67,6 +67,10 @@ function readAll() {
         image: data.image || '',
         cardImage: data.cardImage || data.image || '',
         imageAlt: data.imageAlt || '',
+        // Who wrote it. Empty means the site's default author — see
+        // lib/author.js. Set `author:` in the front matter when someone else
+        // actually wrote the post.
+        author: data.author || '',
         draft: data.draft === true,
         read: data.read || readingTime(body),
         href: `/blog/${slug}`,

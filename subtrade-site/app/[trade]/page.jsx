@@ -2,6 +2,7 @@ import { trades, features, SIGNUP } from '../../lib/data';
 import RelatedLinks from '../../components/RelatedLinks';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 const GUIDE = '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight';
 const CORE_FEATURES = [
@@ -46,8 +47,14 @@ export default function TradePage({ params }) {
       ],
     },
   ];
+  const crumbs = breadcrumbs([[t.title, `/${t.slug}/`]]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <section className="hero" style={{ paddingBottom: 40 }}>
         <div className="wrap hero-inner">
           <p className="eyebrow">{t.trade} contractor software</p>

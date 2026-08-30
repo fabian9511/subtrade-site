@@ -1,12 +1,20 @@
+import { breadcrumbs } from '../../lib/breadcrumbs';
+
 export const metadata = {
   alternates: { canonical: '/contact-us/' },
   title: 'Contact Us',
   description: 'Get in touch with SubTrade Software. Support, sales and general questions.',
 };
 
+const crumbs = breadcrumbs([['Contact', '/contact-us/']]);
+
 export default function Contact() {
   return (
     <section className="section" style={{ paddingTop: 100 }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <div className="wrap prose">
         <p className="eyebrow">SubTrade Software Ltd.</p>
         <h1 className="display">Contact us</h1>

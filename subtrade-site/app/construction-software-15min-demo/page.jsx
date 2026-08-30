@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 import { SIGNUP } from '../../lib/data';
 
 export const metadata = {
@@ -8,9 +9,15 @@ export const metadata = {
     'A 15-minute walkthrough of SubTrade for trade contractors. Or skip the call: the free trial gives you the full platform immediately.',
 };
 
+const crumbs = breadcrumbs([['Book a demo', '/construction-software-15min-demo/']]);
+
 export default function Demo() {
   return (
     <section className="section" style={{ paddingTop: 90 }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <div className="wrap" style={{ maxWidth: 860 }}>
         <p className="eyebrow">15 minutes, no pitch deck</p>
         <h1 className="display" style={{ fontSize: 'clamp(38px,5.5vw,64px)', margin: '18px 0 14px' }}>

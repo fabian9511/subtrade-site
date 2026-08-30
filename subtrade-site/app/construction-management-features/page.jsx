@@ -1,5 +1,6 @@
 import { features, SIGNUP } from '../../lib/data';
 import Link from 'next/link';
+import { breadcrumbs } from '../../lib/breadcrumbs';
 
 export const metadata = {
   alternates: { canonical: '/construction-management-features/' },
@@ -8,9 +9,15 @@ export const metadata = {
     'Every SubTrade feature: GPS time tracking, change orders, crew scheduling, daily logs, drawings, submittals, safety forms and progress billing for trade contractors.',
 };
 
+const crumbs = breadcrumbs([['Features', '/construction-management-features/']]);
+
 export default function FeaturesHub() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <section className="hero" style={{ paddingBottom: 40 }}>
         <div className="wrap hero-inner">
           <p className="eyebrow">The full platform, every plan</p>
