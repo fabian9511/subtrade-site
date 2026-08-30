@@ -55,17 +55,20 @@ const faqSchema = {
   })),
 };
 
-const appSchema = {
+// A WebPage rather than a WebApplication. Google's rich results rules require
+// anything in the SoftwareApplication family to carry a rating or a review, and
+// a free calculator has neither, so the old markup failed validation on every
+// crawl while buying no rich result in return.
+const pageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+  '@type': 'WebPage',
   name: 'Construction Holdback Calculator',
   url: 'https://subtradesoftware.com/construction-holdback-calculator/',
-  applicationCategory: 'FinanceApplication',
-  operatingSystem: 'Web',
   description:
     'Calculate statutory holdback, GST timing and net payable on a construction progress draw in Canada.',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
-  publisher: { '@type': 'Organization', name: 'SubTrade Software Ltd.' },
+  isPartOf: { '@id': 'https://subtradesoftware.com/#website' },
+  publisher: { '@id': 'https://subtradesoftware.com/#organization' },
+  inLanguage: 'en-CA',
 };
 
 const F = '/construction-management-features';
@@ -98,7 +101,7 @@ export default function HoldbackCalculatorPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
       />
 
       <section className="hero" style={{ paddingBottom: 34 }}>

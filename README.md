@@ -148,6 +148,7 @@ the job — for this site, it usually will.
 | The PDF export both calculators use | `lib/holdbackPdf.js` |
 | Features, trades, comparisons, signup URL | `lib/data.js` |
 | Tutorial library content | `lib/tutorials.js` |
+| Customer reviews (carousel **and** home page markup) | `lib/reviews.js` |
 | Every 301 redirect from the WordPress days | `next.config.mjs` |
 | Sitemap (posts add themselves) | `app/sitemap.js` |
 | All styling, one file | `app/globals.css` |
@@ -158,6 +159,39 @@ statutory holdback, five provinces) and `/construction-retainage-calculator/`
 no signup, and export a one-page PDF summary. They share their PDF writer and
 their component shell, but the rules engines are deliberately separate because
 Canadian holdback and US retainage are different legal animals.
+
+---
+
+## SEO plumbing that is easy to break
+
+**Every page needs a self-referencing canonical.** Add
+`alternates: { canonical: '/that-url/' }` to the page's `metadata` export (with
+the trailing slash). A page with no canonical is a page Google is free to fold
+into some other URL it thinks is similar.
+
+**Structured data is not free.** Google's rich results rules require anything in
+the `SoftwareApplication` family — including `WebApplication` — to carry a
+rating or a review. The site-wide markup used to be a `SoftwareApplication`
+with neither, so every page on the site failed validation. It is now an
+`Organization` plus a `WebSite`, which are valid everywhere, and the app itself
+is marked up on the home page where the reviews actually are. Never invent a
+rating to satisfy a validator: reviews in `lib/reviews.js` are what both the
+carousel and the markup render, so the two cannot drift apart.
+
+**Watch for `_1` filenames.** GitHub's uploader silently appends `_1` when a
+file of that name already exists, so re-uploading an edited post publishes a
+second copy of it instead of replacing the original. That has happened four
+times. If you see `something_1.md` in `content/posts/`, it is almost certainly
+the *newer* text: move it onto the original filename, delete the `_1`, and add a
+redirect from the `_1` URL in `next.config.mjs`.
+
+**IndexNow, if Ahrefs Site Audit is nagging about it.** IndexNow tells Bing,
+Yandex and Naver about changed pages — Google does not use it, so this is not
+how you get indexed by Google. To turn it on: generate a key in Ahrefs Site
+Audit under Crawl settings, then add a file named `<that-key>.txt` to
+`subtrade-site/public/` whose entire contents are the key itself. It publishes
+at `https://subtradesoftware.com/<that-key>.txt`, which is where Ahrefs looks
+to verify it before submitting anything.
 
 ---
 

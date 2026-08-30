@@ -14,7 +14,11 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const f = features.find((x) => x.slug === params.slug);
   if (!f) return {};
-  return { title: f.title, description: f.description };
+  return {
+    title: f.title,
+    description: f.description,
+    alternates: { canonical: `/construction-management-features/${f.slug}/` },
+  };
 }
 
 export default function FeaturePage({ params }) {

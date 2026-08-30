@@ -30,6 +30,7 @@ export function generateMetadata({ params }) {
   return {
     title: `${t.title} | SubTrade Tutorial`,
     description: `${t.blurb} Step-by-step SubTrade video tutorial.`,
+    alternates: { canonical: `/tutorials/${t.slug}/` },
   };
 }
 
@@ -47,8 +48,21 @@ export default function TutorialPage({ params }) {
     publisher: { '@type': 'Organization', name: 'SubTrade Software Ltd.' },
   };
   const feat = FEATURE_FOR[t.slug];
+  // The next three tutorials in the library, wrapping round at the end. Every
+  // tutorial used to have exactly one link pointing at it — its card on the
+  // library page — so nothing led a reader or a crawler from one to the next.
+  const i = tutorials.findIndex((x) => x.slug === t.slug);
+  const nextUp = [1, 2, 3].map((n) => tutorials[(i + n) % tutorials.length]).filter(Boolean);
   const relatedGroups = [
     ...(feat ? [{ label: 'Related feature', links: [{ href: feat[0], label: feat[1] }] }] : []),
+    ...(nextUp.length
+      ? [
+          {
+            label: 'Next tutorials',
+            links: nextUp.map((x) => ({ href: `/tutorials/${x.slug}/`, label: x.title })),
+          },
+        ]
+      : []),
     {
       label: 'Keep learning',
       links: [

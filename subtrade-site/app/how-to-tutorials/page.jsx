@@ -2,6 +2,7 @@ import { tutorials } from '../../lib/tutorials';
 import Link from 'next/link';
 
 export const metadata = {
+  alternates: { canonical: '/how-to-tutorials/' },
   title: 'SubTrade Video Tutorials',
   description:
     'Step-by-step SubTrade video tutorials: projects, time tracking, change orders, purchase orders, scheduling, drawings and notifications.',

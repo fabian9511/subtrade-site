@@ -1,6 +1,7 @@
 import { effective, intro, sections } from './privacy-text';
 
 export const metadata = {
+  alternates: { canonical: '/privacy-policy/' },
   title: 'Privacy Policy',
   description: 'Privacy Policy for the SubTrade construction project management platform by Subtrade Software Ltd.',
 };

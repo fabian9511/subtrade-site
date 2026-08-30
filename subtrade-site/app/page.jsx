@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { trades } from '../lib/data';
 import AppShowcase from '../components/AppShowcase';
 import Reviews from '../components/Reviews';
+import { reviews, aggregateRating } from '../lib/reviews';
 import AppDownload from '../components/AppDownload';
 
 export const metadata = {
@@ -29,6 +30,49 @@ const faqSchema = {
   })),
 };
 
+
+// The product itself is marked up here rather than site-wide, because Google's
+// rich results rules require a SoftwareApplication to carry a rating or a
+// review — and this is the page where the reviews are actually shown. Both the
+// rating and the review list come from lib/reviews.js, the same source the
+// carousel renders, so the markup can never overstate what is on the page.
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'SubTrade',
+  url: 'https://subtradesoftware.com/',
+  description:
+    'Field management software for trade subcontractors: GPS time tracking, change orders, crew scheduling, daily logs and progress billing in one app.',
+  applicationCategory: 'BusinessApplication',
+  applicationSubCategory: 'Construction Management Software',
+  operatingSystem: 'Web, iOS, Android',
+  offers: {
+    '@type': 'Offer',
+    price: '299',
+    priceCurrency: 'CAD',
+    url: 'https://subtradesoftware.com/pricing-plans/',
+    availability: 'https://schema.org/InStock',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: aggregateRating.ratingValue,
+    reviewCount: aggregateRating.reviewCount,
+    bestRating: '5',
+    worstRating: '1',
+  },
+  review: reviews.map((r) => ({
+    '@type': 'Review',
+    author: { '@type': 'Organization', name: r.name },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: String(r.rating),
+      bestRating: '5',
+      worstRating: '1',
+    },
+    reviewBody: r.quote,
+  })),
+  publisher: { '@id': 'https://subtradesoftware.com/#organization' },
+};
 
 const PORTAL = 'https://portal.subtradesoftware.com';
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
@@ -97,6 +141,10 @@ const featureGroups = [
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+      />
       {/* Preload the hero background (LCP element). As a CSS background-image it is
           otherwise only discovered after the stylesheet is parsed, which serialized
           the request chain and pushed mobile LCP past 8s on slow 4G. */}

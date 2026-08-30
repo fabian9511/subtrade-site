@@ -1,4 +1,5 @@
 export const metadata = {
+  alternates: { canonical: '/contact-us/' },
   title: 'Contact Us',
   description: 'Get in touch with SubTrade Software. Support, sales and general questions.',
 };

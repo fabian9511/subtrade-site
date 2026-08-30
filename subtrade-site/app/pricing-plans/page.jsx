@@ -1,6 +1,7 @@
 import Calculator from '../../components/Calculator';
 
 export const metadata = {
+  alternates: { canonical: '/pricing-plans/' },
   title: 'Pricing',
   description:
     'SubTrade is $299/month CAD with 5 users included. Additional users from $4 to $15 each. Save 20% on annual billing. Free trial, no demo call.',

@@ -55,17 +55,20 @@ const faqSchema = {
   })),
 };
 
-const appSchema = {
+// A WebPage rather than a WebApplication. Google's rich results rules require
+// anything in the SoftwareApplication family to carry a rating or a review, and
+// a free calculator has neither, so the old markup failed validation on every
+// crawl while buying no rich result in return.
+const pageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+  '@type': 'WebPage',
   name: 'Construction Retainage Calculator',
   url: 'https://subtradesoftware.com/construction-retainage-calculator/',
-  applicationCategory: 'FinanceApplication',
-  operatingSystem: 'Web',
   description:
     'Calculate retainage withheld and net payable on a US construction progress payment, with statutory caps for all 50 states and DC.',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  publisher: { '@type': 'Organization', name: 'SubTrade Software Ltd.' },
+  isPartOf: { '@id': 'https://subtradesoftware.com/#website' },
+  publisher: { '@id': 'https://subtradesoftware.com/#organization' },
+  inLanguage: 'en-US',
 };
 
 const F = '/construction-management-features';
@@ -108,7 +111,7 @@ export default function RetainageCalculatorPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
       />
 
       <section className="hero" style={{ paddingBottom: 34 }}>

@@ -10,7 +10,7 @@ imageAlt: "A framing estimator in a SubTrade hard hat checking a steel stud layo
 
 Framing estimates lose money in two predictable places: the labour to lay out and stand the walls, and everything that lives inside the openings, headers, and assemblies that a footage price quietly ignores. The material is the easy half. Studs, track, and sheathing come off a takeoff and a supplier quote. What separates a framing bid that holds from one that bleeds is how well you convert a wall type and a height onto a drawing into installed man-hours, using rates that came from your own finished jobs rather than a number you remember from a good week three years ago.
 
-We know the problem from the inside. SubTrade was built inside Quality Gypsum Services, a commercial drywall contractor in Calgary, Alberta, and steel stud framing is the scope right next to ours on nearly every job. The estimating logic is the same whether you frame in metal or wood: the material is knowable, the labour is where the risk lives. Here is the method that keeps a framing estimate honest.
+We know the problem from the inside. SubTrade was built inside [Quality Gypsum Services](https://qualitygypsum.ca/services/drywall/), a commercial drywall contractor in Calgary, Alberta, and steel stud framing is the scope right next to ours on nearly every job. The estimating logic is the same whether you frame in metal or wood: the material is knowable, the labour is where the risk lives. Here is the method that keeps a framing estimate honest.
 
 ## Start with the takeoff, in the units the work is actually built in
 

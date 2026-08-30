@@ -90,6 +90,28 @@ export function getPost(slug) {
   return readAll().find((p) => p.slug === slug) || null;
 }
 
+// Sibling posts to link at the foot of an article. Same tag first, since that
+// is what a reader who just finished the piece most likely wants next.
+//
+// The last slot always goes to the post immediately after this one in date
+// order, wrapping round at the end of the list. That chain is what guarantees
+// every post is linked from at least one other post no matter how the tags
+// fall — before this, most posts had exactly one link pointing at them, the
+// card on /blog/, which is a thin trail for a crawler and a dead end for a
+// reader.
+export function getRelatedPosts(slug, count = 3) {
+  const all = readAll();
+  const i = all.findIndex((p) => p.slug === slug);
+  if (i === -1 || all.length < 2) return [];
+
+  const chain = all[(i + 1) % all.length];
+  const rest = all.filter((p) => p.slug !== slug && p.slug !== chain.slug);
+  const sameTag = rest.filter((p) => p.tag === all[i].tag);
+  const others = rest.filter((p) => p.tag !== all[i].tag);
+
+  return [...sameTag, ...others].slice(0, Math.max(count - 1, 0)).concat(chain);
+}
+
 // The long-form guide published before the Markdown system existed. It keeps
 // its original root-level URL because Google has it indexed and moving it would
 // throw away that history for nothing.

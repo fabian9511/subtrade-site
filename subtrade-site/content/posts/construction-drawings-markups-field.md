@@ -10,7 +10,7 @@ imageAlt: "A foreman on a jobsite drawing a red markup on a construction plan di
 
 The drawing set that matters is not the one in the trailer. It is the one your foreman is standing in front of, the one with the beam that is two inches off, the wall that moved, the backing the owner added on a walk. Those field markups are where a project actually gets built, and on most jobs they live on a coffee-stained paper set that never makes it back to anyone who needs it. When the markups get lost, so does the evidence of what changed, who directed it, and when. That is not a paperwork problem. That is a getting-paid problem.
 
-We built SubTrade inside Quality Gypsum Services, a commercial drywall contractor in Calgary, Alberta, and we have watched clean field markups win a back charge dispute and watched a missing redline hand away a legitimate extra. Here is how to mark up drawings in the field so the information survives the job.
+We built SubTrade inside [Quality Gypsum Services](https://qualitygypsum.ca/), a commercial drywall contractor in Calgary, Alberta, and we have watched clean field markups win a back charge dispute and watched a missing redline hand away a legitimate extra. Here is how to mark up drawings in the field so the information survives the job.
 
 ## Why the field set is worth more than the office set
 

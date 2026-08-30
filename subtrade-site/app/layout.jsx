@@ -30,34 +30,48 @@ export const metadata = {
   },
 };
 
-const orgSchema = {
+// Site-wide identity markup. Every page carries this, so it has to be markup
+// that is valid on every page: an Organization and the WebSite it publishes.
+//
+// It used to be a SoftwareApplication instead, which Google's rich results
+// rules require to carry a rating or a review. There is no rating on a privacy
+// policy or a blog post, so all ~90 pages failed validation. The app itself is
+// now marked up on the home page, where the reviews actually live.
+const ORG_ID = 'https://subtradesoftware.com/#organization';
+
+const siteSchema = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'SubTrade',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web, iOS, Android',
-  offers: {
-    '@type': 'Offer',
-    price: '299',
-    priceCurrency: 'CAD',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: 'SubTrade Software Ltd.',
-    url: 'https://subtradesoftware.com/',
-    logo: 'https://subtradesoftware.com/logo-horizontal.png',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Calgary',
-      addressRegion: 'AB',
-      addressCountry: 'CA',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': ORG_ID,
+      name: 'SubTrade Software Ltd.',
+      url: 'https://subtradesoftware.com/',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://subtradesoftware.com/logo-horizontal.png',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Calgary',
+        addressRegion: 'AB',
+        addressCountry: 'CA',
+      },
+      sameAs: [
+        'https://apps.apple.com/ca/app/subtrade/id6752587413',
+        'https://play.google.com/store/apps/details?id=com.subtradesoftware.subtrade.app',
+        'https://www.youtube.com/@subtradesoftware',
+      ],
     },
-    sameAs: [
-      'https://apps.apple.com/ca/app/subtrade/id6752587413',
-      'https://play.google.com/store/apps/details?id=com.subtradesoftware.subtrade.app',
-      'https://www.youtube.com/@subtradesoftware',
-    ],
-  },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://subtradesoftware.com/#website',
+      url: 'https://subtradesoftware.com/',
+      name: 'SubTrade',
+      inLanguage: 'en-CA',
+      publisher: { '@id': ORG_ID },
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {
@@ -76,7 +90,7 @@ export default function RootLayout({ children }) {
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
         />
         <header className="header">
           <div className="wrap header-inner">

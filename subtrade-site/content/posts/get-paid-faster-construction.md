@@ -10,7 +10,7 @@ imageAlt: "A subcontractor reviewing payment and holdback figures on a laptop at
 
 Most subcontractors think getting paid faster means chasing invoices harder. It rarely does. The money on a construction job moves on a set of levers that are mostly decided before you ever send a reminder email: how clean your billing is, how much is being held back and when it releases, whether the statutory payment clock is running, and how well your draws survive scrutiny. Pull those levers and the cash arrives weeks sooner. Ignore them and no amount of follow-up will speed up a draw that was never set up to move.
 
-We built SubTrade inside Quality Gypsum Services, a commercial drywall contractor in Calgary, Alberta, where slow payment is the difference between making payroll comfortably and sweating it. This is the playbook we use, organized by the levers that actually control when you get paid. Each one links to the deep dive if you want the detail.
+We built SubTrade inside [Quality Gypsum Services](https://qualitygypsum.ca/), a commercial drywall contractor in Calgary, Alberta, where slow payment is the difference between making payroll comfortably and sweating it. This is the playbook we use, organized by the levers that actually control when you get paid. Each one links to the deep dive if you want the detail.
 
 ## Lever 1: Bill clean, and bill on time
 

@@ -1,4 +1,5 @@
 export const metadata = {
+  alternates: { canonical: '/about/' },
   title: 'About',
   description:
     'SubTrade was built by Fabian Vargas Garcia, president of a Calgary commercial drywall company, after years of using field software designed for GCs instead of subs.',

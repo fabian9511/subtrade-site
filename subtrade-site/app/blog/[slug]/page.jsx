@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { SIGNUP } from '../../../lib/data';
-import { getAllPosts, getPost } from '../../../lib/posts';
+import { getAllPosts, getPost, getRelatedPosts } from '../../../lib/posts';
 import ArticleToc from '../../../components/ArticleToc';
 import RelatedLinks from '../../../components/RelatedLinks';
 
@@ -78,7 +78,19 @@ export default function Post({ params }) {
     },
   ];
 
+  // Three sibling articles, chosen by tag. This is what gives every post more
+  // than the single incoming link from the blog index.
+  const siblings = getRelatedPosts(post.slug, 3);
+
   const related = [
+    ...(siblings.length
+      ? [
+          {
+            label: 'More on this',
+            links: siblings.map((p) => ({ href: `/blog/${p.slug}/`, label: p.title })),
+          },
+        ]
+      : []),
     {
       label: 'Free for subcontractors',
       links: [

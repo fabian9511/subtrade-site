@@ -2,6 +2,7 @@ import Script from 'next/script';
 import { SIGNUP } from '../../lib/data';
 
 export const metadata = {
+  alternates: { canonical: '/construction-software-15min-demo/' },
   title: 'Book a 15-Minute SubTrade Demo',
   description:
     'A 15-minute walkthrough of SubTrade for trade contractors. Or skip the call: the free trial gives you the full platform immediately.',
