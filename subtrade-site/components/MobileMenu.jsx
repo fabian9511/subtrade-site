@@ -100,6 +100,14 @@ export default function MobileMenu() {
         createPortal(
           <div className={`mnav${open ? ' open' : ''}`} aria-hidden={!open}>
             <nav className="mnav-panel" aria-label="Mobile navigation">
+          <Link href="/explore-the-app" className="mnav-item mnav-hero" onClick={close}>
+            <span className="mnav-ico" aria-hidden="true">📱</span>
+            <span className="mnav-text">
+              <span className="mnav-name">Explore the Mobile App</span>
+              <span className="mnav-sub">Tap through the real app — no signup</span>
+            </span>
+          </Link>
+
           <span className="mnav-label">Features</span>
           {cols.map((c) => (
             <div className="mnav-group" key={c.title}>
@@ -117,6 +125,7 @@ export default function MobileMenu() {
           ))}
 
           <div className="mnav-links">
+            <Link href="/explore-the-app" className="mnav-explore" onClick={close}>Explore the mobile app</Link>
             <Link href="/pricing-plans" onClick={close}>Pricing</Link>
             <Link href="/compare" onClick={close}>Compare</Link>
             <Link href="/construction-templates" onClick={close}>Templates</Link>

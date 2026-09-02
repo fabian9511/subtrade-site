@@ -86,6 +86,7 @@ export default function RootLayout({ children }) {
             </Link>
             <nav className="nav" aria-label="Main">
               <span className="hide-m"><MegaMenu /></span>
+              <Link href="/explore-the-app" className="hide-m nav-explore">Explore the app</Link>
               <Link href="/pricing-plans" className="hide-m">Pricing</Link>
               <a href={PORTAL} className="hide-m">Log in</a>
               <a href={SIGNUP} className="btn btn-primary">
@@ -118,6 +119,7 @@ export default function RootLayout({ children }) {
               <div className="footer-col">
                 <b>Product</b>
                 <Link href="/construction-management-features">Features</Link>
+                <Link href="/explore-the-app">Explore the mobile app</Link>
                 <Link href="/pricing-plans">Pricing</Link>
                 <Link href="/compare">Compare</Link>
                 <Link href="/construction-templates">Templates</Link>

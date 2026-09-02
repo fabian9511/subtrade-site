@@ -8,10 +8,16 @@ const img = (p) => `${base}${p}`;
 const pageImages = {
   '': [img('/subtrade-foreman-using-app-jobsite.webp'), img('/subtrade-app-project-tools-home.webp'), img('/subtrade-worker-capturing-site-photo.webp')],
   '/construction-management-features': [img('/subtrade-worker-capturing-site-photo-wide.webp')],
+  '/explore-the-app': [img('/subtrade-app-project-tools-home.webp'), img('/subtrade-app-construction-drawing-markup.webp')],
   '/construction-management-features/site-photos': [img('/subtrade-before-after-construction-photos.webp'), img('/subtrade-photo-markup-install-access-panel.webp'), img('/subtrade-gps-site-photos-worker.webp')],
   '/construction-management-features/change-order-management': [img('/subtrade-change-order-from-the-field.webp')],
   '/construction-management-features/daily-logs': [img('/subtrade-daily-log-foreman-end-of-day.webp')],
   '/construction-management-features/construction-crew-scheduling': [img('/subtrade-crew-scheduling-jobsite.webp')],
+  '/construction-management-features/asset-management': [
+    img('/subtrade-asset-management-register.webp'),
+    img('/subtrade-deploy-equipment-to-site.webp'),
+    img('/subtrade-asset-qr-labels-avery-sheet.webp'),
+  ],
   '/time-tracking': [img('/subtrade-gps-time-tracking-clock-in.webp')],
   '/pricing-plans': [img('/subtrade-organized-multi-trade-jobsite.webp')],
   '/about': [img('/fabian-vargas-garcia-subtrade-cofounder.webp')],
@@ -19,7 +25,7 @@ const pageImages = {
 
 export default function sitemap() {
   const staticPaths = [
-    '', '/construction-management-features', '/time-tracking', '/pricing-plans',
+    '', '/construction-management-features', '/explore-the-app', '/time-tracking', '/pricing-plans',
     '/compare', '/blog', '/about', '/construction-templates',
     '/construction-holdback-calculator',
     '/construction-retainage-calculator',

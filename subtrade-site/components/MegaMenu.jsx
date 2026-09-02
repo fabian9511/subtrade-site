@@ -77,6 +77,7 @@ export default function MegaMenu() {
               <b>Built by a subcontractor, for subcontractors</b>
               <p>Every feature designed around how trade subs actually work, from the field to the office.</p>
               <a href={SIGNUP} className="btn btn-primary" style={{ justifyContent: 'center' }}>Start free trial</a>
+              <Link href="/explore-the-app" className="mega-demo">Explore the mobile app →</Link>
               <Link href="/construction-software-15min-demo" className="mega-demo">Book a demo →</Link>
               <span className="mega-zero"><span className="mono">$0</span> to get started · no credit card</span>
               <div className="mega-stores">
