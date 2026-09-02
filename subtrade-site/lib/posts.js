@@ -44,7 +44,10 @@ function readAll() {
 
   return fs
     .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith('.md') && f !== 'TEMPLATE.md')
+    // Skip TEMPLATE.md and any name_1.md / name_2.md copy. GitHub's web uploader
+    // creates those when a file is uploaded twice, and publishing them puts the
+    // same post at two URLs.
+    .filter((f) => f.endsWith('.md') && f !== 'TEMPLATE.md' && !/_\d+\.md$/.test(f))
     .map((file) => {
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf8');
       const { data, body } = parseFrontMatter(raw);

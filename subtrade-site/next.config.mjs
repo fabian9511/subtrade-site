@@ -75,6 +75,9 @@ const nextConfig = {
       // Consolidated / mis-named URLs
       { source: '/best-software-for-subcontractors-comparing-top-tools-for-2025-to-boost-efficiency-and-project-management', destination: GUIDE, permanent: true },
       { source: '/blog/what-is-a-sub-trade_1', destination: '/blog/what-is-a-sub-trade/', permanent: true },
+      { source: '/blog/construction-drawings-markups-field_1', destination: '/blog/construction-drawings-markups-field/', permanent: true },
+      { source: '/blog/framing-contractor-estimating_1', destination: '/blog/framing-contractor-estimating/', permanent: true },
+      { source: '/blog/get-paid-faster-construction_1', destination: '/blog/get-paid-faster-construction/', permanent: true },
     ];
   },
 };

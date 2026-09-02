@@ -42,7 +42,7 @@ const schema = [
     },
     mainEntityOfPage: `${BASE}${PATH}`,
     datePublished: '2026-01-15',
-    dateModified: '2026-08-04',
+    dateModified: '2026-09-02',
   },
   {
     '@context': 'https://schema.org',
@@ -143,7 +143,7 @@ export default function Guide() {
 
             <h2 id="what-is-it">What is subcontractor management software?</h2>
             <p>
-              <Link href="/">Subcontractor management software</Link> is field
+              <b>Subcontractor management software</b> is field
               management software built for trade contractors rather than general
               contractors. It puts time tracking with job costing, change orders,
               crew scheduling, daily logs, site photos, drawings, safety forms and
@@ -489,8 +489,7 @@ export default function Guide() {
 
             <h2 id="where-subtrade-fits">Where SubTrade fits</h2>
             <p>
-              SubTrade is{' '}
-              <Link href="/">subcontractor management software</Link> built
+              <Link href="/">SubTrade</Link> is subcontractor management software built
               exclusively for trade contractors, by a working drywall subcontractor.
               Time tracking with live job costing, sixty-second change orders,
               scheduling for multi-job reality, daily logs, drawings, safety forms

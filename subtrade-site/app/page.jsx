@@ -184,7 +184,12 @@ export default function Home() {
               <h2 className="display">Follow a crew through Tuesday</h2>
               <p>
                 Most construction software is built for the GC upstairs. SubTrade
-                follows your crew from the truck to the draw.
+                follows your crew from the truck to the draw. Still comparing
+                tools? Start with our guide to{' '}
+                <Link href="/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight">
+                  choosing subcontractor management software
+                </Link>
+                .
               </p>
             </div>
             <img
