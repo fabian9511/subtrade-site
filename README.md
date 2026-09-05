@@ -151,6 +151,7 @@ the job — for this site, it usually will.
 | Customer reviews (carousel **and** home page markup) | `lib/reviews.js` |
 | Who gets the byline on articles | `lib/author.js` |
 | BreadcrumbList markup, one builder for every page | `lib/breadcrumbs.js` |
+| Bare date → ISO 8601 timestamp with the right Alberta offset | `lib/isodate.js` |
 | Every 301 redirect from the WordPress days | `next.config.mjs` |
 | Sitemap (posts add themselves) | `app/sitemap.js` |
 | All styling, one file | `app/globals.css` |
@@ -193,6 +194,19 @@ from it — Google gives little weight to an author it cannot see on the page, s
 the two must never drift apart. A post can override the name with `author:` in
 its front matter, and it should whenever someone else actually wrote it: the
 byline is a claim about a real person.
+
+**Dates in structured data need a time and a timezone.** Search Console
+reports a bare `2026-08-29` as "missing a timezone" / "invalid datetime value",
+so every `uploadDate`, `datePublished` and `dateModified` goes through
+`isoDateTime()` in `lib/isodate.js`, which turns it into
+`2026-08-29T09:00:00-06:00`. Write plain `YYYY-MM-DD` in the data files and let
+that function work out whether Alberta was on MST or MDT that day.
+
+**Tutorial upload dates are still placeholders.** All twelve `uploaded:` fields
+in `lib/tutorials.js` read `2026-01-01`, inherited from a single hard-coded date
+that used to cover every tutorial. `uploadDate` is a factual claim about a video
+and Google requires it, so replace them with the real dates from YouTube Studio
+when you get the chance.
 
 **`<lastmod>` in the sitemap is only ever a real date.** It comes from a post's
 `date`/`updated` front matter. Pages that do not record when they changed do not

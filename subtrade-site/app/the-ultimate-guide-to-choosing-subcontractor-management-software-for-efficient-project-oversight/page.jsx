@@ -3,6 +3,7 @@ import Link from 'next/link';
 import ArticleToc from '../../components/ArticleToc';
 import { AUTHOR, authorSchema } from '../../lib/author';
 import { breadcrumbs } from '../../lib/breadcrumbs';
+import { isoDateTime } from '../../lib/isodate';
 
 const PATH =
   '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight/';
@@ -43,8 +44,8 @@ const schema = [
       logo: { '@type': 'ImageObject', url: `${BASE}/logo-horizontal.png` },
     },
     mainEntityOfPage: `${BASE}${PATH}`,
-    datePublished: '2026-01-15',
-    dateModified: '2026-08-04',
+    datePublished: isoDateTime('2026-01-15'),
+    dateModified: isoDateTime('2026-08-04'),
   },
   breadcrumbs([
     ['Blog', '/blog/'],

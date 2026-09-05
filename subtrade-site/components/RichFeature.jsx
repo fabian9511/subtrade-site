@@ -1,4 +1,5 @@
 import { SIGNUP } from '../lib/data';
+import { isoDateTime } from '../lib/isodate';
 import VideoEmbed from './VideoEmbed';
 
 const SITE = 'https://subtradesoftware.com';
@@ -31,7 +32,7 @@ export default function RichFeature({ f }) {
     name: v.title,
     description: v.description,
     thumbnailUrl: [`${SITE}${v.poster}`],
-    uploadDate: v.uploadDate,
+    uploadDate: isoDateTime(v.uploadDate),
     duration: v.duration,
     embedUrl: `https://www.youtube.com/embed/${v.id}`,
     contentUrl: `https://youtu.be/${v.id}`,

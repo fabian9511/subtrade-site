@@ -4,6 +4,7 @@ import RelatedLinks from '../../../components/RelatedLinks';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { breadcrumbs } from '../../../lib/breadcrumbs';
+import { isoDateTime } from '../../../lib/isodate';
 
 const F = '/construction-management-features';
 const FEATURE_FOR = {
@@ -45,7 +46,9 @@ export default function TutorialPage({ params }) {
     description: t.blurb,
     thumbnailUrl: `https://i.ytimg.com/vi/${t.videoId}/hqdefault.jpg`,
     embedUrl: `https://www.youtube-nocookie.com/embed/${t.videoId}`,
-    uploadDate: '2026-01-01',
+    // Google wants a full ISO 8601 timestamp with a timezone here, not a bare
+    // date. The day itself comes from lib/tutorials.js.
+    uploadDate: isoDateTime(t.uploaded),
     publisher: { '@type': 'Organization', name: 'SubTrade Software Ltd.' },
   };
   const feat = FEATURE_FOR[t.slug];

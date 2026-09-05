@@ -6,6 +6,7 @@ import ArticleToc from '../../../components/ArticleToc';
 import RelatedLinks from '../../../components/RelatedLinks';
 import { AUTHOR, authorSchema } from '../../../lib/author';
 import { breadcrumbs } from '../../../lib/breadcrumbs';
+import { isoDateTime } from '../../../lib/isodate';
 
 const BASE = 'https://subtradesoftware.com';
 
@@ -66,8 +67,11 @@ export default function Post({ params }) {
         logo: { '@type': 'ImageObject', url: `${BASE}/logo-horizontal.png` },
       },
       mainEntityOfPage: `${BASE}${path}`,
-      ...(post.date ? { datePublished: post.date } : {}),
-      ...(post.updated ? { dateModified: post.updated } : {}),
+      // Full ISO 8601 with a timezone, for the same reason the video markup
+      // needs one: a bare date does not identify a moment, and Search Console
+      // reports it.
+      ...(post.date ? { datePublished: isoDateTime(post.date) } : {}),
+      ...(post.updated ? { dateModified: isoDateTime(post.updated) } : {}),
       ...(post.image ? { image: `${BASE}${post.image}` } : {}),
     },
     breadcrumbs([
