@@ -112,6 +112,9 @@ export default function TutorialPage({ params }) {
         )}
 
         <div style={{ marginTop: 36, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+          {t.pdf && (
+            <a href={t.pdf} className="btn btn-ghost" download>Download the PDF guide</a>
+          )}
           <Link href="/how-to-tutorials" className="btn btn-ghost">All tutorials</Link>
           <a href={SIGNUP} className="btn btn-primary">Start free trial</a>
         </div>
