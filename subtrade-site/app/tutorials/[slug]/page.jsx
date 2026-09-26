@@ -14,6 +14,7 @@ const FEATURE_FOR = {
   'manage-change-orders-subtrade-software': [`${F}/change-order-management`, 'Change Orders'],
   'purchase-orders-approval': [`${F}/change-order-management`, 'Change Orders'],
   'subtrade-tutorial-auto-naming-construction-drawings': [`${F}/drawings-markups`, 'Drawings & Markups'],
+  'crew-scheduling-subtrade-software': [`${F}/construction-crew-scheduling`, 'Crew Scheduling'],
   'scheduling-feature-workflow-construction-drawings-upload': [`${F}/construction-crew-scheduling`, 'Crew Scheduling'],
   'custom-notifications': [`${F}/field-operations`, 'Field Operations'],
   'creating-and-submitting-a-daily-report': [`${F}/daily-logs`, 'Daily Logs'],
