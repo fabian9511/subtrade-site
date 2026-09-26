@@ -1,6 +1,8 @@
 // Each tutorial lives at /tutorials/<slug> matching the old WordPress URLs.
 // videoId: the YouTube video ID (the part after v= or youtu.be/).
 // Fill in each videoId before launch; pages render a link to the channel until then.
+// pdf (optional): path to a PDF guide in /public/guides/. Adds a download button
+// on the tutorial page and a "PDF guide" tag on the card.
 export const tutorials = [
   {
     slug: 'how-to-create-a-project-subtrade-software',
@@ -19,6 +21,7 @@ export const tutorials = [
     title: 'Employee time sheets workflow',
     blurb: 'Review, correct and approve crew hours without the Friday detective work.',
     videoId: 'I7XraCWxwCM',
+    pdf: '/guides/subtrade-timesheet-guide.pdf',
   },
   {
     slug: 'time-tracking-approval-and-the-time-splitting',
