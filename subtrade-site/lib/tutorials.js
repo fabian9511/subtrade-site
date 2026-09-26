@@ -78,6 +78,29 @@ export const tutorials = [
     videoId: '6Sl9PQ5N92k',
   },
   {
+    slug: 'crew-scheduling-subtrade-software',
+    title: 'Crew scheduling',
+    blurb: 'Book your crew for the week, repeat shifts and catch double-bookings.',
+    videoId: 'MxCJSzEnXL4',
+    pdf: '/guides/subtrade-scheduling-guide.pdf',
+    content: {
+      lead: `The Schedule shows your whole crew for the week: who's working, what hours, and on which job. This walkthrough shows how to book shifts fast and keep anyone from getting double-booked.`,
+      learnTitle: `In this tutorial you'll learn how to:`,
+      learn: [
+        `Read the week at a glance: total scheduled hours, the week scroller and daily or weekly view`,
+        `Filter the schedule by employee or by project`,
+        `Book one worker or a whole crew in a single shift`,
+        `Repeat a shift across several days and skip weekends automatically`,
+        `Use the Morning, Afternoon, All Day and Night presets, or set custom and overnight hours`,
+        `Assign the project, task and notes, and let SubTrade skip any shift that clashes`,
+      ],
+      body: [
+        `Book next week's shifts before Friday and your crew sees where they're going on their phone.`,
+        `Want it on paper? Download the PDF guide below and hand it to your supervisors.`,
+      ],
+    },
+  },
+  {
     slug: 'scheduling-feature-workflow-construction-drawings-upload',
     title: 'Scheduling workflow and drawings upload',
     blurb: 'Schedule crews and attach the right drawings to the right job.',
