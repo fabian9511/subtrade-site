@@ -29,7 +29,7 @@ export default function Tutorials() {
           <div className="grid">
             {tutorials.map((t) => (
               <Link href={`/tutorials/${t.slug}`} className="cell" key={t.slug}>
-                <span className="tag">Tutorial</span>
+                <span className="tag">{t.pdf ? 'Tutorial · PDF guide' : 'Tutorial'}</span>
                 <h3>{t.title}</h3>
                 <p>{t.blurb}</p>
               </Link>
