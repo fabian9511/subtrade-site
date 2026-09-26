@@ -20,8 +20,24 @@ export const tutorials = [
     slug: 'workflow-efficiency-with-employee-time-sheets',
     title: 'Employee time sheets workflow',
     blurb: 'Review, correct and approve crew hours without the Friday detective work.',
-    videoId: 'I7XraCWxwCM',
+    videoId: 'yadJ0PqzO5k',
     pdf: '/guides/subtrade-timesheet-guide.pdf',
+    content: {
+      lead: `Every hour your crew clocks lands on one Timesheet page. This walkthrough shows how to review those hours, approve them before payroll, and check who was actually on site, without chasing anyone down on Friday.`,
+      learnTitle: `In this tutorial you'll learn how to:`,
+      learn: [
+        `Filter hours by pay period, project or employee, and export them to CSV`,
+        `Read the totals: gross hours, breaks, payable hours and labour cost`,
+        `Approve or reject time before it reaches payroll`,
+        `Fix or stop a running timer when someone forgets to clock out`,
+        `Check each worker's pay period totals and every entry behind them`,
+        `See whether a punch was on site or off site, with the exact pin on a map`,
+      ],
+      body: [
+        `Pending Approvals is a company setting. Turn it on in Company Settings when you want a supervisor to sign off on hours before they count toward payroll.`,
+        `Want it on paper? Download the PDF guide below and hand it to your supervisors.`,
+      ],
+    },
   },
   {
     slug: 'time-tracking-approval-and-the-time-splitting',
