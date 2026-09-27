@@ -6,9 +6,26 @@
 export const tutorials = [
   {
     slug: 'how-to-create-a-project-subtrade-software',
-    title: 'How to create a project',
-    blurb: 'Set up a new project with crew, drawings and cost codes in minutes.',
-    videoId: 'ptRGanQAzdA',
+    title: 'Project dashboard and templates',
+    blurb: 'Run every job from one screen and start each new one from a template.',
+    videoId: 'OUYpHYuhJ2w',
+    pdf: '/guides/subtrade-project-dashboard-guide.pdf',
+    content: {
+      lead: `Every job you're running sits on one Projects page. This walkthrough shows how to read a project card, create a new job in a couple of minutes, and build templates so every job of the same type starts set up the way you work.`,
+      learnTitle: `In this tutorial you'll learn how to:`,
+      learn: [
+        `Switch between active and archived jobs and search any project by name`,
+        `Read a project card: progress, tasks, team, dates and status`,
+        `Create a project with customer, crew, job site address and schedule`,
+        `Build a template per job type with tasks, priority, start and due days`,
+        `Load default team members, drawing folders and forms into a template`,
+        `Set the statuses for tasks, RFIs, change orders and POs`,
+      ],
+      body: [
+        `Leave the project code blank and SubTrade numbers the job for you. Archive a job when it wraps up and your active list stays clean.`,
+        `Want it on paper? Download the PDF guide below and hand it to your PMs and supervisors.`,
+      ],
+    },
   },
   {
     slug: 'setup-new-employees-fast-in-subtrade-software',
