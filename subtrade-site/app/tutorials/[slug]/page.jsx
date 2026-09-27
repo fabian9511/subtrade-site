@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 
 const F = '/construction-management-features';
 const FEATURE_FOR = {
-  'how-to-create-a-project-subtrade-software': [`${F}/field-operations`, 'Field Operations'],
+  'how-to-create-a-project-subtrade-software': [`${F}/project-dashboard`, 'Project Dashboard'],
   'setup-new-employees-fast-in-subtrade-software': ['/time-tracking', 'Time Tracking'],
   'workflow-efficiency-with-employee-time-sheets': ['/time-tracking', 'Time Tracking'],
   'time-tracking-approval-and-the-time-splitting': ['/time-tracking', 'Time Tracking'],
