@@ -29,6 +29,18 @@ export default function Tutorials() {
           <div className="grid">
             {tutorials.map((t) => (
               <Link href={`/tutorials/${t.slug}`} className="cell" key={t.slug}>
+                {t.videoId && (
+                  <span className="tut-thumb">
+                    <img
+                      src={`https://i.ytimg.com/vi/${t.videoId}/hqdefault.jpg`}
+                      alt={`${t.title} video thumbnail`}
+                      loading="lazy"
+                      width="480"
+                      height="270"
+                    />
+                    <span className="tut-play" aria-hidden="true" />
+                  </span>
+                )}
                 <span className="tag">{t.pdf ? 'Tutorial · PDF guide' : 'Tutorial'}</span>
                 <h3>{t.title}</h3>
                 <p>{t.blurb}</p>
