@@ -332,6 +332,162 @@ export const features = [
     },
   },
   {
+    slug: 'bid-manager',
+    name: 'Bid Manager',
+    keyword: 'construction bid management software for subcontractors',
+    title: 'Bid Management Software for Subcontractors',
+    description:
+      'Track every tender from invite to award on one board: pipeline value, win rate, drawings, proposals, vendor pricing requests and auto follow-ups. New in SubTrade.',
+    h1: 'Every bid on one board',
+    intro:
+      'Bid Manager tracks every tender you are invited to, from the day it lands in your inbox to the day it is awarded or lost. Drawings, proposals, vendor pricing and follow-ups all live on the bid.',
+    points: [
+      ['One board for every tender', 'Incoming, estimating, sent, follow-up, awarded and lost, with your pipeline value and win rate on top.'],
+      ['Everything on the bid', 'The GC contact, key dates, scope of work and every drawing and addendum, in one place.'],
+      ['Vendor pricing without the chase', 'Send the drawings to suppliers and subs. They price it on a link, no account needed.'],
+      ['Follow-ups that run themselves', 'Auto-chase reminds vendors before the due date so the numbers show up in time.'],
+    ],
+    rich: {
+      heroTitle: ['Every bid', 'on one board'],
+      heroSub:
+        'Bid Manager tracks every tender you are invited to, from the day it lands in your inbox to the day it is awarded or lost. Drawings, proposals, vendor pricing and follow-ups all live on the bid, so nothing gets missed at 4:55 on closing day.',
+      stats: [
+        ['Pipeline', 'Open value, awarded, win rate'],
+        ['Drawings', 'Every addendum, filed'],
+        ['Vendor pricing', 'No account needed'],
+        ['Auto-chase', '5, 2 and 1 days out'],
+      ],
+      video: {
+        id: 'JbtD3J8YEuI',
+        caption: 'Part 1 of 3: your bid pipeline. Parts 2 and 3 are in the tutorials below.',
+        title: 'Bid Manager, Part 1: Your bid pipeline',
+        description:
+          'A walkthrough of Bid Manager in SubTrade: the Kanban board of tenders by stage, open pipeline value, awarded value, win rate and active bids, search and estimator filters, tender cards with countdowns, list view, and adding a new tender.',
+        poster: '/subtrade-bid-manager-video-poster.webp',
+        posterAlt: 'Play the SubTrade Bid Manager walkthrough, every bid on one board',
+        uploadDate: '2026-09-27',
+        duration: 'PT2M32S',
+      },
+      sections: [
+        {
+          eyebrow: 'New in SubTrade',
+          title: 'Your whole bid pipeline, one board',
+          isNew: true,
+          body:
+            'Every tender is a card in the column that matches its stage: Incoming Tender, Estimating, Sent, Follow-up, Awarded, Lost and Non-tendered. Move the card as the bid moves. Across the top sit the four numbers an estimator should know without opening a spreadsheet.',
+          checks: [
+            'Open pipeline, awarded value, win rate and active bids at the top of the page',
+            'Each column shows its bid count and what the bids add up to',
+            'Add your own custom columns if your shop works differently',
+            'Cards count down to closing and flag anything overdue',
+            'Search by tender, quote number or client, and filter by estimator',
+            'Switch to a list view sorted by due date',
+          ],
+          images: ['/subtrade-bid-manager-board.webp'],
+          imageAlt: 'SubTrade Bid Manager Kanban board with tenders in Incoming Tender, Estimating, Sent, Follow-up, Awarded, Lost and Non-tendered columns, and open pipeline, awarded, win rate and active bid totals across the top',
+          browser: true,
+        },
+        {
+          eyebrow: 'New Tender',
+          title: 'On the board in under a minute',
+          flip: true,
+          body:
+            'The invite comes in, you hit New Tender. Project name, status, bid value, the GC from your customer list or typed in fresh, the contact, the site, the due date and who on your team is on it.',
+          checks: [
+            'Pick the company from your customer list, or type a new name and it is created on the spot',
+            'Contact person, email and phone kept with the bid',
+            'Due date and estimated construction date',
+            'Assign team members and add notes',
+          ],
+          images: ['/subtrade-bid-manager-new-tender.webp'],
+          imageAlt: 'The New Tender dialog in SubTrade with project name, status, bid value, company, contact person, email, phone, location, due date, estimated construction date, assigned team members and notes',
+          browser: true,
+        },
+        {
+          eyebrow: 'Inside a tender',
+          title: 'Everything about the bid, in one place',
+          body:
+            'Open any card and the whole bid is there: the site on a map, every date that matters, the GC and their contact, your scope of work and the drawings. When the GC makes the call, mark it awarded or lost and your win rate updates.',
+          checks: [
+            'Project location on a map, with Open in Maps for the job walk',
+            'Date invited, job walk, RFIs due, due date, expected start and finish',
+            'Request type, tender number, trade names, GC and contact details',
+            'Scope of work and notes so anyone can pick up the bid',
+            'Tender documents and addenda as they arrived, sorted into folders',
+            'Mark as Awarded or Mark as Lost in one click',
+          ],
+          images: ['/subtrade-bid-manager-tender-overview.webp', '/subtrade-bid-manager-drawings.webp'],
+          imageAlts: [
+            'A tender in SubTrade Bid Manager showing the bid value, status, Edit, Mark as Awarded and Mark as Lost buttons, the Overview, Drawings, Estimating, Vendors and Follow-ups tabs, and the project location map',
+            'The Drawings tab of a tender in SubTrade listing the tender documents the general contractor sent, with upload, new folder, open, download and delete',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'Proposals',
+          title: 'Every number you send, on record',
+          flip: true,
+          body:
+            'Proposals live on the Estimating tab with their own quote numbers. When the GC asks for changes, make a revision. The old one is kept and marked superseded, so you always know which number went out. Takeoff and estimating are coming very soon.',
+          checks: [
+            'A quote number on every proposal, searchable later',
+            'Send the proposal straight from the tender',
+            'Revisions keep the earlier versions, marked superseded',
+            'Takeoff and estimating steps coming very soon',
+          ],
+          images: ['/subtrade-bid-manager-proposals.webp'],
+          imageAlt: 'The Estimating tab of a tender in SubTrade with Takeoff and Estimate marked coming soon, a Proposal step, and a proposal list with quote number, value and earlier revisions',
+          browser: true,
+        },
+        {
+          eyebrow: 'Vendor pricing',
+          title: 'Get supplier and sub pricing without the email chase',
+          body:
+            'Invite a vendor from the tender, pick the drawings to include and say what you need priced. The message fills itself in with the project, the address and your due date. They open one link, see the drawings and send their price back. No account needed.',
+          checks: [
+            'Pick vendors from your vendor list',
+            'Choose which drawings go out and attach site photos or extra specs',
+            'Send from SubTrade, or copy the link and send it yourself',
+            'Your logo on the email and the pricing page',
+            'Vendors enter a price, notes like exclusions or lead time, and attach their quote',
+            'The price lands back on the tender',
+          ],
+          images: ['/subtrade-bid-manager-invite-vendor.webp', '/subtrade-bid-manager-vendor-pricing-page.webp'],
+          imageAlts: [
+            'The Invite vendor dialog in SubTrade with the vendor, documents included, attachments, what we need priced, and a pre-filled pricing request message',
+            'The vendor pricing page from a SubTrade pricing request, showing the project, what needs pricing, the tender documents and fields for price, notes and a quote attachment, with no account needed',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'Follow-ups',
+          title: 'The bid keeps moving until it is in',
+          flip: true,
+          body:
+            'The Follow-ups tab shows the due date, how many vendors have priced and every open follow-up. Turn on auto-chase and vendors get reminders five, two and one day before the bid is due.',
+          checks: [
+            'Auto-chase reminders 5, 2 and 1 days before the due date',
+            'See how many vendors have priced at a glance',
+            'Open, snoozed and done follow-ups kept apart',
+            'Chase now, or open the estimate straight from the follow-up',
+            'Add your own follow-ups any time',
+          ],
+          images: ['/subtrade-bid-manager-follow-ups.webp'],
+          imageAlt: 'The Follow-ups tab of a tender in SubTrade showing the bid due date, vendors priced, the auto-chase toggle set to 5, 2 and 1 days before due, and open follow-ups with Chase now and Open estimate buttons',
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['What is Bid Manager in SubTrade?', 'It is where every tender you are invited to lives, from the invite to the award. A Kanban board shows every bid by stage with your pipeline value and win rate, and each tender holds its dates, contacts, scope, drawings, proposals, vendor pricing and follow-ups.'],
+        ['Do my vendors need a SubTrade account to price a job?', 'No. They get an email with your logo and one link. The link opens the drawings you chose and a pricing form for their price, notes and quote. No account and no login.'],
+        ['Can I track revisions to my proposals?', 'Yes. Every proposal has its own quote number. When you revise it, the earlier version is kept and marked superseded, so you always know which number went to the GC.'],
+        ['Does Bid Manager do takeoff and estimating?', 'Takeoff and estimating are coming very soon. Today the Estimating tab is where your proposals live, and the takeoff and estimate steps will slot in ahead of them.'],
+        ['Can I add my own bid stages?', 'Yes. The board comes with Incoming Tender, Estimating, Sent, Follow-up, Awarded, Lost and Non-tendered, and you can add custom columns to match how your shop works.'],
+        ['Does Bid Manager cost extra?', 'No. It is part of SubTrade on every plan, the same as time tracking, forms and progress billing. No add-on module.'],
+      ],
+    },
+  },
+  {
     slug: 'construction-crew-scheduling',
     image: '/subtrade-crew-scheduling-jobsite.webp',
     imageAlt: 'Two workers reviewing the SubTrade crew schedule on a phone at a truck tailgate',
