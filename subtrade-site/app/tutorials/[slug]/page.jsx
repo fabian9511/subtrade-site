@@ -19,7 +19,21 @@ const FEATURE_FOR = {
   'custom-notifications': [`${F}/field-operations`, 'Field Operations'],
   'creating-and-submitting-a-daily-report': [`${F}/daily-logs`, 'Daily Logs'],
   'introducing-field-operations': [`${F}/field-operations`, 'Field Operations'],
+  'forms-dashboard-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
+  'build-a-form-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
+  'forms-in-projects-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
+  'review-form-submissions-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
 };
+
+function seriesOf(t) {
+  if (!t.series) return null;
+  const parts = tutorials
+    .filter((x) => x.series && x.series.name === t.series.name)
+    .sort((a, b) => a.series.part - b.series.part);
+  const i = parts.findIndex((x) => x.slug === t.slug);
+  return { parts, prev: parts[i - 1], next: parts[i + 1] };
+}
+const shortTitle = (x) => x.title.replace(/^.*?Part \d+:\s*/, '');
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -48,6 +62,7 @@ export default function TutorialPage({ params }) {
     publisher: { '@type': 'Organization', name: 'SubTrade Software Ltd.' },
   };
   const feat = FEATURE_FOR[t.slug];
+  const ser = seriesOf(t);
   const relatedGroups = [
     ...(feat ? [{ label: 'Related feature', links: [{ href: feat[0], label: feat[1] }] }] : []),
     {
@@ -69,11 +84,28 @@ export default function TutorialPage({ params }) {
     )}
     <section className="section" style={{ paddingTop: 90 }}>
       <div className="wrap" style={{ maxWidth: 860 }}>
-        <p className="eyebrow">SubTrade tutorial</p>
+        <p className="eyebrow">
+          {ser ? `${t.series.name} series · Part ${t.series.part} of ${t.series.of}` : 'SubTrade tutorial'}
+        </p>
         <h1 className="display" style={{ fontSize: 'clamp(34px,5.5vw,58px)', margin: '18px 0 14px' }}>
           {t.title}
         </h1>
         <p style={{ color: 'var(--steel-400)', marginBottom: 30, fontSize: 18 }}>{t.blurb}</p>
+        {ser && (
+          <nav className="series-steps" aria-label={`${t.series.name} series`}>
+            {ser.parts.map((x) => (
+              <Link
+                key={x.slug}
+                href={`/tutorials/${x.slug}`}
+                className={x.slug === t.slug ? 'on' : ''}
+                aria-current={x.slug === t.slug ? 'page' : undefined}
+              >
+                <span>Part {x.series.part}</span>
+                {shortTitle(x)}
+              </Link>
+            ))}
+          </nav>
+        )}
         {t.videoId ? (
           <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, border: '1px solid var(--steel-700)', borderRadius: 4, overflow: 'hidden' }}>
             <iframe
@@ -109,6 +141,28 @@ export default function TutorialPage({ params }) {
             )}
             {t.content.body &&
               t.content.body.map((p, i) => <p key={i}>{p}</p>)}
+          </div>
+        )}
+
+        {ser && (
+          <div className="series-nav">
+            {ser.prev ? (
+              <Link href={`/tutorials/${ser.prev.slug}`} className="series-btn prev">
+                <small>&larr; Previous · Part {ser.prev.series.part}</small>
+                {shortTitle(ser.prev)}
+              </Link>
+            ) : <span />}
+            {ser.next ? (
+              <Link href={`/tutorials/${ser.next.slug}`} className="series-btn next">
+                <small>Next · Part {ser.next.series.part} &rarr;</small>
+                {shortTitle(ser.next)}
+              </Link>
+            ) : (
+              <Link href={`/tutorials/${ser.parts[0].slug}`} className="series-btn next done">
+                <small>Series complete · Start over &rarr;</small>
+                {shortTitle(ser.parts[0])}
+              </Link>
+            )}
           </div>
         )}
 
