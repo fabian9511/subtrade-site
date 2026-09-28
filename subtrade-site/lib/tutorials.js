@@ -132,6 +132,7 @@ export const tutorials = [
     title: 'Set up new employees fast',
     blurb: 'Add crew members and get them clocking in the same day.',
     videoId: '9k-B3G5IFKc',
+    published: '2025-09-29',
   },
   {
     slug: 'workflow-efficiency-with-employee-time-sheets',
@@ -162,18 +163,21 @@ export const tutorials = [
     title: 'Time tracking approval and time splitting',
     blurb: 'Approve time and split hours across jobs and cost codes.',
     videoId: 'VYoNEFi7GqU',
+    published: '2026-02-08',
   },
   {
     slug: 'manage-change-orders-subtrade-software',
     title: 'Manage change orders',
     blurb: 'Create, price, send and track change orders from the field.',
     videoId: 'gSl3P6ZYrlM',
+    published: '2026-01-07',
   },
   {
     slug: 'purchase-orders-approval',
     title: 'Purchase orders and approval',
     blurb: 'Create POs from the field and run them through approval.',
     videoId: 'TOlQrawWAaE',
+    published: '2026-04-14',
     content: {
       lead: `Learn how to set up and manage the full purchase order approval workflow in SubTrade — from configuring company settings to collecting signatures and sending approved POs.`,
       learnTitle: `In this tutorial you'll learn how to:`,
@@ -194,6 +198,7 @@ export const tutorials = [
     title: 'Auto-naming construction drawings',
     blurb: 'Upload a drawing set and let SubTrade name and organize the sheets.',
     videoId: '6Sl9PQ5N92k',
+    published: '2025-09-29',
   },
   {
     slug: 'crew-scheduling-subtrade-software',
@@ -224,24 +229,28 @@ export const tutorials = [
     title: 'Scheduling workflow and drawings upload',
     blurb: 'Schedule crews and attach the right drawings to the right job.',
     videoId: '5prhlCrc0BU',
+    published: '2026-02-08',
   },
   {
     slug: 'custom-notifications',
     title: 'Custom notifications',
     blurb: 'Choose what your crew and office get notified about, and when.',
     videoId: 'P7cCwB33_QQ',
+    published: '2025-12-08',
   },
   {
     slug: 'manage-time-tracking-and-approvals',
     title: 'Manage time tracking and approvals',
     blurb: 'Run the full time tracking workflow from clock-in to approval.',
     videoId: '0R906kMBrCc',
+    published: '2026-04-05',
   },
   {
     slug: 'creating-and-submitting-a-daily-report',
     title: 'Create and submit a daily report',
     blurb: 'File a detailed daily report with weather, manpower and photos.',
     videoId: 'YiYaNBgRVRY',
+    published: '2026-04-12',
     content: {
       lead: `Learn how to create and submit a daily report in SubTrade Software, step by step. This tutorial walks you through the complete daily reporting workflow, from logging general notes and site conditions to tracking manpower, equipment, materials, and activity progress.`,
     },
@@ -251,6 +260,7 @@ export const tutorials = [
     title: 'Introducing Field Operations',
     blurb: 'A tour of the Field Operations dashboard: live crews, alerts and sites.',
     videoId: '8eddsG-K56Y',
+    published: '2026-04-13',
     content: {
       lead: `We just dropped something big. Introducing Field Operations: one screen that shows you everything happening across all your active jobs, right now.`,
       learnTitle: `What Field Operations gives you:`,
