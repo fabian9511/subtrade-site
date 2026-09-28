@@ -41,7 +41,7 @@ export default function Tutorials() {
                     <span className="tut-play" aria-hidden="true" />
                   </span>
                 )}
-                <span className="tag">{t.pdf ? 'Tutorial · PDF guide' : 'Tutorial'}</span>
+                <span className="tag">{['Tutorial', t.series && `Part ${t.series.part} of ${t.series.of}`, t.pdf && 'PDF guide'].filter(Boolean).join(' · ')}</span>
                 <h3>{t.title}</h3>
                 <p>{t.blurb}</p>
               </Link>
