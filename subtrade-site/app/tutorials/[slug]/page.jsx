@@ -58,7 +58,7 @@ export default function TutorialPage({ params }) {
     description: t.blurb,
     thumbnailUrl: `https://i.ytimg.com/vi/${t.videoId}/hqdefault.jpg`,
     embedUrl: `https://www.youtube-nocookie.com/embed/${t.videoId}`,
-    uploadDate: '2026-01-01',
+    uploadDate: t.published || '2026-01-01',
     publisher: { '@type': 'Organization', name: 'SubTrade Software Ltd.' },
   };
   const feat = FEATURE_FOR[t.slug];
