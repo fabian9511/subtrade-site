@@ -1,9 +1,21 @@
 import { features, trades, SIGNUP } from '../../../lib/data';
 import RichFeature from '../../../components/RichFeature';
 import RelatedLinks from '../../../components/RelatedLinks';
+import TutorialStrip from '../../../components/TutorialStrip';
 import OpsFeed from '../../../components/OpsFeed';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+// which tutorials to show on each feature page
+const TUTORIALS_FOR = {
+  'field-operations': ['workflow-efficiency-with-employee-time-sheets', 'crew-scheduling-subtrade-software', 'how-to-create-a-project-subtrade-software', 'forms-dashboard-subtrade-software'],
+  'project-dashboard': ['how-to-create-a-project-subtrade-software', 'forms-in-projects-subtrade-software', 'crew-scheduling-subtrade-software'],
+  'construction-crew-scheduling': ['crew-scheduling-subtrade-software', 'scheduling-feature-workflow-construction-drawings-upload', 'workflow-efficiency-with-employee-time-sheets'],
+  'safety-custom-forms': ['forms-dashboard-subtrade-software', 'build-a-form-subtrade-software', 'forms-in-projects-subtrade-software', 'review-form-submissions-subtrade-software'],
+  'change-order-management': ['manage-change-orders-subtrade-software', 'purchase-orders-approval'],
+  'daily-logs': ['creating-and-submitting-a-daily-report'],
+  'drawings-markups': ['subtrade-tutorial-auto-naming-construction-drawings', 'scheduling-feature-workflow-construction-drawings-upload'],
+};
 
 const GUIDE = '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight';
 
@@ -113,6 +125,14 @@ export default function FeaturePage({ params }) {
         </div>
       </section>
         </>
+      )}
+      {TUTORIALS_FOR[f.slug] && (
+        <TutorialStrip
+          slugs={TUTORIALS_FOR[f.slug]}
+          eyebrow="Video tutorials"
+          title={`See ${f.name.toLowerCase()} in the app`}
+          intro="Short walkthroughs from the SubTrade team, each with a PDF guide your office can keep."
+        />
       )}
       <RelatedLinks groups={relatedGroups} />
     </>
