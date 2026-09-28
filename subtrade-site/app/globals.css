@@ -790,8 +790,10 @@ main > section.section { padding: 96px 0; }
 .mega-banner .btn-ghost:hover {
   color: #ffffff !important;
 }
-.mega-demo { color: #ffffff; font-weight: 500; }
-.mega-demo:hover { color: #ffffff; text-decoration: underline; }
+.mega-demo,
+.nav .mega-demo { color: #ffffff; font-weight: 500; }
+.mega-demo:hover,
+.nav .mega-demo:hover { color: #ffffff; text-decoration: underline; }
 
 /* hero media (replaces ops feed) */
 .hero-media img {
