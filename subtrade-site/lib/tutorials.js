@@ -3,6 +3,7 @@
 // Fill in each videoId before launch; pages render a link to the channel until then.
 // pdf (optional): path to a PDF guide in /public/guides/. Adds a download button
 // on the tutorial page and a "PDF guide" tag on the card.
+// series (optional): { name, part, of } links the parts with Previous / Next buttons.
 export const tutorials = [
   {
     slug: 'how-to-create-a-project-subtrade-software',
@@ -24,6 +25,99 @@ export const tutorials = [
       body: [
         `Leave the project code blank and SubTrade numbers the job for you. Archive a job when it wraps up and your active list stays clean.`,
         `Want it on paper? Download the PDF guide below and hand it to your PMs and supervisors.`,
+      ],
+    },
+  },
+  {
+    slug: 'forms-dashboard-subtrade-software',
+    title: 'Forms, Part 1: The forms dashboard',
+    blurb: 'Every form, folder and submission in one place. Start of the 4-part forms series.',
+    videoId: '23v4AXu-E6k',
+    pdf: '/guides/subtrade-forms-guide-part-1.pdf',
+    series: { name: 'Forms', part: 1, of: 4 },
+    content: {
+      lead: `Forms live in two places in SubTrade. The Forms page is your master library, where you build every form, file it in folders and see every submission. Each project has its own Forms tab where you bring in only the forms that job needs.`,
+      learnTitle: `In this part you'll learn how to:`,
+      learn: [
+        `Tell the main Forms page apart from a project's Forms tab`,
+        `Read the counters: total, active, deployed, with approval, public access and undeployed`,
+        `Use Quick Insights to see where your forms stand`,
+        `Create folders like Safety, Quality Control and Material Count Sheets`,
+        `Search the forms list, edit a form, move it to a folder, duplicate or delete it`,
+      ],
+      body: [
+        `Update a form in the library once and every project using it gets the same version.`,
+        `Want it on paper? Download the PDF guide below, then carry on to Part 2.`,
+      ],
+    },
+  },
+  {
+    slug: 'build-a-form-subtrade-software',
+    title: 'Forms, Part 2: Build a form',
+    blurb: 'Drag in the fields, preview it on a phone and add automations that email or open tasks on their own.',
+    videoId: 'aYBgrEDRFV0',
+    pdf: '/guides/subtrade-forms-guide-part-2.pdf',
+    series: { name: 'Forms', part: 2, of: 4 },
+    content: {
+      lead: `Build anything from a quick sign-in sheet to a full hazard assessment with photos, signatures and automations. Same builder, as simple or as detailed as the job calls for.`,
+      learnTitle: `In this part you'll learn how to:`,
+      learn: [
+        `Find your way around the builder: elements, your form and settings`,
+        `Use field elements like checklists, photo capture, signatures and yes/no`,
+        `Add static info the crew can't change: images, PDFs, location, weather and attendees`,
+        `Drag, drop and preview the form on a phone or tablet`,
+        `Set form settings like public access, approvals and signatures`,
+        `Add conditional logic and automations that send emails or create tasks`,
+      ],
+      body: [
+        `Example: a worker ticks "Working alone" and the PM gets an email right away with the form attached.`,
+        `Want it on paper? Download the PDF guide below, then carry on to Part 3.`,
+      ],
+    },
+  },
+  {
+    slug: 'forms-in-projects-subtrade-software',
+    title: 'Forms, Part 3: Forms in your projects',
+    blurb: 'Bring the right forms into each job, post a QR code on site and track every submission.',
+    videoId: 'BJI2jNuzVT0',
+    pdf: '/guides/subtrade-forms-guide-part-3.pdf',
+    series: { name: 'Forms', part: 3, of: 4 },
+    content: {
+      lead: `Once your forms are built, bring them into your projects. Every project has its own Forms page, so each job only gets the forms it needs, and every submission on that job is tracked in one spot.`,
+      learnTitle: `In this part you'll learn how to:`,
+      learn: [
+        `Open a project's Forms page`,
+        `Add forms from your library to the job`,
+        `Share a form's QR code so anyone on site can fill it in`,
+        `See project submissions, trends and approvals`,
+        `Check team activity: who's submitting and who isn't`,
+        `Search and filter every submission on the job`,
+      ],
+      body: [
+        `The project view shows that job only. For every submission across the company, use View Submissions on the main Forms page.`,
+        `Want it on paper? Download the PDF guide below, then carry on to Part 4.`,
+      ],
+    },
+  },
+  {
+    slug: 'review-form-submissions-subtrade-software',
+    title: 'Forms, Part 4: Review submissions',
+    blurb: 'Find any submission, see it the way the crew filled it in and download a branded PDF.',
+    videoId: 'pEi5Vdas92E',
+    pdf: '/guides/subtrade-forms-guide-part-4.pdf',
+    series: { name: 'Forms', part: 4, of: 4 },
+    content: {
+      lead: `Review submissions company-wide from View Submissions on the main Forms page, or one job at a time from that project's Forms page. Open any submission exactly the way the crew filled it in, and download a clean PDF with your logo on it.`,
+      learnTitle: `In this part you'll learn how to:`,
+      learn: [
+        `Filter submissions by date range, user, project or form`,
+        `Read the submissions activity list`,
+        `Open a submission and see every answer, location and signature`,
+        `Download a branded PDF of any submission`,
+      ],
+      body: [
+        `The PDF carries your company logo, name and address, ready for a safety audit or to send straight to the GC.`,
+        `That wraps up the forms series. Download the PDF guide below.`,
       ],
     },
   },
