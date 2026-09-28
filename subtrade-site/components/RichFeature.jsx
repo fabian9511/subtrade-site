@@ -70,7 +70,7 @@ export default function RichFeature({ f }) {
           <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
           {v && (
             <div style={{ marginTop: 44 }}>
-              <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} />
+              <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} parts={v.parts} />
               <p className="hero-note" style={{ marginTop: 14 }}>{v.caption}</p>
             </div>
           )}

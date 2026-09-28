@@ -13,11 +13,20 @@ import { useState } from 'react';
  * Styles are inline rather than in globals.css deliberately — this component is
  * self-contained and needs no global classes.
  */
-export default function VideoEmbed({ id, title, poster, posterAlt }) {
+export default function VideoEmbed({ id, title, poster, posterAlt, parts }) {
   const [playing, setPlaying] = useState(false);
   const [hover, setHover] = useState(false);
+  // A series (parts) plays in order: after the chosen part, YouTube carries on
+  // through the rest of the series via the playlist parameter.
+  const [cur, setCur] = useState(0);
+  const ids = parts && parts.length ? parts.map((x) => x.id) : [id];
+  const nowId = ids[cur];
+  const rest = ids.slice(cur + 1);
+  const src = `https://www.youtube-nocookie.com/embed/${nowId}?autoplay=1&rel=0${rest.length ? `&playlist=${rest.join(',')}` : ''}`;
+  const pick = (i) => { setCur(i); setPlaying(true); };
 
   return (
+    <>
     <div
       style={{
         position: 'relative',
@@ -31,7 +40,8 @@ export default function VideoEmbed({ id, title, poster, posterAlt }) {
     >
       {playing ? (
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
+          key={nowId}
+          src={src}
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
@@ -96,5 +106,33 @@ export default function VideoEmbed({ id, title, poster, posterAlt }) {
         </button>
       )}
     </div>
+    {parts && parts.length > 1 && (
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginTop: 16 }}>
+        {parts.map((pt, i) => {
+          const on = playing && i === cur;
+          return (
+            <button
+              key={pt.id}
+              type="button"
+              onClick={() => pick(i)}
+              aria-pressed={on}
+              style={{
+                cursor: 'pointer',
+                borderRadius: 999,
+                padding: '9px 16px',
+                fontSize: 14,
+                fontWeight: 600,
+                border: `1px solid ${on ? '#E8732A' : 'rgba(128,128,128,0.35)'}`,
+                background: on ? '#E8732A' : 'transparent',
+                color: on ? '#fff' : 'inherit',
+              }}
+            >
+              &#9654; {pt.label}
+            </button>
+          );
+        })}
+      </div>
+    )}
+    </>
   );
 }
