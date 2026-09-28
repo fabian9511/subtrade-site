@@ -3303,3 +3303,53 @@ main > section.section { padding: 96px 0; }
 .series-btn.next:hover { background: #d0461f; }
 .series-btn.prev:hover { border-color: #e8542b; }
 @media (max-width: 640px) { .series-nav { grid-template-columns: 1fr; } .series-btn.next { text-align: left; } }
+
+/* tutorial strip (feature pages, home, explore) */
+.tut-strip-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.tut-strip-head p:not(.eyebrow) { color: var(--steel-400); margin-top: 8px; max-width: 560px; }
+.tut-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+.tut-card {
+  display: block;
+  background: var(--steel-900);
+  border: 1px solid var(--steel-700);
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s;
+}
+.tut-card:hover { border-color: #e8542b; }
+.tut-card .tut-thumb { margin: 0 0 14px; }
+.tut-card .tag,
+.tut-card h3,
+.tut-card p { margin-left: 18px; margin-right: 18px; }
+.tut-card .tag {
+  display: inline-block;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel-400);
+}
+.tut-card h3 {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.tut-card p { font-size: 14px; color: var(--steel-400); margin-top: 6px; margin-bottom: 18px; }
+@media (max-width: 640px) {
+  .tut-strip-head { flex-direction: column; align-items: flex-start; }
+}

@@ -3,6 +3,7 @@ import { trades } from '../lib/data';
 import AppShowcase from '../components/AppShowcase';
 import Reviews from '../components/Reviews';
 import AppDownload from '../components/AppDownload';
+import TutorialStrip from '../components/TutorialStrip';
 
 export const metadata = {
   alternates: { canonical: '/' },
@@ -334,6 +335,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <TutorialStrip
+        eyebrow="Watch it work"
+        title="Two minutes each. See the app before you sign up."
+        intro="Time tracking, scheduling, projects and forms, walked through by the SubTrade team. Every video comes with a PDF guide."
+      />
 
       <section className="cta-band">
         <div className="wrap">
