@@ -3,6 +3,7 @@
 // Fill in each videoId before launch; pages render a link to the channel until then.
 // pdf (optional): path to a PDF guide in /public/guides/. Adds a download button
 // on the tutorial page and a "PDF guide" tag on the card.
+// published (optional): YYYY-MM-DD the video went up on YouTube (used for video search results).
 // series (optional): { name, part, of } links the parts with Previous / Next buttons.
 export const tutorials = [
   {
@@ -10,6 +11,7 @@ export const tutorials = [
     title: 'Project dashboard and templates',
     blurb: 'Run every job from one screen and start each new one from a template.',
     videoId: 'OUYpHYuhJ2w',
+    published: '2026-09-27',
     pdf: '/guides/subtrade-project-dashboard-guide.pdf',
     content: {
       lead: `Every job you're running sits on one Projects page. This walkthrough shows how to read a project card, create a new job in a couple of minutes, and build templates so every job of the same type starts set up the way you work.`,
@@ -33,6 +35,7 @@ export const tutorials = [
     title: 'Forms, Part 1: The forms dashboard',
     blurb: 'Every form, folder and submission in one place. Start of the 4-part forms series.',
     videoId: '23v4AXu-E6k',
+    published: '2026-09-27',
     pdf: '/guides/subtrade-forms-guide-part-1.pdf',
     series: { name: 'Forms', part: 1, of: 4 },
     content: {
@@ -56,6 +59,7 @@ export const tutorials = [
     title: 'Forms, Part 2: Build a form',
     blurb: 'Drag in the fields, preview it on a phone and add automations that email or open tasks on their own.',
     videoId: 'aYBgrEDRFV0',
+    published: '2026-09-27',
     pdf: '/guides/subtrade-forms-guide-part-2.pdf',
     series: { name: 'Forms', part: 2, of: 4 },
     content: {
@@ -80,6 +84,7 @@ export const tutorials = [
     title: 'Forms, Part 3: Forms in your projects',
     blurb: 'Bring the right forms into each job, post a QR code on site and track every submission.',
     videoId: 'BJI2jNuzVT0',
+    published: '2026-09-27',
     pdf: '/guides/subtrade-forms-guide-part-3.pdf',
     series: { name: 'Forms', part: 3, of: 4 },
     content: {
@@ -104,6 +109,7 @@ export const tutorials = [
     title: 'Forms, Part 4: Review submissions',
     blurb: 'Find any submission, see it the way the crew filled it in and download a branded PDF.',
     videoId: 'pEi5Vdas92E',
+    published: '2026-09-27',
     pdf: '/guides/subtrade-forms-guide-part-4.pdf',
     series: { name: 'Forms', part: 4, of: 4 },
     content: {
@@ -132,6 +138,7 @@ export const tutorials = [
     title: 'Employee time sheets workflow',
     blurb: 'Review, correct and approve crew hours without the Friday detective work.',
     videoId: 'yadJ0PqzO5k',
+    published: '2026-09-26',
     pdf: '/guides/subtrade-timesheet-guide.pdf',
     content: {
       lead: `Every hour your crew clocks lands on one Timesheet page. This walkthrough shows how to review those hours, approve them before payroll, and check who was actually on site, without chasing anyone down on Friday.`,
@@ -193,6 +200,7 @@ export const tutorials = [
     title: 'Crew scheduling',
     blurb: 'Book your crew for the week, repeat shifts and catch double-bookings.',
     videoId: 'MxCJSzEnXL4',
+    published: '2026-09-26',
     pdf: '/guides/subtrade-scheduling-guide.pdf',
     content: {
       lead: `The Schedule shows your whole crew for the week: who's working, what hours, and on which job. This walkthrough shows how to book shifts fast and keep anyone from getting double-booked.`,
