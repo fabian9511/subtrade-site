@@ -23,6 +23,9 @@ const FEATURE_FOR = {
   'build-a-form-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
   'forms-in-projects-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
   'review-form-submissions-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
+  'bid-manager-pipeline-subtrade-software': [`${F}/bid-manager`, 'Bid Manager'],
+  'bid-manager-inside-a-tender-subtrade-software': [`${F}/bid-manager`, 'Bid Manager'],
+  'bid-manager-proposals-vendors-follow-ups-subtrade-software': [`${F}/bid-manager`, 'Bid Manager'],
 };
 
 function seriesOf(t) {
