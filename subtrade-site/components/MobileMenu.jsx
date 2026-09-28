@@ -26,6 +26,7 @@ const cols = [
   {
     title: 'Project Management',
     items: [
+      ['🏆', 'Bid Manager', 'Tenders, vendor pricing & win rate', '/construction-management-features/bid-manager'],
       ['📊', 'Dashboard', 'Live cost & project overview', '/construction-management-features/project-dashboard'],
       ['✅', 'Tasks', 'Kanban boards & punch lists', '/construction-management-features/task-management'],
       ['📐', 'Drawings', 'Plans & markups in the field', '/construction-management-features/drawings-markups'],
