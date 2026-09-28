@@ -2,6 +2,7 @@ import Link from 'next/link';
 import AppDemo from '../../components/AppDemo';
 import AppDownload from '../../components/AppDownload';
 import RelatedLinks from '../../components/RelatedLinks';
+import TutorialStrip from '../../components/TutorialStrip';
 import { SIGNUP } from '../../lib/data';
 
 export const metadata = {
@@ -196,6 +197,12 @@ export default function ExploreTheAppPage() {
           </div>
         </div>
       </section>
+
+      <TutorialStrip
+        eyebrow="Video tutorials"
+        title="Watch a real walkthrough"
+        intro="Each one is under two and a half minutes and comes with a PDF guide."
+      />
 
       <section className="cta-band">
         <div className="wrap">
