@@ -197,6 +197,29 @@ export const tutorials = [
     },
   },
   {
+    slug: 'progress-billing-subtrade-software',
+    title: 'Progress billing: SOV, claims and holdback',
+    blurb: 'Set up a job for billing, claim by percent or amount, bring in change orders and track every dollar of holdback.',
+    videoId: 'uQTLHVyawno',
+    published: '2026-09-29',
+    pdf: '/guides/subtrade-progress-billing-guide.pdf',
+    content: {
+      lead: `Build your schedule of values once, put in a claim every month in minutes, bring in approved change orders, and always know what you've billed, what you've been paid and what's still held back.`,
+      learnTitle: `In this video you'll learn how to:`,
+      learn: [
+        `Fill in the contract value, number and date in your project settings`,
+        `Start billing a project from an SOV template, with holdback and warranty holdback`,
+        `Put in a claim by percent complete or by dollar amount`,
+        `Bill approved change orders, credits, back charges and allowances`,
+        `Read the amount due, the project reconciliation and the holdback tracker`,
+      ],
+      body: [
+        `Your schedule of values has to add up to the contract amount. Once a claim is accepted, approve and lock it so the numbers can't change.`,
+        `Download the PDF guide below for whoever does your billing.`,
+      ],
+    },
+  },
+  {
     slug: 'setup-new-employees-fast-in-subtrade-software',
     title: 'Set up new employees fast',
     blurb: 'Add crew members and get them clocking in the same day.',

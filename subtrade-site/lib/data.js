@@ -694,6 +694,17 @@ export const features = [
         ['COs', 'On every draw'],
         ['PDF', 'Claim in one click'],
       ],
+            video: {
+        id: 'uQTLHVyawno',
+        caption: 'The full walkthrough in under 3 minutes: SOV, claims, change orders and holdback.',
+        title: 'Progress Billing in SubTrade: schedule of values, claims and holdback',
+        description:
+          'A walkthrough of Progress Billing in SubTrade: the billing dashboard, starting billing from an SOV template with holdback and warranty holdback, claiming by percent or amount, billing approved change orders, the project reconciliation and the holdback tracker.',
+        poster: '/subtrade-progress-billing-video-poster.webp',
+        posterAlt: 'Play the SubTrade Progress Billing walkthrough, bill the job and track the holdback',
+        uploadDate: '2026-09-29',
+        duration: 'PT2M53S',
+      },
       sections: [
         {
           eyebrow: 'The schedule of values',
