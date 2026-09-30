@@ -14,6 +14,7 @@ const TUTORIALS_FOR = {
   'safety-custom-forms': ['forms-dashboard-subtrade-software', 'build-a-form-subtrade-software', 'forms-in-projects-subtrade-software', 'review-form-submissions-subtrade-software'],
   'change-order-management': ['manage-change-orders-subtrade-software', 'purchase-orders-approval'],
   'daily-logs': ['creating-and-submitting-a-daily-report'],
+  'progress-billing': ['progress-billing-subtrade-software'],
   'bid-manager': ['bid-manager-pipeline-subtrade-software', 'bid-manager-inside-a-tender-subtrade-software', 'bid-manager-proposals-vendors-follow-ups-subtrade-software'],
   'drawings-markups': ['subtrade-tutorial-auto-naming-construction-drawings', 'scheduling-feature-workflow-construction-drawings-upload'],
 };
