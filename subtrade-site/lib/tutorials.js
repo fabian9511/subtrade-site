@@ -220,6 +220,30 @@ export const tutorials = [
     },
   },
   {
+    slug: 'project-reports-subtrade-software',
+    title: 'Project reports: share progress with your client',
+    blurb: 'Build a client report from the job and send it as a one-time PDF or a live link locked with a PIN.',
+    videoId: 'Z2eVjuY1ehU',
+    published: '2026-10-03',
+    pdf: '/guides/subtrade-project-reports-guide.pdf',
+    content: {
+      lead: `Show your client the work without building a report by hand. Pick what goes in, then email it once as a PDF or share a live link they can check anytime.`,
+      learnTitle: `In this video you'll learn how to:`,
+      learn: [
+        `Find every report for a job on the project's Reports page`,
+        `Choose a one-time PDF by email or a live activity link`,
+        `Add an SOV summary with % complete, claimed to date and remaining`,
+        `Pick photos by album, tasks by status, forms and daily reports`,
+        `Lock a live link with a 4-digit PIN and an expiry date`,
+        `See exactly what your client sees when they open it`,
+      ],
+      body: [
+        `Make as many reports as you want, one per client or one per scope. Drag the grip dots on any section to change the order it shows in the report.`,
+        `Download the PDF guide below for your PMs and office.`,
+      ],
+    },
+  },
+  {
     slug: 'setup-new-employees-fast-in-subtrade-software',
     title: 'Set up new employees fast',
     blurb: 'Add crew members and get them clocking in the same day.',
