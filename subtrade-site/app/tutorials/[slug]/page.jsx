@@ -24,6 +24,7 @@ const FEATURE_FOR = {
   'forms-in-projects-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
   'review-form-submissions-subtrade-software': [`${F}/safety-custom-forms`, 'Safety & Custom Forms'],
   'progress-billing-subtrade-software': [`${F}/progress-billing`, 'Progress Billing'],
+  'project-reports-subtrade-software': [`${F}/project-dashboard`, 'Project Dashboard'],
   'bid-manager-pipeline-subtrade-software': [`${F}/bid-manager`, 'Bid Manager'],
   'bid-manager-inside-a-tender-subtrade-software': [`${F}/bid-manager`, 'Bid Manager'],
   'bid-manager-proposals-vendors-follow-ups-subtrade-software': [`${F}/bid-manager`, 'Bid Manager'],
