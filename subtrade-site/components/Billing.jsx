@@ -62,7 +62,7 @@ export function BillingRequest() {
           <button type="submit" className="btn btn-primary btn-lg fx-submit" disabled={busy}>
             {busy ? 'Sending…' : 'Email me a secure link'}
           </button>
-          <p className="fx-fine">We email a one-time link so only you can see or change your subscription.</p>
+          <p className="fx-fine">We email a one-time link that works for 30 minutes, so only you can see or change your subscription.</p>
         </form>
       )}
     </div>
@@ -163,14 +163,17 @@ export function BillingManage() {
   const [token, setToken] = useState('');
   const [s, setS] = useState(null); // summary
   const [invoices, setInvoices] = useState([]);
-  const [step, setStep] = useState('loading'); // loading | view | reason | offer | confirm | saved | cancelled | expired
+  const [step, setStep] = useState('loading'); // loading | ready | view | reason | offer | confirm | saved | cancelled | expired
   const [reason, setReason] = useState('');
   const [comment, setComment] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const t = new URLSearchParams(window.location.search).get('t') || '';
+    const t =
+      new URLSearchParams(window.location.hash.slice(1)).get('t') ||
+      new URLSearchParams(window.location.search).get('t') ||
+      '';
     // Design check on a developer's own machine only: /billing/manage/?mock=1
     if (window.location.hostname === 'localhost' && new URLSearchParams(window.location.search).has('mock')) {
       const now = Date.now() / 1000;
@@ -181,14 +184,23 @@ export function BillingManage() {
     }
     // Keep the token out of the address bar and browser history.
     window.history.replaceState(null, '', '/billing/manage/');
-    post('/api/billing/manage/', { token: t, action: 'view' }).then((r) => {
-      if (!r.ok) return setStep('expired');
-      setToken(r.token);
-      setS(r.summary);
-      setInvoices(r.invoices || []);
-      setStep('view');
-    });
+    if (!t) return setStep('expired');
+    // Wait for a real click: email link scanners open links automatically and
+    // would otherwise use up the one-time link.
+    setToken(t);
+    setStep('ready');
   }, []);
+
+  async function open() {
+    setBusy(true);
+    const r = await post('/api/billing/manage/', { token, action: 'view' });
+    setBusy(false);
+    if (!r.ok) return setStep('expired');
+    setToken(r.token);
+    setS(r.summary);
+    setInvoices(r.invoices || []);
+    setStep('view');
+  }
 
   useEffect(() => {
     if (step !== 'loading') window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -215,12 +227,25 @@ export function BillingManage() {
       </div>
     );
 
+  if (step === 'ready')
+    return (
+      <div className="bl-layout">
+        <div className="bl-card">
+          <p className="eyebrow">Secure link</p>
+          <p className="bl-lead">Your link is ready. For your security it works once.</p>
+          <button type="button" className="btn btn-primary btn-lg fx-submit" disabled={busy} onClick={open}>
+            {busy ? 'Opening…' : 'Show my subscription'}
+          </button>
+        </div>
+      </div>
+    );
+
   if (step === 'expired')
     return (
       <div className="bl-layout">
         <div className="bl-card">
           <p className="eyebrow">Link expired</p>
-          <p className="bl-lead">For your security, billing links only work for a short time.</p>
+          <p className="bl-lead">For your security, billing links work once and only for 30 minutes.</p>
           <a href="/billing/" className="btn btn-primary btn-lg fx-submit">Get a new link</a>
         </div>
       </div>

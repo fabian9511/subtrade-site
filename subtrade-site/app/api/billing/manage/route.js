@@ -9,6 +9,7 @@ import {
   undoCancel,
   cardUpdateUrl,
   listInvoices,
+  consumeLinkNonce,
   REASONS,
 } from '../../../../lib/billing';
 
@@ -35,12 +36,20 @@ export async function POST(req) {
       { status: 401 },
     );
   }
+  const p = readToken(body.token);
+  const expired = NextResponse.json(
+    { ok: false, expired: true, error: 'This link has expired or was already used. Ask for a new one below.' },
+    { status: 401 },
+  );
+  if (p.step === 'email') {
+    // The emailed link opens the page once; everything after uses the page token.
+    if (body.action !== 'view' || !(await consumeLinkNonce(sub, p.n))) return expired;
+  } else if (p.step !== 'page') return expired;
   const reason = REASONS[body.reason] ? body.reason : 'other';
   const comment = typeof body.comment === 'string' ? body.comment.trim().slice(0, 500) : '';
 
   switch (body.action) {
     case 'view': {
-      const p = readToken(body.token);
       // Swap the 30-minute email token for a 60-minute page token.
       const token = p.step === 'email' ? signToken({ sub: p.sub, cus: p.cus, step: 'page' }, 60) : body.token;
       return NextResponse.json({ ok: true, token, summary: summarize(sub), invoices: await listInvoices(sub) });

@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { findSubscription, signToken, emailLink } from '../../../../lib/billing';
+import { findSubscription, signToken, emailLink, issueLinkNonce } from '../../../../lib/billing';
 
 /**
  * Step 1 of /billing/: the customer types their email; if it has a live
- * subscription we email a signed link (30 minutes). The answer is always the
+ * subscription we email a signed, one-time link (30 minutes). The answer is always the
  * same, so nobody can use this to find out who is a customer.
  *
  * On preview links (never production) the link is also returned, so the flow
@@ -32,8 +32,11 @@ export async function POST(req) {
   const found = await findSubscription(email);
   if (!found) return NextResponse.json(done);
 
-  const token = signToken({ sub: found.sub.id, cus: found.customer.id, step: 'email' }, 30);
-  const link = `${new URL(req.url).origin}/billing/manage/?t=${encodeURIComponent(token)}`;
+  const nonce = await issueLinkNonce(found.sub.id);
+  if (!nonce) return NextResponse.json(done);
+  const token = signToken({ sub: found.sub.id, cus: found.customer.id, step: 'email', n: nonce }, 30);
+  // After "#", so the code is never sent to any server, analytics or referrer.
+  const link = `${new URL(req.url).origin}/billing/manage/#t=${encodeURIComponent(token)}`;
   const sent = await emailLink(email, link);
   if (!sent) console.error('[billing/link] email not sent for', found.customer.id);
 

@@ -105,6 +105,21 @@ export function readToken(token) {
   }
 }
 
+// One-time email links: each link carries a random nonce that is also saved on
+// the subscription. Opening the link clears it, and asking for a new link
+// replaces it, so an old or already-used link never works again.
+export async function issueLinkNonce(subId) {
+  const nonce = crypto.randomBytes(16).toString('hex');
+  const ok = await stripe(`subscriptions/${subId}`, { method: 'POST', form: { 'metadata[billing_link]': nonce } });
+  return ok ? nonce : null;
+}
+
+export async function consumeLinkNonce(sub, nonce) {
+  if (!nonce || sub.metadata?.billing_link !== nonce) return false;
+  await stripe(`subscriptions/${sub.id}`, { method: 'POST', form: { 'metadata[billing_link]': '' } });
+  return true;
+}
+
 /* ---------------- what the page shows ---------------- */
 
 const day = (unix) =>
