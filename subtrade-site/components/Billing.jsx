@@ -180,6 +180,7 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
   const per = annual ? 'year' : 'month';
   const same = users === s.users && annual === curAnnual;
   const switching = annual && !curAnnual;
+  const toMonthly = curAnnual && !annual;
   const up = switching || newPrice > curPrice;
 
   // What's charged today (Stripe does the exact proration; this is the estimate).
@@ -192,7 +193,9 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
   const credit = curPrice * left;
   const todayLine = same
     ? null
-    : s.trial
+    : toMonthly
+      ? `Today: ${money(0)}. From ${s.next_date}: ${money(newPrice)} + tax per month.`
+      : s.trial
       ? `Today: ${money(0)}. Nothing is charged during your free trial. First charge on ${s.next_date}: ${money(newPrice)} + tax.`
       : switching
         ? `Today: ${money(newPrice)} yearly price − ${money(credit)} credit for the ${daysLeft ?? 'unused'} unused days of this month = ≈ ${money(today)} + tax.`
@@ -206,14 +209,16 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
       <h2 className="bl-title">Add or remove users, or switch to yearly</h2>
 
       <div className="toggle" role="group" aria-label="Billing period">
-        <button type="button" className={annual ? '' : 'on'} aria-pressed={!annual} disabled={curAnnual} onClick={() => setAnnual(false)}>
+        <button type="button" className={annual ? '' : 'on'} aria-pressed={!annual} onClick={() => setAnnual(false)}>
           Monthly
         </button>
         <button type="button" className={annual ? 'on' : ''} aria-pressed={annual} onClick={() => setAnnual(true)}>
           Annual −20%
         </button>
       </div>
-      {curAnnual && <p className="fx-fine">You&rsquo;re on yearly billing. To switch to monthly at your renewal, email support@subtradesoftware.com.</p>}
+      {curAnnual && !annual && (
+        <p className="fx-fine">You&rsquo;ve paid for the year, so monthly billing starts at your renewal on {s.next_date}. No refund for the current year.</p>
+      )}
 
       <div className="calc">
         <label htmlFor="bl-users">
@@ -244,7 +249,9 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
 
       {!same && (
         <p className="bl-change-note">
-          {s.trial
+          {toMonthly
+            ? `Your yearly plan stays until ${s.next_date}. Then you switch to monthly billing: ${money(newPrice)} + tax per month for ${users} users.`
+            : s.trial
             ? `You're on your free trial, so nothing is charged now. When it ends on ${s.next_date}, you'll pay ${money(newPrice)} + tax per ${per}.`
             : switching
               ? `Your yearly plan starts today. You're charged ${money(newPrice)} + tax less a credit for the unused part of this month, then yearly from today.`
@@ -266,7 +273,7 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
       {error && <p className="fx-error" role="alert">{error}</p>}
       <div className="bl-actions">
         <button type="button" className="btn btn-primary" disabled={busy || same} onClick={() => onConfirm({ users, plan: annual ? 'yearly' : 'monthly' })}>
-          {busy ? 'Saving…' : same ? 'Pick a change above' : s.trial || !up ? 'Confirm change' : `Confirm and pay ${today > 0 ? `≈ ${money(today)}` : ''} + tax`}
+          {busy ? 'Saving…' : same ? 'Pick a change above' : toMonthly ? `Switch to monthly on ${s.next_date}` : s.trial || !up ? 'Confirm change' : `Confirm and pay ${today > 0 ? `≈ ${money(today)}` : ''} + tax`}
         </button>
         <button type="button" className="bl-link" onClick={onBack}>Go back</button>
       </div>
@@ -407,6 +414,15 @@ export function BillingManage() {
       </div>
 
       <TrialBar s={s} />
+
+      {s.pending && !s.cancel_at_period_end && (
+        <div className="bl-notice">
+          Switching to monthly on <b>{s.pending.date}</b>
+          {s.pending.amount != null ? `: ${money(s.pending.amount)} + tax per month` : ''}
+          {s.pending.users ? ` for ${s.pending.users} users` : ''}.{' '}
+          <button type="button" className="bl-link" disabled={busy} onClick={() => act('undo_switch')}>Keep yearly instead</button>
+        </div>
+      )}
 
       {s.cancel_at_period_end && (
         <div className="bl-notice">
@@ -698,8 +714,17 @@ export function BillingManage() {
         <div className="bl-main">
           <div className="bl-card bl-done">
             <p className="eyebrow">Plan updated</p>
-            <h2 className="bl-title">Done. Your plan is now {s.users} users, billed {s.plan === 'yearly' ? 'yearly' : 'monthly'}.</h2>
-            <p>Any charge for today is in your billing history. Your team can add the new users in SubTrade right away.</p>
+            {s.pending ? (
+              <>
+                <h2 className="bl-title">Done. You&rsquo;ll switch to monthly on {s.pending.date}.</h2>
+                <p>Your yearly plan stays as it is until then. Changed your mind? Use &ldquo;Keep yearly instead&rdquo; on your subscription page.</p>
+              </>
+            ) : (
+              <>
+                <h2 className="bl-title">Done. Your plan is now {s.users} users, billed {s.plan === 'yearly' ? 'yearly' : 'monthly'}.</h2>
+                <p>Any charge for today is in your billing history. Your team can add the new users in SubTrade right away.</p>
+              </>
+            )}
             <div className="bl-actions">
               <button type="button" className="btn btn-primary" onClick={() => setStep('view')}>Back to my subscription</button>
             </div>

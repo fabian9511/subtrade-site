@@ -12,6 +12,7 @@ import {
   consumeLinkNonce,
   startPaidNow,
   changePlan,
+  undoSwitch,
   REASONS,
 } from '../../../../lib/billing';
 
@@ -68,6 +69,11 @@ export async function POST(req) {
       if (!r.ok) return NextResponse.json(r, { status: 409 });
       const fresh = (await loadFromToken(body.token)) || sub;
       return NextResponse.json({ ...r, summary: summarize(fresh), invoices: await listInvoices(fresh) });
+    }
+    case 'undo_switch': {
+      const r = await undoSwitch(sub);
+      if (!r.ok) return NextResponse.json(r, { status: 409 });
+      return NextResponse.json({ ok: true, summary: summarize((await loadFromToken(body.token)) || sub) });
     }
     case 'start': {
       const r = await startPaidNow(sub);
