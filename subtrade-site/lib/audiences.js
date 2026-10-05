@@ -193,9 +193,15 @@ export async function syncAudiences() {
   const { lists, total, skipped, contacts, listTag } = await buildLists();
   const result = { ok: true, contacts: total, skipped_no_email_or_opted_out: skipped, audiences: {} };
   for (const [key, def] of Object.entries(AUDIENCES)) {
-    const id = await ensureAudience(def);
-    await replaceAudience(id, lists[key]);
-    result.audiences[key] = { id, name: def.name, emails: lists[key].size };
+    // A Meta hiccup (e.g. the last upload is still processing) must not stop
+    // the other audiences or the GHL tagging; the next run catches up.
+    try {
+      const id = await ensureAudience(def);
+      await replaceAudience(id, lists[key]);
+      result.audiences[key] = { id, name: def.name, emails: lists[key].size };
+    } catch (err) {
+      result.audiences[key] = { name: def.name, emails: lists[key].size, error: err?.message };
+    }
   }
   const totals = {};
   for (const t of listTag.values()) totals[t] = (totals[t] || 0) + 1;
