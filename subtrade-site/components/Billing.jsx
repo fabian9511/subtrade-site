@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import PriceBreakdown from './PriceBreakdown';
 
 const post = (url, body) =>
   fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
@@ -273,6 +274,13 @@ export function BillingManage() {
         </div>
       </div>
 
+      {s.users && (
+        <details className="pb-details bl-breakdown" open>
+          <summary>What you pay, line by line</summary>
+          <PriceBreakdown users={s.users} annual={s.interval === 'year'} saveOffer={s.save_offer_used} />
+        </details>
+      )}
+
       {error && <p className="fx-error" role="alert">{error}</p>}
       <div className="bl-actions">
         <button
@@ -410,16 +418,36 @@ export function BillingManage() {
             {step === 'offer' && (
               <div className="bl-offer">
                 <span className="bl-offer-tag">Offer for you</span>
-                <h2 className="bl-title">Stay and get an extra 20% off for 12 months</h2>
+                <h2 className="bl-title">Don&rsquo;t cancel, and save an extra 20%</h2>
+                {s.amount != null && (
+                  <div className="bl-save">
+                    <div>
+                      <span>You save</span>
+                      <b className="mono">{money(s.amount * 0.2)}</b>
+                      <small>every {per}</small>
+                    </div>
+                    <div>
+                      <span>Over the next 12 months</span>
+                      <b className="mono">{money(per === 'year' ? s.amount * 0.2 : s.amount * 0.2 * 12)}</b>
+                      <small>back in your pocket</small>
+                    </div>
+                    <div>
+                      <span>Your new price</span>
+                      <b className="mono">{money(s.amount * 0.8)}</b>
+                      <small><s>{money(s.amount)}</s> per {per} + tax</small>
+                    </div>
+                  </div>
+                )}
                 <p>
                   {s.trial
                     ? `Keep your trial. When your paid plan starts on ${s.next_date}, you pay 20% less for your first 12 months.`
-                    : 'Your next 12 months cost 20% less, starting with your next charge. Nothing else changes.'}
+                    : 'The discount starts with your next charge and lasts 12 months. Same plan, same users, nothing else changes.'}
                 </p>
-                {s.amount != null && (
-                  <p className="bl-offer-price">
-                    <b className="mono">{money(s.amount * 0.8)}</b> <s>{money(s.amount)}</s> <span>per {per} + tax</span>
-                  </p>
+                {s.users && (
+                  <details className="pb-details">
+                    <summary>See the full price with your discount</summary>
+                    <PriceBreakdown users={s.users} annual={s.interval === 'year'} saveOffer compact />
+                  </details>
                 )}
                 <button
                   type="button"
@@ -429,7 +457,7 @@ export function BillingManage() {
                     if (await act('save')) setStep('saved');
                   }}
                 >
-                  {busy ? 'Applying…' : 'Yes, keep SubTrade with 20% off'}
+                  {busy ? 'Applying…' : s.amount != null ? `Keep SubTrade and save ${money(per === 'year' ? s.amount * 0.2 : s.amount * 0.2 * 12)}` : 'Yes, keep SubTrade with 20% off'}
                 </button>
               </div>
             )}

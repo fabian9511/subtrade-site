@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
 import { BASE, INCLUDED_USERS, MIN_USERS, MAX_USERS, periodPrice, shownMonthly, fmt } from '../lib/pricing';
+import PriceBreakdown from './PriceBreakdown';
 
 /**
  * The Facebook-ads funnel on /start/:
@@ -729,6 +730,10 @@ function TrialBox({ lead }) {
           </span>
           <b className="mono">${fmt(charge)}.00 <small>CAD + tax</small></b>
         </div>
+        <details className="pb-details">
+          <summary>See the price breakdown</summary>
+          <PriceBreakdown users={users} annual={annual} compact />
+        </details>
         <ul className="fx-ticks fx-trial-terms">
           <li>Use the full platform free for 14 days.</li>
           <li>Cancel before <b>{firstCharge}</b> and you pay nothing.</li>

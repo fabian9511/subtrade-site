@@ -40,3 +40,28 @@ export function shownMonthly(users, annual) {
 }
 
 export const fmt = (n) => n.toLocaleString('en-CA', { maximumFractionDigits: 0 });
+
+// Line-by-line price for a team size, matching monthlyTotal/periodPrice.
+// Returns { lines: [{label, detail, amount}], monthly, period, annual }.
+export const TIERS = [
+  { from: 6, to: 15, rate: 15 },
+  { from: 16, to: 25, rate: 10 },
+  { from: 26, to: 29, rate: 7 },
+  { from: 30, to: Infinity, rate: 4 },
+];
+
+export function priceBreakdown(users, annual) {
+  const u = clampUsers(users);
+  const lines = [{ label: 'SubTrade, complete platform', detail: `includes ${INCLUDED_USERS} users`, amount: BASE }];
+  for (const t of TIERS) {
+    if (u < t.from) break;
+    const n = Math.min(u, t.to) - t.from + 1;
+    lines.push({
+      label: Math.min(u, t.to) === t.from ? `User ${t.from}` : `Users ${t.from}–${Math.min(u, t.to)}`,
+      detail: `${n} × $${t.rate}`,
+      amount: n * t.rate,
+    });
+  }
+  const monthly = monthlyTotal(u);
+  return { users: u, lines, monthly, annual, period: periodPrice(u, annual) };
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { periodPrice, fmt, INCLUDED_USERS } from '../lib/pricing';
+import PriceBreakdown from './PriceBreakdown';
 
 // "What you signed up for" on /start/welcome/, from the plan and team size
 // Stripe sends back in the URL. Same numbers as the trial box and Stripe.
@@ -40,6 +41,10 @@ export default function WelcomeSummary() {
         </span>
         <b className="mono">${fmt(plan.charge)}.00 <small>CAD + tax</small></b>
       </div>
+      <details className="pb-details">
+        <summary>What you&rsquo;re paying for, line by line</summary>
+        <PriceBreakdown users={plan.users} annual={plan.annual} compact />
+      </details>
       <p className="fx-fine">
         Cancel anytime before {plan.firstCharge} and you pay nothing.
       </p>
