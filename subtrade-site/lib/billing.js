@@ -95,6 +95,23 @@ async function ensureCoupon() {
   return made?.id || null;
 }
 
+// Plan changes need a normal, active product: the ones Checkout makes on the
+// fly are locked by Stripe (inactive, can't be renamed or re-activated).
+// One permanent product, created on first use.
+const PLAN_PRODUCT = 'subtrade_complete';
+async function ensurePlanProduct() {
+  const have = await stripe(`products/${PLAN_PRODUCT}`);
+  if (have) {
+    if (!have.active) await stripe(`products/${PLAN_PRODUCT}`, { method: 'POST', form: { active: 'true' } });
+    return PLAN_PRODUCT;
+  }
+  const made = await stripe('products', {
+    method: 'POST',
+    form: { id: PLAN_PRODUCT, name: 'SubTrade, complete', tax_code: 'txcd_10103001', 'metadata[source]': 'subtradesoftware.com/billing' },
+  });
+  return made?.id || null;
+}
+
 const hasSaveCoupon = (sub) =>
   (sub.discounts || []).some((d) => d?.coupon?.id === SAVE_COUPON.id || d?.source?.coupon === SAVE_COUPON.id) ||
   sub.metadata?.save_offer === 'accepted';
@@ -402,7 +419,8 @@ export async function changePlan(sub, { users, plan }) {
   const amount = periodPrice(u, annual);
   const trial = sub.status === 'trialing';
   const upgrade = annual !== curAnnual || amount > (item.price?.unit_amount || 0) / 100;
-  const product = typeof item.price?.product === 'string' ? item.price.product : item.price?.product?.id;
+  const product = await ensurePlanProduct();
+  if (!product) return { ok: false, error: 'Could not change your plan. Please email support@subtradesoftware.com.' };
   const usersText = `${u} ${u === 1 ? 'user' : 'users'}`;
   const priceText = `$${fmt(amount)}/${annual ? 'year' : 'month'}`;
 
@@ -420,15 +438,6 @@ export async function changePlan(sub, { users, plan }) {
     payment_behavior: 'error_if_incomplete',
   };
   if (!trial && annual && !curAnnual) form.billing_cycle_anchor = 'now'; // yearly starts today
-  // Checkout's inline prices leave the product "inactive", and Stripe won't
-  // attach a new price to an inactive product, so switch it back on (and
-  // rename it to the new plan) first.
-  if (product) {
-    await stripe(`products/${product}`, {
-      method: 'POST',
-      form: { active: 'true', name: `SubTrade · ${usersText} · billed ${annual ? 'yearly (20% off)' : 'monthly'}` },
-    });
-  }
   const r = await stripeTry(`subscriptions/${sub.id}`, form);
   if (r.card) return { ok: false, error: cardMessage(r.data) };
   if (!r.ok) return { ok: false, error: 'Could not change your plan. Please email support@subtradesoftware.com.' };
