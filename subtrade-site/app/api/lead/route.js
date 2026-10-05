@@ -25,7 +25,19 @@ const FIELDS = {
   timeline: 'msNLRy4Ie7IDFbNeMEqx', // When are you planning to implement a new system?
   heard: 'lbWIwVStHiboFNlQw0qV', // Where did you hear about us? (single)
   company: 'Vptj9VI3AUb6rQR21GIR', // Organization Name
+  role: 'VL3tWhtUJS8eU9vLt0CN', // Job Title:
 };
+
+// The software question is a pick-list of tools; the old GoHighLevel field only
+// knows three buckets, so fold the picks into the closest one. The exact tools
+// go into a note on the contact.
+function currentBucket(software) {
+  if (!software.length) return '';
+  if (software.some((s) => !['Excel', 'QuickBooks', 'Pen & paper', 'Other'].includes(s))) return 'Another Construction Software';
+  if (software.includes('Excel')) return 'SpreadSheets';
+  if (software.includes('Pen & paper')) return 'Pen & Paper';
+  return '';
+}
 
 const clean = (v, max = 120) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
@@ -42,8 +54,9 @@ export async function POST(req) {
 
   const email = clean(body.email, 160).toLowerCase();
   const firstName = clean(body.firstName, 60);
-  if (!firstName || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ ok: false, error: 'Name and a valid email are required' }, { status: 400 });
+  const required = [firstName, clean(body.lastName), clean(body.phone), clean(body.company)];
+  if (required.some((v) => !v) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json({ ok: false, error: 'All fields are required' }, { status: 400 });
   }
 
   const token = process.env.GHL_PRIVATE_TOKEN;
@@ -53,12 +66,14 @@ export async function POST(req) {
   }
 
   const a = body.answers || {};
+  const software = (Array.isArray(a.software) ? a.software : []).map((v) => clean(v, 40)).filter(Boolean).slice(0, 15);
   const customFields = [
     ['company', body.company],
     ['trade', a.trade],
     ['employees', a.employees],
     ['volume', a.volume],
-    ['current', a.current],
+    ['current', currentBucket(software)],
+    ['role', a.role],
     ['timeline', a.timeline],
     ['heard', 'Facebook'],
   ]
@@ -68,6 +83,8 @@ export async function POST(req) {
   const tags = ['fb-ads-funnel'];
   if (body.stage === 'qualified') tags.push('fb-funnel-qualified');
   if (body.stage === 'trial') tags.push('fb-funnel-trial-path');
+  if (a.price === 'No') tags.push('fb-price-no');
+  software.forEach((t) => tags.push(`uses-${t.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`));
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -106,6 +123,25 @@ export async function POST(req) {
         headers,
         body: JSON.stringify({ tags }),
       }).catch(() => {});
+
+      // After the questions, leave the answers as a note so they read in one place.
+      if (body.stage === 'qualified' || body.stage === 'trial') {
+        const lines = [
+          `Facebook ads funnel (/start/) — ${body.stage === 'qualified' ? 'shown the booking calendar' : 'sent to free trial'}`,
+          `Trade: ${clean(a.trade) || '-'}`,
+          `Role: ${clean(a.role) || '-'}`,
+          `People: ${clean(a.employees) || '-'}`,
+          `Yearly volume: ${clean(a.volume) || '-'}`,
+          `Uses now: ${software.join(', ') || '-'}`,
+          `Wants a system: ${clean(a.timeline) || '-'}`,
+          `$299/month fits budget: ${clean(a.price) || '-'}`,
+        ];
+        await fetch(`${GHL}/contacts/${id}/notes`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ body: lines.join('\n') }),
+        }).catch(() => {});
+      }
     }
     return NextResponse.json({ ok: true, stored: true });
   } catch (err) {

@@ -24,6 +24,11 @@ const QUESTIONS = [
     options: ['Drywall / Framing', 'Electrical', 'Plumbing', 'HVAC / Mechanical', 'Concrete Forming', 'Painting', 'General Contractor', 'Other'],
   },
   {
+    key: 'role',
+    q: "What's your role?",
+    options: ['Owner', 'Partner', 'Project manager', 'Foreman / Superintendent', 'Office / Admin'],
+  },
+  {
     key: 'employees',
     q: 'How many people work for you, office and field?',
     options: ['1-5', '6-10', '11-20', '21-50', '50+'],
@@ -34,12 +39,13 @@ const QUESTIONS = [
     options: ['$0 - 299K', '$300 - 599K', '$600 - 999K', '$1 - 2.99M', '$3 - 5.99M', '$6M +'],
   },
   {
-    key: 'current',
-    q: 'How do you run your jobs today?',
+    key: 'software',
+    q: 'What do you use to run your jobs now?',
+    hint: 'Pick all that apply.',
+    multi: true,
     options: [
-      ['Pen & Paper', 'Paper, whiteboard, texts'],
-      ['SpreadSheets', 'Spreadsheets'],
-      ['Another Construction Software', 'Another construction software'],
+      'Procore', 'Buildertrend', 'Jobber', 'JobTread', 'Fieldwire', 'Monday',
+      'Raken', 'SiteMax', 'Excel', 'QuickBooks', 'Pen & paper', 'Other',
     ],
   },
   {
@@ -51,14 +57,20 @@ const QUESTIONS = [
       ['6+ Months', 'Just looking for now'],
     ],
   },
+  {
+    key: 'price',
+    q: 'SubTrade is $299/month for 5 users. Does that fit your budget?',
+    options: ['Yes', 'I need to see it first', 'No'],
+  },
 ];
 
-// A 15-minute call is worth it for companies with a crew to run or real volume.
-// Everyone else gets the trial, which is the full product anyway.
+// A 15-minute call is worth it for companies with a crew to run or real volume,
+// as long as the price isn't already a no. Everyone else gets the trial, which
+// is the full product anyway.
 function isQualified(a) {
   const smallCrew = a.employees === '1-5';
   const smallVolume = a.volume === '$0 - 299K' || a.volume === '$300 - 599K';
-  return !(smallCrew && smallVolume);
+  return !(smallCrew && smallVolume) && a.price !== 'No';
 }
 
 const track = (...args) => {
@@ -121,8 +133,10 @@ export default function Funnel() {
     e.preventDefault();
     setError('');
     if (!lead.firstName.trim()) return setError('Please add your first name.');
+    if (!lead.lastName.trim()) return setError('Please add your last name.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim())) return setError('Please check your email address.');
     if (lead.phone.replace(/\D/g, '').length < 10) return setError('Please add a phone number we can reach you on.');
+    if (!lead.company.trim()) return setError('Please add your company name.');
     setBusy(true);
     await save({ ...lead, stage: 'registered' });
     setBusy(false);
@@ -130,8 +144,15 @@ export default function Funnel() {
     setStage('questions');
   }
 
+  function toggle(key, value) {
+    setAnswers((prev) => {
+      const list = Array.isArray(prev[key]) ? prev[key] : [];
+      return { ...prev, [key]: list.includes(value) ? list.filter((v) => v !== value) : [...list, value] };
+    });
+  }
+
   function answer(key, value) {
-    const next = { ...answers, [key]: value };
+    const next = value === undefined ? answers : { ...answers, [key]: value };
     setAnswers(next);
     if (qi < QUESTIONS.length - 1) {
       setQi(qi + 1);
@@ -212,21 +233,36 @@ export default function Funnel() {
                   <span style={{ width: `${((qi + 1) / QUESTIONS.length) * 100}%` }} />
                 </div>
                 <h2 className="display fx-card-title">{QUESTIONS[qi].q}</h2>
-                <div className="fx-options">
+                {QUESTIONS[qi].hint && <p className="fx-card-sub" style={{ marginBottom: 0 }}>{QUESTIONS[qi].hint}</p>}
+                <div className={`fx-options${QUESTIONS[qi].multi ? ' fx-options-grid' : ''}`}>
                   {QUESTIONS[qi].options.map((o) => {
                     const [value, label] = Array.isArray(o) ? o : [o, o];
+                    const { key, multi } = QUESTIONS[qi];
+                    const on = multi ? (answers[key] || []).includes(value) : answers[key] === value;
                     return (
                       <button
                         key={value}
                         type="button"
-                        className={`fx-option${answers[QUESTIONS[qi].key] === value ? ' is-on' : ''}`}
-                        onClick={() => answer(QUESTIONS[qi].key, value)}
+                        aria-pressed={on}
+                        className={`fx-option${on ? ' is-on' : ''}`}
+                        onClick={() => (multi ? toggle(key, value) : answer(key, value))}
                       >
                         {label}
                       </button>
                     );
                   })}
                 </div>
+                {QUESTIONS[qi].multi && (
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-lg fx-submit"
+                    style={{ marginTop: 16 }}
+                    disabled={!(answers[QUESTIONS[qi].key] || []).length}
+                    onClick={() => answer(QUESTIONS[qi].key)}
+                  >
+                    Next
+                  </button>
+                )}
                 {qi > 0 && (
                   <button type="button" className="fx-back" onClick={() => setQi(qi - 1)}>
                     ← Back
@@ -316,7 +352,7 @@ export default function Funnel() {
             <h2 className="display">Three steps, about 20 minutes of your time</h2>
           </div>
           <ol className="fx-steps">
-            <li><b>Answer 5 quick questions</b><span>So we know your trade, crew size and how you run jobs today.</span></li>
+            <li><b>Answer 7 quick questions</b><span>So we know your trade, crew size and what you use to run jobs today.</span></li>
             <li><b>Watch the short video</b><span>See SubTrade working on a real job before you talk to anyone.</span></li>
             <li><b>Book a 15-minute call</b><span>A screen share with someone who runs construction jobs, set up around your company.</span></li>
           </ol>
@@ -364,7 +400,7 @@ function Field({ label, type = 'text', value, onChange, autoComplete }) {
   return (
     <label className="fx-field">
       <span>{label}</span>
-      <input type={type} value={value} onChange={(e) => onChange(e.target.value)} autoComplete={autoComplete} />
+      <input type={type} value={value} onChange={(e) => onChange(e.target.value)} autoComplete={autoComplete} required aria-required="true" />
     </label>
   );
 }

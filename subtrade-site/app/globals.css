@@ -3407,6 +3407,8 @@ main > section.section { padding: 96px 0; }
 }
 .fx-option:hover, .fx-option:focus-visible { border-color: var(--chalk); background: var(--chalk-soft); }
 .fx-option.is-on { border-color: var(--chalk); background: var(--chalk-soft); }
+.fx-options-grid { grid-template-columns: 1fr 1fr; }
+.fx-option.is-on::after { content: " ✓"; color: var(--chalk); font-weight: 700; }
 .fx-back { margin-top: 14px; background: none; border: 0; color: var(--steel-400); font-size: 14px; }
 .fx-split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 .fx-photo { width: 100%; height: auto; border-radius: 10px; display: block; }
