@@ -62,8 +62,11 @@ export async function POST(req) {
   if (clean(body.website)) return NextResponse.json({ ok: true });
 
   const email = clean(body.email, 160).toLowerCase();
+  // Always hand GoHighLevel +1XXXXXXXXXX, whatever the browser sent.
+  const digits = clean(body.phone, 30).replace(/\D/g, '').replace(/^1/, '');
+  const phone = digits.length === 10 ? `+1${digits}` : '';
   const firstName = clean(body.firstName, 60);
-  const required = [firstName, clean(body.lastName), clean(body.phone), clean(body.company)];
+  const required = [firstName, clean(body.lastName), phone, clean(body.company)];
   if (!body.consent?.terms || required.some((v) => !v) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: 'All fields are required' }, { status: 400 });
   }
@@ -117,7 +120,7 @@ export async function POST(req) {
         firstName,
         lastName: clean(body.lastName, 60),
         email,
-        phone: clean(body.phone, 30),
+        phone,
         companyName: clean(body.company),
         source: 'Facebook Ads - /start',
         customFields,

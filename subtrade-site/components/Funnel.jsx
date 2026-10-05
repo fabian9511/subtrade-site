@@ -89,6 +89,19 @@ const save = (payload) =>
 
 const STORE = 'subtrade-start-funnel';
 
+// North American numbers only (Canada/US). Area codes never start with 1, so a
+// leading 1 is always the country code, whether typed or from our own "+1 ".
+const phoneDigits = (v) => v.replace(/\D/g, '').replace(/^1/, '').slice(0, 10);
+function formatPhone(v) {
+  const d = phoneDigits(v);
+  if (!d) return '';
+  if (d.length <= 3) return `+1 ${d}`;
+  if (d.length <= 6) return `+1 ${d.slice(0, 3)}-${d.slice(3)}`;
+  return `+1 ${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}`;
+}
+// What GoHighLevel stores: +14038092908
+const phoneE164 = (v) => `+1${phoneDigits(v)}`;
+
 export default function Funnel() {
   const [stage, setStage] = useState('register'); // register | questions | result
   const [lead, setLead] = useState({ firstName: '', lastName: '', email: '', phone: '', company: '', website: '' });
@@ -136,11 +149,11 @@ export default function Funnel() {
     if (!lead.firstName.trim()) return setError('Please add your first name.');
     if (!lead.lastName.trim()) return setError('Please add your last name.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim())) return setError('Please check your email address.');
-    if (lead.phone.replace(/\D/g, '').length < 10) return setError('Please add a phone number we can reach you on.');
+    if (phoneDigits(lead.phone).length !== 10) return setError('Please enter a 10-digit phone number, like +1 403-555-0100.');
     if (!lead.company.trim()) return setError('Please add your company name.');
     if (!consent.terms) return setError('Please agree to the Terms & Conditions and Privacy Policy.');
     setBusy(true);
-    await save({ ...lead, consent: { ...consent, at: new Date().toISOString() }, stage: 'registered' });
+    await save({ ...lead, phone: phoneE164(lead.phone), consent: { ...consent, at: new Date().toISOString() }, stage: 'registered' });
     setBusy(false);
     track('track', 'Lead', { content_name: 'SubTrade /start register' });
     setStage('questions');
@@ -161,7 +174,7 @@ export default function Funnel() {
       return;
     }
     const qualified = isQualified(next);
-    save({ ...lead, consent, answers: next, stage: qualified ? 'qualified' : 'trial' });
+    save({ ...lead, phone: phoneE164(lead.phone), consent, answers: next, stage: qualified ? 'qualified' : 'trial' });
     track('track', 'CompleteRegistration', { content_name: 'SubTrade /start questions', status: qualified ? 'qualified' : 'trial' });
     setStage('result');
   }
@@ -207,7 +220,7 @@ export default function Funnel() {
                   <Field label="Last name" value={lead.lastName} name="family-name" onChange={(v) => setLead((l) => ({ ...l, lastName: v }))} autoComplete="family-name" />
                 </div>
                 <Field label="Work email" type="email" value={lead.email} name="email" onChange={(v) => setLead((l) => ({ ...l, email: v }))} autoComplete="email" />
-                <Field label="Mobile phone" type="tel" value={lead.phone} name="tel" onChange={(v) => setLead((l) => ({ ...l, phone: v }))} autoComplete="tel" />
+                <Field label="Mobile phone" type="tel" value={lead.phone} name="tel" onChange={(v) => setLead((l) => ({ ...l, phone: formatPhone(v) }))} placeholder="+1 403-555-0100" inputMode="tel" autoComplete="tel" />
                 <Field label="Company name" value={lead.company} name="organization" onChange={(v) => setLead((l) => ({ ...l, company: v }))} autoComplete="organization" />
                 <input
                   className="fx-hp"
@@ -419,11 +432,11 @@ function Check({ id, checked, onChange, children }) {
   );
 }
 
-function Field({ label, type = 'text', value, onChange, autoComplete, name }) {
+function Field({ label, type = 'text', value, onChange, autoComplete, name, placeholder, inputMode }) {
   return (
     <label className="fx-field">
       <span>{label}</span>
-      <input type={type} name={name} id={`f-${name}`} value={value} onChange={(e) => onChange(e.target.value)} autoComplete={autoComplete} required aria-required="true" />
+      <input type={type} name={name} placeholder={placeholder} inputMode={inputMode} id={`f-${name}`} value={value} onChange={(e) => onChange(e.target.value)} autoComplete={autoComplete} required aria-required="true" />
     </label>
   );
 }
@@ -436,7 +449,7 @@ function Result({ lead, qualified }) {
     first_name: lead.firstName || '',
     last_name: lead.lastName || '',
     email: lead.email || '',
-    phone: lead.phone || '',
+    phone: lead.phone ? phoneE164(lead.phone) : '',
     company_name: lead.company || '',
     organization: lead.company || '',
     companyName: lead.company || '',
