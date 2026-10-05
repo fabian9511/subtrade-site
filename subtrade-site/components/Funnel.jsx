@@ -537,9 +537,10 @@ function Field({ label, type = 'text', value, onChange, autoComplete, name, plac
   );
 }
 
-/* ---------- 4. the result: video, then book a call or start the trial ---------- */
+/* ---------- 4. the result: video, then choose: book a call or start the trial ---------- */
 function Result({ lead, qualified }) {
   const name = lead.firstName;
+  const [path, setPath] = useState(qualified ? 'call' : 'trial');
   // GoHighLevel's booking widget fills its own form from these.
   const prefill = new URLSearchParams({
     first_name: lead.firstName || '',
@@ -550,19 +551,31 @@ function Result({ lead, qualified }) {
     organization: lead.company || '',
     companyName: lead.company || '',
   }).toString();
+
+  const choices = [
+    {
+      id: 'call',
+      title: 'Book a 15-minute call',
+      text: 'Screen share with our team. Your trade, your questions. No pitch deck.',
+      meta: 'Free · 15 minutes',
+    },
+    {
+      id: 'trial',
+      title: 'Start your 14-day free trial',
+      text: 'The full platform on your real jobs. Pick your team size, $0 today.',
+      meta: '$0 today · cancel anytime',
+    },
+  ];
+  if (!qualified) choices.reverse();
+
   return (
     <section className="section fx-result">
-      <div className="wrap" style={{ maxWidth: 900 }}>
+      <div className="wrap fx-result-head">
         <p className="eyebrow">{qualified ? 'You are a good fit' : 'You are all set'}</p>
         <h1 className="display fx-result-title">
           {name ? `Thanks, ${name}. ` : ''}Watch this first
         </h1>
-        <p className="fx-result-sub">
-          {qualified
-            ? 'See how SubTrade runs a job from clock-in to progress claim, then pick a time below for a 15-minute call.'
-            : 'See how SubTrade runs a job from clock-in to progress claim. Then start your free trial and load a real project.'}
-        </p>
-
+        <p className="fx-result-sub">See how SubTrade runs a job from clock-in to progress claim.</p>
         <video
           className="fx-vsl"
           src="/vsl/subtrade-why.mp4"
@@ -571,39 +584,57 @@ function Result({ lead, qualified }) {
           playsInline
           preload="metadata"
         />
+      </div>
 
-        {qualified ? (
-          <>
-            <h2 className="display fx-book-title">Book your 15-minute call</h2>
-            <p className="fx-result-sub">Screen share, your questions, your trade. No pitch deck.</p>
-            <div className="fx-booking">
-              <iframe
-                src={`https://api.leadconnectorhq.com/widget/booking/${BOOKING_ID}?${prefill}`}
-                id={`${BOOKING_ID}_booking`}
-                title="Book a SubTrade call"
-                scrolling="no"
-              />
-            </div>
-            <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
-            <h2 className="display fx-book-title">Or skip the call and start now</h2>
-            <TrialBox lead={lead} />
-          </>
-        ) : (
-          <div className="fx-trial">
-            <h2 className="display fx-book-title">Start your 14-day free trial</h2>
-            <TrialBox lead={lead} />
-            <p className="fx-fine">
-              Want to talk it through first? <a href="/construction-software-15min-demo/">Book a 15-minute call</a>.
-            </p>
+      <div className="wrap fx-choose">
+        <h2 className="display fx-choose-title">How do you want to start?</h2>
+        <div className="fx-choices" role="tablist" aria-label="How do you want to start?">
+          {choices.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              role="tab"
+              id={`fx-tab-${c.id}`}
+              aria-selected={path === c.id}
+              aria-controls={`fx-panel-${c.id}`}
+              className={`fx-choice${path === c.id ? ' is-on' : ''}`}
+              onClick={() => setPath(c.id)}
+            >
+              <span className="fx-choice-radio" aria-hidden="true" />
+              <span className="fx-choice-body">
+                <b>
+                  {c.title}
+                  {qualified && c.id === 'call' && <em>Recommended</em>}
+                </b>
+                <span>{c.text}</span>
+                <small>{c.meta}</small>
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <div className={`fx-panel${path === 'call' ? '' : ' is-off'}`} role="tabpanel" id="fx-panel-call" aria-labelledby="fx-tab-call" aria-hidden={path !== 'call'}>
+          <div className="fx-booking">
+            <iframe
+              src={`https://api.leadconnectorhq.com/widget/booking/${BOOKING_ID}?${prefill}`}
+              id={`${BOOKING_ID}_booking`}
+              title="Book a SubTrade call"
+              scrolling="no"
+            />
           </div>
-        )}
+          <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
+        </div>
+        <div className="fx-panel" role="tabpanel" id="fx-panel-trial" aria-labelledby="fx-tab-trial" hidden={path !== 'trial'}>
+          <TrialBox lead={lead} />
+        </div>
       </div>
     </section>
   );
 }
 
 /* ---------- 14-day trial with a card on file (Stripe checkout) ---------- */
-// Same look and numbers as the pricing page calculator (lib/pricing.js).
+// Left: build the plan (same numbers as the pricing page, lib/pricing.js).
+// Right: a plain receipt of what happens today and when the first charge lands.
 function TrialBox({ lead }) {
   const [annual, setAnnual] = useState(false);
   const [users, setUsers] = useState(INCLUDED_USERS);
@@ -613,8 +644,8 @@ function TrialBox({ lead }) {
   const plan = annual ? 'yearly' : 'monthly';
   const shown = shownMonthly(users, annual);
   const charge = periodPrice(users, annual);
-  const chargeText = `$${fmt(charge)}/${annual ? 'year' : 'month'}`;
   const extra = users - INCLUDED_USERS;
+  const usersText = `${users} ${users === 1 ? 'user' : 'users'}`;
 
   async function start() {
     setBusy(true);
@@ -645,52 +676,61 @@ function TrialBox({ lead }) {
   }
 
   return (
-    <div className="price-card fx-trialcard">
-      <p className="eyebrow">SubTrade, complete</p>
-      <div className="price-line">
-        <span className="mono">${fmt(shown)}</span>
-        <small>/month CAD</small>
-      </div>
-      <p className="price-sub">
-        {annual ? `Billed annually at $${fmt(charge)}/yr (20% off)` : 'Billed monthly. Switch to annual and save 20%.'}
-      </p>
-
-      <div className="toggle" role="group" aria-label="Billing period">
-        <button type="button" className={annual ? '' : 'on'} aria-pressed={!annual} onClick={() => setAnnual(false)}>Monthly</button>
-        <button type="button" className={annual ? 'on' : ''} aria-pressed={annual} onClick={() => setAnnual(true)}>Annual −20%</button>
-      </div>
-
-      <div className="calc">
-        <label htmlFor="fx-users">
-          Team size: <b className="mono" style={{ color: 'var(--gypsum)' }}>{users} {users === 1 ? 'user' : 'users'}</b>
-          {users <= INCLUDED_USERS && ' (included in base)'}
-        </label>
-        <input id="fx-users" type="range" min={MIN_USERS} max={MAX_USERS} value={users} onChange={(e) => setUsers(Number(e.target.value))} />
-        <div className="calc-readout">
-          <span className="mono">${fmt(shown)}/mo</span>
-          <small>
-            {extra > 0
-              ? `base $${annual ? fmt(Math.round(BASE * 0.8)) : BASE} + ${extra} extra ${extra === 1 ? 'user' : 'users'}`
-              : `${INCLUDED_USERS} users included`}
-          </small>
+    <div className="fx-trial-grid">
+      <div className="fx-trial-build">
+        <p className="eyebrow">1 · Build your plan</p>
+        <div className="toggle" role="group" aria-label="Billing period">
+          <button type="button" className={annual ? '' : 'on'} aria-pressed={!annual} onClick={() => setAnnual(false)}>Monthly</button>
+          <button type="button" className={annual ? 'on' : ''} aria-pressed={annual} onClick={() => setAnnual(true)}>Annual −20%</button>
         </div>
+        <div className="calc">
+          <label htmlFor="fx-users">
+            Team size: <b className="mono" style={{ color: 'var(--gypsum)' }}>{usersText}</b>
+            {users <= INCLUDED_USERS && ' (included in base)'}
+          </label>
+          <input id="fx-users" type="range" min={MIN_USERS} max={MAX_USERS} value={users} onChange={(e) => setUsers(Number(e.target.value))} />
+          <div className="calc-readout">
+            <span className="mono">${fmt(shown)}/mo</span>
+            <small>
+              {extra > 0
+                ? `base $${annual ? fmt(Math.round(BASE * 0.8)) : BASE} + ${extra} extra ${extra === 1 ? 'user' : 'users'}`
+                : `${INCLUDED_USERS} users included`}
+            </small>
+          </div>
+          {annual && <p className="fx-annual-note">Billed once a year: ${fmt(charge)} CAD (20% off monthly).</p>}
+          <div className="tiers">
+            Base plan <span className="mono">${BASE}</span> includes {INCLUDED_USERS} users, then per user:
+            <br />
+            users 6–15 <span className="mono">$15</span> · 16–25 <span className="mono">$10</span> · 26–29 <span className="mono">$7</span> · 30+ <span className="mono">$4</span>
+          </div>
+        </div>
+      </div>
 
+      <div className="fx-receipt" aria-live="polite">
+        <p className="eyebrow">2 · Your free trial</p>
+        <p className="fx-receipt-plan">SubTrade, complete · {usersText} · billed {annual ? 'yearly' : 'monthly'}</p>
+        <div className="fx-receipt-row fx-receipt-today">
+          <span>Due today</span>
+          <b className="mono">$0.00</b>
+        </div>
+        <div className="fx-receipt-row">
+          <span>
+            First charge on <b>{firstCharge}</b>
+            <small>then every {annual ? 'year' : 'month'} until you cancel</small>
+          </span>
+          <b className="mono">${fmt(charge)}.00 <small>CAD</small></b>
+        </div>
         <ul className="fx-ticks fx-trial-terms">
-          <li><b>$0 today.</b> The full platform for 14 days.</li>
-          <li>Your card is charged <b>{chargeText} CAD</b> on <b>{firstCharge}</b>.</li>
-          <li>Cancel anytime before then and you pay nothing.</li>
+          <li>Use the full platform free for 14 days.</li>
+          <li>Cancel before <b>{firstCharge}</b> and you pay nothing.</li>
+          <li>Your card is saved now, not charged.</li>
         </ul>
         {error && <p className="fx-error" role="alert">{error}</p>}
         <button type="button" className="btn btn-primary btn-lg fx-submit" onClick={start} disabled={busy}>
-          {busy ? 'Opening secure checkout…' : 'Start free trial'}
+          {busy ? 'Opening secure checkout…' : 'Start my free trial · $0 today'}
         </button>
-        <div className="tiers">
-          Base plan <span className="mono">${BASE}</span> includes {INCLUDED_USERS} users, then per user:
-          <br />
-          users 6–15 <span className="mono">$15</span> · 16–25 <span className="mono">$10</span> · 26–29 <span className="mono">$7</span> · 30+ <span className="mono">$4</span>
-        </div>
+        <p className="fx-fine">Secure checkout by Stripe. Your card details never touch our site. See our <a href="/fair-billing-policy/">Fair Billing Policy</a>.</p>
       </div>
-      <p className="fx-fine">Secure checkout by Stripe. Your card details never touch our site. See our <a href="/fair-billing-policy/">Fair Billing Policy</a>.</p>
     </div>
   );
 }

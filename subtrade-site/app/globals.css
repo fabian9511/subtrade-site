@@ -3528,8 +3528,45 @@ main > section.section { padding: 96px 0; }
 .fx-plan.is-on { border-color: var(--chalk); background: var(--chalk-soft); box-shadow: 0 0 0 1px var(--chalk) inset; }
 .fx-trial-terms { margin-bottom: 14px; }
 @media (max-width: 560px) { .fx-plans { grid-template-columns: 1fr; } .fx-trialbox { padding: 18px; } }
-/* /start/ trial box reuses the pricing-page card */
-.fx-trialcard { max-width: 520px; text-align: left; }
-.fx-trialcard .fx-trial-terms { margin-top: 22px; }
-.fx-trialcard .fx-submit { width: 100%; justify-content: center; margin-top: 8px; }
-.fx-trialcard .fx-fine { margin-top: 16px; }
+/* /start/ result: video, then choose call or trial */
+.fx-result-head { max-width: 960px; text-align: center; }
+.fx-result-head .fx-result-sub { margin: 0 auto 28px; }
+.fx-choose { max-width: 1040px; margin-top: 72px; }
+.fx-choose-title { font-size: clamp(30px, 4.5vw, 46px); text-align: center; margin-bottom: 24px; }
+.fx-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.fx-choice { display: flex; gap: 14px; align-items: flex-start; text-align: left; padding: 20px 22px; border: 1px solid var(--steel-700); border-radius: 10px; background: #fff; color: var(--gypsum); cursor: pointer; font: inherit; transition: border-color .15s, box-shadow .15s; }
+.fx-choice:hover { border-color: var(--steel-500); }
+.fx-choice.is-on { border-color: var(--chalk); box-shadow: 0 0 0 1px var(--chalk) inset; background: #fff; }
+.fx-choice-radio { flex: none; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%; border: 2px solid var(--steel-700); position: relative; }
+.fx-choice.is-on .fx-choice-radio { border-color: var(--chalk); }
+.fx-choice.is-on .fx-choice-radio::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--chalk); }
+.fx-choice-body { display: grid; gap: 4px; }
+.fx-choice-body b { font-size: 19px; font-weight: 700; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.fx-choice-body b em { font-style: normal; font-size: 11px; font-family: var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .08em; color: var(--chalk); background: var(--chalk-soft); padding: 2px 8px; border-radius: 3px; }
+.fx-choice-body span { color: var(--steel-400); font-size: 15px; line-height: 1.5; }
+.fx-choice-body small { color: var(--gypsum); font-size: 13px; font-family: var(--font-mono), monospace; margin-top: 4px; }
+.fx-panel[hidden] { display: none; }
+/* keep the booking widget loaded (and sized) while the trial tab is showing */
+.fx-panel.is-off { position: absolute; left: -10000px; width: min(1040px, 100vw); visibility: hidden; }
+.fx-trial-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--steel-700); border-radius: 10px; background: #fff; overflow: hidden; }
+.fx-trial-build { padding: 34px; }
+.fx-trial-build .toggle { margin: 14px 0 26px; }
+.fx-annual-note { margin-top: 10px; font-size: 14px; color: var(--steel-400); }
+.fx-receipt { padding: 34px; background: var(--steel-900); border-left: 1px solid var(--steel-800); display: flex; flex-direction: column; }
+.fx-receipt-plan { font-weight: 600; margin: 10px 0 18px; }
+.fx-receipt-row { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--steel-800); }
+.fx-receipt-row span { color: var(--steel-400); font-size: 15px; }
+.fx-receipt-row span b { color: var(--gypsum); }
+.fx-receipt-row span small { display: block; color: var(--steel-500); font-size: 13px; }
+.fx-receipt-row > b { font-size: 20px; font-weight: 500; white-space: nowrap; }
+.fx-receipt-row > b small { font-size: 12px; color: var(--steel-500); }
+.fx-receipt-today span { color: var(--gypsum); font-weight: 600; font-size: 17px; }
+.fx-receipt-today > b { font-size: 34px; color: var(--chalk); }
+.fx-receipt .fx-trial-terms { margin: 10px 0 18px; padding-top: 16px; border-top: 1px solid var(--steel-800); }
+.fx-receipt .fx-submit { width: 100%; justify-content: center; margin-top: auto; }
+@media (max-width: 860px) {
+  .fx-choices, .fx-trial-grid { grid-template-columns: 1fr; }
+  .fx-receipt { border-left: 0; border-top: 1px solid var(--steel-800); }
+  .fx-trial-build, .fx-receipt { padding: 24px 20px; }
+  .fx-choose { margin-top: 52px; }
+}

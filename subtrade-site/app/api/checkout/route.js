@@ -38,7 +38,13 @@ export async function POST(req) {
   const users = clampUsers(body.users ?? 5);
   const amount = periodPrice(users, annual); // whole dollars per billing period
   const priceText = `$${fmt(amount)}/${annual ? 'year' : 'month'}`;
-  const productName = `SubTrade – ${annual ? 'Yearly, save 20%' : 'Monthly'} (${users} ${users === 1 ? 'user' : 'users'})`;
+  const usersText = `${users} ${users === 1 ? 'user' : 'users'}`;
+  const productName = `SubTrade · ${usersText} · billed ${annual ? 'yearly (20% off)' : 'monthly'}`;
+  const firstCharge = new Date(Date.now() + TRIAL_DAYS * 864e5).toLocaleDateString('en-CA', {
+    month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Edmonton',
+  });
+  const money = `CA$${fmt(amount)}.00`;
+  const description = `FREE 14-day trial: you pay $0.00 today. On ${firstCharge} your card is charged ${money} for ${annual ? 'one year' : 'one month'} (${usersText}), then every ${annual ? 'year' : 'month'} until you cancel. Cancel before ${firstCharge} and you pay nothing.`;
   const email = clean(body.email, 160).toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: 'A valid email is required' }, { status: 400 });
@@ -65,6 +71,8 @@ export async function POST(req) {
   form.set('line_items[0][price_data][unit_amount]', String(amount * 100));
   form.set('line_items[0][price_data][recurring][interval]', annual ? 'year' : 'month');
   form.set('line_items[0][price_data][product_data][name]', productName);
+  form.set('line_items[0][price_data][product_data][description]', description);
+  form.set('line_items[0][price_data][product_data][images][0]', 'https://subtradesoftware.com/logo-mark.png');
   form.set('subscription_data[trial_period_days]', String(TRIAL_DAYS));
   // No card at the end of the trial means no subscription, never a surprise bill.
   form.set('subscription_data[trial_settings][end_behavior][missing_payment_method]', 'cancel');
@@ -75,7 +83,7 @@ export async function POST(req) {
   }
   form.set(
     'custom_text[submit][message]',
-    `$0 today. Your card is charged ${priceText} CAD after the ${TRIAL_DAYS}-day trial. Cancel anytime before then and you pay nothing.`,
+    `You pay $0.00 today — your card is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing.`,
   );
   if (process.env.STRIPE_AUTOMATIC_TAX === '1') form.set('automatic_tax[enabled]', 'true');
   form.set('success_url', `${origin}/start/welcome/?plan=${plan}&users=${users}`);
