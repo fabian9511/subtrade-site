@@ -1,5 +1,5 @@
 // Verbatim Terms text provided by SubTrade Software Ltd.
-export const effective = 'Effective Date: July 22, 2025 / Last Updated: July 22, 2025';
+export const effective = 'Effective Date: July 22, 2025 / Last Updated: October 5, 2026';
 export const intro = `Welcome to Subtrade, a construction project management platform developed and operated by Subtrade Software Ltd ("Company", "we", "us", or "our"). By creating an account, accessing, or using Subtrade (the "Platform"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree, do not use the Platform.`;
 
 export const sections = [
@@ -7,7 +7,7 @@ export const sections = [
 `Subtrade Software Ltd provides a comprehensive Software-as-a-Service (SaaS) platform designed for the construction industry. Our Services include, but are not limited to, functionalities for Leads/Bids, Estimating, Proposals, Time Management, Geofence, Field Management, Safety Management, Resources Management, Schedule Management, Communication Management, Document Management, and Photo Gallery.`,
 `In addition to these core functionalities, we may offer supplementary support services such as installation assistance, maintenance, and bug fixing, as further detailed in your specific service agreement.`]},
 {h:'2. Eligibility and Use of the Platform', b:[
-`2.1 Eligibility. You must be at least 18 years old and have the legal authority to enter into these Terms.`,
+`2.1 Eligibility. You must be at least 18 years old and have the legal authority to enter into these Terms. The Platform is for business use. If you create an account or subscribe for a company, you confirm that you are acting for that business, not as a consumer, and that you have authority to bind it to these Terms.`,
 `2.2 Permitted Use. You may use Subtrade only as intended: to manage construction projects, tasks, drawings, time tracking and team collaboration.`,
 `2.3 Prohibited Uses. You agree not to: reverse-engineer, copy, or resell any part of the platform; upload malicious code, illegal content, or anything that violates laws or third-party rights; abuse platform resources or attempt unauthorized access to any systems or data.`]},
 {h:'3. Accounts and Access', b:[
@@ -33,11 +33,20 @@ export const sections = [
 `Subtrade includes offline features in its mobile app. Local data (e.g., project files, tasks, photos) is stored on your device and synchronized when connectivity is restored.`]},
 {h:'9. System Availability', b:[
 `We aim for high uptime but cannot guarantee uninterrupted access. Maintenance, updates, or AWS outages may affect availability.`]},
-{h:'10. Financial Terms', b:[
-`You agree to pay Subtrade Software Ltd: the Fee as specified in your service agreement; and any other amount payable to Subtrade Software Ltd under this Agreement.`,
-`Payment terms, including frequency of payments and consequences of late payments, will be clearly outlined in your specific service agreement or invoice.`]},
+{h:'10. Fees, Free Trials and Subscriptions', b:[
+`10.1 Signed agreements. If you have a signed subscription agreement or order form with Subtrade Software Ltd, its fees, term, renewal, cancellation and payment terms apply and take priority over this Section 10.`,
+`10.2 Online subscriptions. If you subscribe on our website (for example at subtradesoftware.com/start), your order is the plan, billing period (monthly or yearly), number of users and price shown on the checkout page and in your confirmation. Prices are in Canadian dollars and follow our published pricing at the time of your order. You agree to pay those fees and any other amount payable under these Terms.`,
+`10.3 Taxes. Prices do not include taxes. GST/HST and any other sales taxes that apply are added at checkout and on each invoice, based on your billing address.`,
+`10.4 Free trial. New customers may be offered a free trial (currently 14 days). A valid payment card is required to start it. Nothing is charged during the trial. Unless you cancel before the trial ends, your paid subscription starts automatically when the trial ends and your card is charged the price shown at checkout, plus taxes. If you cancel before the trial ends, you are not charged. One free trial per company. We may refuse or end a trial we reasonably believe is a repeat trial or is being misused.`,
+`10.5 Automatic renewal. Online subscriptions renew automatically at the end of each billing period (monthly or yearly), and your card on file is charged in advance for the next period, until you cancel.`,
+`10.6 Cancelling. You can cancel an online subscription at any time from the billing settings in your account (where available) or by emailing support@subtradesoftware.com. Cancellation takes effect at the end of your current paid period. You keep access until then and are not charged again.`,
+`10.7 No refunds. Fees are paid in advance and are non-refundable, including for unused time in a monthly or yearly period, partially used periods, unused users and downgrades, except as stated in these Terms or required by law. If we permanently discontinue the Services, we will refund prepaid fees for the unused part of your current billing period.`,
+`10.8 Users. Your price covers the number of users on your subscription. Each user is a named individual and logins may not be shared. Users added during a billing period are charged at our standard per-user rate, prorated for the rest of that period, and included in full from the next renewal. Reductions in users take effect at the next renewal.`,
+`10.9 Price changes. We may change our prices for future billing periods. We will give you at least 30 days' notice by email before a price change applies to your subscription, and you may cancel before it takes effect. A price change never affects a period you have already paid for.`,
+`10.10 Failed payments. If a payment fails, we and our payment processor may retry your card. If an amount is still unpaid 10 days after we notify you, we may suspend access to the Services until it is paid, and may cancel the subscription.`,
+`10.11 Payment processing. Card payments are processed by Stripe. We do not store your full card details. By subscribing, you authorize us, through Stripe, to charge your card for the fees and taxes described in this Section 10.`]},
 {h:'11. Termination', b:[
-`You may delete your account at any time. We may suspend or delete accounts that: violate these Terms; pose a security risk; are inactive for extended periods.`,
+`You may delete your account at any time. Deleting an account does not cancel or end a paid subscription or a signed agreement: online subscriptions are cancelled as described in Section 10.6, and signed agreements end as they set out. We may suspend or delete accounts that: violate these Terms; pose a security risk; are inactive for extended periods.`,
 `Upon termination of this Agreement, you will immediately: cease and desist from any use of the Services; return to Subtrade Software Ltd all property, including Confidential Information and Intellectual Property, in your possession that belongs to Subtrade Software Ltd; pay the Fees for all Services completed up to the date of termination.`,
 `All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.`]},
 {h:'12. Limitation of Liability', b:[
@@ -53,7 +62,7 @@ export const sections = [
 `We may update these Terms occasionally. Continued use after changes indicates your acceptance of the revised Terms. The "Last Updated" date at the top of these Terms will be revised to reflect any changes.`]},
 {h:'14. General Provisions', b:[
 `14.1 Governing Law. These Terms shall be governed and construed in accordance with the laws of the Province of Alberta and the federal laws of Canada applicable therein, without regard to its conflict of law provisions.`,
-`14.2 Entire Agreement. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have between us regarding the Service.`,
+`14.2 Entire Agreement. These Terms, together with our Privacy Policy, our Fair Billing Policy and any signed agreement or order form between you and Subtrade Software Ltd, are the entire agreement between us regarding the Service, and replace any earlier quotes, demos, emails or discussions. If a signed agreement or order form conflicts with these Terms, the signed agreement or order form governs.`,
 `14.3 Severability. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect.`,
 `14.4 Waiver. No waiver of any term of these Terms shall be deemed a further or continuing waiver of such term or any other term, and Subtrade Software Ltd's failure to assert any right or provision under these Terms shall not constitute a waiver of such right or provision.`]},
 {h:'15. App Store Specific Terms', b:[
@@ -79,6 +88,15 @@ export const sections = [
 `Carrier Liability: Carriers are not liable for delayed or undelivered messages.`,
 `Message Frequency: As always, message and data rates may apply for any messages sent to you from us and to us from you. Message frequency may vary. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.`,
 `Privacy: If you have any questions regarding privacy, please read our privacy policy at subtradesoftware.com/privacy-policy.`]},
+{h:'17. Customer Responsibilities', b:[
+`These responsibilities apply to every customer, including customers who subscribe online without a signed agreement.`,
+`17.1 No reliance on future features. You are buying the Services as they exist when you subscribe. Your purchase is not conditional on any future feature or change, including anything discussed in a demo, email, call, chat or roadmap conversation. Statements by our staff about planned features or timing are for information only, are not warranties and create no obligation unless written into a signed agreement.`,
+`17.2 Not payroll or accounting software. The Services are not payroll or accounting software. You are solely responsible for payroll, overtime calculations, vacation and leave entitlements, and compliance with employment standards legislation, even where you use time-tracking data from the Platform.`,
+`17.3 Location and time tracking. The Services include GPS, geofence and time-tracking features. You are solely responsible for telling your employees and contractors about location and time tracking, obtaining any consents required, and complying with Alberta's Personal Information Protection Act and all other privacy and employment laws that apply to you.`,
+`17.4 Indemnity. You will defend and indemnify Subtrade Software Ltd against any third-party claim, including a claim by your employees or contractors, arising from (a) your data, (b) your use of the Services in breach of these Terms or the law, or (c) your time records, pay, overtime, leave or location-tracking practices.`,
+`17.5 Your data when you leave. On written request made within 30 days after your subscription ends, we will help you export your data in a commonly used format. After that period we may delete it. You are responsible for keeping your own backups of critical project records.`,
+`17.6 Feedback. Any suggestions, feature requests or bug reports you give us may be used by Subtrade Software Ltd without restriction or compensation, and we own anything we build from them.`,
+`17.7 Publicity. We may identify you by name and logo as a SubTrade customer unless you object in writing to support@subtradesoftware.com.`]},
 {h:'Contact Us', b:[
 `If you have any questions regarding this agreement, please contact us at support@subtradesoftware.com.`]},
 ];

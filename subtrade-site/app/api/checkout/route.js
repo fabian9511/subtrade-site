@@ -43,7 +43,7 @@ export async function POST(req) {
   const firstCharge = new Date(Date.now() + TRIAL_DAYS * 864e5).toLocaleDateString('en-CA', {
     month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Edmonton',
   });
-  const money = `CA$${fmt(amount)}.00`;
+  const money = `CA$${fmt(amount)}.00 plus GST`;
   const description = `FREE 14-day trial: you pay $0.00 today. On ${firstCharge} your card is charged ${money} for ${annual ? 'one year' : 'one month'} (${usersText}), then every ${annual ? 'year' : 'month'} until you cancel. Cancel before ${firstCharge} and you pay nothing.`;
   const email = clean(body.email, 160).toLowerCase();
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -70,6 +70,8 @@ export async function POST(req) {
   form.set('line_items[0][price_data][currency]', 'cad');
   form.set('line_items[0][price_data][unit_amount]', String(amount * 100));
   form.set('line_items[0][price_data][recurring][interval]', annual ? 'year' : 'month');
+  form.set('line_items[0][price_data][tax_behavior]', 'exclusive'); // prices are plus GST
+  form.set('line_items[0][price_data][product_data][tax_code]', 'txcd_10103001'); // SaaS, business use
   form.set('line_items[0][price_data][product_data][name]', productName);
   form.set('line_items[0][price_data][product_data][description]', description);
   form.set('line_items[0][price_data][product_data][images][0]', 'https://subtradesoftware.com/logo-mark.png');
@@ -83,19 +85,42 @@ export async function POST(req) {
   }
   form.set(
     'custom_text[submit][message]',
-    `You pay $0.00 today — your card is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing.`,
+    `You pay $0.00 today — your card is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing. By starting your trial you agree to our [Terms & Conditions](https://subtradesoftware.com/terms-and-conditions/) and [Fair Billing Policy](https://subtradesoftware.com/fair-billing-policy/).`,
   );
-  if (process.env.STRIPE_AUTOMATIC_TAX === '1') form.set('automatic_tax[enabled]', 'true');
+  // GST/HST through Stripe Tax: it charges only where a registration is added
+  // in Stripe (Settings → Tax), so GST/HST only. Needs the billing address.
+  form.set('automatic_tax[enabled]', 'true');
+  form.set('billing_address_collection', 'required');
+  // Required "I agree to the Terms" tick box (needs the Terms URL in Stripe →
+  // Settings → Public details). Stripe keeps the record on the session.
+  form.set('consent_collection[terms_of_service]', 'required');
   form.set('success_url', `${origin}/start/welcome/?plan=${plan}&users=${users}&session_id={CHECKOUT_SESSION_ID}`);
   form.set('cancel_url', `${origin}/start/`);
 
-  try {
+  const create = async (f) => {
     const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: form,
+      body: f,
     });
-    const data = await res.json();
+    return { res, data: await res.json() };
+  };
+
+  try {
+    let { res, data } = await create(form);
+    // If Stripe Tax or the Terms URL isn't set up in this Stripe account yet,
+    // don't block the trial: drop that part, log it loudly, and carry on.
+    for (let i = 0; !res.ok && i < 2; i++) {
+      const msg = String(data?.error?.message || '');
+      if (/tax/i.test(msg) && form.has('automatic_tax[enabled]')) {
+        console.error('[checkout] SET UP STRIPE TAX — GST not charged:', msg);
+        form.delete('automatic_tax[enabled]');
+      } else if (/terms|consent/i.test(msg) && form.has('consent_collection[terms_of_service]')) {
+        console.error('[checkout] ADD TERMS URL IN STRIPE PUBLIC DETAILS — no tick box:', msg);
+        form.delete('consent_collection[terms_of_service]');
+      } else break;
+      ({ res, data } = await create(form));
+    }
     if (!res.ok) {
       console.error('[checkout] stripe error', res.status, data?.error?.message);
       return NextResponse.json({ ok: false, error: 'Could not start checkout' }, { status: 502 });

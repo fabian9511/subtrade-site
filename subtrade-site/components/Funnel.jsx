@@ -503,7 +503,7 @@ export default function Funnel() {
           </div>
           <div className="fx-faq">
             {[
-              ['How much does it cost?', '$299/month CAD with 5 users included. Extra users are $4 to $15 each, and paying yearly saves 20%. The price is on our pricing page, no sales call needed to find it out.'],
+              ['How much does it cost?', '$299/month CAD plus GST, with 5 users included. Extra users are $4 to $15 each, and paying yearly saves 20%. The price is on our pricing page, no sales call needed to find it out.'],
               ['Which trades is it for?', 'Subcontractors running crews: drywall, framing, electrical, plumbing, HVAC, painting, concrete and more.'],
               ['Will my guys actually use it?', 'Clocking in, taking photos and filling a form are all one tap from the phone app (iPhone and Android).'],
               ['Can I try it first?', 'Yes. The free trial is the full platform, and you can cancel anytime during the trial and pay nothing.'],
@@ -706,7 +706,7 @@ function TrialBox({ lead }) {
                 : `${INCLUDED_USERS} users included`}
             </small>
           </div>
-          {annual && <p className="fx-annual-note">Billed once a year: ${fmt(charge)} CAD (20% off monthly).</p>}
+          {annual && <p className="fx-annual-note">Billed once a year: ${fmt(charge)} CAD plus GST (20% off monthly).</p>}
           <div className="tiers">
             Base plan <span className="mono">${BASE}</span> includes {INCLUDED_USERS} users, then per user:
             <br />
@@ -727,7 +727,7 @@ function TrialBox({ lead }) {
             First charge on <b>{firstCharge}</b>
             <small>then every {annual ? 'year' : 'month'} until you cancel</small>
           </span>
-          <b className="mono">${fmt(charge)}.00 <small>CAD</small></b>
+          <b className="mono">${fmt(charge)}.00 <small>CAD + GST</small></b>
         </div>
         <ul className="fx-ticks fx-trial-terms">
           <li>Use the full platform free for 14 days.</li>
