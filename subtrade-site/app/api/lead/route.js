@@ -24,9 +24,9 @@ const PIPELINE_ID = 'OuxZEd4r0BA8PEreH5n6';
 const STAGES = {
   registered: 'ce4b3264-b6fc-4450-adde-5396d0410fe1', // Signed up – no answers
   qualified: 'c87c14c8-4d34-43c5-a653-e22ae0dcc45d', // Qualified
-  // "Trial path" stage still to be added in GoHighLevel; until then these
-  // leads sit in Qualified and are told apart by the fb-funnel-trial-path tag.
-  trial: process.env.GHL_STAGE_TRIAL_PATH || 'c87c14c8-4d34-43c5-a653-e22ae0dcc45d',
+  // Small companies / price "No": kept out of Qualified so they never enter
+  // the "book a demo" campaign (Facebook New Lead Camp starts on Qualified).
+  trial: '6316cc7e-a969-4973-9529-448c93db84af', // Trial path
 };
 
 // Existing SubTrade custom fields in GoHighLevel (same ones the old forms used).
