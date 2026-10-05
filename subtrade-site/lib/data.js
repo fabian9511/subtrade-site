@@ -887,6 +887,17 @@ export const features = [
         ['Markups', 'Draw on any photo'],
         ['500', 'Chars of notes per photo'],
       ],
+      short: {
+        id: 'tRIpyWK8EfY',
+        caption: 'Mark it up, stamp it, file it by job. 42 seconds on the phone.',
+        title: 'Site Photos That Stay on the Right Job | SubTrade',
+        description:
+          'Site photos in SubTrade: every photo lands on the right job, sorted by date and album. Share it clean or as a card with notes, mark it up with boxes, arrows and text, stamp the date and time, file it in an album, and add a description and tags the office can search.',
+        poster: '/subtrade-site-photos-short-poster.webp',
+        posterAlt: 'Play the SubTrade site photos short: the gallery and a marked-up column photo under the words every photo, on the right job',
+        uploadDate: '2026-10-04',
+        duration: 'PT42S',
+      },
       sections: [
         {
           eyebrow: 'New feature',

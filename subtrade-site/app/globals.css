@@ -202,6 +202,10 @@ a:focus-visible, button:focus-visible {
 .hs-solo { padding: 0; }
 .hs-solo .hs-main { margin-right: 0; }
 .hs-solo .hs-cap { position: static; max-width: none; margin-top: 14px; }
+.hs-shortonly { padding: 0; display: flex; flex-direction: column; align-items: center; }
+.hs-shortonly .hs-short { position: relative; right: auto; bottom: auto; width: 100%; max-width: 330px; transform: none; box-shadow: 0 0 0 6px #fff, 0 40px 80px rgba(0, 0, 0, 0.28); }
+.hs-shortonly .hs-cap { position: static; max-width: 330px; margin-top: 20px; text-align: center; }
+@media (max-width: 960px) { .hs-shortonly .hs-short { width: 72%; max-width: 300px; margin: 0; } }
 @media (max-width: 960px) {
   .hs-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .hs-main { margin-right: 0; }
