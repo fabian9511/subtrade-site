@@ -111,6 +111,14 @@ export async function POST(req) {
   if (body.stage === 'qualified') tags.push('fb-funnel-qualified');
   if (body.stage === 'trial') tags.push('fb-funnel-trial-path');
   if (a.price === 'No') tags.push('fb-price-no');
+  // Hot lead: someone who can buy, runs a real crew, wants it now and is fine
+  // with the price. GoHighLevel texts Fabian to call these within 15 minutes.
+  if (
+    ['Owner', 'Partner'].includes(a.role) &&
+    ['11-20', '21-50', '50+'].includes(a.employees) &&
+    a.timeline === 'Immediately' &&
+    a.price === 'Yes'
+  ) tags.push('hot-lead');
   // Consent from the sign-up form. Follow-up texts must only go to people
   // tagged here (marketing texts need sms-consent-marketing).
   const consent = body.consent || {};
