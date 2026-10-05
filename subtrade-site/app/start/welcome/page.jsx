@@ -1,4 +1,5 @@
 import WelcomeTrack from '../../../components/WelcomeTrack';
+import WelcomeSummary from '../../../components/WelcomeSummary';
 
 // Where Stripe sends people after they start the card-on-file trial.
 export const metadata = {
@@ -13,24 +14,46 @@ export default function Welcome() {
   return (
     <section className="section fx-result">
       <WelcomeTrack />
-      <div className="wrap" style={{ maxWidth: 760 }}>
+      <div className="wrap fx-welcome">
         <p className="eyebrow">You&rsquo;re in</p>
-        <h1 className="display fx-result-title">Your 14-day trial has started</h1>
+        <h1 className="display fx-result-title">Your 14-day free trial has started</h1>
         <p className="fx-result-sub">
-          Nothing was charged today. One last step: create your SubTrade login with the same email you just used.
+          Nothing was charged today. You&rsquo;re also registered for SubTrade onboarding: step-by-step tutorials and a
+          free setup session with our team, so your first job is running before the trial ends.
         </p>
-        <a href={SIGNUP} className="btn btn-primary btn-lg">Create my SubTrade login</a>
 
-        <ol className="fx-steps" style={{ marginTop: 48 }}>
-          <li><b>Create your login</b><span>Use the same email, so your trial and your account match up.</span></li>
-          <li><b>Load one real job</b><span>Not a test. Add the job and the crew working on it.</span></li>
-          <li><b>Have your crew clock in tomorrow</b><span>They download the SubTrade app on iPhone or Android and clock in on site.</span></li>
-        </ol>
+        <div className="fx-welcome-grid">
+          <WelcomeSummary />
 
-        <p className="fx-fine" style={{ marginTop: 32 }}>
-          Your card is only charged when the 14 days are up. Cancel anytime before then and you pay nothing.
-          Questions? Email <a href="mailto:support@subtradesoftware.com">support@subtradesoftware.com</a> or{' '}
-          <a href="/construction-software-15min-demo/">book 15 minutes with Fabian</a>.
+          <div className="fx-welcome-next">
+            <p className="eyebrow">Your onboarding</p>
+            <ol className="fx-onboard">
+              <li>
+                <b>Create your SubTrade login</b>
+                <span>Use the same email you just used, so your trial and your account match up.</span>
+                <a href={SIGNUP} className="btn btn-primary btn-lg">Create my login</a>
+              </li>
+              <li>
+                <b>Book your free onboarding session</b>
+                <span>15 minutes on a screen share. We walk you through setting up your company, your crew and your first job.</span>
+                <a href="/construction-software-15min-demo/" className="fx-onboard-link">Pick a time →</a>
+              </li>
+              <li>
+                <b>Follow the tutorials</b>
+                <span>Short how-to guides for every part of SubTrade: jobs, crews, time tracking, change orders and billing.</span>
+                <a href="/how-to-tutorials/" className="fx-onboard-link">Open the tutorials →</a>
+              </li>
+              <li>
+                <b>Have your crew clock in</b>
+                <span>They download the SubTrade app on iPhone or Android and clock in on site. That&rsquo;s when it clicks.</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <p className="fx-fine" style={{ marginTop: 36 }}>
+          Questions at any point? Email <a href="mailto:support@subtradesoftware.com">support@subtradesoftware.com</a>.
+          See our <a href="/fair-billing-policy/">Fair Billing Policy</a>.
         </p>
       </div>
     </section>

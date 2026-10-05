@@ -205,7 +205,7 @@ export default function Funnel() {
       // Never on subtradesoftware.com, so real visitors always register.
       const q = new URLSearchParams(window.location.search);
       if (q.has('skip') && !/(^|\.)subtradesoftware\.com$/.test(window.location.hostname)) {
-        setLead((l) => ({ ...l, firstName: q.get('name') || 'Tester', email: q.get('email') || '', company: 'TEST' }));
+        setLead((l) => ({ ...l, firstName: q.get('name') || 'Tester', email: q.get('email') || '', company: q.get('company') || '' }));
         setStage('result');
         return;
       }
