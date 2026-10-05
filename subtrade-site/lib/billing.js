@@ -6,6 +6,7 @@
 // Nothing is changed without a valid token.
 
 import crypto from 'node:crypto';
+import { clampUsers, periodPrice, fmt, MAX_USERS } from './pricing';
 import { ghl, LOCATION_ID, toGhl, STAGES } from './stripeGhl';
 
 const STRIPE = 'https://api.stripe.com/v1';
@@ -167,6 +168,8 @@ export function summarize(sub) {
     card: pm?.card ? { brand: pm.card.brand, last4: pm.card.last4, exp: `${pm.card.exp_month}/${String(pm.card.exp_year).slice(-2)}` } : null,
     save_offer_used: hasSaveCoupon(sub),
     offer: SAVE_COUPON.label,
+    period_start: sub.current_period_start || item?.current_period_start || null,
+    period_end: periodEnd(sub) || null,
     trial_start: sub.trial_start || null,
     trial_end: sub.trial_end || null,
     email: sub.customer?.email || null,
@@ -188,6 +191,41 @@ export async function listInvoices(sub) {
       status: i.status === 'paid' ? (i.total === 0 ? 'Free trial' : 'Paid') : i.status === 'open' ? 'Due' : i.status,
       url: i.hosted_invoice_url || null,
     }));
+}
+
+/* ---------------- team alerts ---------------- */
+
+// SubTrade accounts don't read Stripe yet, so anything that changes what a
+// customer has (users, paid/cancelled) must reach the people who update the
+// app, right away: an email to each address and a text to each phone.
+// Override with BILLING_ALERT_EMAILS / BILLING_ALERT_PHONES (comma-separated).
+const ALERT_EMAILS = (process.env.BILLING_ALERT_EMAILS || 'info@qualitygypsum.ca,cvargas024@gmail.com')
+  .split(',').map((x) => x.trim()).filter(Boolean);
+const ALERT_PHONES = (process.env.BILLING_ALERT_PHONES || '+14038092908')
+  .split(',').map((x) => x.trim()).filter(Boolean);
+
+async function alertTeam(sub, { title, action, details = [] }) {
+  if (!process.env.GHL_PRIVATE_TOKEN) return;
+  const who = [sub.metadata?.company, sub.customer?.email].filter(Boolean).join(' · ') || sub.customer?.id || 'a customer';
+  const lines = [...details, `Stripe subscription: ${sub.id}`];
+  const sms = `SubTrade billing: ${title} — ${who}. ${action}`.slice(0, 300);
+  const html = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.55;color:#15181c;max-width:560px">
+  <p style="margin:0 0 6px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#E8732A;font-weight:700">Billing alert</p>
+  <h2 style="margin:0 0 10px;font-size:20px">${title}</h2>
+  <p style="margin:0 0 12px"><b>${who}</b></p>
+  <p style="margin:0 0 14px;padding:12px 14px;background:#fff4ec;border-left:4px solid #E8732A"><b>To do:</b> ${action}</p>
+  <ul style="margin:0 0 12px;padding-left:18px">${lines.map((l) => `<li>${l}</li>`).join('')}</ul>
+  <p style="margin:0;font-size:12px;color:#6b7280">Sent automatically by subtradesoftware.com/billing.</p></div>`;
+  for (const email of ALERT_EMAILS) {
+    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email, tags: ['subtrade-team-alerts'] });
+    const id = up?.contact?.id;
+    if (id) await ghl('/conversations/messages', 'POST', { type: 'Email', contactId: id, subject: `Billing alert: ${title} — ${who}`, html }, '2021-04-15');
+  }
+  for (const phone of ALERT_PHONES) {
+    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, phone });
+    const id = up?.contact?.id;
+    if (id) await ghl('/conversations/messages', 'POST', { type: 'SMS', contactId: id, message: sms }, '2021-04-15');
+  }
 }
 
 /* ---------------- actions ---------------- */
@@ -239,6 +277,11 @@ Comment: ${comment}` : ''}`,
         due: new Date(Date.now() + 864e5).toISOString(),
       },
     });
+    await alertTeam(sub, {
+      title: 'Apply the 20% stay discount by hand',
+      action: `In Stripe, add coupon ${SAVE_COUPON.id} to subscription ${sub.id}.`,
+      details: [`Reason it failed: ${why}`],
+    });
     return { ok: true, manual: true };
   };
   if (!coupon) return fallback('coupon not available');
@@ -262,7 +305,82 @@ Comment: ${comment}` : ''}`,
       : `Tried to cancel, took the save offer (${SAVE_COUPON.label}).\n${why}`,
     ...(trial ? { stage: STAGES.won, status: 'won' } : {}),
   });
+  if (trial) {
+    await alertTeam(sub, {
+      title: 'Took the stay offer: trial ended, now paying',
+      action: `Make sure their SubTrade account is set as paid with ${sub.metadata?.users || '?'} users.`,
+      details: [`Plan: ${sub.metadata?.price || '?'} CAD with 20% off for 12 months`, why.replace(/\n/g, ' · ')],
+    });
+  }
   return { ok: true, charged: trial };
+}
+
+// Change users and/or billing period (self-serve, Fair Billing Policy 4.x):
+//   more users, or monthly -> yearly: now, prorated difference charged today
+//   fewer users: the lower price applies from the next renewal, no refund
+//   yearly -> monthly: not self-serve (yearly is paid up front)
+//   during the trial: just updates what will be charged when it ends
+export async function changePlan(sub, { users, plan }) {
+  const item = sub.items?.data?.[0];
+  if (!item) return { ok: false, error: 'Could not read your plan.' };
+  const curAnnual = item.price?.recurring?.interval === 'year';
+  const curUsers = Number(sub.metadata?.users) || null;
+  const annual = plan === 'yearly';
+  const u = clampUsers(users);
+  if (Number(users) > MAX_USERS) return { ok: false, error: `For more than ${MAX_USERS} users, email support@subtradesoftware.com and we'll set it up.` };
+  if (curAnnual && !annual) return { ok: false, error: 'Switching from yearly to monthly happens at your renewal. Email support@subtradesoftware.com and we will set it up.' };
+  if (u === curUsers && annual === curAnnual) return { ok: false, error: 'That is already your plan.' };
+
+  const amount = periodPrice(u, annual);
+  const trial = sub.status === 'trialing';
+  const upgrade = annual !== curAnnual || amount > (item.price?.unit_amount || 0) / 100;
+  const product = typeof item.price?.product === 'string' ? item.price.product : item.price?.product?.id;
+  const usersText = `${u} ${u === 1 ? 'user' : 'users'}`;
+  const priceText = `$${fmt(amount)}/${annual ? 'year' : 'month'}`;
+
+  const form = {
+    'items[0][id]': item.id,
+    'items[0][price_data][currency]': 'cad',
+    'items[0][price_data][product]': product,
+    'items[0][price_data][unit_amount]': String(amount * 100),
+    'items[0][price_data][recurring][interval]': annual ? 'year' : 'month',
+    'items[0][price_data][tax_behavior]': 'exclusive',
+    'metadata[users]': String(u),
+    'metadata[plan]': annual ? 'yearly' : 'monthly',
+    'metadata[price]': priceText,
+    proration_behavior: trial || !upgrade ? 'none' : 'always_invoice',
+    payment_behavior: 'error_if_incomplete',
+  };
+  if (!trial && annual && !curAnnual) form.billing_cycle_anchor = 'now'; // yearly starts today
+  const r = await stripeTry(`subscriptions/${sub.id}`, form);
+  if (r.card) return { ok: false, error: cardMessage(r.data) };
+  if (!r.ok) return { ok: false, error: 'Could not change your plan. Please email support@subtradesoftware.com.' };
+
+  if (product) {
+    await stripe(`products/${product}`, {
+      method: 'POST',
+      form: { name: `SubTrade · ${usersText} · billed ${annual ? 'yearly (20% off)' : 'monthly'}` },
+    });
+  }
+  const before = `${curUsers || '?'} users, $${fmt((item.price?.unit_amount || 0) / 100)}/${curAnnual ? 'year' : 'month'}`;
+  await noteToGhl(sub, {
+    tags: [upgrade ? 'plan-upgraded' : 'plan-downgraded', `plan-${annual ? 'yearly' : 'monthly'}`],
+    note: `Changed plan on the website: ${before} → ${usersText}, ${priceText} CAD.${
+      trial ? ' (During the free trial, no charge yet.)' : upgrade ? ' Prorated difference charged today.' : ' Lower price applies from the next renewal.'
+    }`,
+  });
+  await alertTeam(sub, {
+    title: `Plan changed to ${usersText}`,
+    action: curUsers && curUsers !== u
+      ? `Update their user count in SubTrade from ${curUsers} to ${u}${u > curUsers ? ' now' : ' (they keep access until renewal)'}.`
+      : `Billing switched to ${annual ? 'yearly' : 'monthly'} — check their account plan in SubTrade.`,
+    details: [
+      `Before: ${before}`,
+      `After: ${usersText}, ${priceText} CAD`,
+      trial ? 'During the free trial (no charge yet)' : upgrade ? 'Prorated difference charged today' : `Lower price from the next renewal`,
+    ],
+  });
+  return { ok: true, charged: !trial && upgrade };
 }
 
 // "Start my paid plan now" during the free trial: full price, charged today.
@@ -276,6 +394,11 @@ export async function startPaidNow(sub) {
     note: 'Ended the free trial early on the website and started the paid plan. First charge taken today.',
     stage: STAGES.won,
     status: 'won',
+  });
+  await alertTeam(sub, {
+    title: 'Trial ended early: now a paying customer',
+    action: `Make sure their SubTrade account is set as paid with ${sub.metadata?.users || '?'} users.`,
+    details: [`Plan: ${sub.metadata?.price || '?'} CAD, ${sub.metadata?.users || '?'} users`],
   });
   return { ok: true };
 }
@@ -302,6 +425,11 @@ export async function cancelAtPeriodEnd(sub, { reason, comment }) {
       due: new Date(Date.now() + 864e5).toISOString(),
     },
   });
+  await alertTeam(fresh || sub, {
+    title: 'Cancelled their subscription',
+    action: `Call them before ${s.ends_on || day(endUnix)}. On that date, close or downgrade their SubTrade account.`,
+    details: [`Reason: ${REASONS[reason] || reason || '-'}`, ...(comment ? [`Comment: ${comment}`] : []), `Access ends: ${s.ends_on || day(endUnix)}`],
+  });
   return { ok: true, summary: s };
 }
 
@@ -309,6 +437,7 @@ export async function undoCancel(sub) {
   const updated = await stripe(`subscriptions/${sub.id}`, { method: 'POST', form: { cancel_at_period_end: 'false' } });
   if (!updated) return { ok: false, error: 'Could not undo. Please email support@subtradesoftware.com.' };
   await noteToGhl(sub, { tags: ['cancel-undone'], note: 'Undid their cancellation on the website. Subscription continues.' });
+  await alertTeam(sub, { title: 'Undid their cancellation', action: 'No account change needed. Their subscription continues.' });
   const fresh = await getSub(sub.id);
   return { ok: true, summary: summarize(fresh || updated) };
 }

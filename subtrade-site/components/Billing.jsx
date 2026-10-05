@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import PriceBreakdown from './PriceBreakdown';
+import { periodPrice, MIN_USERS, MAX_USERS } from '../lib/pricing';
 
 const post = (url, body) =>
   fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
@@ -149,6 +150,96 @@ function Sidebar() {
         <span>Fabian Vargas Garcia · Co-Founder</span>
       </div>
     </aside>
+  );
+}
+
+function ChangePlan({ s, busy, error, onConfirm, onBack }) {
+  const curAnnual = s.interval === 'year';
+  const [annual, setAnnual] = useState(curAnnual);
+  const [users, setUsers] = useState(s.users || 5);
+  const disc = s.save_offer_used ? 0.8 : 1;
+  const curPrice = (s.amount || 0) * disc;
+  const newPrice = periodPrice(users, annual) * disc;
+  const per = annual ? 'year' : 'month';
+  const same = users === s.users && annual === curAnnual;
+  const switching = annual && !curAnnual;
+  const up = switching || newPrice > curPrice;
+
+  // What's charged today (Stripe does the exact proration; this is the estimate).
+  const now = Date.now() / 1000;
+  const left = s.period_start && s.period_end ? Math.max(0, Math.min(1, (s.period_end - now) / (s.period_end - s.period_start))) : 1;
+  let today = 0;
+  if (!s.trial && up) today = switching ? Math.max(0, newPrice - curPrice * left) : (newPrice - curPrice) * left;
+
+  return (
+    <div className="bl-card">
+      <p className="eyebrow">Change plan</p>
+      <h2 className="bl-title">Add or remove users, or switch to yearly</h2>
+
+      <div className="toggle" role="group" aria-label="Billing period">
+        <button type="button" className={annual ? '' : 'on'} aria-pressed={!annual} disabled={curAnnual} onClick={() => setAnnual(false)}>
+          Monthly
+        </button>
+        <button type="button" className={annual ? 'on' : ''} aria-pressed={annual} onClick={() => setAnnual(true)}>
+          Annual −20%
+        </button>
+      </div>
+      {curAnnual && <p className="fx-fine">You&rsquo;re on yearly billing. To switch to monthly at your renewal, email support@subtradesoftware.com.</p>}
+
+      <div className="calc">
+        <label htmlFor="bl-users">
+          Team size: <b className="mono" style={{ color: 'var(--gypsum)' }}>{users} {users === 1 ? 'user' : 'users'}</b>
+          {s.users && users !== s.users && <span className="bl-delta"> ({users > s.users ? '+' : ''}{users - s.users} from today)</span>}
+        </label>
+        <input id="bl-users" type="range" min={MIN_USERS} max={MAX_USERS} value={users} onChange={(e) => setUsers(Number(e.target.value))} />
+        <p className="fx-fine">More than {MAX_USERS} users? Email support@subtradesoftware.com.</p>
+      </div>
+
+      <div className="bl-compare">
+        <div>
+          <span>Now</span>
+          <b className="mono">{money(curPrice)}</b>
+          <small>{s.users} users · per {curAnnual ? 'year' : 'month'}</small>
+        </div>
+        <div className={same ? '' : 'is-new'}>
+          <span>New</span>
+          <b className="mono">{money(newPrice)}</b>
+          <small>{users} users · per {per}</small>
+        </div>
+        <div>
+          <span>Charged today</span>
+          <b className="mono">{same ? '—' : s.trial ? money(0) : `${up ? '≈ ' : ''}${money(today)}`}</b>
+          <small>{same ? 'no change' : '+ tax'}</small>
+        </div>
+      </div>
+
+      {!same && (
+        <p className="bl-change-note">
+          {s.trial
+            ? `You're on your free trial, so nothing is charged now. When it ends on ${s.next_date}, you'll pay ${money(newPrice)} + tax per ${per}.`
+            : switching
+              ? `Your yearly plan starts today. You're charged ${money(newPrice)} + tax less a credit for the unused part of this month, then yearly from today.`
+              : up
+                ? `The extra users are yours right away. Today you pay only the difference for the rest of this ${curAnnual ? 'year' : 'month'}; from ${s.next_date} you pay ${money(newPrice)} + tax per ${per}.`
+                : `Your new lower price of ${money(newPrice)} + tax starts on ${s.next_date}. No refund for the current ${curAnnual ? 'year' : 'month'}, as in our Fair Billing Policy.`}
+        </p>
+      )}
+
+      {!same && (
+        <details className="pb-details">
+          <summary>New price, line by line</summary>
+          <PriceBreakdown users={users} annual={annual} saveOffer={s.save_offer_used} compact />
+        </details>
+      )}
+
+      {error && <p className="fx-error" role="alert">{error}</p>}
+      <div className="bl-actions">
+        <button type="button" className="btn btn-primary" disabled={busy || same} onClick={() => onConfirm({ users, plan: annual ? 'yearly' : 'monthly' })}>
+          {busy ? 'Saving…' : same ? 'Pick a change above' : s.trial || !up ? 'Confirm change' : `Confirm and pay ${today > 0 ? `≈ ${money(today)}` : ''} + tax`}
+        </button>
+        <button type="button" className="bl-link" onClick={onBack}>Go back</button>
+      </div>
+    </div>
   );
 }
 
@@ -329,6 +420,11 @@ export function BillingManage() {
         >
           Update card
         </button>
+        {!s.cancel_at_period_end && s.users && (
+          <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => setStep('change')}>
+            Change plan
+          </button>
+        )}
         {s.trial && !s.cancel_at_period_end && (
           <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => setStep('buy')}>
             Start my paid plan now
@@ -539,6 +635,42 @@ export function BillingManage() {
                 {step === 'offer' ? 'No thanks, cancel my subscription' : 'Cancel my subscription'}
               </button>
               <button type="button" className="bl-link" onClick={() => setStep('view')}>Go back</button>
+            </div>
+          </div>
+        </div>
+        <Sidebar />
+      </div>
+    );
+
+  if (step === 'change')
+    return (
+      <div className="bl-layout">
+        <div className="bl-main">
+          <ChangePlan
+            s={s}
+            busy={busy}
+            error={error}
+            onBack={() => setStep('view')}
+            onConfirm={async (choice) => {
+              const r = await act('change', choice);
+              if (r) setStep('changed');
+            }}
+          />
+        </div>
+        <Sidebar />
+      </div>
+    );
+
+  if (step === 'changed')
+    return (
+      <div className="bl-layout">
+        <div className="bl-main">
+          <div className="bl-card bl-done">
+            <p className="eyebrow">Plan updated</p>
+            <h2 className="bl-title">Done. Your plan is now {s.users} users, billed {s.plan === 'yearly' ? 'yearly' : 'monthly'}.</h2>
+            <p>Any charge for today is in your billing history. Your team can add the new users in SubTrade right away.</p>
+            <div className="bl-actions">
+              <button type="button" className="btn btn-primary" onClick={() => setStep('view')}>Back to my subscription</button>
             </div>
           </div>
         </div>

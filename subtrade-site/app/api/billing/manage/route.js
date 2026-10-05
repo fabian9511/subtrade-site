@@ -11,6 +11,7 @@ import {
   listInvoices,
   consumeLinkNonce,
   startPaidNow,
+  changePlan,
   REASONS,
 } from '../../../../lib/billing';
 
@@ -21,6 +22,7 @@ import {
  *           "cancel" → cancel at the end of the paid period (reason, comment)
  *           "undo"   → undo a cancellation
  *           "start"  → end the free trial now and start the paid plan
+ *           "change" → change users / monthly→yearly (users, plan)
  *           "card"   → Stripe's secure page to change the card
  */
 export async function POST(req) {
@@ -60,6 +62,12 @@ export async function POST(req) {
       const r = await acceptOffer(sub, { reason, comment });
       if (!r.ok) return NextResponse.json(r, { status: 409 });
       return NextResponse.json({ ...r, summary: summarize((await loadFromToken(body.token)) || sub) });
+    }
+    case 'change': {
+      const r = await changePlan(sub, { users: body.users, plan: body.plan });
+      if (!r.ok) return NextResponse.json(r, { status: 409 });
+      const fresh = (await loadFromToken(body.token)) || sub;
+      return NextResponse.json({ ...r, summary: summarize(fresh), invoices: await listInvoices(fresh) });
     }
     case 'start': {
       const r = await startPaidNow(sub);
