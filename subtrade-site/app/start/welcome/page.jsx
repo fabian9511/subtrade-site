@@ -18,7 +18,7 @@ export default function Welcome() {
         <p className="eyebrow">You&rsquo;re in</p>
         <h1 className="display fx-result-title">Your 14-day free trial has started</h1>
         <p className="fx-result-sub">
-          Nothing was charged today. You&rsquo;re also registered for SubTrade onboarding: step-by-step tutorials and a
+          Nothing was charged today. You&rsquo;re also registered for SubTrade onboarding: step-by-step tutorial emails over the next two weeks and a
           free setup session with our team, so your first job is running before the trial ends.
         </p>
 
