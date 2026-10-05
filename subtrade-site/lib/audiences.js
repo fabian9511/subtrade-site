@@ -57,13 +57,22 @@ const optedOut = (c) => c.dnd === true || c.dndSettings?.Email?.status === 'acti
 
 /* ---------------- GoHighLevel ---------------- */
 
+// The plain contact list, not /contacts/search: search shows tag changes
+// late, which made every run redo the same contacts.
 async function allContacts() {
   const out = [];
+  let after = null;
   for (let page = 1; page <= 200; page++) {
-    const r = await ghl('/contacts/search', 'POST', { locationId: LOCATION_ID, page, pageLimit: 100 });
+    const q = new URLSearchParams({ locationId: LOCATION_ID, limit: '100' });
+    if (after) {
+      q.set('startAfter', String(after.startAfter));
+      q.set('startAfterId', after.startAfterId);
+    }
+    const r = await ghl(`/contacts/?${q}`, 'GET');
     const list = r?.contacts || [];
     out.push(...list);
-    if (list.length < 100) break;
+    if (list.length < 100 || !r?.meta?.startAfterId) break;
+    after = { startAfter: r.meta.startAfter, startAfterId: r.meta.startAfterId };
   }
   return out;
 }
