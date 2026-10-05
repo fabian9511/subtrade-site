@@ -201,7 +201,7 @@ export async function listInvoices(sub) {
 // Override with BILLING_ALERT_EMAILS / BILLING_ALERT_PHONES (comma-separated).
 const ALERT_EMAILS = (process.env.BILLING_ALERT_EMAILS || 'info@qualitygypsum.ca,cvargas024@gmail.com')
   .split(',').map((x) => x.trim()).filter(Boolean);
-const ALERT_PHONES = (process.env.BILLING_ALERT_PHONES || '+14038092908')
+const ALERT_PHONES = (process.env.BILLING_ALERT_PHONES || '+14038092908,+14033053853')
   .split(',').map((x) => x.trim()).filter(Boolean);
 
 async function alertTeam(sub, { title, action, details = [] }) {
