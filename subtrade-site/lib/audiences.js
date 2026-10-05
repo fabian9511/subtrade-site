@@ -126,6 +126,13 @@ async function syncListTags(contacts, listTag, deadline) {
     const stale = have.filter((t) => t !== want);
     if (want && (!have.includes(want) || stale.length)) todo.push({ id: c.id, want, stale, add: !have.includes(want) });
   }
+  // Random order: GHL search shows new tags a few minutes late, so a fixed
+  // order would redo the same contacts on back-to-back runs. Re-adding a tag
+  // is harmless.
+  for (let i = todo.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [todo[i], todo[j]] = [todo[j], todo[i]];
+  }
   const counts = {};
   let done = 0;
   for (let i = 0; i < todo.length; i += 6) {
