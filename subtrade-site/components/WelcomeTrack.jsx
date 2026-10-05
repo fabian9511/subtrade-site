@@ -28,7 +28,13 @@ export default function WelcomeTrack() {
           keepalive: true,
         })
           .then((r) => r.json())
-          .then((d) => d?.signup && window.dispatchEvent(new CustomEvent('subtrade:signup', { detail: d.signup })))
+          .then((d) => {
+            if (!d?.signup) return;
+            window.dispatchEvent(new CustomEvent('subtrade:signup', { detail: d.signup }));
+            try {
+              if (d.signup.email) localStorage.setItem('subtrade-billing-email', d.signup.email);
+            } catch {}
+          })
           .catch(() => {});
       }
       sessionStorage.removeItem('subtrade-start-funnel');

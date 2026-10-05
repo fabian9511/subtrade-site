@@ -18,6 +18,8 @@ const REASONS = [
   ['other', 'Something else'],
 ];
 
+export const EMAIL_KEY = 'subtrade-billing-email';
+
 const money = (n) => `$${Number(n).toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 /* ---------- /billing/ : ask for the email link ---------- */
@@ -28,6 +30,18 @@ export function BillingRequest() {
   const [error, setError] = useState('');
   const [previewLink, setPreviewLink] = useState('');
 
+  // Fill the email in for them: ?email= in the link, else the one they used
+  // last time on this device (saved after checkout or a previous request).
+  useEffect(() => {
+    let e = new URLSearchParams(window.location.search).get('email') || '';
+    if (!e) {
+      try {
+        e = localStorage.getItem(EMAIL_KEY) || '';
+      } catch {}
+    }
+    if (e) setEmail(e.trim().toLowerCase());
+  }, []);
+
   async function submit(e) {
     e.preventDefault();
     setBusy(true);
@@ -35,6 +49,9 @@ export function BillingRequest() {
     const r = await post('/api/billing/link/', { email });
     setBusy(false);
     if (r.ok) {
+      try {
+        localStorage.setItem(EMAIL_KEY, email.trim().toLowerCase());
+      } catch {}
       setMsg(r.message);
       if (r.previewLink) setPreviewLink(r.previewLink);
     } else setError(r.error || 'Something went wrong. Please try again.');
@@ -57,7 +74,7 @@ export function BillingRequest() {
         <form onSubmit={submit}>
           <label className="fx-field">
             <span>Email you subscribed with</span>
-            <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" name="email" id="bl-email" required autoComplete="email" inputMode="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </label>
           {error && <p className="fx-error" role="alert">{error}</p>}
           <button type="submit" className="btn btn-primary btn-lg fx-submit" disabled={busy}>
