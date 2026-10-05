@@ -199,6 +199,9 @@ a:focus-visible, button:focus-visible {
 }
 .hs-cap { position: absolute; left: 0; bottom: 14px; max-width: 62%; margin: 0; }
 .hs-stats { margin-top: 56px; }
+.hs-solo { padding: 0; }
+.hs-solo .hs-main { margin-right: 0; }
+.hs-solo .hs-cap { position: static; max-width: none; margin-top: 14px; }
 @media (max-width: 960px) {
   .hs-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .hs-main { margin-right: 0; }

@@ -54,7 +54,7 @@ export default function RichFeature({ f }) {
       {sh && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(shortSchema) }} />
       )}
-      {sh && v ? (
+      {v && (sh || r.videoHero) ? (
         <section className="hero hero-fv">
           <div className="wrap">
             <div className="hs-grid">
@@ -71,13 +71,15 @@ export default function RichFeature({ f }) {
                 </div>
                 <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
               </div>
-              <div className="hs-media">
+              <div className={sh ? 'hs-media' : 'hs-media hs-solo'}>
                 <div className="hs-main">
                   <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} parts={v.parts} />
                 </div>
-                <div className="hs-short">
-                  <VideoEmbed id={sh.id} title={sh.title} poster={sh.poster} posterAlt={sh.posterAlt} ratio="9 / 16" />
-                </div>
+                {sh && (
+                  <div className="hs-short">
+                    <VideoEmbed id={sh.id} title={sh.title} poster={sh.poster} posterAlt={sh.posterAlt} ratio="9 / 16" />
+                  </div>
+                )}
                 <p className="hero-note hs-cap">{v.caption}</p>
               </div>
             </div>

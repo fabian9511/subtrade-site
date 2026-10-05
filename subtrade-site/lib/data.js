@@ -28,6 +28,19 @@ export const features = [
         ['Auto', 'Photos & logs stream in'],
         ['1 tap', 'Into any project'],
       ],
+      videoHero: true,
+      video: {
+        id: 'qhFLBtlU6KI',
+        caption: 'Every job on one screen in 38 seconds: what needs you now, the live site map and today\'s crew.',
+        title: 'SubTrade Project Overview: Every Job on One Screen',
+        description:
+          'A walkthrough of the SubTrade overview: every active project on one screen, the Right Now list of overdue RFIs, tasks and hazards, the live site map with workers on each job, and today\'s crew status and 7-day schedule.',
+        poster: '/subtrade-field-operations-video-poster.webp',
+        posterAlt:
+          'Play the SubTrade overview walkthrough: the live command center with the site map and a project popup under the words every job, one screen',
+        uploadDate: '2026-10-04',
+        duration: 'PT38S',
+      },
       sections: [
         {
           eyebrow: 'The command center',
