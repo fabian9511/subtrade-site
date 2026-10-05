@@ -222,7 +222,8 @@ async function alertTeam(subIn, { title, action, details = [] }) {
   const phone = m.phone || c.phone || '—';
   const a = c.address || {};
   const address = [a.line1, a.line2, a.city, a.state, a.postal_code, a.country].filter(Boolean).join(', ') || '—';
-  const taxIds = (c.tax_ids?.data || []).map((t) => `${t.type.replace(/_/g, ' ').toUpperCase()} ${t.value}`).join(', ') || '—';
+  const TAX_LABEL = { ca_gst_hst: 'GST/HST', ca_qst: 'QST', ca_pst_bc: 'BC PST', ca_pst_sk: 'SK PST', ca_pst_mb: 'MB RST', ca_bn: 'Business no.' };
+  const taxIds = (c.tax_ids?.data || []).map((t) => `${TAX_LABEL[t.type] || t.type.replace(/_/g, ' ').toUpperCase()} ${t.value}`).join(', ') || '—';
   const per = s.interval === 'year' ? 'year' : 'month';
   const amount = s.amount != null ? `$${(s.save_offer_used ? s.amount * 0.8 : s.amount).toFixed(2)} CAD + tax / ${per}${s.save_offer_used ? ' (20% stay discount)' : ''}` : '—';
   const status = s.cancel_at_period_end ? `Cancelling — access until ${s.ends_on}` : s.trial ? `Free trial — first charge ${s.next_date}` : s.status === 'past_due' ? 'Payment overdue' : `Active — next charge ${s.next_date}`;
