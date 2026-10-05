@@ -53,6 +53,7 @@ export default function Welcome() {
 
         <p className="fx-fine" style={{ marginTop: 36 }}>
           Questions at any point? Email <a href="mailto:support@subtradesoftware.com">support@subtradesoftware.com</a>.
+          To see your plan, update your card or cancel, go to <a href="/billing/">subtradesoftware.com/billing</a>.
           See our <a href="/fair-billing-policy/">Fair Billing Policy</a>.
         </p>
       </div>

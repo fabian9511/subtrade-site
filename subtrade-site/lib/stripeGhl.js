@@ -4,7 +4,7 @@
 // Needs STRIPE_SECRET_KEY and GHL_PRIVATE_TOKEN in Vercel.
 
 const GHL = 'https://services.leadconnectorhq.com';
-const LOCATION_ID = process.env.GHL_LOCATION_ID || 'tvaEDkrxBWUrDUqzetBb';
+export const LOCATION_ID = process.env.GHL_LOCATION_ID || 'tvaEDkrxBWUrDUqzetBb';
 const PIPELINE_ID = 'OuxZEd4r0BA8PEreH5n6'; // FB Ads Funnel - Fabian
 export const STAGES = {
   trialStarted: '8094972b-1354-4448-a2c5-4bdd0c9cc265',
@@ -26,12 +26,12 @@ export async function stripeGet(path) {
   return res.ok ? res.json() : null;
 }
 
-async function ghl(path, method, body) {
+export async function ghl(path, method, body, version = '2021-07-28') {
   const res = await fetch(`${GHL}${path}`, {
     method,
     headers: {
       Authorization: `Bearer ${process.env.GHL_PRIVATE_TOKEN}`,
-      Version: '2021-07-28',
+      Version: version,
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
