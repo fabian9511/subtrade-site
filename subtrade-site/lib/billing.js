@@ -133,7 +133,27 @@ export function summarize(sub) {
     card: pm?.card ? { brand: pm.card.brand, last4: pm.card.last4, exp: `${pm.card.exp_month}/${String(pm.card.exp_year).slice(-2)}` } : null,
     save_offer_used: hasSaveCoupon(sub),
     offer: SAVE_COUPON.label,
+    trial_start: sub.trial_start || null,
+    trial_end: sub.trial_end || null,
+    email: sub.customer?.email || null,
+    company: sub.metadata?.company || sub.customer?.name || null,
   };
+}
+
+// Last invoices for the billing history (Stripe-hosted invoice/receipt links).
+export async function listInvoices(sub) {
+  const customer = sub.customer?.id || sub.customer;
+  const r = await stripe(`invoices?customer=${customer}&limit=6`);
+  return (r?.data || [])
+    .filter((i) => i.status !== 'draft')
+    .map((i) => ({
+      id: i.id,
+      number: i.number,
+      date: day(i.created),
+      total: i.total / 100,
+      status: i.status === 'paid' ? (i.total === 0 ? 'Free trial' : 'Paid') : i.status === 'open' ? 'Due' : i.status,
+      url: i.hosted_invoice_url || null,
+    }));
 }
 
 /* ---------------- actions ---------------- */

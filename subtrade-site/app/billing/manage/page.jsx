@@ -9,7 +9,8 @@ export const metadata = {
 export default function BillingManagePage() {
   return (
     <section className="section fx-result">
-      <div className="wrap bl-wrap">
+      <div className="wrap bl-wide">
+        <p className="eyebrow">Your account</p>
         <h1 className="display fx-result-title">Your SubTrade subscription</h1>
         <BillingManage />
       </div>

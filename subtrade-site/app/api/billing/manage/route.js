@@ -8,6 +8,7 @@ import {
   cancelAtPeriodEnd,
   undoCancel,
   cardUpdateUrl,
+  listInvoices,
   REASONS,
 } from '../../../../lib/billing';
 
@@ -42,7 +43,7 @@ export async function POST(req) {
       const p = readToken(body.token);
       // Swap the 30-minute email token for a 60-minute page token.
       const token = p.step === 'email' ? signToken({ sub: p.sub, cus: p.cus, step: 'page' }, 60) : body.token;
-      return NextResponse.json({ ok: true, token, summary: summarize(sub) });
+      return NextResponse.json({ ok: true, token, summary: summarize(sub), invoices: await listInvoices(sub) });
     }
     case 'save': {
       const r = await acceptOffer(sub, { reason, comment });
