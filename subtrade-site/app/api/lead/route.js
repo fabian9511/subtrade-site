@@ -16,11 +16,18 @@ import { NextResponse } from 'next/server';
 const GHL = 'https://services.leadconnectorhq.com';
 const LOCATION_ID = process.env.GHL_LOCATION_ID || 'tvaEDkrxBWUrDUqzetBb';
 
-// Every funnel lead lands in the "SubTrade Software" pipeline, stage
-// "Fabian FB Leads". Later moves (Demo Booked, No Show, 14-Day Free Trial,
-// Nurture) are done by GoHighLevel workflows, not here.
-const PIPELINE_ID = 'ehpEmBoueE7AcdOXAyP9';
-const STAGE_FB_LEADS = 'c62a57b4-661d-408d-aaa2-c43eabd02f38';
+// "FB Ads Funnel - Fabian" pipeline, used only by this page. The page sets the
+// first stages; GoHighLevel workflows move cards on from there (call booked,
+// no show, won). Won customers are copied into SubTrade Software > Onboarding
+// by a workflow.
+const PIPELINE_ID = 'OuxZEd4r0BA8PEreH5n6';
+const STAGES = {
+  registered: 'ce4b3264-b6fc-4450-adde-5396d0410fe1', // Signed up – no answers
+  qualified: 'c87c14c8-4d34-43c5-a653-e22ae0dcc45d', // Qualified
+  // "Trial path" stage still to be added in GoHighLevel; until then these
+  // leads sit in Qualified and are told apart by the fb-funnel-trial-path tag.
+  trial: process.env.GHL_STAGE_TRIAL_PATH || 'c87c14c8-4d34-43c5-a653-e22ae0dcc45d',
+};
 
 // Existing SubTrade custom fields in GoHighLevel (same ones the old forms used).
 const FIELDS = {
@@ -139,7 +146,8 @@ export async function POST(req) {
         body: JSON.stringify({ tags }),
       }).catch(() => {});
 
-      // One card per lead in Fabian FB Leads (upsert, so no duplicates).
+      // One card per lead in FB Ads Funnel (upsert, so no duplicates; the
+      // second call after the questions moves it on from Signed up).
       const company = clean(body.company);
       await fetch(`${GHL}/opportunities/upsert`, {
         method: 'POST',
@@ -150,7 +158,7 @@ export async function POST(req) {
           contactId: id,
           name: `${firstName} ${clean(body.lastName, 60)}${company ? ` — ${company}` : ''}`.trim(),
           status: 'open',
-          pipelineStageId: STAGE_FB_LEADS,
+          pipelineStageId: STAGES[body.stage] || STAGES.registered,
         }),
       })
         .then((r) => !r.ok && r.text().then((t) => console.error('[lead] opportunity failed', r.status, t.slice(0, 200))))
