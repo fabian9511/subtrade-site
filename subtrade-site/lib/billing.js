@@ -218,7 +218,8 @@ async function alertTeam(sub, { title, action, details = [] }) {
   <ul style="margin:0 0 12px;padding-left:18px">${lines.map((l) => `<li>${l}</li>`).join('')}</ul>
   <p style="margin:0;font-size:12px;color:#6b7280">Sent automatically by subtradesoftware.com/billing.</p></div>`;
   for (const email of ALERT_EMAILS) {
-    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email, tags: ['subtrade-team-alerts'] });
+    // No tags here: tags on /contacts/upsert REPLACE the contact's tags.
+    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email });
     const id = up?.contact?.id;
     if (id) await ghl('/conversations/messages', 'POST', { type: 'Email', contactId: id, subject: `Billing alert: ${title} — ${who}`, html }, '2021-04-15');
   }
