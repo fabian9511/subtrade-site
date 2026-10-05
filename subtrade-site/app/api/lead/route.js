@@ -9,12 +9,21 @@ import { NextResponse } from 'next/server';
  * fills in the answers instead of creating a duplicate.
  *
  * Needs GHL_PRIVATE_TOKEN in the Vercel environment (a GoHighLevel Private
- * Integration token with contacts.write). Without it the funnel still works for
+ * Integration token with contacts.write and opportunities.write). Without it the funnel still works for
  * the visitor, but nothing reaches GoHighLevel — the response says so.
  */
 
 const GHL = 'https://services.leadconnectorhq.com';
 const LOCATION_ID = process.env.GHL_LOCATION_ID || 'tvaEDkrxBWUrDUqzetBb';
+
+// "FB Leads" pipeline. New funnel leads land in Opt In; anyone who says the
+// price doesn't fit goes straight to Long Term Nurture. Every later move
+// (booked, no-show, closed) is done by GoHighLevel workflows, not here.
+const PIPELINE_ID = '3LUh3uJf0lWBoU7XmSr1';
+const STAGE = {
+  optIn: 'd8abc937-55d3-4ec7-a5fb-3d6566d48bac',
+  nurture: 'd5971925-9733-4d53-b42d-87947cd27eaa',
+};
 
 // Existing SubTrade custom fields in GoHighLevel (same ones the old forms used).
 const FIELDS = {
@@ -123,6 +132,23 @@ export async function POST(req) {
         headers,
         body: JSON.stringify({ tags }),
       }).catch(() => {});
+
+      // One card per lead in the FB Leads pipeline (upsert, so no duplicates).
+      const company = clean(body.company);
+      await fetch(`${GHL}/opportunities/upsert`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          locationId: LOCATION_ID,
+          pipelineId: PIPELINE_ID,
+          contactId: id,
+          name: `${firstName} ${clean(body.lastName, 60)}${company ? ` — ${company}` : ''}`.trim(),
+          status: 'open',
+          pipelineStageId: a.price === 'No' ? STAGE.nurture : STAGE.optIn,
+        }),
+      })
+        .then((r) => !r.ok && r.text().then((t) => console.error('[lead] opportunity failed', r.status, t.slice(0, 200))))
+        .catch(() => {});
 
       // After the questions, leave the answers as a note so they read in one place.
       if (body.stage === 'qualified' || body.stage === 'trial') {
