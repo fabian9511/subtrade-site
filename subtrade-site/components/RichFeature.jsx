@@ -162,8 +162,39 @@ export default function RichFeature({ f }) {
                   ))}
                 </div>
               )}
+              {s.motion === 'beforeAfter' && (
+                <div className="tablet tablet-landscape">
+                  <div className="ba" role="img" aria-label={`${s.beforeAlt}. ${s.afterAlt}.`}>
+                    <img src={s.before} alt={s.beforeAlt} loading="lazy" />
+                    <div className="ba-after"><img src={s.after} alt={s.afterAlt} loading="lazy" /></div>
+                    <span className="ba-line" aria-hidden="true"><i /></span>
+                    <span className="ba-tag ba-tag-b" aria-hidden="true">Before</span>
+                    <span className="ba-tag ba-tag-a" aria-hidden="true">After</span>
+                  </div>
+                </div>
+              )}
+              {s.motion === 'markup' && (
+                <div className="tablet tablet-landscape">
+                  <div className="mk">
+                    <img src={s.markupImage} alt={s.imageAlt} loading="lazy" />
+                    <svg viewBox="0 0 1400 1050" aria-hidden="true">
+                      <rect className="mk-rect" x="513" y="235" width="211" height="129" rx="4" pathLength="100" />
+                      <path className="mk-arrow" d="M724 584 L703 404" pathLength="100" />
+                      <path className="mk-head" d="M674 440 L703 400 L736 436" pathLength="100" />
+                      <text className="mk-text" x="752" y="680" textAnchor="middle">Install access panel</text>
+                    </svg>
+                  </div>
+                </div>
+              )}
               {s.metaCard && (
-                <div className="meta-card">
+                <div className={s.metaMap ? 'meta-card meta-live' : 'meta-card'}>
+                  {s.metaMap && (
+                    <div className="meta-map" aria-hidden="true">
+                      <span className="meta-pin"><i /></span>
+                      <em>GPS locked</em>
+                      <b>{s.metaMap}</b>
+                    </div>
+                  )}
                   {s.metaCard.map(([k, v]) => (
                     <div className="meta-row" key={k}>
                       <span>{k}</span>
