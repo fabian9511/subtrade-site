@@ -3391,6 +3391,17 @@ main > section.section { padding: 96px 0; }
   border: 1px solid var(--steel-700); border-radius: 6px; background: var(--steel-900); color: var(--gypsum);
 }
 .fx-field input:focus { outline: 2px solid var(--chalk); outline-offset: 0; border-color: transparent; background: #fff; }
+.fx-consent { display: grid; gap: 10px; margin: 6px 0 14px; }
+.fx-consent-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel-500); margin-top: 4px; }
+.fx-check {
+  display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: start;
+  border: 1px solid var(--steel-700); border-radius: 6px; background: var(--steel-900);
+  padding: 12px 14px; font-size: 13px; line-height: 1.5; color: var(--steel-300); cursor: pointer;
+}
+.fx-check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--chalk); cursor: pointer; }
+.fx-check a { color: var(--chalk); text-decoration: underline; }
+.fx-check:has(input:checked) { border-color: var(--chalk); background: var(--chalk-soft); }
+.fx-req { color: var(--chalk); font-weight: 700; }
 .fx-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .fx-error { color: #b42318; font-size: 14px; margin: 4px 0 10px; }
 .fx-submit { width: 100%; justify-content: center; margin-top: 6px; }

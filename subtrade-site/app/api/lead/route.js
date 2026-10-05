@@ -64,7 +64,7 @@ export async function POST(req) {
   const email = clean(body.email, 160).toLowerCase();
   const firstName = clean(body.firstName, 60);
   const required = [firstName, clean(body.lastName), clean(body.phone), clean(body.company)];
-  if (required.some((v) => !v) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!body.consent?.terms || required.some((v) => !v) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: 'All fields are required' }, { status: 400 });
   }
 
@@ -93,6 +93,12 @@ export async function POST(req) {
   if (body.stage === 'qualified') tags.push('fb-funnel-qualified');
   if (body.stage === 'trial') tags.push('fb-funnel-trial-path');
   if (a.price === 'No') tags.push('fb-price-no');
+  // Consent from the sign-up form. Follow-up texts must only go to people
+  // tagged here (marketing texts need sms-consent-marketing).
+  const consent = body.consent || {};
+  if (consent.terms) tags.push('accepted-terms');
+  if (consent.smsMarketing) tags.push('sms-consent-marketing');
+  if (consent.smsService) tags.push('sms-consent-service');
   software.forEach((t) => tags.push(`uses-${t.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`));
 
   const headers = {
@@ -161,6 +167,7 @@ export async function POST(req) {
           `Uses now: ${software.join(', ') || '-'}`,
           `Wants a system: ${clean(a.timeline) || '-'}`,
           `$299/month fits budget: ${clean(a.price) || '-'}`,
+          `SMS consent: marketing ${consent.smsMarketing ? 'yes' : 'no'}, service ${consent.smsService ? 'yes' : 'no'} (terms accepted ${consent.terms ? 'yes' : 'no'})`,
         ];
         await fetch(`${GHL}/contacts/${id}/notes`, {
           method: 'POST',

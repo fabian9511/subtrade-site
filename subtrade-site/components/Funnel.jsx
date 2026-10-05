@@ -92,6 +92,7 @@ const STORE = 'subtrade-start-funnel';
 export default function Funnel() {
   const [stage, setStage] = useState('register'); // register | questions | result
   const [lead, setLead] = useState({ firstName: '', lastName: '', email: '', phone: '', company: '', website: '' });
+  const [consent, setConsent] = useState({ terms: false, smsMarketing: false, smsService: false });
   const [answers, setAnswers] = useState({});
   const [qi, setQi] = useState(0);
   const [error, setError] = useState('');
@@ -137,8 +138,9 @@ export default function Funnel() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim())) return setError('Please check your email address.');
     if (lead.phone.replace(/\D/g, '').length < 10) return setError('Please add a phone number we can reach you on.');
     if (!lead.company.trim()) return setError('Please add your company name.');
+    if (!consent.terms) return setError('Please agree to the Terms & Conditions and Privacy Policy.');
     setBusy(true);
-    await save({ ...lead, stage: 'registered' });
+    await save({ ...lead, consent: { ...consent, at: new Date().toISOString() }, stage: 'registered' });
     setBusy(false);
     track('track', 'Lead', { content_name: 'SubTrade /start register' });
     setStage('questions');
@@ -159,12 +161,12 @@ export default function Funnel() {
       return;
     }
     const qualified = isQualified(next);
-    save({ ...lead, answers: next, stage: qualified ? 'qualified' : 'trial' });
+    save({ ...lead, consent, answers: next, stage: qualified ? 'qualified' : 'trial' });
     track('track', 'CompleteRegistration', { content_name: 'SubTrade /start questions', status: qualified ? 'qualified' : 'trial' });
     setStage('result');
   }
 
-  if (stage === 'result') return <Result name={lead.firstName} qualified={isQualified(answers)} />;
+  if (stage === 'result') return <Result lead={lead} qualified={isQualified(answers)} />;
 
   return (
     <>
@@ -201,28 +203,40 @@ export default function Funnel() {
                 <h2 className="display fx-card-title">See if SubTrade fits your company</h2>
                 <p className="fx-card-sub">Two minutes. Then watch how it works and grab a time with us.</p>
                 <div className="fx-row">
-                  <Field label="First name" value={lead.firstName} onChange={(v) => setLead({ ...lead, firstName: v })} autoComplete="given-name" />
-                  <Field label="Last name" value={lead.lastName} onChange={(v) => setLead({ ...lead, lastName: v })} autoComplete="family-name" />
+                  <Field label="First name" value={lead.firstName} name="given-name" onChange={(v) => setLead((l) => ({ ...l, firstName: v }))} autoComplete="given-name" />
+                  <Field label="Last name" value={lead.lastName} name="family-name" onChange={(v) => setLead((l) => ({ ...l, lastName: v }))} autoComplete="family-name" />
                 </div>
-                <Field label="Work email" type="email" value={lead.email} onChange={(v) => setLead({ ...lead, email: v })} autoComplete="email" />
-                <Field label="Mobile phone" type="tel" value={lead.phone} onChange={(v) => setLead({ ...lead, phone: v })} autoComplete="tel" />
-                <Field label="Company name" value={lead.company} onChange={(v) => setLead({ ...lead, company: v })} autoComplete="organization" />
+                <Field label="Work email" type="email" value={lead.email} name="email" onChange={(v) => setLead((l) => ({ ...l, email: v }))} autoComplete="email" />
+                <Field label="Mobile phone" type="tel" value={lead.phone} name="tel" onChange={(v) => setLead((l) => ({ ...l, phone: v }))} autoComplete="tel" />
+                <Field label="Company name" value={lead.company} name="organization" onChange={(v) => setLead((l) => ({ ...l, company: v }))} autoComplete="organization" />
                 <input
                   className="fx-hp"
                   tabIndex={-1}
                   autoComplete="off"
                   aria-hidden="true"
                   value={lead.website}
-                  onChange={(e) => setLead({ ...lead, website: e.target.value })}
+                  onChange={(e) => { const v = e.target.value; setLead((l) => ({ ...l, website: v })); }}
                 />
+                <div className="fx-consent">
+                  <Check id="c-terms" checked={consent.terms} onChange={(v) => setConsent((c) => ({ ...c, terms: v }))}>
+                    I agree to the <a href="/terms-and-conditions/" target="_blank" rel="noopener">Terms &amp; Conditions</a> and{' '}
+                    <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> <span className="fx-req">*</span>
+                  </Check>
+                  <p className="fx-consent-label mono">SMS consent (optional)</p>
+                  <Check id="c-sms-mkt" checked={consent.smsMarketing} onChange={(v) => setConsent((c) => ({ ...c, smsMarketing: v }))}>
+                    I consent to receive marketing text messages from SubTrade Software Ltd at the phone number provided.
+                    Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.
+                  </Check>
+                  <Check id="c-sms-svc" checked={consent.smsService} onChange={(v) => setConsent((c) => ({ ...c, smsService: v }))}>
+                    I consent to receive non-marketing text messages from SubTrade Software Ltd about my demo call, onboarding,
+                    service updates and account notifications. Message &amp; data rates may apply. Text HELP for assistance, reply
+                    STOP to opt out.
+                  </Check>
+                </div>
                 {error && <p className="fx-error" role="alert">{error}</p>}
                 <button className="btn btn-primary btn-lg fx-submit" disabled={busy}>
                   {busy ? 'One second…' : 'Continue'}
                 </button>
-                <p className="fx-fine">
-                  By continuing you agree we can call, text or email you about SubTrade. No spam, unsubscribe anytime.
-                  See our <a href="/privacy-policy/">privacy policy</a>.
-                </p>
               </form>
             ) : (
               <div>
@@ -396,17 +410,37 @@ export default function Funnel() {
   );
 }
 
-function Field({ label, type = 'text', value, onChange, autoComplete }) {
+function Check({ id, checked, onChange, children }) {
+  return (
+    <label className="fx-check" htmlFor={id}>
+      <input type="checkbox" id={id} checked={checked} onChange={(e) => onChange(e.target.checked)} />
+      <span>{children}</span>
+    </label>
+  );
+}
+
+function Field({ label, type = 'text', value, onChange, autoComplete, name }) {
   return (
     <label className="fx-field">
       <span>{label}</span>
-      <input type={type} value={value} onChange={(e) => onChange(e.target.value)} autoComplete={autoComplete} required aria-required="true" />
+      <input type={type} name={name} id={`f-${name}`} value={value} onChange={(e) => onChange(e.target.value)} autoComplete={autoComplete} required aria-required="true" />
     </label>
   );
 }
 
 /* ---------- 4. the result: video, then book a call or start the trial ---------- */
-function Result({ name, qualified }) {
+function Result({ lead, qualified }) {
+  const name = lead.firstName;
+  // GoHighLevel's booking widget fills its own form from these.
+  const prefill = new URLSearchParams({
+    first_name: lead.firstName || '',
+    last_name: lead.lastName || '',
+    email: lead.email || '',
+    phone: lead.phone || '',
+    company_name: lead.company || '',
+    organization: lead.company || '',
+    companyName: lead.company || '',
+  }).toString();
   return (
     <section className="section fx-result">
       <div className="wrap" style={{ maxWidth: 900 }}>
@@ -435,7 +469,7 @@ function Result({ name, qualified }) {
             <p className="fx-result-sub">Screen share, your questions, your trade. No pitch deck.</p>
             <div className="fx-booking">
               <iframe
-                src={`https://api.leadconnectorhq.com/widget/booking/${BOOKING_ID}`}
+                src={`https://api.leadconnectorhq.com/widget/booking/${BOOKING_ID}?${prefill}`}
                 id={`${BOOKING_ID}_booking`}
                 title="Book a SubTrade call"
                 scrolling="no"
