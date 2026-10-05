@@ -353,16 +353,19 @@ export async function changePlan(sub, { users, plan }) {
     payment_behavior: 'error_if_incomplete',
   };
   if (!trial && annual && !curAnnual) form.billing_cycle_anchor = 'now'; // yearly starts today
+  // Checkout's inline prices leave the product "inactive", and Stripe won't
+  // attach a new price to an inactive product, so switch it back on (and
+  // rename it to the new plan) first.
+  if (product) {
+    await stripe(`products/${product}`, {
+      method: 'POST',
+      form: { active: 'true', name: `SubTrade · ${usersText} · billed ${annual ? 'yearly (20% off)' : 'monthly'}` },
+    });
+  }
   const r = await stripeTry(`subscriptions/${sub.id}`, form);
   if (r.card) return { ok: false, error: cardMessage(r.data) };
   if (!r.ok) return { ok: false, error: 'Could not change your plan. Please email support@subtradesoftware.com.' };
 
-  if (product) {
-    await stripe(`products/${product}`, {
-      method: 'POST',
-      form: { name: `SubTrade · ${usersText} · billed ${annual ? 'yearly (20% off)' : 'monthly'}` },
-    });
-  }
   const before = `${curUsers || '?'} users, $${fmt((item.price?.unit_amount || 0) / 100)}/${curAnnual ? 'year' : 'month'}`;
   await noteToGhl(sub, {
     tags: [upgrade ? 'plan-upgraded' : 'plan-downgraded', `plan-${annual ? 'yearly' : 'monthly'}`],
