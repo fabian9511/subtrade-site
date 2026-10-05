@@ -17,7 +17,7 @@ export default function Calculator() {
       <p className="eyebrow">SubTrade, complete</p>
       <div className="price-line">
         <span className="mono">${fmt(shown)}</span>
-        <small>/month CAD + GST</small>
+        <small>/month CAD + tax</small>
       </div>
       <p className="price-sub">
         {annual

@@ -38,7 +38,7 @@ export default function WelcomeSummary() {
           Free trial ends <b>{plan.firstCharge}</b>
           <small>first charge that day, then every {plan.annual ? 'year' : 'month'} until you cancel</small>
         </span>
-        <b className="mono">${fmt(plan.charge)}.00 <small>CAD + GST</small></b>
+        <b className="mono">${fmt(plan.charge)}.00 <small>CAD + tax</small></b>
       </div>
       <p className="fx-fine">
         Cancel anytime before {plan.firstCharge} and you pay nothing.

@@ -43,7 +43,7 @@ export async function POST(req) {
   const firstCharge = new Date(Date.now() + TRIAL_DAYS * 864e5).toLocaleDateString('en-CA', {
     month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Edmonton',
   });
-  const money = `CA$${fmt(amount)}.00 plus GST`;
+  const money = `CA$${fmt(amount)}.00 plus applicable taxes`;
   const description = `FREE 14-day trial: you pay $0.00 today. On ${firstCharge} your card is charged ${money} for ${annual ? 'one year' : 'one month'} (${usersText}), then every ${annual ? 'year' : 'month'} until you cancel. Cancel before ${firstCharge} and you pay nothing.`;
   const email = clean(body.email, 160).toLowerCase();
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -87,10 +87,14 @@ export async function POST(req) {
     'custom_text[submit][message]',
     `You pay $0.00 today — your card is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing. By starting your trial you agree to our [Terms & Conditions](https://subtradesoftware.com/terms-and-conditions/) and [Fair Billing Policy](https://subtradesoftware.com/fair-billing-policy/).`,
   );
-  // GST/HST through Stripe Tax: it charges only where a registration is added
-  // in Stripe (Settings → Tax), so GST/HST only. Needs the billing address.
+  // Sales tax through Stripe Tax: it charges only where a registration is added
+  // in Stripe (Settings → Tax → Locations): GST/HST, plus SK/MB/BC/QC once
+  // registered there. Needs the billing address.
   form.set('automatic_tax[enabled]', 'true');
   form.set('billing_address_collection', 'required');
+  // Lets a business enter its GST/HST or QST number (on the invoice; QST
+  // numbers keep Québec sales out of the specified-supplier threshold).
+  form.set('tax_id_collection[enabled]', 'true');
   // Required "I agree to the Terms" tick box (needs the Terms URL in Stripe →
   // Settings → Public details). Stripe keeps the record on the session.
   form.set('consent_collection[terms_of_service]', 'required');
