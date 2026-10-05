@@ -16,14 +16,11 @@ import { NextResponse } from 'next/server';
 const GHL = 'https://services.leadconnectorhq.com';
 const LOCATION_ID = process.env.GHL_LOCATION_ID || 'tvaEDkrxBWUrDUqzetBb';
 
-// "FB Leads" pipeline. New funnel leads land in Opt In; anyone who says the
-// price doesn't fit goes straight to Long Term Nurture. Every later move
-// (booked, no-show, closed) is done by GoHighLevel workflows, not here.
-const PIPELINE_ID = '3LUh3uJf0lWBoU7XmSr1';
-const STAGE = {
-  optIn: 'd8abc937-55d3-4ec7-a5fb-3d6566d48bac',
-  nurture: 'd5971925-9733-4d53-b42d-87947cd27eaa',
-};
+// Every funnel lead lands in the "SubTrade Software" pipeline, stage
+// "Fabian FB Leads". Later moves (Demo Booked, No Show, 14-Day Free Trial,
+// Nurture) are done by GoHighLevel workflows, not here.
+const PIPELINE_ID = 'ehpEmBoueE7AcdOXAyP9';
+const STAGE_FB_LEADS = 'c62a57b4-661d-408d-aaa2-c43eabd02f38';
 
 // Existing SubTrade custom fields in GoHighLevel (same ones the old forms used).
 const FIELDS = {
@@ -142,7 +139,7 @@ export async function POST(req) {
         body: JSON.stringify({ tags }),
       }).catch(() => {});
 
-      // One card per lead in the FB Leads pipeline (upsert, so no duplicates).
+      // One card per lead in Fabian FB Leads (upsert, so no duplicates).
       const company = clean(body.company);
       await fetch(`${GHL}/opportunities/upsert`, {
         method: 'POST',
@@ -153,7 +150,7 @@ export async function POST(req) {
           contactId: id,
           name: `${firstName} ${clean(body.lastName, 60)}${company ? ` — ${company}` : ''}`.trim(),
           status: 'open',
-          pipelineStageId: a.price === 'No' ? STAGE.nurture : STAGE.optIn,
+          pipelineStageId: STAGE_FB_LEADS,
         }),
       })
         .then((r) => !r.ok && r.text().then((t) => console.error('[lead] opportunity failed', r.status, t.slice(0, 200))))
