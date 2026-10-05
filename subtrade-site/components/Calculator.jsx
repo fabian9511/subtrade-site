@@ -2,19 +2,7 @@
 
 import { useState } from 'react';
 
-// Tiered per-user pricing beyond the 5 included users:
-// users 6-15: $15 | 16-25: $10 | 26-29: $7 | 30+: $4
-function monthlyTotal(users) {
-  let total = 299;
-  if (users > 5) total += (Math.min(users, 15) - 5) * 15;
-  if (users > 15) total += (Math.min(users, 25) - 15) * 10;
-  if (users > 25) total += (Math.min(users, 29) - 25) * 7;
-  if (users > 29) total += (users - 29) * 4;
-  return total;
-}
-
-const fmt = (n) =>
-  n.toLocaleString('en-CA', { maximumFractionDigits: 0 });
+import { monthlyTotal, fmt } from '../lib/pricing';
 
 export default function Calculator() {
   const [users, setUsers] = useState(5);

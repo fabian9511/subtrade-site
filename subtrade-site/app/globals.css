@@ -3471,3 +3471,8 @@ main > section.section { padding: 96px 0; }
 .fx-plan.is-on { border-color: var(--chalk); background: var(--chalk-soft); box-shadow: 0 0 0 1px var(--chalk) inset; }
 .fx-trial-terms { margin-bottom: 14px; }
 @media (max-width: 560px) { .fx-plans { grid-template-columns: 1fr; } .fx-trialbox { padding: 18px; } }
+/* /start/ trial box reuses the pricing-page card */
+.fx-trialcard { max-width: 520px; text-align: left; }
+.fx-trialcard .fx-trial-terms { margin-top: 22px; }
+.fx-trialcard .fx-submit { width: 100%; justify-content: center; margin-top: 8px; }
+.fx-trialcard .fx-fine { margin-top: 16px; }

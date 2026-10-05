@@ -1,10 +1,13 @@
 import { NextResponse } from 'next/server';
+import { clampUsers, periodPrice, fmt } from '../../../lib/pricing';
 
 /**
  * Starts a SubTrade 14-day trial with a card on file, for the /start/ funnel.
  *
  * Sends the visitor to Stripe's own hosted checkout page: $0 today, then
- * $299/month or $2,870/year (CAD) when the 14 days are up, unless they cancel.
+ * the pricing-page price for their team size (lib/pricing.js), monthly or
+ * yearly, in CAD, when the 14 days are up, unless they cancel. The amount is
+ * worked out here from the user count, never taken from the browser.
  * The card never touches our site.
  *
  * Needs STRIPE_SECRET_KEY in Vercel (start with a TEST key, sk_test_...).
@@ -15,10 +18,6 @@ import { NextResponse } from 'next/server';
  * and metadata.source = fb-ads-funnel) — see the note sent to Steban.
  */
 
-const PLANS = {
-  monthly: { amount: 29900, interval: 'month', name: 'SubTrade – Monthly (5 users)' },
-  yearly: { amount: 287000, interval: 'year', name: 'SubTrade – Yearly (5 users, save 20%)' },
-};
 const TRIAL_DAYS = 14;
 
 const clean = (v, max = 120) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
@@ -34,8 +33,12 @@ export async function POST(req) {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) return NextResponse.json({ ok: false, configured: false });
 
-  const plan = PLANS[body.plan] ? body.plan : 'monthly';
-  const p = PLANS[plan];
+  const plan = body.plan === 'yearly' ? 'yearly' : 'monthly';
+  const annual = plan === 'yearly';
+  const users = clampUsers(body.users ?? 5);
+  const amount = periodPrice(users, annual); // whole dollars per billing period
+  const priceText = `$${fmt(amount)}/${annual ? 'year' : 'month'}`;
+  const productName = `SubTrade – ${annual ? 'Yearly, save 20%' : 'Monthly'} (${users} ${users === 1 ? 'user' : 'users'})`;
   const email = clean(body.email, 160).toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: 'A valid email is required' }, { status: 400 });
@@ -45,6 +48,8 @@ export async function POST(req) {
   const meta = {
     source: 'fb-ads-funnel',
     plan,
+    users: String(users),
+    price: priceText,
     first_name: clean(body.firstName, 60),
     last_name: clean(body.lastName, 60),
     company: clean(body.company),
@@ -57,9 +62,9 @@ export async function POST(req) {
   form.set('payment_method_collection', 'always');
   form.set('line_items[0][quantity]', '1');
   form.set('line_items[0][price_data][currency]', 'cad');
-  form.set('line_items[0][price_data][unit_amount]', String(p.amount));
-  form.set('line_items[0][price_data][recurring][interval]', p.interval);
-  form.set('line_items[0][price_data][product_data][name]', p.name);
+  form.set('line_items[0][price_data][unit_amount]', String(amount * 100));
+  form.set('line_items[0][price_data][recurring][interval]', annual ? 'year' : 'month');
+  form.set('line_items[0][price_data][product_data][name]', productName);
   form.set('subscription_data[trial_period_days]', String(TRIAL_DAYS));
   // No card at the end of the trial means no subscription, never a surprise bill.
   form.set('subscription_data[trial_settings][end_behavior][missing_payment_method]', 'cancel');
@@ -70,10 +75,10 @@ export async function POST(req) {
   }
   form.set(
     'custom_text[submit][message]',
-    `$0 today. Your card is charged ${p.interval === 'month' ? '$299/month' : '$2,870/year'} CAD after the ${TRIAL_DAYS}-day trial. Cancel anytime before then and you pay nothing.`,
+    `$0 today. Your card is charged ${priceText} CAD after the ${TRIAL_DAYS}-day trial. Cancel anytime before then and you pay nothing.`,
   );
   if (process.env.STRIPE_AUTOMATIC_TAX === '1') form.set('automatic_tax[enabled]', 'true');
-  form.set('success_url', `${origin}/start/welcome/?plan=${plan}`);
+  form.set('success_url', `${origin}/start/welcome/?plan=${plan}&users=${users}`);
   form.set('cancel_url', `${origin}/start/`);
 
   try {

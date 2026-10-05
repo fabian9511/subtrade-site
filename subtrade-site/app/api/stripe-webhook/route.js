@@ -117,7 +117,7 @@ export async function POST(req) {
         leaveWorkflows: true,
         note: [
           'Trial started with a card (Stripe, from subtradesoftware.com/start/)',
-          `Plan: ${plan === 'yearly' ? '$2,870/year' : '$299/month'} CAD`,
+          `Plan: ${obj.metadata.price || (plan === 'yearly' ? '$2,870/year' : '$299/month')} CAD, ${obj.metadata.users || 5} users`,
           `First charge: ${day(sub?.trial_end)}`,
           `Stripe customer: ${obj.customer} · subscription: ${obj.subscription}`,
           'Next: make sure they created their login at portal.subtradesoftware.com/signup with this email.',

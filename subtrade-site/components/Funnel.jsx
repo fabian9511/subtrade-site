@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
+import { BASE, INCLUDED_USERS, MIN_USERS, MAX_USERS, periodPrice, shownMonthly, fmt } from '../lib/pricing';
 
 /**
  * The Facebook-ads funnel on /start/:
@@ -515,23 +516,30 @@ function Result({ lead, qualified }) {
 }
 
 /* ---------- 14-day trial with a card on file (Stripe checkout) ---------- */
+// Same look and numbers as the pricing page calculator (lib/pricing.js).
 function TrialBox({ lead }) {
-  const [plan, setPlan] = useState('monthly');
+  const [annual, setAnnual] = useState(false);
+  const [users, setUsers] = useState(INCLUDED_USERS);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const firstCharge = new Date(Date.now() + 14 * 864e5).toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' });
-  const price = plan === 'yearly' ? '$2,870/year' : '$299/month';
+  const plan = annual ? 'yearly' : 'monthly';
+  const shown = shownMonthly(users, annual);
+  const charge = periodPrice(users, annual);
+  const chargeText = `$${fmt(charge)}/${annual ? 'year' : 'month'}`;
+  const extra = users - INCLUDED_USERS;
 
   async function start() {
     setBusy(true);
     setError('');
-    track('track', 'InitiateCheckout', { value: plan === 'yearly' ? 2870 : 299, currency: 'CAD' });
+    track('track', 'InitiateCheckout', { value: charge, currency: 'CAD', num_items: users });
     try {
       const res = await fetch('/api/checkout/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           plan,
+          users,
           email: lead.email,
           firstName: lead.firstName,
           lastName: lead.lastName,
@@ -550,28 +558,51 @@ function TrialBox({ lead }) {
   }
 
   return (
-    <div className="fx-trialbox">
-      <div className="fx-plans" role="radiogroup" aria-label="Choose a plan">
-        <button type="button" role="radio" aria-checked={plan === 'monthly'} className={`fx-plan${plan === 'monthly' ? ' is-on' : ''}`} onClick={() => setPlan('monthly')}>
-          <b>Monthly</b>
-          <span>$299/month</span>
-          <small>5 users included</small>
-        </button>
-        <button type="button" role="radio" aria-checked={plan === 'yearly'} className={`fx-plan${plan === 'yearly' ? ' is-on' : ''}`} onClick={() => setPlan('yearly')}>
-          <b>Yearly <em>save 20%</em></b>
-          <span>$2,870/year</span>
-          <small>5 users included</small>
-        </button>
+    <div className="price-card fx-trialcard">
+      <p className="eyebrow">SubTrade, complete</p>
+      <div className="price-line">
+        <span className="mono">${fmt(shown)}</span>
+        <small>/month CAD</small>
       </div>
-      <ul className="fx-ticks fx-trial-terms">
-        <li><b>$0 today.</b> The full platform for 14 days.</li>
-        <li>Your card is charged <b>{price} CAD</b> on <b>{firstCharge}</b>.</li>
-        <li>Cancel anytime before then and you pay nothing.</li>
-      </ul>
-      {error && <p className="fx-error" role="alert">{error}</p>}
-      <button type="button" className="btn btn-primary btn-lg fx-submit" onClick={start} disabled={busy}>
-        {busy ? 'Opening secure checkout…' : 'Start my free trial'}
-      </button>
+      <p className="price-sub">
+        {annual ? `Billed annually at $${fmt(charge)}/yr (20% off)` : 'Billed monthly. Switch to annual and save 20%.'}
+      </p>
+
+      <div className="toggle" role="group" aria-label="Billing period">
+        <button type="button" className={annual ? '' : 'on'} aria-pressed={!annual} onClick={() => setAnnual(false)}>Monthly</button>
+        <button type="button" className={annual ? 'on' : ''} aria-pressed={annual} onClick={() => setAnnual(true)}>Annual −20%</button>
+      </div>
+
+      <div className="calc">
+        <label htmlFor="fx-users">
+          Team size: <b className="mono" style={{ color: 'var(--gypsum)' }}>{users} {users === 1 ? 'user' : 'users'}</b>
+          {users <= INCLUDED_USERS && ' (included in base)'}
+        </label>
+        <input id="fx-users" type="range" min={MIN_USERS} max={MAX_USERS} value={users} onChange={(e) => setUsers(Number(e.target.value))} />
+        <div className="calc-readout">
+          <span className="mono">${fmt(shown)}/mo</span>
+          <small>
+            {extra > 0
+              ? `base $${annual ? fmt(Math.round(BASE * 0.8)) : BASE} + ${extra} extra ${extra === 1 ? 'user' : 'users'}`
+              : `${INCLUDED_USERS} users included`}
+          </small>
+        </div>
+
+        <ul className="fx-ticks fx-trial-terms">
+          <li><b>$0 today.</b> The full platform for 14 days.</li>
+          <li>Your card is charged <b>{chargeText} CAD</b> on <b>{firstCharge}</b>.</li>
+          <li>Cancel anytime before then and you pay nothing.</li>
+        </ul>
+        {error && <p className="fx-error" role="alert">{error}</p>}
+        <button type="button" className="btn btn-primary btn-lg fx-submit" onClick={start} disabled={busy}>
+          {busy ? 'Opening secure checkout…' : 'Start free trial'}
+        </button>
+        <div className="tiers">
+          Base plan <span className="mono">${BASE}</span> includes {INCLUDED_USERS} users, then per user:
+          <br />
+          users 6–15 <span className="mono">$15</span> · 16–25 <span className="mono">$10</span> · 26–29 <span className="mono">$7</span> · 30+ <span className="mono">$4</span>
+        </div>
+      </div>
       <p className="fx-fine">Secure checkout by Stripe. Your card details never touch our site. See our <a href="/fair-billing-policy/">Fair Billing Policy</a>.</p>
     </div>
   );
