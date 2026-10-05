@@ -335,10 +335,10 @@ export default function Funnel() {
             {[
               ['/subtrade-gps-time-tracking-clock-in.webp', 'GPS time tracking', 'Crews clock in on site from their phone. Time sheets and job costs fill themselves in.', 'Worker clocking in on a jobsite with GPS time tracking in the SubTrade app'],
               ['/subtrade-change-order-from-the-field.webp', 'Change orders', 'Write it up and get it signed on the spot, with photos, before the extra work starts.', 'Foreman creating a change order from the field in SubTrade'],
-              ['/subtrade-schedule-of-values-progress-billing.webp', 'Progress billing', 'Schedule of values, holdback and approved change orders, rolled into the claim for you.', 'SubTrade progress billing screen with schedule of values and holdback'],
+              ['/subcontractor-filling-out-aia-g702-g703-pay-application.webp', 'Progress billing', 'Schedule of values, holdback and approved change orders, rolled into the claim for you.', 'Subcontractor at his desk building a progress claim on a laptop, calculator and hard hat beside him'],
               ['/subtrade-crew-scheduling-jobsite.webp', 'Crew scheduling', 'See who is on which job this week and move people around in seconds.', 'Crew scheduling across jobsites in SubTrade'],
               ['/subtrade-daily-log-foreman-end-of-day.webp', 'Daily logs & photos', 'GPS-tagged photos and daily logs filed to the right job, ready when there is a dispute.', 'Foreman filing an end-of-day daily log in SubTrade'],
-              ['/subtrade-dashboard-job-costing.webp', 'Job costing', 'Budget against actual on every job while it is still running, not after it is over.', 'SubTrade job costing dashboard showing budget versus actual'],
+              ['/ppe-tracking-hardhats-vests-gang-box-jobsite.webp', 'Forms & safety', 'FLHAs, toolbox talks and inspections filled out and signed on the phone, filed to the job automatically.', 'Hard hats, safety vests, glasses and a harness on a jobsite gang box while a worker fills out a safety form on his phone'],
             ].map(([src, title, text, alt]) => (
               <article key={title} className="fx-feature">
                 <img src={src} alt={alt} loading="lazy" />
