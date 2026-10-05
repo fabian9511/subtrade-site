@@ -200,6 +200,15 @@ export default function Funnel() {
   // Pick up where they left off after a refresh.
   useEffect(() => {
     try {
+      // Test shortcut, preview links only: /start/?skip jumps straight to the
+      // last screen without registering (optional &email=...&name=...).
+      // Never on subtradesoftware.com, so real visitors always register.
+      const q = new URLSearchParams(window.location.search);
+      if (q.has('skip') && !/(^|\.)subtradesoftware\.com$/.test(window.location.hostname)) {
+        setLead((l) => ({ ...l, firstName: q.get('name') || 'Tester', email: q.get('email') || '', company: 'TEST' }));
+        setStage('result');
+        return;
+      }
       const s = JSON.parse(sessionStorage.getItem(STORE) || 'null');
       if (s?.stage) {
         setStage(s.stage);

@@ -46,7 +46,7 @@ export async function POST(req) {
   const money = `CA$${fmt(amount)}.00`;
   const description = `FREE 14-day trial: you pay $0.00 today. On ${firstCharge} your card is charged ${money} for ${annual ? 'one year' : 'one month'} (${usersText}), then every ${annual ? 'year' : 'month'} until you cancel. Cancel before ${firstCharge} and you pay nothing.`;
   const email = clean(body.email, 160).toLowerCase();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: 'A valid email is required' }, { status: 400 });
   }
 
@@ -64,7 +64,7 @@ export async function POST(req) {
 
   const form = new URLSearchParams();
   form.set('mode', 'subscription');
-  form.set('customer_email', email);
+  if (email) form.set('customer_email', email); // else Stripe asks for it
   form.set('payment_method_collection', 'always');
   form.set('line_items[0][quantity]', '1');
   form.set('line_items[0][price_data][currency]', 'cad');
@@ -86,7 +86,7 @@ export async function POST(req) {
     `You pay $0.00 today — your card is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing.`,
   );
   if (process.env.STRIPE_AUTOMATIC_TAX === '1') form.set('automatic_tax[enabled]', 'true');
-  form.set('success_url', `${origin}/start/welcome/?plan=${plan}&users=${users}`);
+  form.set('success_url', `${origin}/start/welcome/?plan=${plan}&users=${users}&session_id={CHECKOUT_SESSION_ID}`);
   form.set('cancel_url', `${origin}/start/`);
 
   try {
