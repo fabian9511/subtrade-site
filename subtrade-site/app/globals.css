@@ -3500,6 +3500,7 @@ main > section.section { padding: 96px 0; }
 .fx-result-title { font-size: clamp(38px, 6vw, 64px); margin: 18px 0 12px; }
 .fx-result-sub { color: var(--steel-400); font-size: 18px; margin-bottom: 26px; max-width: 640px; }
 .fx-vsl { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; background: #0b1220; display: block; box-shadow: 0 24px 60px rgba(0,0,0,0.25); }
+.fx-hero-video { margin: 4px 0 24px; }
 .fx-book-title { font-size: clamp(30px, 4.5vw, 46px); margin: 60px 0 8px; }
 .fx-booking { border: 1px solid var(--steel-700); border-radius: 8px; overflow: hidden; background: #fff; }
 .fx-booking iframe { width: 100%; min-height: 720px; border: 0; display: block; }

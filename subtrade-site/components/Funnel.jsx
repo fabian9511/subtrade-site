@@ -288,6 +288,14 @@ export default function Funnel() {
               <br />
               <em>One app.</em>
             </h1>
+            <video
+              className="fx-vsl fx-hero-video"
+              src="/vsl/subtrade-start-hero.mp4"
+              poster="/vsl/subtrade-start-hero-poster.webp"
+              controls
+              playsInline
+              preload="metadata"
+            />
             <p className="lede">
               Time tracking, scheduling, change orders, daily logs, safety forms and progress billing, all in one
               place. Your crews use it on site, you see everything from the office, and nothing gets lost in a truck.
