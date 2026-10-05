@@ -241,14 +241,7 @@ export async function emailLink(email, link) {
   const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email });
   const id = up?.contact?.id;
   if (!id) return false;
-  const html = `
-<div style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#15181c;max-width:520px">
-  <p>Hi,</p>
-  <p>Here is your secure link to manage your SubTrade subscription. It works for 30 minutes.</p>
-  <p><a href="${link}" style="display:inline-block;background:#e8542b;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 22px;border-radius:4px">Manage my subscription</a></p>
-  <p style="font-size:13px;color:#585d64">If you didn't ask for this, you can ignore this email. Nothing changes unless you use the link.</p>
-  <p style="font-size:13px;color:#585d64">SubTrade Software Ltd · Calgary, Alberta · support@subtradesoftware.com</p>
-</div>`;
+  const html = billingEmailHtml(link);
   const sent = await ghl(
     '/conversations/messages',
     'POST',
@@ -256,4 +249,63 @@ export async function emailLink(email, link) {
     '2021-04-15',
   );
   return !!sent;
+}
+
+// Branded like SubTrade's product emails (navy header + logo, orange band,
+// Barlow, navy footer). Styles are inline so Gmail and Outlook keep them.
+// Transactional (the person asked for it), so no unsubscribe link.
+const LOGO = 'https://assets.cdn.filesafe.space/tvaEDkrxBWUrDUqzetBb/media/69d663795075bef1bf313b01.png';
+function billingEmailHtml(link) {
+  const font = "font-family:'Barlow',Arial,Helvetica,sans-serif;";
+  const cond = "font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;";
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your SubTrade billing link</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;800&display=swap');
+@media only screen and (max-width:600px){.px{padding-left:20px!important;padding-right:20px!important}.h1{font-size:32px!important}}</style></head>
+<body style="margin:0;padding:0;background:#e8edf3;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8edf3;"><tr><td align="center" style="padding:40px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:640px;background:#ffffff;border-radius:14px;overflow:hidden;">
+  <tr><td align="center" class="px" style="background:#0A1628;padding:30px 48px 26px;">
+    <img src="${LOGO}" alt="SubTrade Software" width="150" style="display:block;width:150px;max-width:150px;height:auto;border:0;">
+    <p style="${font}margin:8px 0 0;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Built for Subcontractors</p>
+  </td></tr>
+  <tr><td align="center" class="px" style="background:#E8732A;background-image:linear-gradient(135deg,#E8732A 0%,#c95e1a 100%);padding:34px 48px 30px;">
+    <span style="${font}display:inline-block;background:rgba(255,255,255,0.2);color:#ffffff;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px;">&#128274; Account &middot; Billing</span>
+    <h1 class="h1" style="${cond}margin:0 0 10px;font-size:42px;line-height:1.05;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#ffffff;">Manage your<br>subscription</h1>
+    <p style="${font}margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.88);">Your secure link is ready. It works for 30 minutes.</p>
+  </td></tr>
+  <tr><td class="px" style="padding:36px 48px 0;">
+    <p style="${font}margin:0 0 14px;font-size:16px;font-weight:600;color:#0A1628;">Hi there &#128075;</p>
+    <p style="${font}margin:0 0 20px;font-size:15px;line-height:1.75;color:#374151;">You asked to manage your SubTrade subscription. Use the button below to see your plan and next charge, update your card, or make changes.</p>
+  </td></tr>
+  <tr><td align="center" class="px" style="padding:8px 48px 32px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" bgcolor="#E8732A" style="border-radius:6px;background:#E8732A;">
+      <a href="${link}" target="_blank" style="${cond}display:inline-block;padding:16px 44px;font-size:17px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;">Manage my subscription</a>
+    </td></tr></table>
+    <p style="${font}margin:12px 0 0;font-size:11px;color:#9ca3af;">For your security this link expires in 30 minutes. You can always ask for a new one at subtradesoftware.com/billing</p>
+  </td></tr>
+  <tr><td class="px" style="padding:0 48px;"><div style="height:1px;background:#e8ecf0;line-height:1px;font-size:1px;">&nbsp;</div></td></tr>
+  <tr><td class="px" style="padding:26px 48px 30px;">
+    <p style="${font}margin:0;font-size:14px;line-height:1.75;color:#374151;">Didn't ask for this? You can ignore this email. Nothing changes unless you use the link.</p>
+    <p style="${font}margin:14px 0 0;font-size:14px;line-height:1.75;color:#374151;">&#128172; Questions about your bill? Just reply. It comes straight to us, not a ticket queue.</p>
+    <p style="${font}margin:18px 0 2px;font-size:14px;font-weight:700;color:#0A1628;">The SubTrade Team</p>
+    <p style="${font}margin:0;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#E8732A;">SubTrade Software Ltd.</p>
+  </td></tr>
+  <tr><td align="center" style="background:#0A1628;padding:28px 48px 8px;">
+    <img src="${LOGO}" alt="SubTrade Software" width="120" style="display:block;width:120px;max-width:120px;height:auto;border:0;margin:0 auto;">
+  </td></tr>
+  <tr><td align="center" style="background:#0A1628;padding:4px 48px 10px;">
+    <p style="${font}margin:0;font-size:11px;line-height:1.7;color:rgba(255,255,255,0.35);">Calgary, Alberta, Canada<br>You are receiving this because someone asked for a billing link for this email address.</p>
+  </td></tr>
+  <tr><td align="center" style="background:#0A1628;padding:10px 48px 8px;">
+    <a href="https://subtradesoftware.com/fair-billing-policy/" style="${font}font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:underline;">Fair Billing Policy</a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="https://subtradesoftware.com/privacy-policy/" style="${font}font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:underline;">Privacy Policy</a>
+  </td></tr>
+  <tr><td align="center" style="background:#0A1628;padding:4px 48px 24px;">
+    <p style="${font}margin:0;font-size:10px;color:rgba(255,255,255,0.25);">&copy; ${new Date().getFullYear()} SubTrade Software Ltd. All Rights Reserved.</p>
+  </td></tr>
+</table>
+</td></tr></table>
+</body></html>`;
 }
