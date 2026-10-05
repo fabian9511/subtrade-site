@@ -170,6 +170,18 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
   const left = s.period_start && s.period_end ? Math.max(0, Math.min(1, (s.period_end - now) / (s.period_end - s.period_start))) : 1;
   let today = 0;
   if (!s.trial && up) today = switching ? Math.max(0, newPrice - curPrice * left) : (newPrice - curPrice) * left;
+  const daysTotal = s.period_start && s.period_end ? Math.round((s.period_end - s.period_start) / 86400) : null;
+  const daysLeft = daysTotal != null ? Math.max(0, Math.round(daysTotal * left)) : null;
+  const credit = curPrice * left;
+  const todayLine = same
+    ? null
+    : s.trial
+      ? `Today: ${money(0)}. Nothing is charged during your free trial. First charge on ${s.next_date}: ${money(newPrice)} + tax.`
+      : switching
+        ? `Today: ${money(newPrice)} yearly price − ${money(credit)} credit for the ${daysLeft ?? 'unused'} unused days of this month = ≈ ${money(today)} + tax.`
+        : up
+          ? `Today: ${money(newPrice - curPrice)} difference × ${daysLeft ?? '?'} of ${daysTotal ?? '?'} days left this ${curAnnual ? 'year' : 'month'} = ≈ ${money(today)} + tax.`
+          : `Today: ${money(0)}. From ${s.next_date}: ${money(newPrice)} + tax per ${per}.`;
 
   return (
     <div className="bl-card">
@@ -224,6 +236,8 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
                 : `Your new lower price of ${money(newPrice)} + tax starts on ${s.next_date}. No refund for the current ${curAnnual ? 'year' : 'month'}, as in our Fair Billing Policy.`}
         </p>
       )}
+
+      {todayLine && <p className="bl-today">{todayLine}</p>}
 
       {!same && (
         <details className="pb-details">
