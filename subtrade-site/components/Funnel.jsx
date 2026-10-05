@@ -596,14 +596,13 @@ function Result({ lead, qualified }) {
         <h1 className="display fx-result-title">
           {name ? `Thanks, ${name}. ` : ''}Watch this first
         </h1>
-        <p className="fx-result-sub">See how SubTrade runs a job from clock-in to progress claim.</p>
-        <video
-          className="fx-vsl"
-          src="/vsl/subtrade-why.mp4"
-          poster="/vsl/subtrade-why-poster.webp"
-          controls
-          playsInline
-          preload="metadata"
+        <p className="fx-result-sub">Why we built SubTrade, in one minute, from the people who built it.</p>
+        <VideoEmbed
+          id="VTlRMWheLpQ"
+          title="Why we built SubTrade"
+          poster="/vsl/subtrade-cofounder-poster.webp"
+          posterAlt="Fabian Vargas, SubTrade co-founder, on why he and Steban Vargas built SubTrade"
+          bakedPlay
         />
       </div>
 
