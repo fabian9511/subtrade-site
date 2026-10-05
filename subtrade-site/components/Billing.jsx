@@ -226,6 +226,7 @@ export function BillingManage() {
       return null;
     }
     if (r.summary) setS(r.summary);
+    if (r.invoices) setInvoices(r.invoices);
     return r;
   }
 
@@ -328,6 +329,11 @@ export function BillingManage() {
         >
           Update card
         </button>
+        {s.trial && !s.cancel_at_period_end && (
+          <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => setStep('buy')}>
+            Start my paid plan now
+          </button>
+        )}
         {s.cancel_at_period_end ? (
           <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => act('undo')}>
             Keep my subscription
@@ -472,9 +478,15 @@ export function BillingManage() {
                   </div>
                 )}
                 <p>
-                  {s.trial
-                    ? `Keep your trial. When your paid plan starts on ${s.next_date}, you pay 20% less for your first 12 months.`
-                    : 'The discount starts with your next charge and lasts 12 months. Same plan, same users, nothing else changes.'}
+                  {s.trial ? (
+                    <>
+                      Your plan starts today with 20% off for 12 months. Your free trial ends now and{' '}
+                      <b>{s.amount != null ? `${money(s.amount * 0.8)} + tax` : 'your first discounted payment'}</b> is charged to your card today,
+                      then every {per}.
+                    </>
+                  ) : (
+                    'The discount starts with your next charge and lasts 12 months. Same plan, same users, nothing else changes.'
+                  )}
                 </p>
                 {s.users && (
                   <details className="pb-details">
@@ -488,10 +500,15 @@ export function BillingManage() {
                   disabled={busy}
                   onClick={async () => {
                     const r = await act('save');
-                    if (r) setStep(r.manual ? 'saved-manual' : 'saved');
+                    if (r) setStep(r.manual ? 'saved-manual' : r.charged ? 'started' : 'saved');
+                    if (r?.charged) act('view');
                   }}
                 >
-                  {busy ? 'Applying…' : s.amount != null ? `Keep SubTrade and save ${money(per === 'year' ? s.amount * 0.2 : s.amount * 0.2 * 12)}` : 'Yes, keep SubTrade with 20% off'}
+                  {busy
+                    ? 'Applying…'
+                    : s.amount != null
+                      ? `${s.trial ? 'Start my plan today and save' : 'Keep SubTrade and save'} ${money(per === 'year' ? s.amount * 0.2 : s.amount * 0.2 * 12)}`
+                      : 'Yes, keep SubTrade with 20% off'}
                 </button>
               </div>
             )}
@@ -522,6 +539,67 @@ export function BillingManage() {
                 {step === 'offer' ? 'No thanks, cancel my subscription' : 'Cancel my subscription'}
               </button>
               <button type="button" className="bl-link" onClick={() => setStep('view')}>Go back</button>
+            </div>
+          </div>
+        </div>
+        <Sidebar />
+      </div>
+    );
+
+  if (step === 'buy') {
+    const due = s.amount != null ? (s.save_offer_used ? s.amount * 0.8 : s.amount) : null;
+    return (
+      <div className="bl-layout">
+        <div className="bl-main">
+          <div className="bl-card">
+            <p className="eyebrow">Start your paid plan</p>
+            <h2 className="bl-title">Ready to go? End your free trial and start today.</h2>
+            <p>
+              Your trial ends now and {due != null ? <b>{money(due)} + tax</b> : 'your first payment'} is charged to your{' '}
+              {s.card ? `${s.card.brand.toUpperCase()} ending ${s.card.last4}` : 'card on file'} today. After that you&rsquo;re billed every {per} on
+              this date. Same plan, same users, nothing else changes.
+            </p>
+            {s.users && (
+              <details className="pb-details" open>
+                <summary>What you&rsquo;ll pay, line by line</summary>
+                <PriceBreakdown users={s.users} annual={s.interval === 'year'} saveOffer={s.save_offer_used} compact />
+              </details>
+            )}
+            {error && <p className="fx-error" role="alert">{error}</p>}
+            <div className="bl-actions">
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled={busy}
+                onClick={async () => {
+                  if (await act('start')) {
+                    setStep('started');
+                    act('view'); // refresh billing history with today's charge
+                  }
+                }}
+              >
+                {busy ? 'Starting…' : due != null ? `Charge ${money(due)} + tax and start now` : 'Start my plan now'}
+              </button>
+              <button type="button" className="bl-link" onClick={() => setStep('view')}>Not yet, keep my trial</button>
+            </div>
+          </div>
+        </div>
+        <Sidebar />
+      </div>
+    );
+  }
+
+  if (step === 'started')
+    return (
+      <div className="bl-layout">
+        <div className="bl-main">
+          <div className="bl-card bl-done">
+            <p className="eyebrow">You&rsquo;re all set</p>
+            <h2 className="bl-title">Your paid plan has started. Welcome to SubTrade.</h2>
+            <p>Your first payment was charged today. You&rsquo;ll find the receipt under Billing history on your subscription page. Thanks for building with us.</p>
+            <div className="bl-actions">
+              <a href="/construction-software-15min-demo/" className="btn btn-primary">Book a setup session</a>
+              <button type="button" className="bl-link" onClick={() => setStep('view')}>Back to my subscription</button>
             </div>
           </div>
         </div>

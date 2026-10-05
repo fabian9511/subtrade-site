@@ -6,7 +6,7 @@
 // Nothing is changed without a valid token.
 
 import crypto from 'node:crypto';
-import { ghl, LOCATION_ID, toGhl } from './stripeGhl';
+import { ghl, LOCATION_ID, toGhl, STAGES } from './stripeGhl';
 
 const STRIPE = 'https://api.stripe.com/v1';
 const LIVE_STATUSES = ['trialing', 'active', 'past_due'];
@@ -39,6 +39,25 @@ async function stripe(path, { method = 'GET', form } = {}) {
   if (!res.ok) console.error('[billing] stripe', method, path, res.status, data?.error?.message);
   return res.ok ? data : null;
 }
+
+// Same as stripe() but keeps Stripe's error (e.g. a declined card).
+async function stripeTry(path, form) {
+  const res = await fetch(`${STRIPE}/${path}`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(form),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) console.error('[billing] stripe POST', path, res.status, data?.error?.message);
+  return { ok: res.ok, data, card: data?.error?.type === 'card_error' };
+}
+
+const cardMessage = (data) =>
+  `Your card was declined${data?.error?.decline_code ? ` (${data.error.decline_code.replace(/_/g, ' ')})` : ''}. Nothing was charged and nothing changed. Update your card and try again.`;
+
+// Ending a trial now: Stripe charges the first period immediately; if the card
+// fails, Stripe rejects the change and the trial carries on untouched.
+const END_TRIAL_NOW = { trial_end: 'now', payment_behavior: 'error_if_incomplete', proration_behavior: 'none' };
 
 // The customer's current subscription (newest live one), with card and discount.
 export async function findSubscription(email) {
@@ -173,10 +192,10 @@ export async function listInvoices(sub) {
 
 /* ---------------- actions ---------------- */
 
-async function noteToGhl(sub, { tags, note, task }) {
+async function noteToGhl(sub, { tags, note, task, stage, status }) {
   const email = (sub.customer?.email || '').toLowerCase();
   if (!email || !process.env.GHL_PRIVATE_TOKEN) return;
-  const r = await toGhl({ email, meta: sub.metadata || {}, tags, note });
+  const r = await toGhl({ email, meta: sub.metadata || {}, tags, note, stage, status });
   if (task && r?.ok) {
     const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email });
     const id = up?.contact?.id;
@@ -223,19 +242,40 @@ Comment: ${comment}` : ''}`,
     return { ok: true, manual: true };
   };
   if (!coupon) return fallback('coupon not available');
-  const updated = await stripe(`subscriptions/${sub.id}`, {
-    method: 'POST',
-    form: {
-      'discounts[0][coupon]': coupon,
-      cancel_at_period_end: 'false',
-      'metadata[save_offer]': 'accepted',
-      'metadata[save_reason]': reason || '',
-    },
+  // During the free trial, taking the offer starts the paid plan now: the
+  // trial ends and the first (discounted) period is charged today.
+  const trial = sub.status === 'trialing';
+  const r = await stripeTry(`subscriptions/${sub.id}`, {
+    'discounts[0][coupon]': coupon,
+    cancel_at_period_end: 'false',
+    'metadata[save_offer]': 'accepted',
+    'metadata[save_reason]': reason || '',
+    ...(trial ? END_TRIAL_NOW : {}),
   });
-  if (!updated) return fallback('subscription update failed');
+  if (r.card) return { ok: false, error: cardMessage(r.data) };
+  if (!r.ok) return fallback('subscription update failed');
+  const why = `Reason: ${REASONS[reason] || reason || '-'}${comment ? `\nComment: ${comment}` : ''}`;
   await noteToGhl(sub, {
-    tags: ['save-offer-accepted'],
-    note: `Tried to cancel, took the save offer (${SAVE_COUPON.label}).\nReason: ${REASONS[reason] || reason || '-'}${comment ? `\nComment: ${comment}` : ''}`,
+    tags: trial ? ['save-offer-accepted', 'paying-customer'] : ['save-offer-accepted'],
+    note: trial
+      ? `Tried to cancel during the trial, took the save offer (${SAVE_COUPON.label}). Trial ended and the first discounted charge was taken today.\n${why}`
+      : `Tried to cancel, took the save offer (${SAVE_COUPON.label}).\n${why}`,
+    ...(trial ? { stage: STAGES.won, status: 'won' } : {}),
+  });
+  return { ok: true, charged: trial };
+}
+
+// "Start my paid plan now" during the free trial: full price, charged today.
+export async function startPaidNow(sub) {
+  if (sub.status !== 'trialing') return { ok: false, error: 'Your paid plan is already running.' };
+  const r = await stripeTry(`subscriptions/${sub.id}`, { ...END_TRIAL_NOW, cancel_at_period_end: 'false', 'metadata[started_early]': 'website' });
+  if (r.card) return { ok: false, error: cardMessage(r.data) };
+  if (!r.ok) return { ok: false, error: 'Could not start your plan. Please email support@subtradesoftware.com.' };
+  await noteToGhl(sub, {
+    tags: ['paying-customer', 'started-early'],
+    note: 'Ended the free trial early on the website and started the paid plan. First charge taken today.',
+    stage: STAGES.won,
+    status: 'won',
   });
   return { ok: true };
 }
