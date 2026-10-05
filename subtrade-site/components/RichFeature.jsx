@@ -54,47 +54,74 @@ export default function RichFeature({ f }) {
       {sh && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(shortSchema) }} />
       )}
-      <section className="hero">
-        <div className="wrap hero-inner" style={{ maxWidth: 900 }}>
-          <p className="eyebrow">{f.name} · SubTrade feature</p>
-          <h1 className="display" style={{ fontSize: 'clamp(44px,7vw,84px)' }}>
-            {r.heroTitle[0]}
-            <br />
-            <em>{r.heroTitle[1]}</em>
-          </h1>
-          <p className="lede">{r.heroSub}</p>
-          <div className="stat-strip">
-            {r.stats.map(([big, small]) => (
-              <div className="stat" key={big}>
-                <b>{big}</b>
-                <span>{small}</span>
+      {sh && v ? (
+        <section className="hero hero-fv">
+          <div className="wrap">
+            <div className="hs-grid">
+              <div className="hs-copy">
+                <p className="eyebrow">{f.name} · SubTrade feature</p>
+                <h1 className="display hs-title">
+                  {r.heroTitle[0]}
+                  <br />
+                  <em>{r.heroTitle[1]}</em>
+                </h1>
+                <p className="lede">{r.heroSub}</p>
+                <div className="hero-ctas">
+                  <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
+                </div>
+                <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
               </div>
-            ))}
-          </div>
-          <div className="hero-ctas" style={{ marginTop: 34 }}>
-            <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
-          </div>
-          <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
-          {v && !sh && (
-            <div style={{ marginTop: 44 }}>
-              <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} parts={v.parts} />
-              <p className="hero-note" style={{ marginTop: 14 }}>{v.caption}</p>
+              <div className="hs-media">
+                <div className="hs-main">
+                  <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} parts={v.parts} />
+                </div>
+                <div className="hs-short">
+                  <VideoEmbed id={sh.id} title={sh.title} poster={sh.poster} posterAlt={sh.posterAlt} ratio="9 / 16" />
+                </div>
+                <p className="hero-note hs-cap">{v.caption}</p>
+              </div>
             </div>
-          )}
-          {v && sh && (
-            <div className="video-pair">
-              <div>
+            <div className="stat-strip hs-stats">
+              {r.stats.map(([big, small]) => (
+                <div className="stat" key={big}>
+                  <b>{big}</b>
+                  <span>{small}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : (
+      <section className="hero">
+          <div className="wrap hero-inner" style={{ maxWidth: 900 }}>
+            <p className="eyebrow">{f.name} · SubTrade feature</p>
+            <h1 className="display" style={{ fontSize: 'clamp(44px,7vw,84px)' }}>
+              {r.heroTitle[0]}
+              <br />
+              <em>{r.heroTitle[1]}</em>
+            </h1>
+            <p className="lede">{r.heroSub}</p>
+            <div className="stat-strip">
+              {r.stats.map(([big, small]) => (
+                <div className="stat" key={big}>
+                  <b>{big}</b>
+                  <span>{small}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hero-ctas" style={{ marginTop: 34 }}>
+              <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
+            </div>
+            <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
+            {v && (
+              <div style={{ marginTop: 44 }}>
                 <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} parts={v.parts} />
                 <p className="hero-note" style={{ marginTop: 14 }}>{v.caption}</p>
               </div>
-              <div className="video-pair-short">
-                <VideoEmbed id={sh.id} title={sh.title} poster={sh.poster} posterAlt={sh.posterAlt} ratio="9 / 16" />
-                <p className="hero-note" style={{ marginTop: 14 }}>{sh.caption}</p>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+            )}
+          </div>
+        </section>
+      )}
 
       {r.sections.map((s, i) => (
         <section className="section" key={s.title}>

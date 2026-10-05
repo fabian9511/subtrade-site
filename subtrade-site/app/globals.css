@@ -175,18 +175,38 @@ a:focus-visible, button:focus-visible {
 .hero.hero-photo .lede { color: #c3c9d2; }
 .hero.hero-photo .hero-note { color: #8a93a0; }
 
-/* Main video with a vertical YouTube Short beside it (feature pages) */
-.video-pair {
-  margin-top: 44px;
+/* Video hero: copy left, video right with a Short over its corner (feature pages with a Short) */
+.hero-fv { padding: 72px 0 70px; }
+.hs-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 220px);
-  gap: 22px;
-  align-items: start;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 56px;
+  align-items: center;
 }
-@media (max-width: 760px) {
-  .video-pair { grid-template-columns: minmax(0, 1fr); }
-  .video-pair-short { max-width: 280px; margin: 0 auto; width: 100%; }
+.hs-title { font-size: clamp(40px, 5.2vw, 72px); }
+.hs-copy .lede { margin-bottom: 30px; }
+.hs-media { position: relative; padding: 0 0 70px 0; }
+.hs-main { margin-right: 120px; }
+.hs-short {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 27%;
+  max-width: 180px;
+  border-radius: 16px;
+  box-shadow: 0 0 0 5px #fff, 0 30px 60px rgba(0, 0, 0, 0.32);
+  transform: rotate(3deg);
 }
+.hs-cap { position: absolute; left: 0; bottom: 14px; max-width: 62%; margin: 0; }
+.hs-stats { margin-top: 56px; }
+@media (max-width: 960px) {
+  .hs-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .hs-main { margin-right: 0; }
+  .hs-media { padding: 0; }
+  .hs-short { position: relative; width: 48%; max-width: 200px; margin: 28px auto 0; transform: none; }
+  .hs-cap { position: static; max-width: none; margin-top: 14px; }
+}
+
 .hero.hero-photo h1 em { color: #ff8a5c; }
 .hero.hero-photo .eyebrow { color: #ff8a5c; }
 .hero.hero-photo .eyebrow::before { background: #ff8a5c; }
