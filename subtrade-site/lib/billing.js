@@ -75,10 +75,9 @@ export async function findSubscription(email) {
 }
 
 async function getSub(subId) {
-  const base = `subscriptions/${subId}?expand[]=default_payment_method&expand[]=customer&expand[]=discounts&expand[]=items.data.price.product`;
-  // The schedule needs "Subscription schedules" permission on the key; never
-  // let a missing permission break the billing page.
-  return (await stripe(`${base}&expand[]=schedule`)) || stripe(base);
+  return stripe(
+    `subscriptions/${subId}?expand[]=default_payment_method&expand[]=customer&expand[]=discounts&expand[]=items.data.price.product`,
+  );
 }
 
 async function ensureCoupon() {
@@ -189,7 +188,6 @@ export function summarize(sub) {
     offer: SAVE_COUPON.label,
     period_start: sub.current_period_start || item?.current_period_start || null,
     period_end: periodEnd(sub) || null,
-    pending: pendingSwitch(sub),
     trial_start: sub.trial_start || null,
     trial_end: sub.trial_end || null,
     email: sub.customer?.email || null,
@@ -416,7 +414,7 @@ export async function changePlan(sub, { users, plan }) {
   const annual = plan === 'yearly';
   const u = clampUsers(users);
   if (Number(users) > MAX_USERS) return { ok: false, error: `For more than ${MAX_USERS} users, email support@subtradesoftware.com and we'll set it up.` };
-  if (curAnnual && !annual) return scheduleMonthly(sub, u);
+  if (curAnnual && !annual) return { ok: false, error: 'Switching from yearly to monthly happens at your renewal. Email support@subtradesoftware.com and we will set it up.' };
   if (u === curUsers && annual === curAnnual) return { ok: false, error: 'That is already your plan.' };
 
   const amount = periodPrice(u, annual);
@@ -731,82 +729,4 @@ function paymentFailedEmail(email, amount, retry) {
   </td></tr>
 </table></td></tr></table></body></html>`;
   return { subject: "Your SubTrade payment didn't go through", html };
-}
-
-
-/* ---------------- yearly -> monthly at renewal (subscription schedule) ---------------- */
-// Needs "Subscription schedules: Write" on the Stripe key.
-
-function pendingSwitch(sub) {
-  const sch = sub.schedule && typeof sub.schedule === 'object' ? sub.schedule : null;
-  const next = sch?.phases?.[1];
-  if (!next || sch.status !== 'active' || next.start_date * 1000 < Date.now()) return null;
-  const it = next.items?.[0] || {};
-  const amount = it.price_data?.unit_amount ?? null;
-  return {
-    date: day(next.start_date),
-    interval: it.price_data?.recurring?.interval || 'month',
-    users: Number(next.metadata?.users) || null,
-    amount: amount != null ? amount / 100 : null,
-  };
-}
-
-async function scheduleMonthly(sub, users) {
-  const item = sub.items?.data?.[0];
-  const product = await ensurePlanProduct();
-  if (!product) return { ok: false, error: 'Could not schedule the switch. Please email support@subtradesoftware.com.' };
-  let schedule = typeof sub.schedule === 'object' ? sub.schedule : sub.schedule ? await stripe(`subscription_schedules/${sub.schedule}`) : null;
-  if (!schedule) schedule = await stripe('subscription_schedules', { method: 'POST', form: { from_subscription: sub.id } });
-  if (!schedule?.phases?.length) {
-    return { ok: false, error: 'Could not schedule the switch. Please email support@subtradesoftware.com.' };
-  }
-  const cur = schedule.phases[0];
-  const monthly = periodPrice(users, false);
-  const usersText = `${users} ${users === 1 ? 'user' : 'users'}`;
-  const meta = { ...(sub.metadata || {}), users: String(users), plan: 'monthly', price: `$${fmt(monthly)}/month` };
-  delete meta.billing_link;
-
-  const form = {
-    end_behavior: 'release',
-    proration_behavior: 'none',
-    'phases[0][start_date]': String(cur.start_date),
-    'phases[0][end_date]': String(cur.end_date),
-    'phases[0][items][0][price]': item.price.id,
-    'phases[0][items][0][quantity]': '1',
-    'phases[1][items][0][price_data][currency]': 'cad',
-    'phases[1][items][0][price_data][product]': product,
-    'phases[1][items][0][price_data][unit_amount]': String(monthly * 100),
-    'phases[1][items][0][price_data][recurring][interval]': 'month',
-    'phases[1][items][0][price_data][tax_behavior]': 'exclusive',
-    'phases[1][items][0][quantity]': '1',
-    'phases[1][automatic_tax][enabled]': sub.automatic_tax?.enabled ? 'true' : 'false',
-  };
-  for (const [k, v] of Object.entries(meta)) if (v) form[`phases[1][metadata][${k}]`] = String(v);
-  const r = await stripeTry(`subscription_schedules/${schedule.id}`, form);
-  if (!r.ok) {
-    return { ok: false, error: /permission|restricted/i.test(r.data?.error?.message || '')
-      ? 'Switching to monthly is not switched on yet. Please email support@subtradesoftware.com.'
-      : 'Could not schedule the switch. Please email support@subtradesoftware.com.' };
-  }
-  const when = day(cur.end_date);
-  await noteToGhl(sub, {
-    tags: ['switch-to-monthly-scheduled'],
-    note: `Scheduled on the website: yearly → monthly on ${when}, ${usersText}, $${fmt(monthly)}/month CAD.`,
-  });
-  await alertTeam(sub, {
-    title: `Switching to monthly on ${when}`,
-    action: `On ${when}, set their SubTrade account to monthly${Number(sub.metadata?.users) !== users ? ` with ${users} users (now ${sub.metadata?.users || '?'})` : ''}. Nothing to do before then.`,
-    details: [`From ${when}: ${usersText}, $${fmt(monthly)}/month CAD`, 'Yearly plan stays until then, no refund'],
-  });
-  return { ok: true, scheduled: true };
-}
-
-export async function undoSwitch(sub) {
-  const id = typeof sub.schedule === 'object' ? sub.schedule?.id : sub.schedule;
-  if (!id) return { ok: false, error: 'There is no switch scheduled.' };
-  const r = await stripeTry(`subscription_schedules/${id}/release`, {});
-  if (!r.ok) return { ok: false, error: 'Could not undo the switch. Please email support@subtradesoftware.com.' };
-  await noteToGhl(sub, { tags: ['switch-to-monthly-cancelled'], note: 'Cancelled the scheduled switch to monthly. Stays on yearly.' });
-  await alertTeam(sub, { title: 'Cancelled the switch to monthly', action: 'No change needed. They stay on yearly.' });
-  return { ok: true };
 }
