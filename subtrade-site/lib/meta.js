@@ -35,7 +35,10 @@ export function userData({ email, firstName, lastName, city, state, zip, country
 // sends the same event with the same eventID.
 export async function sendMetaEvent({ name, eventId, user, value, currency = 'CAD', url, extra = {} }) {
   const token = process.env.META_CAPI_TOKEN;
-  if (!token) return { ok: false, reason: 'not configured' };
+  if (!token) {
+    console.log('[meta] skipped', name, '(no META_CAPI_TOKEN)');
+    return { ok: false, reason: 'not configured' };
+  }
   const body = {
     data: [
       {
@@ -58,6 +61,7 @@ export async function sendMetaEvent({ name, eventId, user, value, currency = 'CA
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) console.error('[meta] event failed', name, res.status, data?.error?.message);
+    else console.log('[meta] sent', name, eventId, 'received:', data?.events_received, data?.fbtrace_id || '');
     return { ok: res.ok };
   } catch (err) {
     console.error('[meta] unreachable', err?.message);
