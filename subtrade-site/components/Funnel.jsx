@@ -497,16 +497,13 @@ function Result({ lead, qualified }) {
               />
             </div>
             <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
-            <p className="fx-fine" style={{ textAlign: 'center' }}>
-              Rather just try it? <a href={SIGNUP}>Start the free trial</a>.
-            </p>
+            <h2 className="display fx-book-title">Or skip the call and start now</h2>
+            <TrialBox lead={lead} />
           </>
         ) : (
           <div className="fx-trial">
-            <a href={SIGNUP} className="btn btn-primary btn-lg" onClick={() => track('track', 'StartTrial')}>
-              Start my free trial
-            </a>
-            <p className="fx-fine">Full platform, cancel anytime during the trial and pay nothing.</p>
+            <h2 className="display fx-book-title">Start your 14-day free trial</h2>
+            <TrialBox lead={lead} />
             <p className="fx-fine">
               Want to talk it through first? <a href="/construction-software-15min-demo/">Book a 15-minute call</a>.
             </p>
@@ -514,5 +511,68 @@ function Result({ lead, qualified }) {
         )}
       </div>
     </section>
+  );
+}
+
+/* ---------- 14-day trial with a card on file (Stripe checkout) ---------- */
+function TrialBox({ lead }) {
+  const [plan, setPlan] = useState('monthly');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const firstCharge = new Date(Date.now() + 14 * 864e5).toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' });
+  const price = plan === 'yearly' ? '$2,870/year' : '$299/month';
+
+  async function start() {
+    setBusy(true);
+    setError('');
+    track('track', 'InitiateCheckout', { value: plan === 'yearly' ? 2870 : 299, currency: 'CAD' });
+    try {
+      const res = await fetch('/api/checkout/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          plan,
+          email: lead.email,
+          firstName: lead.firstName,
+          lastName: lead.lastName,
+          company: lead.company,
+          phone: lead.phone ? phoneE164(lead.phone) : '',
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (data.url) return window.location.assign(data.url);
+      if (data.configured === false) return window.location.assign(SIGNUP);
+      setError('Checkout did not open. Please try again, or email support@subtradesoftware.com.');
+    } catch {
+      setError('Checkout did not open. Check your connection and try again.');
+    }
+    setBusy(false);
+  }
+
+  return (
+    <div className="fx-trialbox">
+      <div className="fx-plans" role="radiogroup" aria-label="Choose a plan">
+        <button type="button" role="radio" aria-checked={plan === 'monthly'} className={`fx-plan${plan === 'monthly' ? ' is-on' : ''}`} onClick={() => setPlan('monthly')}>
+          <b>Monthly</b>
+          <span>$299/month</span>
+          <small>5 users included</small>
+        </button>
+        <button type="button" role="radio" aria-checked={plan === 'yearly'} className={`fx-plan${plan === 'yearly' ? ' is-on' : ''}`} onClick={() => setPlan('yearly')}>
+          <b>Yearly <em>save 20%</em></b>
+          <span>$2,870/year</span>
+          <small>5 users included</small>
+        </button>
+      </div>
+      <ul className="fx-ticks fx-trial-terms">
+        <li><b>$0 today.</b> The full platform for 14 days.</li>
+        <li>Your card is charged <b>{price} CAD</b> on <b>{firstCharge}</b>.</li>
+        <li>Cancel anytime before then and you pay nothing.</li>
+      </ul>
+      {error && <p className="fx-error" role="alert">{error}</p>}
+      <button type="button" className="btn btn-primary btn-lg fx-submit" onClick={start} disabled={busy}>
+        {busy ? 'Opening secure checkout…' : 'Start my free trial'}
+      </button>
+      <p className="fx-fine">Secure checkout by Stripe. Your card details never touch our site. See our <a href="/fair-billing-policy/">Fair Billing Policy</a>.</p>
+    </div>
   );
 }
