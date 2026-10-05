@@ -3367,6 +3367,7 @@ main > section.section { padding: 96px 0; }
 .fx-hero p.lede { margin-bottom: 24px; }
 .fx-ticks { list-style: none; display: grid; gap: 10px; margin-bottom: 8px; }
 .fx-ticks li { position: relative; padding-left: 30px; color: var(--steel-300); }
+.fx-ticks b { color: var(--gypsum); font-weight: 600; }
 .fx-ticks li::before {
   content: ""; position: absolute; left: 2px; top: 7px; width: 14px; height: 8px;
   border-left: 2.5px solid var(--chalk); border-bottom: 2.5px solid var(--chalk);

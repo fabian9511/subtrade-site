@@ -4,13 +4,13 @@ import Funnel from '../../components/Funnel';
 // search (noindex, not in the sitemap) so it never competes with the organic
 // pages, and so ad-specific copy can change freely.
 export const metadata = {
-  title: 'Run Your Crews, Change Orders and Billing From One App',
+  title: 'Every Job. Every Crew. One App.',
   description:
     'SubTrade is field management software built by a Calgary drywall contractor for subcontractors: GPS time tracking, change orders, progress billing and scheduling in one app. $299/month CAD, 5 users included.',
   alternates: { canonical: '/start/' },
   robots: { index: false, follow: true },
   openGraph: {
-    title: 'SubTrade: run your crews, change orders and billing from one app',
+    title: 'SubTrade: every job, every crew, one app',
     description:
       'Built by a working subcontractor for Canadian trade contractors. See if it fits your company in 2 minutes.',
     url: '/start/',

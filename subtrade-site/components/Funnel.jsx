@@ -187,22 +187,24 @@ export default function Funnel() {
       <section className="hero fx-hero">
         <div className="wrap fx-hero-grid">
           <div>
-            <p className="eyebrow">For subcontractors who run crews</p>
+            <p className="eyebrow">Field management software for subcontractors</p>
             <h1 className="display">
-              Stop chasing paper.
+              Every job. Every crew.
               <br />
-              <em>Get paid for every hour and every extra.</em>
+              <em>One app.</em>
             </h1>
             <p className="lede">
-              SubTrade puts your crews, time sheets, change orders and progress billing in one app, so the
-              hours your guys work and the extras they do actually make it onto the invoice.
+              Time tracking, scheduling, change orders, daily logs, safety forms and progress billing, all in one
+              place. Your crews use it on site, you see everything from the office, and nothing gets lost in a truck.
             </p>
             <ul className="fx-ticks">
-              <li>GPS clock-ins from the phone, time sheets done for you</li>
-              <li>Change orders signed in the field, before the work starts</li>
-              <li>Progress claims with holdback, built from the job</li>
+              <li><b>Know who is working where</b>, live, with GPS clock-ins</li>
+              <li><b>Get every extra signed</b> before the work starts</li>
+              <li><b>Photos, logs and FLHAs</b> filed to the right job automatically</li>
+              <li><b>Progress claims with holdback</b>, built from the field</li>
+              <li><b>$299/month, 5 users,</b> every feature included</li>
             </ul>
-            <p className="hero-note">Built by a Calgary drywall contractor. $299/month CAD, 5 users included.</p>
+            <p className="hero-note">Built by a Calgary drywall contractor, for trade contractors across Canada.</p>
             <button type="button" className="btn btn-primary btn-lg fx-jump" onClick={toForm}>
               See if it fits my company
             </button>
@@ -339,6 +341,12 @@ export default function Funnel() {
               ['/subtrade-crew-scheduling-jobsite.webp', 'Crew scheduling', 'See who is on which job this week and move people around in seconds.', 'Crew scheduling across jobsites in SubTrade'],
               ['/subtrade-daily-log-foreman-end-of-day.webp', 'Daily logs & photos', 'GPS-tagged photos and daily logs filed to the right job, ready when there is a dispute.', 'Foreman filing an end-of-day daily log in SubTrade'],
               ['/ppe-tracking-hardhats-vests-gang-box-jobsite.webp', 'Forms & safety', 'FLHAs, toolbox talks and inspections filled out and signed on the phone, filed to the job automatically.', 'Hard hats, safety vests, glasses and a harness on a jobsite gang box while a worker fills out a safety form on his phone'],
+              ['/prompt-payment-foreman-highrise-goldenhour.webp', 'Field operations', 'One live view of every site: who is clocked in where, photos coming in, and what needs your OK today.', 'Foreman on a high-rise deck at sunrise checking every jobsite on a tablet'],
+              ['/subcontractor-dashboard-software-foreman-tablet.webp', 'Dashboard & job costing', 'Budget against actual on every job while it is still running, not after it is over.', 'Site supervisor in the trailer comparing job costs on a tablet and laptop'],
+              ['/foreman-marking-up-construction-drawings-tablet-jobsite.webp', 'Drawings & markups', 'The latest drawings on every phone and tablet. Mark them up on site so nobody builds off an old set.', 'Foreman marking up construction drawings on a tablet inside a framed building'],
+              ['/sub-trade-foreman-reviewing-software-checklist-jobsite.webp', 'Tasks & punch lists', 'Assign the work, attach photos and close out deficiencies before the GC walks the floor.', 'Foreman checking off a punch list on his phone among steel studs and drywall'],
+              ['/subcontractor-reviewing-lien-paperwork-site-office.webp', 'Submittals & RFIs', 'Send them, track them and keep every answer on the job, so nothing is stuck in someone’s inbox.', 'Subcontractor in a site office reviewing submittal paperwork next to a laptop'],
+              ['/material-cost-increase-steel-copper-jobsite.webp', 'Purchase orders', 'Order material against the job, track what arrived, and see the cost land on the budget.', 'Supervisor checking a material delivery of steel studs and copper wire on a tablet'],
             ].map(([src, title, text, alt]) => (
               <article key={title} className="fx-feature">
                 <img src={src} alt={alt} loading="lazy" />
