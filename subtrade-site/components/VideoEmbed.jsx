@@ -13,7 +13,7 @@ import { useState } from 'react';
  * Styles are inline rather than in globals.css deliberately — this component is
  * self-contained and needs no global classes.
  */
-export default function VideoEmbed({ id, title, poster, posterAlt, parts }) {
+export default function VideoEmbed({ id, title, poster, posterAlt, parts, bakedPlay = false }) {
   const [playing, setPlaying] = useState(false);
   const [hover, setHover] = useState(false);
   // A series (parts) plays in order: after the chosen part, YouTube carries on
@@ -74,7 +74,8 @@ export default function VideoEmbed({ id, title, poster, posterAlt, parts }) {
             loading="lazy"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
-          <span
+          {/* Skip our play button when the poster already has one drawn in. */}
+          {!bakedPlay && <span
             aria-hidden="true"
             style={{
               position: 'absolute',
@@ -102,7 +103,7 @@ export default function VideoEmbed({ id, title, poster, posterAlt, parts }) {
                 borderLeft: '21px solid #fff',
               }}
             />
-          </span>
+          </span>}
         </button>
       )}
     </div>

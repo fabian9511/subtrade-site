@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
 import { BASE, INCLUDED_USERS, MIN_USERS, MAX_USERS, periodPrice, shownMonthly, fmt } from '../lib/pricing';
 import PriceBreakdown from './PriceBreakdown';
+import VideoEmbed from './VideoEmbed';
 
 /**
  * The Facebook-ads funnel on /start/:
@@ -467,19 +468,21 @@ export default function Funnel() {
       {/* ---------- who built it ---------- */}
       <section className="section">
         <div className="wrap fx-split">
-          <img
-            src="/fabian-vargas-garcia-subtrade-cofounder.webp"
-            alt="Fabian Vargas Garcia, SubTrade co-founder and president of a Calgary commercial drywall company"
-            className="fx-photo"
-            loading="lazy"
+          <VideoEmbed
+            id="VTlRMWheLpQ"
+            title="Why we built SubTrade"
+            poster="/vsl/subtrade-cofounder-poster.webp"
+            posterAlt="Fabian Vargas, SubTrade co-founder, on why he and Steban Vargas built SubTrade"
+            bakedPlay
           />
           <div className="section-head" style={{ marginBottom: 0 }}>
             <p className="eyebrow">Built on jobsites, not in boardrooms</p>
             <h2 className="display">Made by a sub, for subs</h2>
             <p>
-              SubTrade was built by Fabian Vargas Garcia, who runs a commercial drywall company in Calgary, after
-              years of using software made for general contractors. It is built around how a subcontractor actually
-              gets paid: hours, extras, and progress claims with holdback.
+              SubTrade was built by Fabian Vargas Garcia, who runs a commercial drywall company in Calgary, and our
+              co-founder Steban Vargas, a senior software developer. Fabian brought the jobsites, Steban built the
+              software, and every feature went on Fabian&apos;s own crews first. It is built around how a
+              subcontractor actually gets paid: hours, extras, and progress claims with holdback.
             </p>
           </div>
         </div>
