@@ -658,6 +658,7 @@ function TrialBox({ lead }) {
   const [users, setUsers] = useState(INCLUDED_USERS);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [existing, setExisting] = useState('');
   const firstCharge = new Date(Date.now() + 14 * 864e5).toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' });
   const plan = annual ? 'yearly' : 'monthly';
   const shown = shownMonthly(users, annual);
@@ -685,6 +686,12 @@ function TrialBox({ lead }) {
       });
       const data = await res.json().catch(() => ({}));
       if (data.url) return window.location.assign(data.url);
+      if (data.existing) {
+        setError('');
+        setExisting(data.billing);
+        setBusy(false);
+        return;
+      }
       if (data.configured === false) return window.location.assign(SIGNUP);
       setError('Checkout did not open. Please try again, or email support@subtradesoftware.com.');
     } catch {
@@ -748,6 +755,12 @@ function TrialBox({ lead }) {
           <li>Your card is saved now, not charged.</li>
         </ul>
         {error && <p className="fx-error" role="alert">{error}</p>}
+        {existing && (
+          <p className="fx-existing" role="alert">
+            You already have a SubTrade subscription with this email, so there&rsquo;s no second free trial.{' '}
+            <a href={existing}>Manage your subscription</a> to add users or change your plan.
+          </p>
+        )}
         <button type="button" className="btn btn-primary btn-lg fx-submit" onClick={start} disabled={busy}>
           {busy ? 'Opening secure checkout…' : 'Start my free trial · $0 today'}
         </button>

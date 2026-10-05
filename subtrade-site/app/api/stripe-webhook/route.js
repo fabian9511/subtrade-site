@@ -1,13 +1,16 @@
 import crypto from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { STAGES, stripeGet, toGhl, day, money, recordTrialStarted } from '../../../lib/stripeGhl';
+import { onInvoicePaid, onPaymentFailed, onSubscriptionEnded } from '../../../lib/billing';
 
 /**
  * Stripe → GoHighLevel for the /start/ funnel trials.
  *
  *   checkout.session.completed      trial started with a card  → card "Trial started", tags, note
  *   invoice.paid (amount > 0)       first real payment         → card "Won – paying"
- *   customer.subscription.deleted   cancelled / trial lapsed   → card "Nurture / lost"
+ *   customer.subscription.deleted   cancelled / trial lapsed   → card "Nurture / lost" + team alert
+ *   invoice.payment_failed          card declined              → team alert, GHL task, customer email
+ *   (invoice.paid also sends the team alert on a subscription's first real payment)
  *
  * Only subscriptions made by the funnel (metadata.source = fb-ads-funnel) are
  * touched, so other SubTrade billing passes straight through.
@@ -58,6 +61,11 @@ export async function POST(req) {
           note: `Payment received: ${money(obj.amount_paid, obj.currency)} on ${day(obj.created)} (Stripe invoice ${obj.number || obj.id}).`,
         });
       }
+      await onInvoicePaid(obj); // team alert on the first real payment
+    }
+
+    if (event.type === 'invoice.payment_failed') {
+      await onPaymentFailed(obj); // team alert + GHL task + "update your card" email
     }
 
     if (event.type === 'customer.subscription.deleted' && obj.metadata?.source === 'fb-ads-funnel') {
@@ -70,6 +78,9 @@ export async function POST(req) {
         tags: ['trial-cancelled'],
         note: `Subscription ended on ${day(obj.ended_at || obj.canceled_at)} (${obj.cancellation_details?.reason || 'cancelled'}).`,
       });
+    }
+    if (event.type === 'customer.subscription.deleted') {
+      await onSubscriptionEnded(obj); // team alert: close their account
     }
   } catch (err) {
     console.error('[stripe-webhook] failed', event.type, err?.message);

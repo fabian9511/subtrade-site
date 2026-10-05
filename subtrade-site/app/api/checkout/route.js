@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { clampUsers, periodPrice, fmt } from '../../../lib/pricing';
+import { findSubscription } from '../../../lib/billing';
 
 /**
  * Starts a SubTrade 14-day trial with a card on file, for the /start/ funnel.
@@ -48,6 +49,12 @@ export async function POST(req) {
   const email = clean(body.email, 160).toLowerCase();
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: 'A valid email is required' }, { status: 400 });
+  }
+
+  // One free trial per company: an email that already has a live subscription
+  // goes to the billing page instead of a second trial.
+  if (email && (await findSubscription(email))) {
+    return NextResponse.json({ ok: false, existing: true, billing: `/billing/?email=${encodeURIComponent(email)}` });
   }
 
   const origin = new URL(req.url).origin;

@@ -222,7 +222,7 @@ const ALERT_EMAILS = (process.env.BILLING_ALERT_EMAILS || 'info@qualitygypsum.ca
 const ALERT_PHONES = (process.env.BILLING_ALERT_PHONES || '+14038092908')
   .split(',').map((x) => x.trim()).filter(Boolean);
 
-async function alertTeam(subIn, { title, action, details = [] }) {
+export async function alertTeam(subIn, { title, action, details = [] }) {
   if (!process.env.GHL_PRIVATE_TOKEN) return;
   // Re-read so the alert shows the plan as it is now (after the change).
   const sub =
@@ -315,7 +315,7 @@ async function alertTeam(subIn, { title, action, details = [] }) {
 
 /* ---------------- actions ---------------- */
 
-async function noteToGhl(sub, { tags, note, task, stage, status }) {
+export async function noteToGhl(sub, { tags, note, task, stage, status }) {
   const email = (sub.customer?.email || '').toLowerCase();
   if (!email || !process.env.GHL_PRIVATE_TOKEN) return;
   const r = await toGhl({ email, meta: sub.metadata || {}, tags, note, stage, status });
@@ -378,7 +378,7 @@ Comment: ${comment}` : ''}`,
     cancel_at_period_end: 'false',
     'metadata[save_offer]': 'accepted',
     'metadata[save_reason]': reason || '',
-    ...(trial ? END_TRIAL_NOW : {}),
+    ...(trial ? { ...END_TRIAL_NOW, 'metadata[paid_alerted]': '1' } : {}),
   });
   if (r.card) return { ok: false, error: cardMessage(r.data) };
   if (!r.ok) return fallback('subscription update failed');
@@ -466,7 +466,7 @@ export async function changePlan(sub, { users, plan }) {
 // "Start my paid plan now" during the free trial: full price, charged today.
 export async function startPaidNow(sub) {
   if (sub.status !== 'trialing') return { ok: false, error: 'Your paid plan is already running.' };
-  const r = await stripeTry(`subscriptions/${sub.id}`, { ...END_TRIAL_NOW, cancel_at_period_end: 'false', 'metadata[started_early]': 'website' });
+  const r = await stripeTry(`subscriptions/${sub.id}`, { ...END_TRIAL_NOW, cancel_at_period_end: 'false', 'metadata[started_early]': 'website', 'metadata[paid_alerted]': '1' });
   if (r.card) return { ok: false, error: cardMessage(r.data) };
   if (!r.ok) return { ok: false, error: 'Could not start your plan. Please email support@subtradesoftware.com.' };
   await noteToGhl(sub, {
@@ -612,4 +612,107 @@ function billingEmailHtml(link) {
 </table>
 </td></tr></table>
 </body></html>`;
+}
+
+
+/* ---------------- Stripe webhook events (live site only) ---------------- */
+
+const subOf = (invoice) => invoice.subscription || invoice.parent?.subscription_details?.subscription || null;
+
+// First real payment (e.g. the trial converted by itself on day 14).
+export async function onInvoicePaid(invoice) {
+  const subId = subOf(invoice);
+  if (!subId || !(invoice.amount_paid > 0)) return;
+  const sub = await getSub(subId);
+  if (!sub || sub.metadata?.paid_alerted === '1') return;
+  await stripe(`subscriptions/${sub.id}`, { method: 'POST', form: { 'metadata[paid_alerted]': '1' } });
+  await alertTeam(sub, {
+    title: 'Trial converted: now a paying customer',
+    action: `Make sure their SubTrade account is set as paid with ${sub.metadata?.users || '?'} users.`,
+    details: [`First payment: $${(invoice.amount_paid / 100).toFixed(2)} ${String(invoice.currency).toUpperCase()} (incl. tax)`],
+  });
+}
+
+// Card declined on a renewal or at the end of the trial.
+export async function onPaymentFailed(invoice) {
+  const subId = subOf(invoice);
+  if (!subId) return;
+  const sub = await getSub(subId);
+  if (!sub) return;
+  const amount = `$${(invoice.amount_due / 100).toFixed(2)} ${String(invoice.currency).toUpperCase()}`;
+  const retry = invoice.next_payment_attempt ? day(invoice.next_payment_attempt) : null;
+  await noteToGhl(sub, {
+    tags: ['payment-failed'],
+    note: `Payment failed: ${amount} (attempt ${invoice.attempt_count || 1}).${retry ? ` Stripe retries on ${retry}.` : ' No more automatic retries.'}`,
+    task: {
+      title: 'Payment failed — call them',
+      body: `Their card was declined for ${amount}. They can update it at subtradesoftware.com/billing.`,
+      due: new Date(Date.now() + 864e5).toISOString(),
+    },
+  });
+  await alertTeam(sub, {
+    title: 'Payment failed',
+    action: `Call them: their card was declined. They can update it at subtradesoftware.com/billing.${retry ? ` Stripe retries on ${retry}.` : ' No more automatic retries — their subscription may be cancelled.'}`,
+    details: [`Amount due: ${amount}`, `Attempt: ${invoice.attempt_count || 1}`],
+  });
+  const email = (sub.customer?.email || invoice.customer_email || '').toLowerCase();
+  if (email) await emailCustomer(email, paymentFailedEmail(email, amount, retry));
+}
+
+// Subscription is over (cancelled at period end, or unpaid).
+export async function onSubscriptionEnded(subObj) {
+  const sub = (await getSub(subObj.id)) || subObj;
+  await alertTeam(sub, {
+    title: 'Subscription ended',
+    action: 'Close or downgrade their SubTrade account today. Offer to export their data within 30 days if they ask.',
+    details: [`Reason: ${subObj.cancellation_details?.reason || 'cancelled'}`],
+  });
+}
+
+async function emailCustomer(email, { subject, html }) {
+  if (!process.env.GHL_PRIVATE_TOKEN) return false;
+  const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email });
+  const id = up?.contact?.id;
+  if (!id) return false;
+  return !!(await ghl('/conversations/messages', 'POST', { type: 'Email', contactId: id, subject, html }, '2021-04-15'));
+}
+
+function paymentFailedEmail(email, amount, retry) {
+  const link = `https://subtradesoftware.com/billing/?email=${encodeURIComponent(email)}`;
+  const font = "font-family:'Barlow',Arial,Helvetica,sans-serif;";
+  const cond = "font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;";
+  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Payment didn't go through</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;800&display=swap');</style></head>
+<body style="margin:0;padding:0;background:#e8edf3;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8edf3;"><tr><td align="center" style="padding:40px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:640px;background:#ffffff;border-radius:14px;overflow:hidden;">
+  <tr><td align="center" style="background:#0A1628;padding:30px 48px 26px;">
+    <img src="${LOGO}" alt="SubTrade Software" width="150" style="display:block;width:150px;height:auto;border:0;">
+    <p style="${font}margin:8px 0 0;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Built for Subcontractors</p>
+  </td></tr>
+  <tr><td align="center" style="background:#E8732A;background-image:linear-gradient(135deg,#E8732A 0%,#c95e1a 100%);padding:30px 48px 26px;">
+    <h1 style="${cond}margin:0 0 8px;font-size:38px;line-height:1.05;font-weight:800;text-transform:uppercase;color:#ffffff;">Your payment<br>didn't go through</h1>
+    <p style="${font}margin:0;font-size:15px;color:rgba(255,255,255,0.9);">Let's keep your crews running.</p>
+  </td></tr>
+  <tr><td style="padding:34px 48px 0;">
+    <p style="${font}margin:0 0 14px;font-size:16px;font-weight:600;color:#0A1628;">Hi there,</p>
+    <p style="${font}margin:0 0 16px;font-size:15px;line-height:1.75;color:#374151;">We tried to charge <b>${amount}</b> for your SubTrade subscription, but your card was declined. It happens: cards expire, banks block charges.${retry ? ` We'll try again on <b>${retry}</b>.` : ''}</p>
+    <p style="${font}margin:0 0 20px;font-size:15px;line-height:1.75;color:#374151;">Please update your card so your team doesn't lose access.</p>
+  </td></tr>
+  <tr><td align="center" style="padding:6px 48px 30px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" bgcolor="#E8732A" style="border-radius:6px;background:#E8732A;">
+      <a href="${link}" target="_blank" style="${cond}display:inline-block;padding:16px 44px;font-size:17px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;">Update my card</a>
+    </td></tr></table>
+    <p style="${font}margin:12px 0 0;font-size:11px;color:#9ca3af;">You'll get a secure link by email to make the change.</p>
+  </td></tr>
+  <tr><td style="padding:0 48px 30px;">
+    <p style="${font}margin:0;font-size:14px;line-height:1.75;color:#374151;">&#128172; Questions? Just reply. It comes straight to us.</p>
+    <p style="${font}margin:18px 0 2px;font-size:14px;font-weight:700;color:#0A1628;">The SubTrade Team</p>
+    <p style="${font}margin:0;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#E8732A;">SubTrade Software Ltd.</p>
+  </td></tr>
+  <tr><td align="center" style="background:#0A1628;padding:20px 48px 22px;">
+    <p style="${font}margin:0;font-size:11px;line-height:1.7;color:rgba(255,255,255,0.35);">Calgary, Alberta, Canada · You're receiving this because you have a SubTrade subscription.<br>&copy; ${new Date().getFullYear()} SubTrade Software Ltd.</p>
+  </td></tr>
+</table></td></tr></table></body></html>`;
+  return { subject: "Your SubTrade payment didn't go through", html };
 }

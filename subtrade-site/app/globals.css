@@ -3722,3 +3722,5 @@ main > section.section { padding: 96px 0; }
 .bl-change-note { font-size: 15px; color: var(--steel-300); background: var(--steel-900); border-radius: 8px; padding: 12px 14px; }
 @media (max-width: 640px) { .bl-compare { grid-template-columns: 1fr; } }
 .bl-today { font-family: var(--font-mono), monospace; font-size: 13.5px; color: var(--gypsum); background: #fff; border: 1px dashed var(--steel-700); border-radius: 8px; padding: 10px 12px; margin: 10px 0; }
+.fx-existing { background: #fff7e6; border: 1px solid #f0d49a; color: #5c3b00; border-radius: 8px; padding: 12px 14px; font-size: 15px; margin: 8px 0 12px; }
+.fx-existing a { color: var(--chalk); font-weight: 600; }
