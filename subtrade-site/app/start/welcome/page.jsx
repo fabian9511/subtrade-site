@@ -1,5 +1,6 @@
 import WelcomeTrack from '../../../components/WelcomeTrack';
 import WelcomeSummary from '../../../components/WelcomeSummary';
+import SignupButton from '../../../components/SignupButton';
 
 // Where Stripe sends people after they start the card-on-file trial.
 export const metadata = {
@@ -8,7 +9,6 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
-const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 
 export default function Welcome() {
   return (
@@ -31,7 +31,7 @@ export default function Welcome() {
               <li>
                 <b>Create your SubTrade login</b>
                 <span>Use the same email you just used, so your trial and your account match up.</span>
-                <a href={SIGNUP} className="btn btn-primary btn-lg">Create my login</a>
+                <SignupButton className="btn btn-primary btn-lg">Create my login</SignupButton>
               </li>
               <li>
                 <b>Book your free onboarding session</b>

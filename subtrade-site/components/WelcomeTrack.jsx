@@ -26,7 +26,10 @@ export default function WelcomeTrack() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId }),
           keepalive: true,
-        }).catch(() => {});
+        })
+          .then((r) => r.json())
+          .then((d) => d?.signup && window.dispatchEvent(new CustomEvent('subtrade:signup', { detail: d.signup })))
+          .catch(() => {});
       }
       sessionStorage.removeItem('subtrade-start-funnel');
     } catch {}
