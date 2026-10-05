@@ -227,6 +227,7 @@ async function alertTeam(subIn, { title, action, details = [] }) {
   const amount = s.amount != null ? `$${(s.save_offer_used ? s.amount * 0.8 : s.amount).toFixed(2)} CAD + tax / ${per}${s.save_offer_used ? ' (20% stay discount)' : ''}` : '—';
   const status = s.cancel_at_period_end ? `Cancelling — access until ${s.ends_on}` : s.trial ? `Free trial — first charge ${s.next_date}` : s.status === 'past_due' ? 'Payment overdue' : `Active — next charge ${s.next_date}`;
 
+  const card = s.card ? `${s.card.brand.toUpperCase()} •••• ${s.card.last4} · exp ${s.card.exp}` : 'No card on file';
   const stripeUrl = `https://dashboard.stripe.com/${sub.livemode ? '' : 'test/'}subscriptions/${sub.id}`;
   let ghlUrl = null;
   if (c.email) {
@@ -261,7 +262,7 @@ async function alertTeam(subIn, { title, action, details = [] }) {
   <tr><td class="px" style="padding:26px 48px 0;">
     <div style="${font}background:#fff4ec;border-left:4px solid #E8732A;border-radius:0 8px 8px 0;padding:14px 18px;font-size:15px;line-height:1.55;color:#0A1628;"><b>To do:</b> ${esc(action)}</div>
     ${block('Company', row('Company', company) + row('Contact', contact) + row('Email', email) + row('Phone', phone) + row('Billing address', address) + row('Tax number', taxIds))}
-    ${block('Plan', row('Users', s.users || '—') + row('Billing', s.plan === 'yearly' ? 'Yearly' : 'Monthly') + row('Amount', amount) + row('Status', status) + details.map((d) => row('Change', d)).join(''))}
+    ${block('Plan', row('Users', s.users || '—') + row('Billing', s.plan === 'yearly' ? 'Yearly' : 'Monthly') + row('Amount', amount) + row('Status', status) + row('Card on file', card) + details.map((d) => row('Change', d)).join(''))}
     ${block('Reference', row('Stripe customer', c.id || sub.customer) + row('Stripe subscription', sub.id))}
   </td></tr>
   <tr><td align="center" class="px" style="padding:24px 48px 30px;">
@@ -277,6 +278,7 @@ async function alertTeam(subIn, { title, action, details = [] }) {
     `${company} — ${contact}`,
     `${phone} · ${email}`,
     `${s.users || '?'} users, ${amount.replace(' CAD + tax', '')}`,
+    `Card: ${card}`,
     `To do: ${action}`,
   ].join('\n').slice(0, 480);
 
