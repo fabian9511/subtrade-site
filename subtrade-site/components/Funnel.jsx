@@ -103,6 +103,90 @@ function formatPhone(v) {
 // What GoHighLevel stores: +14038092908
 const phoneE164 = (v) => `+1${phoneDigits(v)}`;
 
+
+/* Small animated app cards laid over each feature photo (CSS-only motion). */
+const Ck = () => <span className="fxc-ok" aria-hidden="true">✓</span>;
+const FX_CHIPS = {
+  'GPS time tracking': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><span className="fxc-dot" /><b>Clocked in</b><em>6:58 AM</em></div>
+      <div className="fxc-sub">Northgate Bldg A · GPS on site <Ck /></div>
+    </div>
+  ),
+  'Change orders': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>CO #014 · Extra bulkhead</b><em>$2,480</em></div>
+      <svg className="fxc-sig" viewBox="0 0 160 26"><path d="M4 18c10-14 16 6 24-4s8-10 14 2 10 6 18-6 10 10 20 2 14-8 22 4 18-6 30 0" /></svg>
+      <span className="fxc-stamp">Signed</span>
+    </div>
+  ),
+  'Progress billing': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>Claim #6 · September</b><em>68%</em></div>
+      <div className="fxc-bar"><i /></div>
+      <div className="fxc-sub">Holdback 10% and 2 COs included <Ck /></div>
+    </div>
+  ),
+  'Crew scheduling': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>This week</b><em>8 crew</em></div>
+      <div className="fxc-week">{['M', 'T', 'W', 'T', 'F'].map((d, i) => <span key={i} style={{ animationDelay: `${0.25 * i}s` }}>{d}</span>)}</div>
+      <div className="fxc-sub fxc-move">Luis → Bow River Lofts</div>
+    </div>
+  ),
+  'Daily logs & photos': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>Daily log filed</b><em>4:52 PM</em></div>
+      <div className="fxc-thumbs">{[0, 1, 2, 3].map((i) => <span key={i} style={{ animationDelay: `${0.3 * i}s` }} />)}</div>
+      <div className="fxc-sub">6 photos · GPS tagged <Ck /></div>
+    </div>
+  ),
+  'Forms & safety': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>FLHA · Level 2</b><em>7:05 AM</em></div>
+      <ul className="fxc-list">{['Fall protection', 'Hazards reviewed', 'Crew signed (4)'].map((t, i) => <li key={t} style={{ animationDelay: `${0.5 * i}s` }}>{t}</li>)}</ul>
+    </div>
+  ),
+  'Field operations': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><span className="fxc-dot" /><b>19 on site</b><em>4 jobs live</em></div>
+      <div className="fxc-sub">2 items need your OK today</div>
+    </div>
+  ),
+  'Dashboard & job costing': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>Maple Ridge Clinic</b><em>On budget</em></div>
+      <div className="fxc-bars"><span><i style={{ width: '82%' }} /></span><span><i className="fxc-act" style={{ width: '71%' }} /></span></div>
+      <div className="fxc-sub">Budget vs actual, live</div>
+    </div>
+  ),
+  'Drawings & markups': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>A-201 · Rev C</b><em>Latest</em></div>
+      <svg className="fxc-cloud" viewBox="0 0 160 30"><path d="M10 22c-8 0-8-12 0-12 0-8 12-8 14-2 2-8 14-8 16 0 2-8 14-8 16 0 2-8 14-8 16 0 2-8 14-8 16 0 2-8 14-8 16 0 8 0 8 12 0 12z" /></svg>
+      <div className="fxc-sub">Pushed to every device <Ck /></div>
+    </div>
+  ),
+  'Tasks & punch lists': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>Punch list · Unit 4</b><em className="fxc-count" /></div>
+      <ul className="fxc-list">{['Patch at outlet', 'Corner bead L2', 'Touch-up hallway'].map((t, i) => <li key={t} style={{ animationDelay: `${0.5 * i}s` }}>{t}</li>)}</ul>
+    </div>
+  ),
+  'Submittals & RFIs': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>RFI 023 · Wall type C4</b></div>
+      <div className="fxc-status"><span>Sent</span><span>Viewed</span><span>Answered</span></div>
+    </div>
+  ),
+  'Purchase orders': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>PO #1042 · Steel studs</b><em>$6,912</em></div>
+      <div className="fxc-sub fxc-deliv">Delivered · cost on budget <Ck /></div>
+    </div>
+  ),
+};
+
 export default function Funnel() {
   const [stage, setStage] = useState('register'); // register | questions | result
   const [lead, setLead] = useState({ firstName: '', lastName: '', email: '', phone: '', company: '', website: '' });
@@ -350,7 +434,10 @@ export default function Funnel() {
               ['/material-cost-increase-steel-copper-jobsite.webp', 'Purchase orders', 'Order material against the job, track what arrived, and see the cost land on the budget.', 'Supervisor checking a material delivery of steel studs and copper wire on a tablet'],
             ].map(([src, title, text, alt]) => (
               <article key={title} className="fx-feature">
-                <img src={src} alt={alt} loading="lazy" />
+                <div className="fx-media">
+                  <img src={src} alt={alt} loading="lazy" />
+                  {FX_CHIPS[title]}
+                </div>
                 <h3 className="display">{title}</h3>
                 <p>{text}</p>
               </article>
