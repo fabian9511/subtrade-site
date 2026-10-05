@@ -1830,6 +1830,29 @@ export const timeTrackingRich = {
       ['By job', 'Hours & cost codes'],
       ['~6 min', 'Friday payroll prep'],
     ],
+    video: {
+      id: 'cOcVMgDpr4Y',
+      caption: 'From the jobsite to payroll in 38 seconds: totals, one-click approvals, overtime and GPS check-ins.',
+      title: 'SubTrade Timesheets: From the Jobsite to Payroll',
+      description:
+        'A walkthrough of SubTrade Timesheets: pay period totals for gross, break and payable hours, approving the week in one click, overtime flagged automatically, every entry and break per crew member, on-site and off-site check-ins, and the check-in location map.',
+      poster: '/subtrade-timesheets-video-poster.webp',
+      posterAlt:
+        'Play the SubTrade Timesheets walkthrough: the desktop timesheet and the mobile app behind the words jobsite to payroll',
+      uploadDate: '2026-10-04',
+      duration: 'PT39S',
+    },
+    short: {
+      id: 'HfGKHFKq8YY',
+      caption: 'On the phone: clock in at the job.',
+      title: 'Clock In From the Jobsite | SubTrade Timesheets',
+      description:
+        'Crews clock in and out from their phone right at the job, add a note on what they worked on, and every hour lands on the right project. Foremen can add time for the whole crew.',
+      poster: '/subtrade-timesheets-short-poster.webp',
+      posterAlt: 'Play the SubTrade mobile timesheet short: the phone app showing net paid hours under the words clock in at the job',
+      uploadDate: '2026-10-04',
+      duration: 'PT24S',
+    },
     sections: [
       {
         eyebrow: 'In the field',

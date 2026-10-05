@@ -25,27 +25,34 @@ export default function RichFeature({ f }) {
   // A feature that has a walkthrough on YouTube describes it to search engines
   // and answer engines as well as showing it.
   const v = r.video;
-  const videoSchema = v && {
+  // An optional vertical YouTube Short plays beside the main video.
+  const sh = r.short;
+  const toSchema = (x, url) => ({
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
-    name: v.title,
-    description: v.description,
-    thumbnailUrl: [`${SITE}${v.poster}`],
-    uploadDate: v.uploadDate,
-    duration: v.duration,
-    embedUrl: `https://www.youtube.com/embed/${v.id}`,
-    contentUrl: `https://youtu.be/${v.id}`,
+    name: x.title,
+    description: x.description,
+    thumbnailUrl: [`${SITE}${x.poster}`],
+    uploadDate: x.uploadDate,
+    duration: x.duration,
+    embedUrl: `https://www.youtube.com/embed/${x.id}`,
+    contentUrl: url,
     publisher: {
       '@type': 'Organization',
       name: 'SubTrade Software',
       url: SITE,
     },
-  };
+  });
+  const videoSchema = v && toSchema(v, `https://youtu.be/${v.id}`);
+  const shortSchema = sh && toSchema(sh, `https://www.youtube.com/shorts/${sh.id}`);
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       {v && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }} />
+      )}
+      {sh && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(shortSchema) }} />
       )}
       <section className="hero">
         <div className="wrap hero-inner" style={{ maxWidth: 900 }}>
@@ -68,10 +75,22 @@ export default function RichFeature({ f }) {
             <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
           </div>
           <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
-          {v && (
+          {v && !sh && (
             <div style={{ marginTop: 44 }}>
               <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} parts={v.parts} />
               <p className="hero-note" style={{ marginTop: 14 }}>{v.caption}</p>
+            </div>
+          )}
+          {v && sh && (
+            <div className="video-pair">
+              <div>
+                <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} parts={v.parts} />
+                <p className="hero-note" style={{ marginTop: 14 }}>{v.caption}</p>
+              </div>
+              <div className="video-pair-short">
+                <VideoEmbed id={sh.id} title={sh.title} poster={sh.poster} posterAlt={sh.posterAlt} ratio="9 / 16" />
+                <p className="hero-note" style={{ marginTop: 14 }}>{sh.caption}</p>
+              </div>
             </div>
           )}
         </div>

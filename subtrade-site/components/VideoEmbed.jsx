@@ -13,7 +13,7 @@ import { useState } from 'react';
  * Styles are inline rather than in globals.css deliberately — this component is
  * self-contained and needs no global classes.
  */
-export default function VideoEmbed({ id, title, poster, posterAlt, parts }) {
+export default function VideoEmbed({ id, title, poster, posterAlt, parts, ratio = '16 / 9' }) {
   const [playing, setPlaying] = useState(false);
   const [hover, setHover] = useState(false);
   // A series (parts) plays in order: after the chosen part, YouTube carries on
@@ -31,7 +31,7 @@ export default function VideoEmbed({ id, title, poster, posterAlt, parts }) {
       style={{
         position: 'relative',
         width: '100%',
-        aspectRatio: '16 / 9',
+        aspectRatio: ratio,
         borderRadius: 14,
         overflow: 'hidden',
         background: '#0b1220',
