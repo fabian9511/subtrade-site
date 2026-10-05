@@ -69,7 +69,7 @@ async function ensureCoupon() {
       percent_off: String(SAVE_COUPON.percent_off),
       duration: 'repeating',
       duration_in_months: String(SAVE_COUPON.months),
-      name: 'Stay with SubTrade: extra 20% off for 12 months',
+      name: 'Stay with SubTrade: 20% off, 12 months', // Stripe max 40 chars
     },
   });
   return made?.id || null;
@@ -202,7 +202,27 @@ export async function loadFromToken(token) {
 export async function acceptOffer(sub, { reason, comment }) {
   if (hasSaveCoupon(sub)) return { ok: false, error: 'This offer was already used on your subscription.' };
   const coupon = await ensureCoupon();
-  if (!coupon) return { ok: false, error: 'Could not apply the offer.' };
+  const fallback = async (why) => {
+    // Never leave someone who said "yes, I'll stay" with an error: keep them,
+    // and flag it so we apply the discount by hand.
+    await stripe(`subscriptions/${sub.id}`, {
+      method: 'POST',
+      form: { cancel_at_period_end: 'false', 'metadata[save_offer]': 'requested' },
+    });
+    await noteToGhl(sub, {
+      tags: ['save-offer-manual'],
+      note: `Took the save offer (${SAVE_COUPON.label}) but it could not be applied automatically (${why}). APPLY THE 20% DISCOUNT BY HAND in Stripe.
+Reason: ${REASONS[reason] || reason || '-'}${comment ? `
+Comment: ${comment}` : ''}`,
+      task: {
+        title: 'Apply the 20% stay discount by hand',
+        body: `They accepted the save offer on the website, but Stripe did not apply it (${why}). Add coupon ${SAVE_COUPON.id} to their subscription in Stripe.`,
+        due: new Date(Date.now() + 864e5).toISOString(),
+      },
+    });
+    return { ok: true, manual: true };
+  };
+  if (!coupon) return fallback('coupon not available');
   const updated = await stripe(`subscriptions/${sub.id}`, {
     method: 'POST',
     form: {
@@ -212,7 +232,7 @@ export async function acceptOffer(sub, { reason, comment }) {
       'metadata[save_reason]': reason || '',
     },
   });
-  if (!updated) return { ok: false, error: 'Could not apply the offer.' };
+  if (!updated) return fallback('subscription update failed');
   await noteToGhl(sub, {
     tags: ['save-offer-accepted'],
     note: `Tried to cancel, took the save offer (${SAVE_COUPON.label}).\nReason: ${REASONS[reason] || reason || '-'}${comment ? `\nComment: ${comment}` : ''}`,

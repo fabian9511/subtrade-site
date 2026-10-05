@@ -1,8 +1,7 @@
 import './globals.css';
 import Link from 'next/link';
 import Script from 'next/script';
-import MegaMenu from '../components/MegaMenu';
-import MobileMenu from '../components/MobileMenu';
+import SiteNav from '../components/SiteNav';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/barlow-condensed/700.css';
@@ -84,16 +83,7 @@ export default function RootLayout({ children }) {
               <img src="/logo-horizontal.png" alt="SubTrade Software" className="logo-full" />
               <img src="/logo-mark.png" alt="SubTrade" className="logo-mark-only" />
             </Link>
-            <nav className="nav" aria-label="Main">
-              <span className="hide-m"><MegaMenu /></span>
-              <Link href="/explore-the-app" className="hide-m nav-explore">Explore the app</Link>
-              <Link href="/pricing-plans" className="hide-m">Pricing</Link>
-              <a href={PORTAL} className="hide-m">Log in</a>
-              <a href={SIGNUP} className="btn btn-primary">
-                Start free trial
-              </a>
-              <MobileMenu />
-            </nav>
+            <SiteNav portal={PORTAL} signup={SIGNUP} />
           </div>
         </header>
         <main>{children}</main>

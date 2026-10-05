@@ -71,15 +71,24 @@ export function BillingRequest() {
 
 /* ---------- /billing/manage/ : the subscription, card, cancel ---------- */
 
+// Same list as "Every plan includes" on /pricing-plans, plus Bid Manager.
 const INCLUDED = [
-  ['GPS time tracking', 'Crews clock in on their phone, with job-site geofences'],
-  ['Crew scheduling', 'Who is where, every day, on one board'],
-  ['Change orders', 'Priced, signed and tracked, so extras get paid'],
-  ['Progress billing', 'Claims with holdback, straight from the job'],
-  ['Daily logs & site photos', 'A record of every day on every site'],
-  ['Drawings & markups', 'The current set in every foreman’s pocket'],
-  ['Safety & custom forms', 'FLHAs, toolbox talks and inspections'],
-  ['Bid Manager', 'Every tender on one board, vendor pricing included'],
+  'GPS Time Tracking',
+  'Job costing',
+  'Change Orders',
+  'Progress Billing with holdback',
+  'Purchase Orders',
+  'Crew Scheduling',
+  'Daily Logs',
+  'GPS-tagged Photos',
+  'Drawings & Markups',
+  'Tasks & Punch Lists',
+  'Submittals & RFIs',
+  'Safety & Custom Forms',
+  'Project Dashboard',
+  'Bid Manager',
+  'Unlimited projects',
+  'iPhone & Android app for your crews',
 ];
 
 const WHY = [
@@ -339,12 +348,11 @@ export function BillingManage() {
           {PlanCard}
 
           <div className="bl-card">
-            <p className="eyebrow">What&rsquo;s included in your plan</p>
+            <p className="eyebrow">Everything in your plan</p>
             <ul className="bl-included">
-              {INCLUDED.map(([t, d]) => (
+              {INCLUDED.map((t) => (
                 <li key={t}>
                   <b>{t}</b>
-                  <span>{d}</span>
                 </li>
               ))}
             </ul>
@@ -479,7 +487,8 @@ export function BillingManage() {
                   className="btn btn-primary btn-lg fx-submit"
                   disabled={busy}
                   onClick={async () => {
-                    if (await act('save')) setStep('saved');
+                    const r = await act('save');
+                    if (r) setStep(r.manual ? 'saved-manual' : 'saved');
                   }}
                 >
                   {busy ? 'Applying…' : s.amount != null ? `Keep SubTrade and save ${money(per === 'year' ? s.amount * 0.2 : s.amount * 0.2 * 12)}` : 'Yes, keep SubTrade with 20% off'}
@@ -513,6 +522,23 @@ export function BillingManage() {
                 {step === 'offer' ? 'No thanks, cancel my subscription' : 'Cancel my subscription'}
               </button>
               <button type="button" className="bl-link" onClick={() => setStep('view')}>Go back</button>
+            </div>
+          </div>
+        </div>
+        <Sidebar />
+      </div>
+    );
+
+  if (step === 'saved-manual')
+    return (
+      <div className="bl-layout">
+        <div className="bl-main">
+          <div className="bl-card bl-done">
+            <p className="eyebrow">Done</p>
+            <h2 className="bl-title">Thanks for staying. Your subscription continues.</h2>
+            <p>Your extra 20% off is being added to your account by our team today. You&rsquo;ll see it on your next charge. Nothing else to do.</p>
+            <div className="bl-actions">
+              <a href="/construction-software-15min-demo/" className="btn btn-primary">Book 15 minutes with our team</a>
             </div>
           </div>
         </div>
