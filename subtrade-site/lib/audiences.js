@@ -8,12 +8,12 @@
 //   SubTrade – Leads      (retarget people who never started)
 //
 // Needs META_ADS_TOKEN (system user token with ads_management on the ad
-// account). Optional META_AD_ACCOUNT (default act_1349967665874307).
+// account). Optional META_AD_ACCOUNT (default act_1615988616297907).
 
 import crypto from 'node:crypto';
 import { ghl, LOCATION_ID } from './stripeGhl';
 
-const AD_ACCOUNT = process.env.META_AD_ACCOUNT || 'act_1349967665874307';
+const AD_ACCOUNT = process.env.META_AD_ACCOUNT || 'act_1615988616297907';
 const GRAPH = 'https://graph.facebook.com/v21.0';
 
 const SUBTRADE_PIPELINE = 'ehpEmBoueE7AcdOXAyP9';
