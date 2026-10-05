@@ -52,6 +52,17 @@ function currentBucket(software) {
   return '';
 }
 
+// The exact consent wording shown on /start/ (components/Funnel.jsx). Bump the
+// version whenever that wording changes, so each consent record says which
+// text the person agreed to.
+const CONSENT_VERSION = 'start-2026-10-04';
+const CONSENT_TEXT = {
+  smsMarketing:
+    'I consent to receive marketing text messages from SubTrade Software Ltd at the phone number provided. Frequency may vary. Message & data rates may apply. Text HELP for assistance, reply STOP to opt out.',
+  smsService:
+    'I consent to receive non-marketing text messages from SubTrade Software Ltd about my demo call, onboarding, service updates and account notifications. Message & data rates may apply. Text HELP for assistance, reply STOP to opt out.',
+};
+
 const clean = (v, max = 120) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
 export async function POST(req) {
@@ -139,6 +150,46 @@ export async function POST(req) {
     // Tags go through their own endpoint so we add to a contact's tags rather
     // than replacing them.
     const id = data?.contact?.id;
+    if (id && body.stage === 'registered') {
+      const consentNow = body.consent || {};
+      const anySms = consentNow.smsMarketing || consentNow.smsService;
+
+      // A brand-new contact who ticked no SMS box gets SMS turned off (DND) in
+      // GoHighLevel itself, so no workflow or manual text can reach them by
+      // mistake. Existing contacts are left alone: they may have opted in
+      // somewhere else, and we never switch DND off for anyone.
+      if (data.new && !anySms) {
+        await fetch(`${GHL}/contacts/${id}`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({
+            dndSettings: { SMS: { status: 'active', message: 'No SMS consent given on subtradesoftware.com/start/' } },
+          }),
+        })
+          .then((r) => !r.ok && r.text().then((t) => console.error('[lead] dnd failed', r.status, t.slice(0, 200))))
+          .catch(() => {});
+      }
+
+      // Proof of consent, kept on the contact: what they agreed to, when,
+      // where and from which connection. This is what a carrier asks for.
+      const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
+      const proof = [
+        `Consent record (${CONSENT_VERSION}) — subtradesoftware.com/start/`,
+        `Time: ${new Date().toISOString()}`,
+        `IP: ${ip}`,
+        `Browser: ${clean(req.headers.get('user-agent') || 'unknown', 200)}`,
+        `Phone: ${phone}`,
+        `Terms & Privacy Policy accepted: ${consentNow.terms ? 'yes' : 'no'}`,
+        `Marketing SMS: ${consentNow.smsMarketing ? `YES — "${CONSENT_TEXT.smsMarketing}"` : 'no'}`,
+        `Non-marketing SMS: ${consentNow.smsService ? `YES — "${CONSENT_TEXT.smsService}"` : 'no'}`,
+        anySms ? '' : (data.new ? 'SMS DND switched on (no consent).' : 'Existing contact: SMS settings left unchanged.'),
+      ].filter(Boolean);
+      await fetch(`${GHL}/contacts/${id}/notes`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ body: proof.join('\n') }),
+      }).catch(() => {});
+    }
     if (id) {
       await fetch(`${GHL}/contacts/${id}/tags`, {
         method: 'POST',
