@@ -199,9 +199,10 @@ export async function listInvoices(sub) {
 // customer has (users, paid/cancelled) must reach the people who update the
 // app, right away: an email to each address and a text to each phone.
 // Override with BILLING_ALERT_EMAILS / BILLING_ALERT_PHONES (comma-separated).
-const ALERT_EMAILS = (process.env.BILLING_ALERT_EMAILS || 'info@qualitygypsum.ca,cvargas024@gmail.com')
+// TESTING: Fabian only. At launch add Steban: cvargas024@gmail.com / +14033053853.
+const ALERT_EMAILS = (process.env.BILLING_ALERT_EMAILS || 'info@qualitygypsum.ca')
   .split(',').map((x) => x.trim()).filter(Boolean);
-const ALERT_PHONES = (process.env.BILLING_ALERT_PHONES || '+14038092908,+14033053853')
+const ALERT_PHONES = (process.env.BILLING_ALERT_PHONES || '+14038092908')
   .split(',').map((x) => x.trim()).filter(Boolean);
 
 async function alertTeam(sub, { title, action, details = [] }) {
