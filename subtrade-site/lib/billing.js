@@ -205,26 +205,89 @@ const ALERT_EMAILS = (process.env.BILLING_ALERT_EMAILS || 'info@qualitygypsum.ca
 const ALERT_PHONES = (process.env.BILLING_ALERT_PHONES || '+14038092908')
   .split(',').map((x) => x.trim()).filter(Boolean);
 
-async function alertTeam(sub, { title, action, details = [] }) {
+async function alertTeam(subIn, { title, action, details = [] }) {
   if (!process.env.GHL_PRIVATE_TOKEN) return;
-  const who = [sub.metadata?.company, sub.customer?.email].filter(Boolean).join(' · ') || sub.customer?.id || 'a customer';
-  const lines = [...details, `Stripe subscription: ${sub.id}`];
-  const sms = `SubTrade billing: ${title} — ${who}. ${action}`.slice(0, 300);
-  const html = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.55;color:#15181c;max-width:560px">
-  <p style="margin:0 0 6px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#E8732A;font-weight:700">Billing alert</p>
-  <h2 style="margin:0 0 10px;font-size:20px">${title}</h2>
-  <p style="margin:0 0 12px"><b>${who}</b></p>
-  <p style="margin:0 0 14px;padding:12px 14px;background:#fff4ec;border-left:4px solid #E8732A"><b>To do:</b> ${action}</p>
-  <ul style="margin:0 0 12px;padding-left:18px">${lines.map((l) => `<li>${l}</li>`).join('')}</ul>
-  <p style="margin:0;font-size:12px;color:#6b7280">Sent automatically by subtradesoftware.com/billing.</p></div>`;
-  for (const email of ALERT_EMAILS) {
-    // No tags here: tags on /contacts/upsert REPLACE the contact's tags.
-    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email });
-    const id = up?.contact?.id;
-    if (id) await ghl('/conversations/messages', 'POST', { type: 'Email', contactId: id, subject: `Billing alert: ${title} — ${who}`, html }, '2021-04-15');
+  // Re-read so the alert shows the plan as it is now (after the change).
+  const sub =
+    (await stripe(
+      `subscriptions/${subIn.id}?expand[]=customer&expand[]=customer.tax_ids&expand[]=discounts&expand[]=items.data.price.product&expand[]=default_payment_method`,
+    )) || subIn;
+  const c = typeof sub.customer === 'object' && sub.customer ? sub.customer : {};
+  const m = sub.metadata || {};
+  const s = summarize(sub);
+
+  const company = m.company || c.name || '—';
+  const contact = [m.first_name, m.last_name].filter(Boolean).join(' ') || c.name || '—';
+  const email = c.email || '—';
+  const phone = m.phone || c.phone || '—';
+  const a = c.address || {};
+  const address = [a.line1, a.line2, a.city, a.state, a.postal_code, a.country].filter(Boolean).join(', ') || '—';
+  const taxIds = (c.tax_ids?.data || []).map((t) => `${t.type.replace(/_/g, ' ').toUpperCase()} ${t.value}`).join(', ') || '—';
+  const per = s.interval === 'year' ? 'year' : 'month';
+  const amount = s.amount != null ? `$${(s.save_offer_used ? s.amount * 0.8 : s.amount).toFixed(2)} CAD + tax / ${per}${s.save_offer_used ? ' (20% stay discount)' : ''}` : '—';
+  const status = s.cancel_at_period_end ? `Cancelling — access until ${s.ends_on}` : s.trial ? `Free trial — first charge ${s.next_date}` : s.status === 'past_due' ? 'Payment overdue' : `Active — next charge ${s.next_date}`;
+
+  const stripeUrl = `https://dashboard.stripe.com/${sub.livemode ? '' : 'test/'}subscriptions/${sub.id}`;
+  let ghlUrl = null;
+  if (c.email) {
+    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email: c.email });
+    if (up?.contact?.id) ghlUrl = `https://app.gohighlevel.com/v2/location/${LOCATION_ID}/contacts/detail/${up.contact.id}`;
   }
-  for (const phone of ALERT_PHONES) {
-    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, phone });
+
+  const esc = (v) => String(v).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]);
+  const font = "font-family:'Barlow',Arial,Helvetica,sans-serif;";
+  const cond = "font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;";
+  const row = (k, v) =>
+    `<tr><td style="${font}padding:7px 0;font-size:13px;color:#6b7280;width:38%;vertical-align:top;border-top:1px solid #eef1f5;">${k}</td><td style="${font}padding:7px 0;font-size:14px;color:#0A1628;font-weight:600;border-top:1px solid #eef1f5;">${esc(v)}</td></tr>`;
+  const block = (label, rows) =>
+    `<p style="${cond}margin:22px 0 6px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8732A;">${label}</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${rows}</table>`;
+  const button = (href, text, solid) =>
+    `<td align="center" bgcolor="${solid ? '#E8732A' : '#ffffff'}" style="border-radius:6px;${solid ? 'background:#E8732A;' : 'border:1px solid #0A1628;'}"><a href="${href}" target="_blank" style="${cond}display:inline-block;padding:12px 22px;font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${solid ? '#ffffff' : '#0A1628'};text-decoration:none;">${text}</a></td>`;
+
+  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Billing alert</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;800&display=swap');
+@media only screen and (max-width:600px){.px{padding-left:20px!important;padding-right:20px!important}}</style></head>
+<body style="margin:0;padding:0;background:#e8edf3;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8edf3;"><tr><td align="center" style="padding:32px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:640px;background:#ffffff;border-radius:14px;overflow:hidden;">
+  <tr><td align="center" class="px" style="background:#0A1628;padding:24px 48px 20px;">
+    <img src="${LOGO}" alt="SubTrade Software" width="130" style="display:block;width:130px;max-width:130px;height:auto;border:0;">
+    <p style="${font}margin:8px 0 0;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Internal · Billing alert</p>
+  </td></tr>
+  <tr><td align="center" class="px" style="background:#E8732A;background-image:linear-gradient(135deg,#E8732A 0%,#c95e1a 100%);padding:26px 48px 22px;">
+    <span style="${font}display:inline-block;background:rgba(255,255,255,0.2);color:#ffffff;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:10px;">${esc(company)}</span>
+    <h1 style="${cond}margin:0;font-size:32px;line-height:1.1;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#ffffff;">${esc(title)}</h1>
+  </td></tr>
+  <tr><td class="px" style="padding:26px 48px 0;">
+    <div style="${font}background:#fff4ec;border-left:4px solid #E8732A;border-radius:0 8px 8px 0;padding:14px 18px;font-size:15px;line-height:1.55;color:#0A1628;"><b>To do:</b> ${esc(action)}</div>
+    ${block('Company', row('Company', company) + row('Contact', contact) + row('Email', email) + row('Phone', phone) + row('Billing address', address) + row('Tax number', taxIds))}
+    ${block('Plan', row('Users', s.users || '—') + row('Billing', s.plan === 'yearly' ? 'Yearly' : 'Monthly') + row('Amount', amount) + row('Status', status) + details.map((d) => row('Change', d)).join(''))}
+    ${block('Reference', row('Stripe customer', c.id || sub.customer) + row('Stripe subscription', sub.id))}
+  </td></tr>
+  <tr><td align="center" class="px" style="padding:24px 48px 30px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>${button(stripeUrl, 'Open in Stripe', true)}${ghlUrl ? `<td width="10">&nbsp;</td>${button(ghlUrl, 'Open in GoHighLevel', false)}` : ''}</tr></table>
+  </td></tr>
+  <tr><td align="center" style="background:#0A1628;padding:18px 48px 20px;">
+    <p style="${font}margin:0;font-size:11px;line-height:1.7;color:rgba(255,255,255,0.4);">Sent automatically by subtradesoftware.com/billing to the SubTrade team.<br>&copy; ${new Date().getFullYear()} SubTrade Software Ltd.</p>
+  </td></tr>
+</table></td></tr></table></body></html>`;
+
+  const sms = [
+    `SubTrade billing alert: ${title}`,
+    `${company} — ${contact}`,
+    `${phone} · ${email}`,
+    `${s.users || '?'} users, ${amount.replace(' CAD + tax', '')}`,
+    `To do: ${action}`,
+  ].join('\n').slice(0, 480);
+
+  for (const to of ALERT_EMAILS) {
+    // No tags here: tags on /contacts/upsert REPLACE the contact's tags.
+    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, email: to });
+    const id = up?.contact?.id;
+    if (id) await ghl('/conversations/messages', 'POST', { type: 'Email', contactId: id, subject: `Billing alert: ${title} — ${company}`, html }, '2021-04-15');
+  }
+  for (const to of ALERT_PHONES) {
+    const up = await ghl('/contacts/upsert', 'POST', { locationId: LOCATION_ID, phone: to });
     const id = up?.contact?.id;
     if (id) await ghl('/conversations/messages', 'POST', { type: 'SMS', contactId: id, message: sms }, '2021-04-15');
   }
