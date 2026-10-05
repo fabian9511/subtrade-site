@@ -7,6 +7,7 @@
 
 import crypto from 'node:crypto';
 import { clampUsers, periodPrice, fmt, MAX_USERS } from './pricing';
+import { sendMetaEvent, userFromStripe } from './meta';
 import { ghl, LOCATION_ID, toGhl, STAGES } from './stripeGhl';
 
 const STRIPE = 'https://api.stripe.com/v1';
@@ -624,7 +625,20 @@ export async function onInvoicePaid(invoice) {
   const subId = subOf(invoice);
   if (!subId || !(invoice.amount_paid > 0)) return;
   const sub = await getSub(subId);
-  if (!sub || sub.metadata?.paid_alerted === '1') return;
+  if (!sub) return;
+  // Facebook: every real payment is a Purchase (amount before tax).
+  if (sub.metadata?.source === 'fb-ads-funnel') {
+    const net = invoice.total_excluding_tax ?? invoice.subtotal ?? invoice.amount_paid;
+    await sendMetaEvent({
+      name: 'Purchase',
+      eventId: invoice.id,
+      value: net / 100,
+      currency: String(invoice.currency || 'cad').toUpperCase(),
+      user: userFromStripe(typeof sub.customer === 'object' ? sub.customer : {}, sub.metadata),
+      extra: { content_name: `SubTrade ${sub.metadata?.plan || ''}`.trim(), num_items: Number(sub.metadata?.users) || undefined },
+    });
+  }
+  if (sub.metadata?.paid_alerted === '1') return;
   await stripe(`subscriptions/${sub.id}`, { method: 'POST', form: { 'metadata[paid_alerted]': '1' } });
   await alertTeam(sub, {
     title: 'Trial converted: now a paying customer',

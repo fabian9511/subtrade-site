@@ -12,11 +12,14 @@ export default function WelcomeTrack() {
       const annual = q.get('plan') === 'yearly';
       const users = q.get('users') || 5;
       const charge = periodPrice(users, annual);
-      window.fbq && window.fbq('track', 'StartTrial', {
-        value: charge,
-        currency: 'CAD',
-        predicted_ltv: annual ? charge : charge * 12,
-      });
+      const sid = q.get('session_id') || undefined;
+      window.fbq &&
+        window.fbq(
+          'track',
+          'StartTrial',
+          { value: charge, currency: 'CAD', predicted_ltv: annual ? charge : charge * 12 },
+          sid ? { eventID: sid } : undefined,
+        );
       // Move the lead's card to "Trial started" now (the Stripe webhook does it
       // too; it cannot reach preview links).
       const sessionId = q.get('session_id');

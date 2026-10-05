@@ -67,6 +67,8 @@ export async function POST(req) {
     last_name: clean(body.lastName, 60),
     company: clean(body.company),
     phone: clean(body.phone, 30),
+    fbp: clean(body.fbp, 120),
+    fbc: clean(body.fbc, 200),
   };
 
   const form = new URLSearchParams();

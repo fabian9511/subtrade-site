@@ -682,6 +682,9 @@ function TrialBox({ lead }) {
           lastName: lead.lastName,
           company: lead.company,
           phone: lead.phone ? phoneE164(lead.phone) : '',
+          // Facebook click/browser cookies, so a later payment can be matched to the ad.
+          fbp: (document.cookie.match(/(?:^|; )_fbp=([^;]+)/) || [])[1] || '',
+          fbc: (document.cookie.match(/(?:^|; )_fbc=([^;]+)/) || [])[1] || '',
         }),
       });
       const data = await res.json().catch(() => ({}));

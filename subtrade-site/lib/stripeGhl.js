@@ -1,3 +1,5 @@
+import { sendMetaEvent, userData } from './meta';
+
 // Shared by /api/stripe-webhook and /api/trial-started: read Stripe, update
 // the lead in GoHighLevel (contact, FB Ads Funnel card, tags, note).
 //
@@ -104,6 +106,21 @@ export async function recordTrialStarted(session) {
     QC: 'Quebec QST applies once sales to buyers without a QST number pass $30,000 in 12 months. Check the Quebec running total (and whether they gave a QST number) before',
   };
   const watch = country === 'CA' ? TAX_WATCH[prov] : null;
+  const cd = session.customer_details || {};
+  const ca = cd.address || {};
+  // Facebook: trial started (same event id as the browser pixel, so it's counted once).
+  await sendMetaEvent({
+    name: 'StartTrial',
+    eventId: session.id,
+    value: (session.amount_subtotal || sub?.items?.data?.[0]?.price?.unit_amount || 0) / 100 || undefined,
+    user: userData({
+      email: cd.email || session.customer_email,
+      firstName: meta.first_name, lastName: meta.last_name,
+      city: ca.city, state: ca.state, zip: ca.postal_code, country: ca.country,
+      fbp: meta.fbp, fbc: meta.fbc,
+    }),
+    extra: { predicted_ltv: undefined, content_name: `SubTrade ${meta.plan || 'monthly'}, ${meta.users || 5} users` },
+  });
   const tags = [TRIAL_TAG, `plan-${plan}`];
   if (watch) tags.push(`tax-alert-${prov.toLowerCase()}`);
   return toGhl({
