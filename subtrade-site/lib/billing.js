@@ -414,7 +414,8 @@ export async function changePlan(sub, { users, plan }) {
   const annual = plan === 'yearly';
   const u = clampUsers(users);
   if (Number(users) > MAX_USERS) return { ok: false, error: `For more than ${MAX_USERS} users, email support@subtradesoftware.com and we'll set it up.` };
-  if (curAnnual && !annual) return { ok: false, error: 'Switching from yearly to monthly happens at your renewal. Email support@subtradesoftware.com and we will set it up.' };
+  // Monthly -> yearly only: yearly plans stay yearly (Fabian's rule).
+  if (curAnnual && !annual) return { ok: false, error: 'Yearly plans renew yearly and can’t be switched to monthly.' };
   if (u === curUsers && annual === curAnnual) return { ok: false, error: 'That is already your plan.' };
 
   const amount = periodPrice(u, annual);

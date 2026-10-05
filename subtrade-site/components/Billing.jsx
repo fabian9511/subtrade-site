@@ -213,7 +213,7 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
           Annual −20%
         </button>
       </div>
-      {curAnnual && <p className="fx-fine">You&rsquo;re on yearly billing. To switch to monthly at your renewal, email support@subtradesoftware.com.</p>}
+      {curAnnual && <p className="fx-fine">You&rsquo;re on yearly billing (20% off). Yearly plans renew yearly and can&rsquo;t be switched to monthly. You can still add or remove users.</p>}
 
       <div className="calc">
         <label htmlFor="bl-users">
