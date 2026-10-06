@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { STAGES, stripeGet, toGhl, day, money, recordTrialStarted } from '../../../lib/stripeGhl';
-import { onInvoicePaid, onPaymentFailed, onSubscriptionEnded, applyBankSetup, applyBankSetupIntent } from '../../../lib/billing';
+import { onInvoicePaid, onPaymentFailed, onSubscriptionEnded, applyBankSetup, applyBankSetupIntent, onSwitchedToBank } from '../../../lib/billing';
 import { syncCardFee, syncCardFeeForCustomer } from '../../../lib/cardFee';
 
 /**
@@ -66,6 +66,11 @@ export async function POST(req) {
     if (event.type === 'customer.subscription.updated') {
       const prev = event.data?.previous_attributes || {};
       if ('default_payment_method' in prev || 'items' in prev) await syncCardFee(obj.id);
+      if ('default_payment_method' in prev && obj.default_payment_method && obj.metadata?.source === 'fb-ads-funnel') {
+        const pm = await stripeGet(`payment_methods/${obj.default_payment_method}`);
+        const was = prev.default_payment_method ? await stripeGet(`payment_methods/${prev.default_payment_method}`) : null;
+        if (pm?.type === 'acss_debit' && was?.type !== 'acss_debit') await onSwitchedToBank(obj.id);
+      }
     }
     if (event.type === 'customer.updated') {
       const prev = event.data?.previous_attributes || {};

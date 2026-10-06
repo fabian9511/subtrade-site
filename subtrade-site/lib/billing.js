@@ -622,6 +622,14 @@ export async function applyBankSetupIntent(si) {
   await alertTeam(sub, { title: 'Switched to bank debit', action: 'Nothing to do in SubTrade. Future charges come from their bank account.' });
 }
 
+// Switched to bank debit on Stripe's "Update payment method" page.
+export async function onSwitchedToBank(subId) {
+  const sub = await getSub(subId);
+  if (!sub) return;
+  await noteToGhl(sub, { tags: ['pays-by-bank-debit'], note: 'Switched to bank debit (Canadian PAD) on the billing page. Future charges come from their bank account.' });
+  await alertTeam(sub, { title: 'Switched to bank debit', action: 'Nothing to do in SubTrade. Future charges come from their bank account.' });
+}
+
 /* ---------------- the email with the link ---------------- */
 
 export async function emailLink(email, link) {

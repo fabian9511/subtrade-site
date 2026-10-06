@@ -264,6 +264,10 @@ function ChangePlan({ s, busy, error, onConfirm, onBack }) {
       )}
 
       {error && <p className="fx-error" role="alert">{error}</p>}
+      <p className="fx-fine">
+        Pay by card, Google Pay or bank debit (pre-authorized debit from a Canadian bank account).
+        {s.card_fee ? ' Bank debit and debit cards have no card fee.' : ''}
+      </p>
       <div className="bl-actions">
         <button type="button" className="btn btn-primary" disabled={busy || same} onClick={() => onConfirm({ users, plan: annual ? 'yearly' : 'monthly' })}>
           {busy ? 'Saving…' : same ? 'Pick a change above' : s.trial || !up ? 'Confirm change' : `Confirm and pay ${today > 0 ? `≈ ${money(today)}` : ''} + tax`}
@@ -450,21 +454,8 @@ export function BillingManage() {
             if (r?.url) window.location.assign(r.url);
           }}
         >
-          {s.bank ? 'Update payment method' : 'Update card'}
+          Update payment method
         </button>
-        {!s.bank && (
-          <button
-            type="button"
-            className="btn btn-ghost"
-            disabled={busy}
-            onClick={async () => {
-              const r = await act('bank');
-              if (r?.url) window.location.assign(r.url);
-            }}
-          >
-            Pay by bank instead
-          </button>
-        )}
         {!s.cancel_at_period_end && s.users && (
           <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => setStep('change')}>
             Change plan
