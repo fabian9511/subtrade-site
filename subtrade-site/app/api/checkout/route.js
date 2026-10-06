@@ -79,19 +79,11 @@ export async function POST(req) {
   form.set('mode', 'subscription');
   if (email) form.set('customer_email', email); // else Stripe asks for it
   form.set('payment_method_collection', 'always');
-  // Card, or a Canadian bank account by pre-authorized debit (PAD). PAD costs
-  // us about 1% (capped) instead of 2.9% + 30c, and never has the card fee.
-  // Needs "Canadian pre-authorized debits" on in Stripe > Settings > Payment
-  // methods; if it isn't, the retry below drops it and offers card only.
+  // Card (Apple Pay / Google Pay come with it) or Link. Stripe Checkout can't
+  // take Canadian bank debit (PAD) in subscription mode yet, so bank debit is
+  // offered after signup on /billing (lib/billing.js bankSetupUrl).
   form.append('payment_method_types[]', 'card');
-  form.append('payment_method_types[]', 'acss_debit');
-  form.append('payment_method_types[]', 'link'); // Stripe's saved checkout (card or bank underneath)
-  form.set('payment_method_options[acss_debit][mandate_options][payment_schedule]', 'interval');
-  form.set(
-    'payment_method_options[acss_debit][mandate_options][interval_description]',
-    `On the renewal date of your SubTrade subscription, every ${annual ? 'year' : 'month'}, for the subscription price plus taxes`,
-  );
-  form.set('payment_method_options[acss_debit][mandate_options][transaction_type]', 'business');
+  form.append('payment_method_types[]', 'link'); // Stripe's saved checkout
   form.set('line_items[0][quantity]', '1');
   form.set('line_items[0][price_data][currency]', 'cad');
   form.set('line_items[0][price_data][unit_amount]', String(amount * 100));
@@ -111,7 +103,7 @@ export async function POST(req) {
   }
   form.set(
     'custom_text[submit][message]',
-    `You pay $0.00 today — your card or bank account is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing.${feeNote} By starting your trial you agree to our [Terms & Conditions](https://subtradesoftware.com/terms-and-conditions/) and [Fair Billing Policy](https://subtradesoftware.com/fair-billing-policy/).`,
+    `You pay $0.00 today — your card is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing.${feeNote} By starting your trial you agree to our [Terms & Conditions](https://subtradesoftware.com/terms-and-conditions/) and [Fair Billing Policy](https://subtradesoftware.com/fair-billing-policy/).`,
   );
   // Sales tax through Stripe Tax: it charges only where a registration is added
   // in Stripe (Settings → Tax → Locations): GST/HST, plus SK/MB/BC/QC once
@@ -147,11 +139,6 @@ export async function POST(req) {
         console.error('[checkout] TURN ON LINK IN STRIPE — without Link:', msg);
         form.delete('payment_method_types[]');
         types.filter((t) => t !== 'link').forEach((t) => form.append('payment_method_types[]', t));
-      } else if (/acss|pre-authorized|payment method type/i.test(msg) && types.includes('acss_debit')) {
-        console.error('[checkout] TURN ON CANADIAN PRE-AUTHORIZED DEBITS IN STRIPE — card only:', msg);
-        form.delete('payment_method_types[]');
-        types.filter((t) => t !== 'acss_debit').forEach((t) => form.append('payment_method_types[]', t));
-        for (const k of [...form.keys()]) if (k.startsWith('payment_method_options[acss_debit]')) form.delete(k);
       } else if (/tax/i.test(msg) && form.has('automatic_tax[enabled]')) {
         console.error('[checkout] SET UP STRIPE TAX — GST not charged:', msg);
         form.delete('automatic_tax[enabled]');

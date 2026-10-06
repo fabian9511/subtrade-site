@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { STAGES, stripeGet, toGhl, day, money, recordTrialStarted } from '../../../lib/stripeGhl';
-import { onInvoicePaid, onPaymentFailed, onSubscriptionEnded } from '../../../lib/billing';
+import { onInvoicePaid, onPaymentFailed, onSubscriptionEnded, applyBankSetup, applyBankSetupIntent } from '../../../lib/billing';
 import { syncCardFee, syncCardFeeForCustomer } from '../../../lib/cardFee';
 
 /**
@@ -12,6 +12,8 @@ import { syncCardFee, syncCardFeeForCustomer } from '../../../lib/cardFee';
  *   customer.subscription.deleted   cancelled / trial lapsed   → card "Nurture / lost" + team alert
  *   invoice.payment_failed          card declined              → team alert, GHL task, customer email
  *   (invoice.paid also sends the team alert on a subscription's first real payment)
+ *   checkout.session.completed (setup) / setup_intent.succeeded
+ *                                   "Pay by bank instead" on /billing → bank debit becomes the payment method
  *   customer.subscription.updated / customer.updated
  *                                   card, bank account or address changed: card fee
  *                                   added or removed (lib/cardFee.js, only when switched on)
@@ -47,9 +49,16 @@ export async function POST(req) {
   const obj = event.data?.object || {};
 
   try {
-    if (event.type === 'checkout.session.completed') {
+    if (event.type === 'checkout.session.completed' && obj.mode === 'setup') {
+      await applyBankSetup(obj); // "Pay by bank instead" on /billing
+    } else if (event.type === 'checkout.session.completed') {
       await recordTrialStarted(obj); // also reported by the welcome page; repeats are skipped
       if (obj.subscription) await syncCardFee(obj.subscription);
+    }
+
+    // Bank account verified by micro-deposits (days after "Pay by bank instead").
+    if (event.type === 'setup_intent.succeeded' && obj.metadata?.subscription) {
+      await applyBankSetupIntent(obj);
     }
 
     // Our own fee change also fires subscription.updated; syncCardFee then

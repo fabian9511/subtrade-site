@@ -558,6 +558,62 @@ export async function cardUpdateUrl(sub, returnUrl) {
   return s?.url || null;
 }
 
+// Switch to bank debit (PAD): Stripe's hosted page in setup mode collects the
+// bank account and the business PAD agreement, then applyBankSetup (from the
+// checkout.session.completed webhook) makes it the subscription's payment
+// method. Needs "Canadian pre-authorized debits" on in Stripe.
+export async function bankSetupUrl(sub, returnUrl) {
+  const s = await stripe('checkout/sessions', {
+    method: 'POST',
+    form: {
+      mode: 'setup',
+      customer: sub.customer?.id || sub.customer,
+      'payment_method_types[0]': 'acss_debit',
+      'payment_method_options[acss_debit][currency]': 'cad',
+      'payment_method_options[acss_debit][mandate_options][payment_schedule]': 'interval',
+      'payment_method_options[acss_debit][mandate_options][interval_description]':
+        `On the renewal date of your SubTrade subscription (every ${planItem(sub)?.price?.recurring?.interval === 'year' ? 'year' : 'month'}), for the subscription price plus taxes`,
+      'payment_method_options[acss_debit][mandate_options][transaction_type]': 'business',
+      'metadata[purpose]': 'bank_debit',
+      'metadata[subscription]': sub.id,
+      'setup_intent_data[metadata][subscription]': sub.id,
+      success_url: `${returnUrl}?bank=done`,
+      cancel_url: returnUrl,
+    },
+  });
+  return s?.url || null;
+}
+
+export async function applyBankSetup(session) {
+  if (session?.mode !== 'setup' || session?.metadata?.purpose !== 'bank_debit' || session.status !== 'complete') return;
+  const si = await stripe(`setup_intents/${session.setup_intent}`);
+  if (si) await applyBankSetupIntent(si);
+}
+
+// Instant verification succeeds at once; micro-deposit verification takes 1-2
+// business days and arrives later as setup_intent.succeeded. Until then the
+// card stays in charge, so no charge ever goes to an unverified account.
+export async function applyBankSetupIntent(si) {
+  const subId = si?.metadata?.subscription;
+  const pm = typeof si?.payment_method === 'object' ? si.payment_method?.id : si?.payment_method;
+  if (!subId || !pm) return;
+  const sub = await getSub(subId);
+  if (!sub || (sub.customer?.id || sub.customer) !== si.customer) return;
+  if (si.status !== 'succeeded') {
+    if (sub.metadata?.bank_pending !== si.id) {
+      await stripe(`subscriptions/${subId}`, { method: 'POST', form: { 'metadata[bank_pending]': si.id } });
+      await noteToGhl(sub, { note: 'Started switching to bank debit; Stripe is verifying the account (micro-deposits, 1-2 business days). Card stays in use until then.' });
+    }
+    return;
+  }
+  if ((sub.default_payment_method?.id || sub.default_payment_method) === pm) return; // already done
+  await stripe(`subscriptions/${subId}`, { method: 'POST', form: { default_payment_method: pm, 'metadata[bank_pending]': '' } });
+  await stripe(`customers/${si.customer}`, { method: 'POST', form: { 'invoice_settings[default_payment_method]': pm } });
+  await syncCardFee(subId); // a bank account never has the card fee
+  await noteToGhl(sub, { tags: ['pays-by-bank-debit'], note: 'Switched to bank debit (Canadian PAD) on the website. Future charges come from their bank account.' });
+  await alertTeam(sub, { title: 'Switched to bank debit', action: 'Nothing to do in SubTrade. Future charges come from their bank account.' });
+}
+
 /* ---------------- the email with the link ---------------- */
 
 export async function emailLink(email, link) {

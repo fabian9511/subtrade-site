@@ -8,6 +8,7 @@ import {
   cancelAtPeriodEnd,
   undoCancel,
   cardUpdateUrl,
+  bankSetupUrl,
   listInvoices,
   consumeLinkNonce,
   startPaidNow,
@@ -24,6 +25,7 @@ import {
  *           "start"  → end the free trial now and start the paid plan
  *           "change" → change users / monthly→yearly (users, plan)
  *           "card"   → Stripe's secure page to change the card
+ *           "bank"   → Stripe's secure page to switch to bank debit (PAD)
  */
 export async function POST(req) {
   if (!process.env.STRIPE_SECRET_KEY) return NextResponse.json({ ok: false, error: 'Billing is not set up yet.' }, { status: 503 });
@@ -84,6 +86,13 @@ export async function POST(req) {
       return url
         ? NextResponse.json({ ok: true, url })
         : NextResponse.json({ ok: false, error: 'Card updates are not switched on yet. Email support@subtradesoftware.com.' }, { status: 503 });
+    }
+    case 'bank': {
+      const back = `${new URL(req.url).origin}/billing/`;
+      const url = await bankSetupUrl(sub, back);
+      return url
+        ? NextResponse.json({ ok: true, url })
+        : NextResponse.json({ ok: false, error: 'Bank debit is not switched on yet. Email support@subtradesoftware.com.' }, { status: 503 });
     }
     default:
       return NextResponse.json({ ok: false }, { status: 400 });

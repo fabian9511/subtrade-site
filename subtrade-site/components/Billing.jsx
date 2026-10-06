@@ -452,6 +452,19 @@ export function BillingManage() {
         >
           {s.bank ? 'Update payment method' : 'Update card'}
         </button>
+        {!s.bank && (
+          <button
+            type="button"
+            className="btn btn-ghost"
+            disabled={busy}
+            onClick={async () => {
+              const r = await act('bank');
+              if (r?.url) window.location.assign(r.url);
+            }}
+          >
+            Pay by bank instead
+          </button>
+        )}
         {!s.cancel_at_period_end && s.users && (
           <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => setStep('change')}>
             Change plan
