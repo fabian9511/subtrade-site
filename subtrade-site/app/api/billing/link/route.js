@@ -25,8 +25,9 @@ export async function POST(req) {
   }
   const done = { ok: true, message: 'If that email has a SubTrade subscription, a secure link is on its way. Check your inbox (and spam).' };
 
+  const preview = process.env.VERCEL_ENV !== 'production' && !/(^|\.)subtradesoftware\.com$/.test(new URL(req.url).hostname);
   const last = recent.get(email) || 0;
-  if (Date.now() - last < 60e3) return NextResponse.json(done); // one email a minute
+  if (!preview && Date.now() - last < 60e3) return NextResponse.json(done); // one email a minute (live site)
   recent.set(email, Date.now());
 
   const found = await findSubscription(email);
@@ -40,6 +41,5 @@ export async function POST(req) {
   const sent = await emailLink(email, link);
   if (!sent) console.error('[billing/link] email not sent for', found.customer.id);
 
-  const preview = process.env.VERCEL_ENV !== 'production' && !/(^|\.)subtradesoftware\.com$/.test(new URL(req.url).hostname);
   return NextResponse.json(preview ? { ...done, previewLink: link, emailSent: sent } : done);
 }
