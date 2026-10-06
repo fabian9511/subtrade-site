@@ -607,8 +607,16 @@ export async function applyBankSetupIntent(si) {
     return;
   }
   if ((sub.default_payment_method?.id || sub.default_payment_method) === pm) return; // already done
-  await stripe(`subscriptions/${subId}`, { method: 'POST', form: { default_payment_method: pm, 'metadata[bank_pending]': '' } });
-  await stripe(`customers/${si.customer}`, { method: 'POST', form: { 'invoice_settings[default_payment_method]': pm } });
+  // Checkout limited the subscription to card + Link, so allow bank debit too.
+  const r = await stripeTry(`subscriptions/${subId}`, {
+    default_payment_method: pm,
+    'payment_settings[payment_method_types][0]': 'card',
+    'payment_settings[payment_method_types][1]': 'link',
+    'payment_settings[payment_method_types][2]': 'acss_debit',
+    'metadata[bank_pending]': '',
+  });
+  // Throw so the webhook answers 500 and Stripe retries; no alert for a switch that didn't happen.
+  if (!r.ok) throw new Error(`bank switch failed: ${r.data?.error?.message || 'unknown'}`);
   await syncCardFee(subId); // a bank account never has the card fee
   await noteToGhl(sub, { tags: ['pays-by-bank-debit'], note: 'Switched to bank debit (Canadian PAD) on the website. Future charges come from their bank account.' });
   await alertTeam(sub, { title: 'Switched to bank debit', action: 'Nothing to do in SubTrade. Future charges come from their bank account.' });
