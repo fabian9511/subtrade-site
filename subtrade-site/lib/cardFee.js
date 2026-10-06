@@ -17,7 +17,13 @@
 const STRIPE = 'https://api.stripe.com/v1';
 export const FEE_RATE = 0.024;
 export const FEE_PRODUCT = 'subtrade_card_fee';
-export const cardFeeOn = () => process.env.NEXT_PUBLIC_CARD_FEE === 'on';
+// Never charged with a live key before the card-network notice period ends
+// (45 days after the Visa/Mastercard notices, at least the 30 the networks require). Test mode is not held back.
+export const CARD_FEE_START = process.env.CARD_FEE_START || '2026-11-19';
+export const cardFeeOn = () =>
+  process.env.NEXT_PUBLIC_CARD_FEE === 'on' &&
+  (!String(process.env.STRIPE_SECRET_KEY || '').includes('_live_') ||
+    Date.now() >= Date.parse(`${CARD_FEE_START}T00:00:00-07:00`));
 
 async function stripe(path, form) {
   const res = await fetch(`${STRIPE}/${path}`, {

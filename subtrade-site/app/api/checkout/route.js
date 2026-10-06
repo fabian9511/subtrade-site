@@ -47,7 +47,7 @@ export async function POST(req) {
   });
   const money = `CA$${fmt(amount)}.00 plus applicable taxes`;
   const feeNote = cardFeeOn()
-    ? ' Credit cards add a 2.4% processing fee (not debit cards, bank debit or Québec addresses).'
+    ? ' From November 19, 2026, credit cards add a 2.4% processing fee (not debit cards, bank debit or Québec addresses).'
     : '';
   const description = `FREE 14-day trial: you pay $0.00 today. On ${firstCharge} you are charged ${money} for ${annual ? 'one year' : 'one month'} (${usersText}), then every ${annual ? 'year' : 'month'} until you cancel. Cancel before ${firstCharge} and you pay nothing.${feeNote}`;
   const email = clean(body.email, 160).toLowerCase();

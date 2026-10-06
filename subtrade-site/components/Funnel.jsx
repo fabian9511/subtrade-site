@@ -759,7 +759,7 @@ function TrialBox({ lead }) {
           <li>Cancel before <b>{firstCharge}</b> and you pay nothing.</li>
           <li>Your card is saved now, not charged. Prefer bank debit? Switch any time on your billing page.</li>
           {process.env.NEXT_PUBLIC_CARD_FEE === 'on' && (
-            <li>Credit cards add a 2.4% processing fee. No fee for bank debit, debit cards or Qu&eacute;bec addresses.</li>
+            <li>From November 19, 2026, credit cards add a 2.4% processing fee. No fee for bank debit, debit cards or Qu&eacute;bec addresses.</li>
           )}
         </ul>
         {error && <p className="fx-error" role="alert">{error}</p>}
