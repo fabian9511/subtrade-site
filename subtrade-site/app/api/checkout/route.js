@@ -143,7 +143,7 @@ export async function POST(req) {
     for (let i = 0; !res.ok && i < 4; i++) {
       const msg = String(data?.error?.message || '');
       const types = form.getAll('payment_method_types[]');
-      if (/blinkb/i.test(msg) && types.includes('link')) {
+      if (/\blink\b/i.test(msg) && types.includes('link')) {
         console.error('[checkout] TURN ON LINK IN STRIPE — without Link:', msg);
         form.delete('payment_method_types[]');
         types.filter((t) => t !== 'link').forEach((t) => form.append('payment_method_types[]', t));
