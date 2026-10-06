@@ -176,6 +176,11 @@ function bankMethod(pm) {
   if (pm?.type === 'acss_debit') return { bank: pm.acss_debit?.bank_name || 'Bank account', last4: pm.acss_debit?.last4 || '' };
   return null;
 }
+// Paid through Stripe Link: Stripe doesn't share the card behind it.
+function linkMethod(pm) {
+  if (pm?.type === 'link') return { email: pm.link?.email || '' };
+  return null;
+}
 
 export function summarize(sub) {
   const item = planItem(sub);
@@ -197,6 +202,7 @@ export function summarize(sub) {
     ends_on: sub.cancel_at_period_end ? day(sub.cancel_at || nextDate) : null,
     card: payMethod(pm),
     bank: bankMethod(pm),
+    link: linkMethod(pm),
     card_fee: fee?.price?.unit_amount ? fee.price.unit_amount / 100 : null,
     save_offer_used: hasSaveCoupon(sub),
     offer: SAVE_COUPON.label,
@@ -263,7 +269,7 @@ export async function alertTeam(subIn, { title, action, details = [] }) {
 
   const card = s.card
     ? `${s.card.brand.toUpperCase()}${s.card.funding ? ` ${s.card.funding}` : ''} •••• ${s.card.last4} · exp ${s.card.exp}`
-    : s.bank ? `Bank debit: ${s.bank.bank} •••• ${s.bank.last4}` : 'Nothing on file';
+    : s.bank ? `Bank debit: ${s.bank.bank} •••• ${s.bank.last4}` : s.link ? `Stripe Link (${s.link.email || 'saved card'})` : 'Nothing on file';
   const stripeUrl = `https://dashboard.stripe.com/${sub.livemode ? '' : 'test/'}subscriptions/${sub.id}`;
   let ghlUrl = null;
   if (c.email) {

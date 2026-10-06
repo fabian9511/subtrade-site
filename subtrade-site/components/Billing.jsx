@@ -430,7 +430,8 @@ export function BillingManage() {
         </div>
         <div>
           <span>{s.bank ? 'Paying by' : 'Card on file'}</span>
-          <b>{s.card ? `${s.card.brand.toUpperCase()} •••• ${s.card.last4}` : s.bank ? `${s.bank.bank} •••• ${s.bank.last4}` : 'None'}</b>
+          <b>{s.card ? `${s.card.brand.toUpperCase()} •••• ${s.card.last4}` : s.bank ? `${s.bank.bank} •••• ${s.bank.last4}` : s.link ? 'Link' : 'None'}</b>
+          {s.link && <small>Saved with Stripe Link{s.link.email ? ` · ${s.link.email}` : ''}</small>}
           {s.card && <small>Expires {s.card.exp}</small>}
           {s.bank && <small>Bank debit (PAD)</small>}
         </div>
