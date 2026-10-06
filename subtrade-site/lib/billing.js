@@ -617,8 +617,7 @@ export async function applyBankSetupIntent(si) {
   const r = await stripeTry(`subscriptions/${subId}`, {
     default_payment_method: pm,
     'payment_settings[payment_method_types][0]': 'card',
-    'payment_settings[payment_method_types][1]': 'link',
-    'payment_settings[payment_method_types][2]': 'acss_debit',
+    'payment_settings[payment_method_types][1]': 'acss_debit',
     'metadata[bank_pending]': '',
   });
   // Throw so the webhook answers 500 and Stripe retries; no alert for a switch that didn't happen.

@@ -81,10 +81,12 @@ export async function syncCardFee(subOrId) {
   );
   if (!sub || !['trialing', 'active', 'past_due'].includes(sub.status)) return { changed: false };
   if (sub.metadata?.source !== 'fb-ads-funnel') return { changed: false }; // only self-serve subscriptions
+  // Card + bank debit only (no Stripe Link: it hides credit vs debit).
   const types = sub.payment_settings?.payment_method_types;
-  if (Array.isArray(types) && !types.includes('acss_debit')) {
+  if (!Array.isArray(types) || types.length !== 2 || !types.includes('card') || !types.includes('acss_debit')) {
     await stripe(`subscriptions/${sub.id}`, {
-      ...Object.fromEntries([...types, 'acss_debit'].map((t, i) => [`payment_settings[payment_method_types][${i}]`, t])),
+      'payment_settings[payment_method_types][0]': 'card',
+      'payment_settings[payment_method_types][1]': 'acss_debit',
     });
   }
 

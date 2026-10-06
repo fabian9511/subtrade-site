@@ -79,11 +79,11 @@ export async function POST(req) {
   form.set('mode', 'subscription');
   if (email) form.set('customer_email', email); // else Stripe asks for it
   form.set('payment_method_collection', 'always');
-  // Card (Apple Pay / Google Pay come with it) or Link. Stripe Checkout can't
-  // take Canadian bank debit (PAD) in subscription mode yet, so bank debit is
-  // offered after signup on /billing (lib/billing.js bankSetupUrl).
+  // Card only (Apple Pay / Google Pay come with it). No Stripe Link: it hides
+  // whether the card is credit or debit, so the card fee couldn't apply.
+  // Stripe Checkout can't take Canadian bank debit (PAD) in subscription mode
+  // yet; customers switch to it on /billing ("Update payment method").
   form.append('payment_method_types[]', 'card');
-  form.append('payment_method_types[]', 'link'); // Stripe's saved checkout
   form.set('line_items[0][quantity]', '1');
   form.set('line_items[0][price_data][currency]', 'cad');
   form.set('line_items[0][price_data][unit_amount]', String(amount * 100));
@@ -134,12 +134,7 @@ export async function POST(req) {
     // don't block the trial: drop that part, log it loudly, and carry on.
     for (let i = 0; !res.ok && i < 4; i++) {
       const msg = String(data?.error?.message || '');
-      const types = form.getAll('payment_method_types[]');
-      if (/\blink\b/i.test(msg) && types.includes('link')) {
-        console.error('[checkout] TURN ON LINK IN STRIPE — without Link:', msg);
-        form.delete('payment_method_types[]');
-        types.filter((t) => t !== 'link').forEach((t) => form.append('payment_method_types[]', t));
-      } else if (/tax/i.test(msg) && form.has('automatic_tax[enabled]')) {
+      if (/tax/i.test(msg) && form.has('automatic_tax[enabled]')) {
         console.error('[checkout] SET UP STRIPE TAX — GST not charged:', msg);
         form.delete('automatic_tax[enabled]');
       } else if (/terms|consent/i.test(msg) && form.has('consent_collection[terms_of_service]')) {
