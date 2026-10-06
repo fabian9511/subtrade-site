@@ -77,7 +77,7 @@ export async function findSubscription(email) {
 
 async function getSub(subId) {
   return stripe(
-    `subscriptions/${subId}?expand[]=default_payment_method&expand[]=customer&expand[]=discounts&expand[]=items.data.price.product`,
+    `subscriptions/${subId}?expand[]=default_payment_method&expand[]=customer&expand[]=discounts&expand[]=items.data.price.product&expand[]=customer.invoice_settings.default_payment_method`,
   );
 }
 
@@ -186,7 +186,9 @@ export function summarize(sub) {
   const item = planItem(sub);
   const fee = feeItem(sub);
   const price = item?.price || {};
-  const pm = sub.default_payment_method;
+  // Stripe's "Update payment method" page sets the customer's default, which
+  // Stripe uses when the subscription has none of its own.
+  const pm = sub.default_payment_method || sub.customer?.invoice_settings?.default_payment_method || null;
   const trial = sub.status === 'trialing';
   const nextDate = trial ? sub.trial_end : periodEnd(sub);
   return {
@@ -248,7 +250,7 @@ export async function alertTeam(subIn, { title, action, details = [] }) {
   // Re-read so the alert shows the plan as it is now (after the change).
   const sub =
     (await stripe(
-      `subscriptions/${subIn.id}?expand[]=customer&expand[]=customer.tax_ids&expand[]=discounts&expand[]=items.data.price.product&expand[]=default_payment_method`,
+      `subscriptions/${subIn.id}?expand[]=customer&expand[]=customer.tax_ids&expand[]=discounts&expand[]=items.data.price.product&expand[]=default_payment_method&expand[]=customer.invoice_settings.default_payment_method`,
     )) || subIn;
   const c = typeof sub.customer === 'object' && sub.customer ? sub.customer : {};
   const m = sub.metadata || {};

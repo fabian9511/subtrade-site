@@ -75,6 +75,19 @@ export async function POST(req) {
     if (event.type === 'customer.updated') {
       const prev = event.data?.previous_attributes || {};
       if ('invoice_settings' in prev || 'address' in prev) await syncCardFeeForCustomer(obj.id);
+      // Switched to bank debit on Stripe's "Update payment method" page.
+      const now = obj.invoice_settings?.default_payment_method;
+      const before = prev.invoice_settings?.default_payment_method;
+      if ('invoice_settings' in prev && now && now !== before) {
+        const pm = await stripeGet(`payment_methods/${now}`);
+        const was = before ? await stripeGet(`payment_methods/${before}`) : null;
+        if (pm?.type === 'acss_debit' && was?.type !== 'acss_debit') {
+          const subs = await stripeGet(`subscriptions?customer=${obj.id}&status=all&limit=10`);
+          for (const s of subs?.data || []) {
+            if (s.metadata?.source === 'fb-ads-funnel' && ['trialing', 'active', 'past_due'].includes(s.status)) await onSwitchedToBank(s.id);
+          }
+        }
+      }
     }
 
     if (event.type === 'invoice.paid' && obj.amount_paid > 0) {
