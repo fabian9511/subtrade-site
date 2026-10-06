@@ -85,6 +85,7 @@ export async function POST(req) {
   // methods; if it isn't, the retry below drops it and offers card only.
   form.append('payment_method_types[]', 'card');
   form.append('payment_method_types[]', 'acss_debit');
+  form.append('payment_method_types[]', 'link'); // Stripe's saved checkout (card or bank underneath)
   form.set('payment_method_options[acss_debit][mandate_options][payment_schedule]', 'interval');
   form.set(
     'payment_method_options[acss_debit][mandate_options][interval_description]',
@@ -139,11 +140,17 @@ export async function POST(req) {
     let { res, data } = await create(form);
     // If Stripe Tax or the Terms URL isn't set up in this Stripe account yet,
     // don't block the trial: drop that part, log it loudly, and carry on.
-    for (let i = 0; !res.ok && i < 3; i++) {
+    for (let i = 0; !res.ok && i < 4; i++) {
       const msg = String(data?.error?.message || '');
-      if (/acss|pre-authorized|payment method type/i.test(msg) && form.getAll('payment_method_types[]').includes('acss_debit')) {
+      const types = form.getAll('payment_method_types[]');
+      if (/blinkb/i.test(msg) && types.includes('link')) {
+        console.error('[checkout] TURN ON LINK IN STRIPE — without Link:', msg);
+        form.delete('payment_method_types[]');
+        types.filter((t) => t !== 'link').forEach((t) => form.append('payment_method_types[]', t));
+      } else if (/acss|pre-authorized|payment method type/i.test(msg) && types.includes('acss_debit')) {
         console.error('[checkout] TURN ON CANADIAN PRE-AUTHORIZED DEBITS IN STRIPE — card only:', msg);
         form.delete('payment_method_types[]');
+        types.filter((t) => t !== 'acss_debit').forEach((t) => form.append('payment_method_types[]', t));
         for (const k of [...form.keys()]) if (k.startsWith('payment_method_options[acss_debit]')) form.delete(k);
       } else if (/tax/i.test(msg) && form.has('automatic_tax[enabled]')) {
         console.error('[checkout] SET UP STRIPE TAX — GST not charged:', msg);

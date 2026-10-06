@@ -58,7 +58,7 @@ async function ensureFeeProduct() {
 export function feeReason(pm, address) {
   if (!cardFeeOn()) return { apply: false, why: 'card fee switched off' };
   if (!pm) return { apply: false, why: 'no payment method' };
-  if (pm.type !== 'card') return { apply: false, why: 'pays by bank debit' };
+  if (pm.type !== 'card') return { apply: false, why: pm.type === 'acss_debit' ? 'pays by bank debit' : `pays by ${pm.type}` };
   if (pm.card?.funding !== 'credit') return { apply: false, why: `${pm.card?.funding || 'non-credit'} card` };
   if ((address?.country || '').toUpperCase() !== 'CA') return { apply: false, why: 'billing address outside Canada' };
   if ((address?.state || '').toUpperCase() === 'QC') return { apply: false, why: 'Québec billing address' };
