@@ -305,10 +305,10 @@ export function BillingManage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const t =
-      new URLSearchParams(window.location.hash.slice(1)).get('t') ||
-      new URLSearchParams(window.location.search).get('t') ||
-      '';
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    const query = new URLSearchParams(window.location.search);
+    const t = hash.get('t') || query.get('t') || '';
+    const back = hash.has('back') || query.has('back'); // returning from Stripe's payment page
     // Design check on a developer's own machine only: /billing/manage/?mock=1
     if (window.location.hostname === 'localhost' && new URLSearchParams(window.location.search).has('mock')) {
       const now = Date.now() / 1000;
@@ -323,12 +323,19 @@ export function BillingManage() {
     // Wait for a real click: email link scanners open links automatically and
     // would otherwise use up the one-time link.
     setToken(t);
+    // Back from Stripe: a page token (not the one-time email link), so open it
+    // straight away. Give the Stripe webhook a moment to record the change.
+    if (back) {
+      setStep('loading');
+      setTimeout(() => open(t), 2500);
+      return;
+    }
     setStep('ready');
   }, []);
 
-  async function open() {
+  async function open(tok = token) {
     setBusy(true);
-    const r = await post('/api/billing/manage/', { token, action: 'view' });
+    const r = await post('/api/billing/manage/', { token: tok, action: 'view' });
     setBusy(false);
     if (!r.ok) return setStep('expired');
     setToken(r.token);
@@ -369,7 +376,7 @@ export function BillingManage() {
         <div className="bl-card">
           <p className="eyebrow">Secure link</p>
           <p className="bl-lead">Your link is ready. For your security it works once.</p>
-          <button type="button" className="btn btn-primary btn-lg fx-submit" disabled={busy} onClick={open}>
+          <button type="button" className="btn btn-primary btn-lg fx-submit" disabled={busy} onClick={() => open()}>
             {busy ? 'Opening…' : 'Show my subscription'}
           </button>
         </div>

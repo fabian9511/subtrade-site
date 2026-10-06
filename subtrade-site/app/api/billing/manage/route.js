@@ -81,8 +81,13 @@ export async function POST(req) {
     case 'undo':
       return NextResponse.json(await undoCancel(sub));
     case 'card': {
-      const back = `${new URL(req.url).origin}/billing/`;
-      const url = await cardUpdateUrl(sub, back);
+      // Come straight back to this subscription page (fresh 60-minute page
+      // token), not to the "enter your email" page.
+      const origin = new URL(req.url).origin;
+      const pageToken = encodeURIComponent(signToken({ sub: p.sub, cus: p.cus, step: 'page' }, 60));
+      const url =
+        (await cardUpdateUrl(sub, `${origin}/billing/manage/#t=${pageToken}&back=1`)) ||
+        (await cardUpdateUrl(sub, `${origin}/billing/manage/?t=${pageToken}&back=1`));
       return url
         ? NextResponse.json({ ok: true, url })
         : NextResponse.json({ ok: false, error: 'Card updates are not switched on yet. Email support@subtradesoftware.com.' }, { status: 503 });
