@@ -125,9 +125,22 @@ export async function syncCardFee(subOrId) {
 }
 
 // Every self-serve subscription of a customer (card or address changed).
+// Also makes the customer's new default (set on Stripe's "Update payment
+// method" page) the subscription's own payment method, so an old card saved on
+// the subscription is never charged after the customer replaced it.
 export async function syncCardFeeForCustomer(customerId) {
+  const customer = await stripe(`customers/${customerId}`);
+  const pm = customer?.invoice_settings?.default_payment_method || null;
   const subs = await stripe(`subscriptions?customer=${customerId}&status=all&limit=10`);
   for (const s of subs?.data || []) {
-    if (['trialing', 'active', 'past_due'].includes(s.status)) await syncCardFee(s.id);
+    if (!['trialing', 'active', 'past_due'].includes(s.status)) continue;
+    if (pm && s.metadata?.source === 'fb-ads-funnel' && s.default_payment_method && s.default_payment_method !== pm) {
+      await stripe(`subscriptions/${s.id}`, {
+        default_payment_method: pm,
+        'payment_settings[payment_method_types][0]': 'card',
+        'payment_settings[payment_method_types][1]': 'acss_debit',
+      });
+    }
+    await syncCardFee(s.id);
   }
 }
