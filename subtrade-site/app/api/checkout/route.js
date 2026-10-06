@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { clampUsers, periodPrice, fmt } from '../../../lib/pricing';
 import { findSubscription } from '../../../lib/billing';
+import { cardFeeOn } from '../../../lib/cardFee';
 
 /**
  * Starts a SubTrade 14-day trial with a card on file, for the /start/ funnel.
@@ -45,7 +46,10 @@ export async function POST(req) {
     month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Edmonton',
   });
   const money = `CA$${fmt(amount)}.00 plus applicable taxes`;
-  const description = `FREE 14-day trial: you pay $0.00 today. On ${firstCharge} your card is charged ${money} for ${annual ? 'one year' : 'one month'} (${usersText}), then every ${annual ? 'year' : 'month'} until you cancel. Cancel before ${firstCharge} and you pay nothing.`;
+  const feeNote = cardFeeOn()
+    ? ' Credit cards add a 2.4% processing fee (not debit cards, bank debit or Québec addresses).'
+    : '';
+  const description = `FREE 14-day trial: you pay $0.00 today. On ${firstCharge} you are charged ${money} for ${annual ? 'one year' : 'one month'} (${usersText}), then every ${annual ? 'year' : 'month'} until you cancel. Cancel before ${firstCharge} and you pay nothing.${feeNote}`;
   const email = clean(body.email, 160).toLowerCase();
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: 'A valid email is required' }, { status: 400 });
@@ -75,6 +79,18 @@ export async function POST(req) {
   form.set('mode', 'subscription');
   if (email) form.set('customer_email', email); // else Stripe asks for it
   form.set('payment_method_collection', 'always');
+  // Card, or a Canadian bank account by pre-authorized debit (PAD). PAD costs
+  // us about 1% (capped) instead of 2.9% + 30c, and never has the card fee.
+  // Needs "Canadian pre-authorized debits" on in Stripe > Settings > Payment
+  // methods; if it isn't, the retry below drops it and offers card only.
+  form.append('payment_method_types[]', 'card');
+  form.append('payment_method_types[]', 'acss_debit');
+  form.set('payment_method_options[acss_debit][mandate_options][payment_schedule]', 'interval');
+  form.set(
+    'payment_method_options[acss_debit][mandate_options][interval_description]',
+    `On the renewal date of your SubTrade subscription, every ${annual ? 'year' : 'month'}, for the subscription price plus taxes`,
+  );
+  form.set('payment_method_options[acss_debit][mandate_options][transaction_type]', 'business');
   form.set('line_items[0][quantity]', '1');
   form.set('line_items[0][price_data][currency]', 'cad');
   form.set('line_items[0][price_data][unit_amount]', String(amount * 100));
@@ -94,7 +110,7 @@ export async function POST(req) {
   }
   form.set(
     'custom_text[submit][message]',
-    `You pay $0.00 today — your card is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing. By starting your trial you agree to our [Terms & Conditions](https://subtradesoftware.com/terms-and-conditions/) and [Fair Billing Policy](https://subtradesoftware.com/fair-billing-policy/).`,
+    `You pay $0.00 today — your card or bank account is saved, not charged. First charge: ${money} on ${firstCharge}. Cancel anytime before then and you pay nothing.${feeNote} By starting your trial you agree to our [Terms & Conditions](https://subtradesoftware.com/terms-and-conditions/) and [Fair Billing Policy](https://subtradesoftware.com/fair-billing-policy/).`,
   );
   // Sales tax through Stripe Tax: it charges only where a registration is added
   // in Stripe (Settings → Tax → Locations): GST/HST, plus SK/MB/BC/QC once
@@ -123,9 +139,13 @@ export async function POST(req) {
     let { res, data } = await create(form);
     // If Stripe Tax or the Terms URL isn't set up in this Stripe account yet,
     // don't block the trial: drop that part, log it loudly, and carry on.
-    for (let i = 0; !res.ok && i < 2; i++) {
+    for (let i = 0; !res.ok && i < 3; i++) {
       const msg = String(data?.error?.message || '');
-      if (/tax/i.test(msg) && form.has('automatic_tax[enabled]')) {
+      if (/acss|pre-authorized|payment method type/i.test(msg) && form.getAll('payment_method_types[]').includes('acss_debit')) {
+        console.error('[checkout] TURN ON CANADIAN PRE-AUTHORIZED DEBITS IN STRIPE — card only:', msg);
+        form.delete('payment_method_types[]');
+        for (const k of [...form.keys()]) if (k.startsWith('payment_method_options[acss_debit]')) form.delete(k);
+      } else if (/tax/i.test(msg) && form.has('automatic_tax[enabled]')) {
         console.error('[checkout] SET UP STRIPE TAX — GST not charged:', msg);
         form.delete('automatic_tax[enabled]');
       } else if (/terms|consent/i.test(msg) && form.has('consent_collection[terms_of_service]')) {

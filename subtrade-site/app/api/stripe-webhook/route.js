@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { STAGES, stripeGet, toGhl, day, money, recordTrialStarted } from '../../../lib/stripeGhl';
 import { onInvoicePaid, onPaymentFailed, onSubscriptionEnded } from '../../../lib/billing';
+import { syncCardFee, syncCardFeeForCustomer } from '../../../lib/cardFee';
 
 /**
  * Stripe → GoHighLevel for the /start/ funnel trials.
@@ -11,6 +12,9 @@ import { onInvoicePaid, onPaymentFailed, onSubscriptionEnded } from '../../../li
  *   customer.subscription.deleted   cancelled / trial lapsed   → card "Nurture / lost" + team alert
  *   invoice.payment_failed          card declined              → team alert, GHL task, customer email
  *   (invoice.paid also sends the team alert on a subscription's first real payment)
+ *   customer.subscription.updated / customer.updated
+ *                                   card, bank account or address changed: card fee
+ *                                   added or removed (lib/cardFee.js, only when switched on)
  *
  * Only subscriptions made by the funnel (metadata.source = fb-ads-funnel) are
  * touched, so other SubTrade billing passes straight through.
@@ -45,6 +49,18 @@ export async function POST(req) {
   try {
     if (event.type === 'checkout.session.completed') {
       await recordTrialStarted(obj); // also reported by the welcome page; repeats are skipped
+      if (obj.subscription) await syncCardFee(obj.subscription);
+    }
+
+    // Our own fee change also fires subscription.updated; syncCardFee then
+    // finds nothing to do, so it never loops.
+    if (event.type === 'customer.subscription.updated') {
+      const prev = event.data?.previous_attributes || {};
+      if ('default_payment_method' in prev || 'items' in prev) await syncCardFee(obj.id);
+    }
+    if (event.type === 'customer.updated') {
+      const prev = event.data?.previous_attributes || {};
+      if ('invoice_settings' in prev || 'address' in prev) await syncCardFeeForCustomer(obj.id);
     }
 
     if (event.type === 'invoice.paid' && obj.amount_paid > 0) {

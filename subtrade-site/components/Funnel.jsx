@@ -757,7 +757,10 @@ function TrialBox({ lead }) {
         <ul className="fx-ticks fx-trial-terms">
           <li>Use the full platform free for 14 days.</li>
           <li>Cancel before <b>{firstCharge}</b> and you pay nothing.</li>
-          <li>Your card is saved now, not charged.</li>
+          <li>Pay by card or Canadian bank account. It&rsquo;s saved now, not charged.</li>
+          {process.env.NEXT_PUBLIC_CARD_FEE === 'on' && (
+            <li>Credit cards add a 2.4% processing fee. No fee for bank debit, debit cards or Qu&eacute;bec addresses.</li>
+          )}
         </ul>
         {error && <p className="fx-error" role="alert">{error}</p>}
         {existing && (
@@ -769,7 +772,7 @@ function TrialBox({ lead }) {
         <button type="button" className="btn btn-primary btn-lg fx-submit" onClick={start} disabled={busy}>
           {busy ? 'Opening secure checkout…' : 'Start my free trial · $0 today'}
         </button>
-        <p className="fx-fine">Secure checkout by Stripe. Your card details never touch our site. See our <a href="/fair-billing-policy/">Fair Billing Policy</a>.</p>
+        <p className="fx-fine">Secure checkout by Stripe. Your card and bank details never touch our site. See our <a href="/fair-billing-policy/">Fair Billing Policy</a>.</p>
       </div>
     </div>
   );

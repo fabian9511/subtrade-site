@@ -421,20 +421,21 @@ export function BillingManage() {
         </div>
         <div>
           <span>Amount</span>
-          <b className="mono">{s.amount != null ? money(s.save_offer_used ? s.amount * 0.8 : s.amount) : '—'}</b>
-          <small>CAD + tax / {per}{s.save_offer_used ? ' · 20% off applied' : ''}</small>
+          <b className="mono">{s.amount != null ? money((s.amount + (s.card_fee || 0)) * (s.save_offer_used ? 0.8 : 1)) : '—'}</b>
+          <small>CAD + tax / {per}{s.card_fee ? ' · incl. 2.4% card fee' : ''}{s.save_offer_used ? ' · 20% off applied' : ''}</small>
         </div>
         <div>
-          <span>Card on file</span>
-          <b>{s.card ? `${s.card.brand.toUpperCase()} •••• ${s.card.last4}` : 'None'}</b>
+          <span>{s.bank ? 'Paying by' : 'Card on file'}</span>
+          <b>{s.card ? `${s.card.brand.toUpperCase()} •••• ${s.card.last4}` : s.bank ? `${s.bank.bank} •••• ${s.bank.last4}` : 'None'}</b>
           {s.card && <small>Expires {s.card.exp}</small>}
+          {s.bank && <small>Bank debit (PAD)</small>}
         </div>
       </div>
 
       {s.users && (
         <details className="pb-details bl-breakdown" open>
           <summary>What you pay, line by line</summary>
-          <PriceBreakdown users={s.users} annual={s.interval === 'year'} saveOffer={s.save_offer_used} />
+          <PriceBreakdown users={s.users} annual={s.interval === 'year'} saveOffer={s.save_offer_used} cardFee={!!s.card_fee} />
         </details>
       )}
 
@@ -449,7 +450,7 @@ export function BillingManage() {
             if (r?.url) window.location.assign(r.url);
           }}
         >
-          Update card
+          {s.bank ? 'Update payment method' : 'Update card'}
         </button>
         {!s.cancel_at_period_end && s.users && (
           <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => setStep('change')}>

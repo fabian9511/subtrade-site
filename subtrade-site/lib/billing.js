@@ -9,6 +9,7 @@ import crypto from 'node:crypto';
 import { clampUsers, periodPrice, fmt, MAX_USERS } from './pricing';
 import { sendMetaEvent, userFromStripe } from './meta';
 import { ghl, LOCATION_ID, toGhl, STAGES } from './stripeGhl';
+import { planItem, feeItem, syncCardFee } from './cardFee';
 
 const STRIPE = 'https://api.stripe.com/v1';
 const LIVE_STATUSES = ['trialing', 'active', 'past_due'];
@@ -164,10 +165,21 @@ const day = (unix) =>
   unix ? new Date(unix * 1000).toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Edmonton' }) : null;
 
 // Newer Stripe API versions moved the period end onto the items.
-const periodEnd = (sub) => sub.current_period_end || sub.items?.data?.[0]?.current_period_end;
+const periodEnd = (sub) => sub.current_period_end || planItem(sub)?.current_period_end;
+
+// How they pay, for the page and the alerts.
+function payMethod(pm) {
+  if (pm?.card) return { brand: pm.card.brand, last4: pm.card.last4, exp: `${pm.card.exp_month}/${String(pm.card.exp_year).slice(-2)}`, funding: pm.card.funding };
+  return null;
+}
+function bankMethod(pm) {
+  if (pm?.type === 'acss_debit') return { bank: pm.acss_debit?.bank_name || 'Bank account', last4: pm.acss_debit?.last4 || '' };
+  return null;
+}
 
 export function summarize(sub) {
-  const item = sub.items?.data?.[0];
+  const item = planItem(sub);
+  const fee = feeItem(sub);
   const price = item?.price || {};
   const pm = sub.default_payment_method;
   const trial = sub.status === 'trialing';
@@ -183,7 +195,9 @@ export function summarize(sub) {
     next_date: day(nextDate),
     cancel_at_period_end: !!sub.cancel_at_period_end,
     ends_on: sub.cancel_at_period_end ? day(sub.cancel_at || nextDate) : null,
-    card: pm?.card ? { brand: pm.card.brand, last4: pm.card.last4, exp: `${pm.card.exp_month}/${String(pm.card.exp_year).slice(-2)}` } : null,
+    card: payMethod(pm),
+    bank: bankMethod(pm),
+    card_fee: fee?.price?.unit_amount ? fee.price.unit_amount / 100 : null,
     save_offer_used: hasSaveCoupon(sub),
     offer: SAVE_COUPON.label,
     period_start: sub.current_period_start || item?.current_period_start || null,
@@ -243,10 +257,13 @@ export async function alertTeam(subIn, { title, action, details = [] }) {
   const TAX_LABEL = { ca_gst_hst: 'GST/HST', ca_qst: 'QST', ca_pst_bc: 'BC PST', ca_pst_sk: 'SK PST', ca_pst_mb: 'MB RST', ca_bn: 'Business no.' };
   const taxIds = (c.tax_ids?.data || []).map((t) => `${TAX_LABEL[t.type] || t.type.replace(/_/g, ' ').toUpperCase()} ${t.value}`).join(', ') || '—';
   const per = s.interval === 'year' ? 'year' : 'month';
-  const amount = s.amount != null ? `$${(s.save_offer_used ? s.amount * 0.8 : s.amount).toFixed(2)} CAD + tax / ${per}${s.save_offer_used ? ' (20% stay discount)' : ''}` : '—';
+  const gross = s.amount != null ? s.amount + (s.card_fee || 0) : null;
+  const amount = gross != null ? `$${(s.save_offer_used ? gross * 0.8 : gross).toFixed(2)} CAD + tax / ${per}${s.card_fee ? ' (incl. 2.4% card fee)' : ''}${s.save_offer_used ? ' (20% stay discount)' : ''}` : '—';
   const status = s.cancel_at_period_end ? `Cancelling — access until ${s.ends_on}` : s.trial ? `Free trial — first charge ${s.next_date}` : s.status === 'past_due' ? 'Payment overdue' : `Active — next charge ${s.next_date}`;
 
-  const card = s.card ? `${s.card.brand.toUpperCase()} •••• ${s.card.last4} · exp ${s.card.exp}` : 'No card on file';
+  const card = s.card
+    ? `${s.card.brand.toUpperCase()}${s.card.funding ? ` ${s.card.funding}` : ''} •••• ${s.card.last4} · exp ${s.card.exp}`
+    : s.bank ? `Bank debit: ${s.bank.bank} •••• ${s.bank.last4}` : 'Nothing on file';
   const stripeUrl = `https://dashboard.stripe.com/${sub.livemode ? '' : 'test/'}subscriptions/${sub.id}`;
   let ghlUrl = null;
   if (c.email) {
@@ -407,7 +424,7 @@ Comment: ${comment}` : ''}`,
 //   yearly -> monthly: not self-serve (yearly is paid up front)
 //   during the trial: just updates what will be charged when it ends
 export async function changePlan(sub, { users, plan }) {
-  const item = sub.items?.data?.[0];
+  const item = planItem(sub);
   if (!item) return { ok: false, error: 'Could not read your plan.' };
   const curAnnual = item.price?.recurring?.interval === 'year';
   const curUsers = Number(sub.metadata?.users) || null;
@@ -443,6 +460,7 @@ export async function changePlan(sub, { users, plan }) {
   const r = await stripeTry(`subscriptions/${sub.id}`, form);
   if (r.card) return { ok: false, error: cardMessage(r.data) };
   if (!r.ok) return { ok: false, error: 'Could not change your plan. Please email support@subtradesoftware.com.' };
+  await syncCardFee(sub.id); // card fee follows the new plan price (when switched on)
 
   const before = `${curUsers || '?'} users, $${fmt((item.price?.unit_amount || 0) / 100)}/${curAnnual ? 'year' : 'month'}`;
   await noteToGhl(sub, {
