@@ -765,9 +765,9 @@ main > section.section { padding: 96px 0; }
 }
 .toolset-head h2 { font-size: clamp(40px, 5vw, 64px); font-weight: 700; line-height: 0.95; margin: 16px 0 14px; }
 .toolset-head p { color: var(--steel-300); font-size: 18px; line-height: 1.6; max-width: 520px; margin: 0; }
-.toolset-head img { width: 100%; height: 260px; object-fit: cover; display: block; }
+.toolset-head img { width: 100%; height: 260px; object-fit: cover; display: block; border-radius: 10px; box-shadow: 0 4px 14px rgba(21, 24, 28, 0.09); }
 .toolset-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
-.toolset-col { background: #fff; border: 1px solid var(--steel-800); border-top: 4px solid var(--gypsum); }
+.toolset-col { background: #fff; border: 1px solid var(--steel-800); border-top: 4px solid var(--gypsum); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(21, 24, 28, 0.06); }
 .toolset-col.zone-money { border-top-color: var(--chalk); }
 .toolset-col.zone-office { border-top-color: var(--steel-500); }
 .toolset-col-h { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 22px 12px; }
