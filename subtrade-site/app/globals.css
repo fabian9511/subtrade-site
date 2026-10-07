@@ -920,7 +920,7 @@ main > section.section { padding: 96px 0; }
 .qs-title { font-family: var(--font-barlow), sans-serif; font-weight: 700; font-size: 40px; line-height: 1; text-transform: uppercase; margin: 0; }
 .qs-from { font-size: 14px; color: var(--steel-400); margin: 6px 0 0; }
 .qs-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--steel-300); }
-.qs-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding: 20px 0; border-bottom: 1px solid var(--steel-800); }
+.qs-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding: 0 0 20px; border-bottom: 1px solid var(--steel-800); }
 .qs-label { font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--steel-400); }
 .qs-stepper { display: flex; align-items: center; border: 1.5px solid var(--gypsum); border-radius: 8px; overflow: hidden; }
 .qs-stepper button { width: 48px; height: 48px; border: none; background: #fff; font-size: 24px; color: var(--gypsum); cursor: pointer; }

@@ -35,18 +35,6 @@ export default function QuoteSheet() {
     <div className="qs">
       <div className="qs-stripe" aria-hidden="true" />
       <div className="qs-body">
-        <div className="qs-head">
-          <div>
-            <p className="qs-title">Quote</p>
-            <p className="qs-from">SubTrade Software Ltd. · Calgary, Alberta</p>
-          </div>
-          <div className="qs-meta">
-            <span>No. ST-{users}</span>
-            <span>Prepared for: your company</span>
-            <span>Terms: {annual ? 'annual' : 'monthly'}</span>
-          </div>
-        </div>
-
         <div className="qs-controls">
           <span className="qs-label" id="qs-crew">Crew size</span>
           <div className="qs-stepper" role="group" aria-labelledby="qs-crew">
@@ -105,7 +93,7 @@ export default function QuoteSheet() {
         </p>
 
         <div className="qs-foot">
-          <a href={SIGNUP} className="btn btn-primary btn-lg">Accept and start free trial</a>
+          <a href={SIGNUP} className="btn btn-primary btn-lg">Start 14-day free trial</a>
         </div>
       </div>
     </div>
