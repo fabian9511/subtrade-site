@@ -92,12 +92,7 @@ export default function Home() {
               <br />
               <em>built in the field</em>
             </h1>
-            <p className="hero-def">{DEFINITION}</p>
-            <p className="lede">
-              Track hours, capture change orders, run crews and bill progress
-              from one app your field crew will actually use. Built by a working
-              sub, not a software company guessing at your day.
-            </p>
+            <p className="lede">{DEFINITION}</p>
             <div className="hero-ctas">
               <a href={SIGNUP} className="btn btn-primary btn-lg">
                 Start free trial

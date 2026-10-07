@@ -256,15 +256,6 @@ a:focus-visible, button:focus-visible {
   margin-bottom: 36px;
 }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
-/* plain one-line definition under the H1: what AI assistants quote */
-.hero p.hero-def {
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--steel-400);
-  max-width: 620px;
-  margin: -10px 0 18px;
-}
-.hero.hero-photo p.hero-def { color: #9aa3ae; }
 .hero-note {
   margin-top: 18px;
   font-size: 14px;
