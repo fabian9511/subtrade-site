@@ -153,36 +153,44 @@ export default function Home() {
 
       <Reviews />
 
-      <section className="section featureset" style={{ paddingTop: 0 }}>
+      <section className="section toolset" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <div className="section-head">
-            <p className="eyebrow">The full set</p>
-            <h2 className="display">Everything on one screen</h2>
-            <p>
-              No modules to bolt on, no per-feature upsells. Every plan gets the
-              whole platform.
-            </p>
+          <div className="toolset-head">
+            <div>
+              <p className="eyebrow">The full set</p>
+              <h2 className="display">{TOOL_COUNT} tools. Every plan.</h2>
+              <p>
+                No modules to bolt on and no per-feature upsells. Field, money
+                and office, all on one screen.
+              </p>
+            </div>
+            <img
+              src="/subtrade-worker-capturing-site-photo.webp"
+              alt="Worker on a commercial jobsite taking a site photo in the SubTrade app"
+              loading="lazy"
+            />
           </div>
 
-          <div className="fset-cols">
+          <div className="toolset-cols">
             {toolGroups.map((g) => (
-              <div className={`fset-col cat-${g.key}`} key={g.key}>
-                <div className="fset-col-h">
-                  <span className="fset-dot" aria-hidden="true" />
-                  {g.label}
-                  <b>{g.tools.length}</b>
+              <div className={`toolset-col zone-${g.key}`} key={g.key}>
+                <div className="toolset-col-h">
+                  <h3>{g.label}</h3>
+                  <span>{g.tools.length} tools</span>
                 </div>
-                {g.tools.map(([ico, title, body, href]) => (
-                  <div className="fset-row" key={title}>
-                    <span className="fset-ico" aria-hidden="true">
-                      {ico}
-                    </span>
-                    <div className="fset-text">
-                      <h3><Link href={href}>{title}</Link></h3>
-                      <p>{body}</p>
-                    </div>
-                  </div>
-                ))}
+                <ul>
+                  {g.tools.map(([, title, body, href]) => (
+                    <li key={title}>
+                      <Link href={href} className="toolset-row">
+                        <span className="toolset-name">
+                          {title}
+                          <span className="toolset-arrow" aria-hidden="true">→</span>
+                        </span>
+                        <span className="toolset-desc">{body}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
