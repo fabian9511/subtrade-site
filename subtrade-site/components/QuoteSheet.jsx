@@ -28,7 +28,7 @@ export default function QuoteSheet() {
   const onBlur = () => set(parseInt(draft, 10) || MIN);
 
   const monthly = monthlyTotal(users);
-  const total = annual ? annualMonthly(monthly) : monthly;
+  const yearly = annualYearly(monthly);
   const lines = userLines(users);
 
   return (
@@ -77,20 +77,30 @@ export default function QuoteSheet() {
           </table>
         </div>
 
-        <div className="qs-sums">
-          <div><span>Subtotal / month</span><span>{money(monthly)}</span></div>
-          {annual && <div className="qs-disc"><span>Annual discount 20%</span><span>−{money(monthly - total)}</span></div>}
-        </div>
-
-        <div className="qs-total">
-          <span>Total per month (CAD)</span>
-          <span className="qs-total-num">${whole(total)}</span>
-        </div>
-        <p className="qs-note">
-          {annual
-            ? `Billed annually at $${whole(annualYearly(monthly))}/yr (20% off).`
-            : 'Billed monthly. Tick annual to save 20%.'}
-        </p>
+        {annual ? (
+          <>
+            <div className="qs-sums">
+              <div><span>Subtotal / year (12 × {money(monthly)})</span><span>{money(monthly * 12)}</span></div>
+              <div className="qs-disc"><span>Annual discount 20%</span><span>−{money(monthly * 12 - yearly)}</span></div>
+            </div>
+            <div className="qs-total">
+              <span>Total per year (CAD)</span>
+              <span className="qs-total-num">${whole(yearly)}</span>
+            </div>
+            <p className="qs-note">Works out to ${whole(annualMonthly(monthly))}/month, billed once a year.</p>
+          </>
+        ) : (
+          <>
+            <div className="qs-sums">
+              <div><span>Subtotal / month</span><span>{money(monthly)}</span></div>
+            </div>
+            <div className="qs-total">
+              <span>Total per month (CAD)</span>
+              <span className="qs-total-num">${whole(monthly)}</span>
+            </div>
+            <p className="qs-note">Billed monthly. Tick annual to save 20%.</p>
+          </>
+        )}
 
         <div className="qs-foot">
           <a href={SIGNUP} className="btn btn-primary btn-lg">Start 14-day free trial</a>
