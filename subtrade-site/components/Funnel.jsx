@@ -107,115 +107,48 @@ function formatPhone(v) {
 const phoneE164 = (v) => `+1${phoneDigits(v)}`;
 
 
-/* Small animated app cards laid over each feature photo (CSS-only motion). */
-const Ck = () => <span className="fxc-ok" aria-hidden="true">✓</span>;
-const FX_CHIPS = {
-  'GPS time tracking': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><span className="fxc-dot" /><b>Clocked in</b><em>6:58 AM</em></div>
-      <div className="fxc-sub">Northgate Bldg A · GPS on site <Ck /></div>
-    </div>
-  ),
-  'Change orders': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>CO #014 · Extra bulkhead</b><em>$2,480</em></div>
-      <svg className="fxc-sig" viewBox="0 0 160 26"><path d="M4 18c10-14 16 6 24-4s8-10 14 2 10 6 18-6 10 10 20 2 14-8 22 4 18-6 30 0" /></svg>
-      <span className="fxc-stamp">Signed</span>
-    </div>
-  ),
-  'Progress billing': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>Claim #6 · September</b><em>68%</em></div>
-      <div className="fxc-bar"><i /></div>
-      <div className="fxc-sub">Holdback 10% and 2 COs included <Ck /></div>
-    </div>
-  ),
-  'Crew scheduling': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>This week</b><em>8 crew</em></div>
-      <div className="fxc-week">{['M', 'T', 'W', 'T', 'F'].map((d, i) => <span key={i} style={{ animationDelay: `${0.25 * i}s` }}>{d}</span>)}</div>
-      <div className="fxc-sub fxc-move">Luis → Bow River Lofts</div>
-    </div>
-  ),
-  'Daily logs & photos': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>Daily log filed</b><em>4:52 PM</em></div>
-      <div className="fxc-thumbs">{[0, 1, 2, 3].map((i) => <span key={i} style={{ animationDelay: `${0.3 * i}s` }} />)}</div>
-      <div className="fxc-sub">6 photos · GPS tagged <Ck /></div>
-    </div>
-  ),
-  'Forms & safety': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>FLHA · Level 2</b><em>7:05 AM</em></div>
-      <ul className="fxc-list">{['Fall protection', 'Hazards reviewed', 'Crew signed (4)'].map((t, i) => <li key={t} style={{ animationDelay: `${0.5 * i}s` }}>{t}</li>)}</ul>
-    </div>
-  ),
-  'Field operations': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><span className="fxc-dot" /><b>19 on site</b><em>4 jobs live</em></div>
-      <div className="fxc-sub">2 items need your OK today</div>
-    </div>
-  ),
-  'Dashboard & job costing': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>Maple Ridge Clinic</b><em>On budget</em></div>
-      <div className="fxc-bars"><span><i style={{ width: '82%' }} /></span><span><i className="fxc-act" style={{ width: '71%' }} /></span></div>
-      <div className="fxc-sub">Budget vs actual, live</div>
-    </div>
-  ),
-  'Drawings & markups': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>A-201 · Rev C</b><em>Latest</em></div>
-      <svg className="fxc-cloud" viewBox="0 0 160 30"><path d="M10 22c-8 0-8-12 0-12 0-8 12-8 14-2 2-8 14-8 16 0 2-8 14-8 16 0 2-8 14-8 16 0 2-8 14-8 16 0 2-8 14-8 16 0 8 0 8 12 0 12z" /></svg>
-      <div className="fxc-sub">Pushed to every device <Ck /></div>
-    </div>
-  ),
-  'Tasks & punch lists': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>Punch list · Unit 4</b><em className="fxc-count" /></div>
-      <ul className="fxc-list">{['Patch at outlet', 'Corner bead L2', 'Touch-up hallway'].map((t, i) => <li key={t} style={{ animationDelay: `${0.5 * i}s` }}>{t}</li>)}</ul>
-    </div>
-  ),
-  'Submittals & RFIs': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>RFI 023 · Wall type C4</b></div>
-      <div className="fxc-status"><span>Sent</span><span>Viewed</span><span>Answered</span></div>
-    </div>
-  ),
-  'Purchase orders': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>PO #1042 · Steel studs</b><em>$6,912</em></div>
-      <div className="fxc-sub fxc-deliv">Delivered · cost on budget <Ck /></div>
-    </div>
-  ),
-  'Bid management & proposals': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>Alpine Fit-Out</b><em>$19,462</em></div>
-      <div className="fxc-status"><span>Sent</span><span>Viewed</span><span>Awarded</span></div>
-    </div>
-  ),
-  'Aerial photo takeoff': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>Roof · Bldg A</b><em>45,672 sf</em></div>
-      <svg className="fxc-trace" viewBox="0 0 160 34"><path d="M8 6h60v-2h46v10h38v16H70v-6H8z" /></svg>
-      <div className="fxc-sub">Traced on the aerial photo <Ck /></div>
-    </div>
-  ),
-  'Takeoff & estimating': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>Wall C4 · L2</b><em>1,284 LF</em></div>
-      <div className="fxc-bar"><i /></div>
-      <div className="fxc-sub">Priced into the estimate <Ck /></div>
-    </div>
-  ),
-  'Job costing + QuickBooks': (
-    <div className="fxc" aria-hidden="true">
-      <div className="fxc-row"><b>Bill #2207</b><em>$4,310</em></div>
-      <div className="fxc-bars"><span><i style={{ width: '78%' }} /></span><span><i className="fxc-act" style={{ width: '64%' }} /></span></div>
-      <div className="fxc-sub fxc-deliv">Synced with QuickBooks <Ck /></div>
-    </div>
-  ),
-};
+/* Every feature, grouped like the site's Features menu (no photos, scans fast). */
+const CATALOG = [
+  {
+    title: 'Field operations',
+    items: [
+      ['Live overview', 'Who is on which site, right now'],
+      ['Time tracking', 'GPS clock-in from the phone'],
+      ['Crew scheduling', 'Drag-and-drop crew timelines'],
+      ['Photos', 'GPS-tagged site photos'],
+      ['Safety & forms', 'FLHAs, toolbox talks, inspections'],
+      ['Asset management', 'Tools, vehicles & equipment'],
+    ],
+  },
+  {
+    title: 'Project management',
+    items: [
+      ['Bid management & proposals', 'Tenders, pricing & proposals'],
+      ['Dashboard', 'Live cost & project overview'],
+      ['Tasks & punch lists', 'Assign work, close deficiencies'],
+      ['Drawings & markups', 'Latest set on every phone'],
+      ['Daily logs', 'Field reports & site diary'],
+    ],
+  },
+  {
+    title: 'Financial & compliance',
+    items: [
+      ['Change orders', 'Signed on site, billed on the claim'],
+      ['Progress billing', 'Claims with holdback handled'],
+      ['Purchase orders', 'Material orders against the job'],
+      ['Submittals & RFIs', 'Sent, tracked and answered'],
+    ],
+  },
+  {
+    title: 'Coming 2027',
+    soon: true,
+    items: [
+      ['Takeoff & estimating', 'Measure the drawings, price the job'],
+      ['Aerial photo takeoff', 'Roofs and lots off the aerial photo'],
+      ['Job costing + QuickBooks', 'Costs synced with QuickBooks'],
+    ],
+  },
+];
 
 /* Section 2: what they get, grouped by outcome, so it reads in five seconds. */
 const ICON = (d) => (
@@ -516,34 +449,16 @@ export default function Funnel() {
             <h2 className="display">One app from the first clock-in to the final claim</h2>
             <p>Your foremen use it on their phones. You run the company from the office. No feature tiers, everything is included.</p>
           </div>
-          <div className="fx-features">
-            {[
-              ['/subtrade-gps-time-tracking-clock-in.webp', 'GPS time tracking', 'Crews clock in on site from their phone. Time sheets and job costs fill themselves in.', 'Worker clocking in on a jobsite with GPS time tracking in the SubTrade app'],
-              ['/subtrade-change-order-from-the-field.webp', 'Change orders', 'Write it up and get it signed on the spot, with photos, before the extra work starts.', 'Foreman creating a change order from the field in SubTrade'],
-              ['/subcontractor-filling-out-aia-g702-g703-pay-application.webp', 'Progress billing', 'Schedule of values, holdback and approved change orders, rolled into the claim for you.', 'Subcontractor at his desk building a progress claim on a laptop, calculator and hard hat beside him'],
-              ['/subtrade-crew-scheduling-jobsite.webp', 'Crew scheduling', 'See who is on which job this week and move people around in seconds.', 'Crew scheduling across jobsites in SubTrade'],
-              ['/subtrade-daily-log-foreman-end-of-day.webp', 'Daily logs & photos', 'GPS-tagged photos and daily logs filed to the right job, ready when there is a dispute.', 'Foreman filing an end-of-day daily log in SubTrade'],
-              ['/ppe-tracking-hardhats-vests-gang-box-jobsite.webp', 'Forms & safety', 'FLHAs, toolbox talks and inspections filled out and signed on the phone, filed to the job automatically.', 'Hard hats, safety vests, glasses and a harness on a jobsite gang box while a worker fills out a safety form on his phone'],
-              ['/prompt-payment-foreman-highrise-goldenhour.webp', 'Field operations', 'One live view of every site: who is clocked in where, photos coming in, and what needs your OK today.', 'Foreman on a high-rise deck at sunrise checking every jobsite on a tablet'],
-              ['/subcontractor-dashboard-software-foreman-tablet.webp', 'Dashboard & job costing', 'Budget against actual on every job while it is still running, not after it is over.', 'Site supervisor in the trailer comparing job costs on a tablet and laptop'],
-              ['/foreman-marking-up-construction-drawings-tablet-jobsite.webp', 'Drawings & markups', 'The latest drawings on every phone and tablet. Mark them up on site so nobody builds off an old set.', 'Foreman marking up construction drawings on a tablet inside a framed building'],
-              ['/sub-trade-foreman-reviewing-software-checklist-jobsite.webp', 'Tasks & punch lists', 'Assign the work, attach photos and close out deficiencies before the GC walks the floor.', 'Foreman checking off a punch list on his phone among steel studs and drywall'],
-              ['/subcontractor-reviewing-lien-paperwork-site-office.webp', 'Submittals & RFIs', 'Send them, track them and keep every answer on the job, so nothing is stuck in someone’s inbox.', 'Subcontractor in a site office reviewing submittal paperwork next to a laptop'],
-              ['/material-cost-increase-steel-copper-jobsite.webp', 'Purchase orders', 'Order material against the job, track what arrived, and see the cost land on the budget.', 'Supervisor checking a material delivery of steel studs and copper wire on a tablet'],
-              ['/subtrade-bid-proposals-card.webp', 'Bid management & proposals', 'Track every tender from invite to award, price it, and send a clean proposal the GC can sign.', 'Estimator tracking bids on a pipeline board in SubTrade'],
-              ['/subtrade-aerial-photo-takeoff.webp', 'Aerial photo takeoff', 'Measure roofs, lots and building footprints straight off the aerial photo, without a site visit.', 'Estimator measuring a commercial roof on an aerial photo on a tablet', 'Coming 2027'],
-              ['/subtrade-takeoff-estimating-card.webp', 'Takeoff & estimating', 'Measure off the drawings and turn the quantities into a priced estimate, in the same app.', 'Estimator marking up construction drawings for a takeoff', 'Coming 2027'],
-              ['/job-costing-cost-codes-subcontractor-office.webp', 'Job costing + QuickBooks', 'Costs coded to the job and synced with QuickBooks, so budget against actual is always current.', 'Contractor reviewing job costs on a laptop in a site office', 'Coming 2027'],
-            ].map(([src, title, text, alt, soon, pos]) => (
-              <article key={title} className="fx-feature">
-                <div className="fx-media">
-                  <img src={src} alt={alt} loading="lazy" style={pos ? { objectPosition: pos } : undefined} />
-                  {FX_CHIPS[title]}
-                  {soon && <span className="fx-soon">{soon}</span>}
-                </div>
-                <h3 className="display">{title}</h3>
-                <p>{text}</p>
-              </article>
+          <div className="fx-catalog">
+            {CATALOG.map((col) => (
+              <div key={col.title} className={`fx-cat${col.soon ? ' fx-cat-soon' : ''}`}>
+                <p className="fx-cat-title">{col.title}</p>
+                <ul>
+                  {col.items.map(([name, desc]) => (
+                    <li key={name}><b>{name}</b><span>{desc}</span></li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         </div>
