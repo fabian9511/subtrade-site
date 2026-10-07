@@ -14,9 +14,9 @@ export const PROFILES = {
   appStore: 'https://apps.apple.com/ca/app/subtrade/id6752587413',
   googlePlay: 'https://play.google.com/store/apps/details?id=com.subtradesoftware.subtrade.app',
   youtube: 'https://www.youtube.com/@subtradesoftware',
-  linkedin: '', // company page, e.g. https://www.linkedin.com/company/...
-  facebook: '', // e.g. https://www.facebook.com/...
-  instagram: '', // e.g. https://www.instagram.com/...
+  linkedin: 'https://www.linkedin.com/company/subtrade-software/',
+  facebook: 'https://www.facebook.com/Subtradesoftware',
+  instagram: 'https://www.instagram.com/subtrade_software/',
 };
 
 export const SAME_AS = Object.values(PROFILES).filter(Boolean);
@@ -26,9 +26,7 @@ export const FABIAN = {
   name: 'Fabian V.',
   jobTitle: 'Co-Founder, SubTrade · President, Quality Gypsum Services',
   image: '/fabian-v-subtrade-cofounder.webp',
-  sameAs: [
-    // 'https://www.linkedin.com/in/...',
-  ],
+  sameAs: ['https://www.linkedin.com/in/fabian-v-582b911a1/'],
 };
 
 export const STEBAN = {

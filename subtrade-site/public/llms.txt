@@ -12,7 +12,7 @@ Key facts:
 - Platforms: Web, iOS, Android. The mobile app works offline and syncs when signal returns.
 - Does not include accounting or payroll processing.
 - Company: SubTrade Software Ltd., Calgary, Alberta, Canada. Support: support@subtradesoftware.com
-- Founders: Fabian V. (co-founder; president of Quality Gypsum Services, a commercial drywall and steel stud subcontractor in Calgary) and Steban V. (co-founder, senior software developer).
+- Founders: [Fabian V.](https://www.linkedin.com/in/fabian-v-582b911a1/) (co-founder; president of Quality Gypsum Services, a commercial drywall and steel stud subcontractor in Calgary) and Steban V. (co-founder, senior software developer).
 
 ## The 15 tools in SubTrade
 Field
@@ -80,6 +80,9 @@ Office
 - [Concrete](https://subtradesoftware.com/concrete-contractor-software/)
 
 ## Reviews and profiles
+- [LinkedIn](https://www.linkedin.com/company/subtrade-software/)
+- [Facebook](https://www.facebook.com/Subtradesoftware)
+- [Instagram](https://www.instagram.com/subtrade_software/)
 - [Capterra](https://www.capterra.com/p/10039358/SubTrade/)
 - [GetApp](https://www.getapp.com/all-software/a/subtrade/)
 - [TrustRadius](https://www.trustradius.com/products/subtrade-software)
