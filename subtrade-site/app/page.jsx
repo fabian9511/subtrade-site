@@ -207,43 +207,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="wrap founder">
-          <blockquote className="display">
-            I run a drywall company in Calgary.
-            <br />
-            <span>SubTrade exists because nothing on the market was built for us.</span>
-          </blockquote>
-          <div>
-            <p className="founder-meta">
-              <b>Fabian V.</b>
-              Co-Founder, SubTrade · President, Quality Gypsum Services
+      <section className="section founders-band">
+        <div className="wrap founders-wrap">
+          <div className="founders-photos">
+            <figure className="founders-fig founders-fig-lg">
+              <img src="/fabian-v-subtrade-cofounder.webp" alt="Fabian V., co-founder of SubTrade, in the SubTrade office" loading="lazy" />
+              <figcaption><b>Fabian V.</b><span>The jobsites</span></figcaption>
+            </figure>
+            <figure className="founders-fig founders-fig-sm">
+              <img src="/steban-v-subtrade-cofounder.webp" alt="Steban V., co-founder and senior software developer at SubTrade" loading="lazy" />
+              <figcaption><b>Steban V.</b><span>The software</span></figcaption>
+            </figure>
+          </div>
+          <div className="founders-copy">
+            <p className="eyebrow">Built on jobsites, not in boardrooms</p>
+            <h2 className="display">Made by a sub, for subs</h2>
+            <p>
+              SubTrade was built by Fabian V., who runs a commercial drywall
+              company in Calgary, and co-founder Steban V., a senior software
+              developer. Fabian brought the jobsites, Steban built the software,
+              and every feature went on Fabian&apos;s own crews first. It is built
+              around how a subcontractor actually gets paid: hours, extras, and
+              progress claims with holdback.
             </p>
-            <div className="founder-facts">
-              <div className="fact">
-                <span className="mono">Still</span>
-                <p>Estimating and running commercial drywall projects every week</p>
-              </div>
-              <div className="fact">
-                <span className="mono">Why</span>
-                <p>
-                  Every field tool was priced and designed for general contractors.
-                  Subs got the leftovers.
-                </p>
-              </div>
-              <div className="fact">
-                <span className="mono">Result</span>
-                <p>
-                  Every feature ships because a real subcontracting business needed
-                  it on a real job first.
-                </p>
-              </div>
-            </div>
-            <p style={{ marginTop: 26 }}>
-              <Link href="/about" className="btn btn-ghost">
-                Read the story
-              </Link>
-            </p>
+            <Link href="/about" className="btn btn-ghost">Read the story</Link>
           </div>
         </div>
       </section>
