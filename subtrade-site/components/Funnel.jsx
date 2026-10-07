@@ -189,6 +189,42 @@ const FX_CHIPS = {
   ),
 };
 
+/* Section 2: what they get, grouped by outcome, so it reads in five seconds. */
+const ICON = (d) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{d}</svg>
+);
+const GLANCE = [
+  {
+    kicker: 'Money',
+    title: 'Bill every extra',
+    text: 'The work the GC asked for gets written up, signed and onto the next claim.',
+    items: ['Change orders signed on site', 'Progress claims with holdback', 'Job costing, budget vs actual', 'Purchase orders against the job'],
+    icon: ICON(<><path d="M12 3v18" /><path d="M16.5 7.5c0-1.7-2-3-4.5-3s-4.5 1.3-4.5 3 2 2.6 4.5 3 4.5 1.4 4.5 3.1-2 3-4.5 3-4.5-1.3-4.5-3" /></>),
+  },
+  {
+    kicker: 'Crews',
+    title: 'Know who is where',
+    text: 'Every hour counted from the phone, every crew on the right job.',
+    items: ['GPS clock-in from the phone', 'Time sheets that fill themselves', 'Crew scheduling by the week', 'Live view of every site'],
+    icon: ICON(<><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></>),
+  },
+  {
+    kicker: 'Paperwork',
+    title: 'Proof for every dispute',
+    text: 'Photos, logs and answers filed to the job the day they happen.',
+    items: ['Daily logs with GPS photos', 'Latest drawings on every phone', 'Submittals and RFIs tracked', 'Everything filed to the job'],
+    icon: ICON(<><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5" /><path d="M9 13h6M9 17h4" /></>),
+  },
+  {
+    kicker: 'Site',
+    title: 'Safe and closed out',
+    text: 'Forms signed on the phone and deficiencies done before the walk.',
+    items: ['FLHAs and toolbox talks', 'Inspections signed on the phone', 'Tasks and punch lists', 'Photos on every item'],
+    icon: ICON(<><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z" /><path d="M9 12l2 2 4-4" /></>),
+  },
+];
+const GLANCE_FACTS = ['iPhone and Android app for crews', 'Office dashboard for you', 'Everything included, no tiers', '$299/month CAD, 5 users included'];
+
 export default function Funnel() {
   const [stage, setStage] = useState('register'); // register | questions | result
   const [lead, setLead] = useState({ firstName: '', lastName: '', email: '', phone: '', company: '', website: '' });
@@ -409,6 +445,38 @@ export default function Funnel() {
 
       <div className="wrap"><div className="chalkline" /></div>
 
+      {/* ---------- 2. benefits at a glance ---------- */}
+      <section className="section fx-glance">
+        <div className="wrap">
+          <div className="fx-glance-head">
+            <div className="section-head" style={{ marginBottom: 0 }}>
+              <p className="eyebrow">At a glance</p>
+              <h2 className="display">Everything your company runs on, in one app</h2>
+            </div>
+            <ul className="fx-facts">
+              {GLANCE_FACTS.map((f) => <li key={f}>{f}</li>)}
+            </ul>
+          </div>
+          <div className="fx-glance-grid">
+            {GLANCE.map((g) => (
+              <article key={g.title} className="fx-glance-card">
+                <span className="fx-glance-icon" aria-hidden="true">{g.icon}</span>
+                <p className="fx-glance-kicker">{g.kicker}</p>
+                <h3 className="display">{g.title}</h3>
+                <p className="fx-glance-text">{g.text}</p>
+                <ul>
+                  {g.items.map((i) => <li key={i}>{i}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <div className="fx-glance-cta">
+            <button type="button" className="btn btn-primary btn-lg" onClick={toForm}>See if it fits my company</button>
+            <a href="#fx-all-features" className="fx-glance-more">See every feature ↓</a>
+          </div>
+        </div>
+      </section>
+
       {/* ---------- the problem ---------- */}
       <section className="section">
         <div className="wrap fx-split">
@@ -430,7 +498,7 @@ export default function Funnel() {
       </section>
 
       {/* ---------- what SubTrade is ---------- */}
-      <section className="section">
+      <section className="section" id="fx-all-features">
         <div className="wrap">
           <div className="section-head">
             <p className="eyebrow">What you get</p>
@@ -468,13 +536,17 @@ export default function Funnel() {
       {/* ---------- who built it ---------- */}
       <section className="section">
         <div className="wrap fx-split">
-          <VideoEmbed
-            id="VTlRMWheLpQ"
-            title="Why we built SubTrade"
-            poster="/vsl/subtrade-cofounder-poster.webp"
-            posterAlt="Fabian Vargas, SubTrade co-founder, on why he and Steban Vargas built SubTrade"
-            bakedPlay
-          />
+          {/* The co-founder video plays on the thank-you screen only (Result). */}
+          <div className="fx-founders">
+            <figure>
+              <img src="/fabian-vargas-garcia-subtrade-cofounder.webp" alt="Fabian Vargas Garcia, SubTrade co-founder and owner of a Calgary drywall company" loading="lazy" />
+              <figcaption><b>Fabian Vargas Garcia</b><span>The jobsites</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/steban-vargas-subtrade-cofounder.webp" alt="Steban Vargas, SubTrade co-founder and senior software developer" loading="lazy" />
+              <figcaption><b>Steban Vargas</b><span>The software</span></figcaption>
+            </figure>
+          </div>
           <div className="section-head" style={{ marginBottom: 0 }}>
             <p className="eyebrow">Built on jobsites, not in boardrooms</p>
             <h2 className="display">Made by a sub, for subs</h2>
