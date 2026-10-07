@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
+import { COMING_SOON } from '../lib/tools';
 
 const PORTAL = 'https://portal.subtradesoftware.com';
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
@@ -124,6 +125,18 @@ export default function MobileMenu() {
               ))}
             </div>
           ))}
+          <div className="mnav-group">
+            <b>Coming soon</b>
+            {COMING_SOON.map(([icon, name, sub]) => (
+              <div className="mnav-item mnav-item-soon" key={name}>
+                <span className="mnav-ico" aria-hidden="true">{icon}</span>
+                <span className="mnav-text">
+                  <span className="mnav-name">{name} <span className="soon-tag">Soon</span></span>
+                  <span className="mnav-sub">{sub}</span>
+                </span>
+              </div>
+            ))}
+          </div>
 
           <div className="mnav-links">
             <Link href="/explore-the-app" className="mnav-explore" onClick={close}>Explore the mobile app</Link>

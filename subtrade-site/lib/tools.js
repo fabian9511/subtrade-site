@@ -45,3 +45,12 @@ export const toolGroups = [
 
 export const TOOL_NAMES = toolGroups.flatMap((g) => g.tools.map((t) => t[1]));
 export const TOOL_COUNT = TOOL_NAMES.length;
+
+// Announced but not shipped yet. Shown in the Features menus with a "Soon" tag
+// and no link. Not counted in TOOL_COUNT. Move an item into toolGroups (with
+// its page) the day it ships.
+export const COMING_SOON = [
+  ['📐', 'Takeoff & Estimates', 'Measure plans and price bids in Bid Manager'],
+  ['📈', 'Job Costing + QuickBooks', 'Budget vs actual per job, synced to QuickBooks'],
+  ['🧾', 'Invoicing', 'Invoice the GC right from the job'],
+];

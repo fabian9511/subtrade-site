@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useRef } from 'react';
+import { COMING_SOON } from '../lib/tools';
 
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 
@@ -29,6 +30,7 @@ const cols = [
   },
   {
     title: 'Financial & Compliance',
+    soon: true,
     items: [
       ['🧾', 'Change Orders', 'Draft, submit & track COs', '/construction-management-features/change-order-management'],
       ['🧰', 'Purchase Orders', 'Track material orders & costs', '/tutorials/purchase-orders-approval'],
@@ -71,6 +73,17 @@ export default function MegaMenu() {
                     </span>
                   </Link>
                 ))}
+                {c.soon && (
+                  <div className="mega-soon">
+                    <b>Coming soon</b>
+                    {COMING_SOON.map(([, name, sub]) => (
+                      <div className="mega-item mega-item-soon" key={name}>
+                        <span className="mega-item-name">{name}</span>
+                        <span className="mega-item-sub">{sub}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
             <div className="mega-promo">
