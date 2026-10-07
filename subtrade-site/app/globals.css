@@ -791,12 +791,45 @@ main > section.section { padding: 96px 0; }
 .toolset-arrow { color: var(--chalk-dim); opacity: 0; transform: translateX(-4px); transition: opacity .15s ease, transform .15s ease; }
 .toolset-row:hover .toolset-arrow, .toolset-row:focus-visible .toolset-arrow { opacity: 1; transform: none; }
 .toolset-desc { display: block; font-size: 14px; line-height: 1.45; color: var(--steel-400); margin-top: 2px; }
+.toolset-soon {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 140px repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+  padding: 22px;
+  border: 1.5px dashed var(--steel-700);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.toolset-soon-label {
+  font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--chalk-dim); padding-top: 4px;
+}
+.toolset-soon-item .toolset-name { justify-content: flex-start; color: var(--steel-300); }
 @media (max-width: 900px) {
   .toolset-head { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .toolset-head img { height: 200px; }
   .toolset-cols { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .toolset-arrow { opacity: 1; transform: none; }
+  .toolset-soon { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }
+
+/* ---------- coming soon block (features hub) ---------- */
+.soon-block { margin-top: 64px; }
+.soon-block-head h2 { font-size: clamp(32px, 4vw, 44px); margin: 14px 0 24px; }
+.soon-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.soon-card {
+  padding: 24px; border: 1.5px dashed var(--steel-700); border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.soon-card .soon-tag { margin-left: 0; }
+.soon-card h3 {
+  font-family: var(--font-barlow), sans-serif; font-weight: 600; font-size: 22px;
+  text-transform: uppercase; letter-spacing: .02em; margin: 12px 0 6px; color: var(--gypsum);
+}
+.soon-card p { font-size: 15px; color: var(--steel-400); line-height: 1.5; margin: 0; }
+@media (max-width: 860px) { .soon-grid { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- image as section complement, not centerpiece ---------- */
 .head-split {

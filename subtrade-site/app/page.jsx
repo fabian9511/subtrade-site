@@ -4,7 +4,7 @@ import AppShowcase from '../components/AppShowcase';
 import Reviews from '../components/Reviews';
 import AppDownload from '../components/AppDownload';
 import TutorialStrip from '../components/TutorialStrip';
-import { toolGroups, TOOL_COUNT, DEFINITION } from '../lib/tools';
+import { toolGroups, TOOL_COUNT, DEFINITION, COMING_SOON } from '../lib/tools';
 
 export const metadata = {
   alternates: { canonical: '/' },
@@ -191,6 +191,16 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="toolset-soon">
+            <span className="toolset-soon-label">Coming soon</span>
+            {COMING_SOON.map(([, name, sub]) => (
+              <div className="toolset-soon-item" key={name}>
+                <span className="toolset-name">{name} <span className="soon-tag">Soon</span></span>
+                <span className="toolset-desc">{sub}</span>
               </div>
             ))}
           </div>
