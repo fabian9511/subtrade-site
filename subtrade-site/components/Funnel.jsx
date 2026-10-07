@@ -5,6 +5,7 @@ import Script from 'next/script';
 import { BASE, INCLUDED_USERS, MIN_USERS, MAX_USERS, periodPrice, shownMonthly, fmt } from '../lib/pricing';
 import PriceBreakdown from './PriceBreakdown';
 import VideoEmbed from './VideoEmbed';
+import Reviews from './Reviews';
 
 /**
  * The Facebook-ads funnel on /start/:
@@ -185,6 +186,33 @@ const FX_CHIPS = {
     <div className="fxc" aria-hidden="true">
       <div className="fxc-row"><b>PO #1042 · Steel studs</b><em>$6,912</em></div>
       <div className="fxc-sub fxc-deliv">Delivered · cost on budget <Ck /></div>
+    </div>
+  ),
+  'Bid management & proposals': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>Alpine Fit-Out</b><em>$19,462</em></div>
+      <div className="fxc-status"><span>Sent</span><span>Viewed</span><span>Awarded</span></div>
+    </div>
+  ),
+  'Aerial photo takeoff': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>Roof · Bldg A</b><em>45,672 sf</em></div>
+      <svg className="fxc-trace" viewBox="0 0 160 34"><path d="M8 6h60v-2h46v10h38v16H70v-6H8z" /></svg>
+      <div className="fxc-sub">Traced on the aerial photo <Ck /></div>
+    </div>
+  ),
+  'Takeoff & estimating': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>Wall C4 · L2</b><em>1,284 LF</em></div>
+      <div className="fxc-bar"><i /></div>
+      <div className="fxc-sub">Priced into the estimate <Ck /></div>
+    </div>
+  ),
+  'Job costing + QuickBooks': (
+    <div className="fxc" aria-hidden="true">
+      <div className="fxc-row"><b>Bill #2207</b><em>$4,310</em></div>
+      <div className="fxc-bars"><span><i style={{ width: '78%' }} /></span><span><i className="fxc-act" style={{ width: '64%' }} /></span></div>
+      <div className="fxc-sub fxc-deliv">Synced with QuickBooks <Ck /></div>
     </div>
   ),
 };
@@ -477,25 +505,8 @@ export default function Funnel() {
         </div>
       </section>
 
-      {/* ---------- the problem ---------- */}
-      <section className="section">
-        <div className="wrap fx-split">
-          <div className="section-head" style={{ marginBottom: 0 }}>
-            <p className="eyebrow">Sound familiar?</p>
-            <h2 className="display">The money leaks out between the field and the office</h2>
-            <p>
-              Hours written on a scrap of paper. An extra the GC asked for on a Tuesday that nobody wrote up.
-              A progress claim built from memory at 10 PM. Every one of those is money you earned and never billed.
-            </p>
-          </div>
-          <img
-            src="/unsigned-change-order-recovery-foreman-tablet.webp"
-            alt="Foreman on a jobsite reviewing an unsigned change order on a tablet"
-            className="fx-photo"
-            loading="lazy"
-          />
-        </div>
-      </section>
+      {/* ---------- reviews ---------- */}
+      <Reviews />
 
       {/* ---------- what SubTrade is ---------- */}
       <section className="section" id="fx-all-features">
@@ -520,7 +531,7 @@ export default function Funnel() {
               ['/subcontractor-reviewing-lien-paperwork-site-office.webp', 'Submittals & RFIs', 'Send them, track them and keep every answer on the job, so nothing is stuck in someone’s inbox.', 'Subcontractor in a site office reviewing submittal paperwork next to a laptop'],
               ['/material-cost-increase-steel-copper-jobsite.webp', 'Purchase orders', 'Order material against the job, track what arrived, and see the cost land on the budget.', 'Supervisor checking a material delivery of steel studs and copper wire on a tablet'],
               ['/subtrade-bid-proposals-card.webp', 'Bid management & proposals', 'Track every tender from invite to award, price it, and send a clean proposal the GC can sign.', 'Estimator tracking bids on a pipeline board in SubTrade'],
-              ['/subtrade-aerial-photo-takeoff.webp', 'Aerial photo takeoff', 'Measure roofs, lots and building footprints straight off the aerial photo, without a site visit.', 'Estimator measuring a commercial roof on an aerial photo on a tablet'],
+              ['/subtrade-aerial-photo-takeoff.webp', 'Aerial photo takeoff', 'Measure roofs, lots and building footprints straight off the aerial photo, without a site visit.', 'Estimator measuring a commercial roof on an aerial photo on a tablet', 'Coming 2027'],
               ['/subtrade-takeoff-estimating-card.webp', 'Takeoff & estimating', 'Measure off the drawings and turn the quantities into a priced estimate, in the same app.', 'Estimator marking up construction drawings for a takeoff', 'Coming 2027'],
               ['/job-costing-cost-codes-subcontractor-office.webp', 'Job costing + QuickBooks', 'Costs coded to the job and synced with QuickBooks, so budget against actual is always current.', 'Contractor reviewing job costs on a laptop in a site office', 'Coming 2027'],
             ].map(([src, title, text, alt, soon, pos]) => (
