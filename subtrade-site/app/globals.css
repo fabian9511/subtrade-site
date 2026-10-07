@@ -755,6 +755,49 @@ main > section.section { padding: 96px 0; }
   .daytl-step h3 { font-size: 24px; }
 }
 
+/* ---------- the full set: 15 tools in three zones, each row links to its page ---------- */
+.toolset-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.toolset-head h2 { font-size: clamp(40px, 5vw, 64px); font-weight: 700; line-height: 0.95; margin: 16px 0 14px; }
+.toolset-head p { color: var(--steel-300); font-size: 18px; line-height: 1.6; max-width: 520px; margin: 0; }
+.toolset-head img { width: 100%; height: 260px; object-fit: cover; display: block; }
+.toolset-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.toolset-col { background: #fff; border: 1px solid var(--steel-800); border-top: 4px solid var(--gypsum); }
+.toolset-col.zone-money { border-top-color: var(--chalk); }
+.toolset-col.zone-office { border-top-color: var(--steel-500); }
+.toolset-col-h { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 22px 12px; }
+.toolset-col-h h3 { font-family: var(--font-barlow), sans-serif; font-weight: 700; font-size: 26px; text-transform: uppercase; margin: 0; }
+.toolset-col-h span { font-family: var(--font-mono), monospace; font-size: 13px; color: var(--steel-400); }
+.toolset-col ul { list-style: none; margin: 0; padding: 0; }
+.toolset-row {
+  display: block;
+  padding: 14px 22px;
+  border-top: 1px solid var(--steel-950);
+  color: var(--gypsum);
+  text-decoration: none;
+  transition: background .15s ease;
+}
+.toolset-row:hover, .toolset-row:focus-visible { background: var(--steel-850); }
+.toolset-name {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  font-family: var(--font-barlow), sans-serif; font-weight: 600; font-size: 19px;
+  text-transform: uppercase; letter-spacing: .02em;
+}
+.toolset-arrow { color: var(--chalk-dim); opacity: 0; transform: translateX(-4px); transition: opacity .15s ease, transform .15s ease; }
+.toolset-row:hover .toolset-arrow, .toolset-row:focus-visible .toolset-arrow { opacity: 1; transform: none; }
+.toolset-desc { display: block; font-size: 14px; line-height: 1.45; color: var(--steel-400); margin-top: 2px; }
+@media (max-width: 900px) {
+  .toolset-head { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .toolset-head img { height: 200px; }
+  .toolset-cols { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .toolset-arrow { opacity: 1; transform: none; }
+}
+
 /* ---------- image as section complement, not centerpiece ---------- */
 .head-split {
   display: grid;
