@@ -1484,6 +1484,8 @@ export const trades = [
 export const compares = [
   {
     slug: 'subtrade-vs-fieldwire',
+    metaDescription: `Fieldwire handles plans and tasks. SubTrade adds time tracking, change orders, crew scheduling and job costing for trade subs, all in one app.`,
+    updated: '2026-10-07',
     competitor: 'Fieldwire',
     eyebrow: 'Honest Comparison',
     headline: 'Plans on site, or the whole business?',
@@ -1536,6 +1538,8 @@ export const compares = [
   },
   {
     slug: 'subtrade-vs-buildertrend',
+    metaDescription: `Buildertrend is built for GCs and home builders. SubTrade is built for trade subs running their own crews, change orders and billing. See how they compare.`,
+    updated: '2026-10-07',
     competitor: 'Buildertrend',
     eyebrow: 'Honest Comparison',
     headline: 'Which is right for a subcontractor?',
@@ -1589,6 +1593,8 @@ export const compares = [
   },
   {
     slug: 'subtrade-vs-procore',
+    metaDescription: `Procore is enterprise software for large GCs and owners. SubTrade is built for trade subs: time tracking, change orders and job costing at $299/month CAD.`,
+    updated: '2026-10-07',
     competitor: 'Procore',
     eyebrow: 'Honest Comparison',
     headline: 'Which is right for a subcontractor?',
@@ -1641,6 +1647,8 @@ export const compares = [
   },
   {
     slug: 'subtrade-vs-esub',
+    metaDescription: `eSUB and SubTrade both serve trade subs. Compare features, ease of use and pricing: SubTrade is mobile-first with a published price of $299/month CAD.`,
+    updated: '2026-10-07',
     competitor: 'eSUB',
     eyebrow: 'Honest Comparison',
     headline: 'Two tools built for subcontractors',
@@ -1693,6 +1701,8 @@ export const compares = [
   },
   {
     slug: 'subtrade-vs-contractor-foreman',
+    metaDescription: `Contractor Foreman is a budget do-everything app. SubTrade is built only for trade subcontractors and how crews run jobs. Features and pricing compared.`,
+    updated: '2026-10-07',
     competitor: 'Contractor Foreman',
     eyebrow: 'Honest Comparison',
     headline: 'Which fits a trade sub?',
@@ -1744,6 +1754,8 @@ export const compares = [
   },
   {
     slug: 'subtrade-vs-raken',
+    metaDescription: `Raken covers daily reports and time cards. SubTrade does that too, plus change orders, crew scheduling, drawings and real-time job costing in one app.`,
+    updated: '2026-10-07',
     competitor: 'Raken',
     eyebrow: 'Honest Comparison',
     headline: 'Field reporting, or the whole operation?',
@@ -1795,6 +1807,8 @@ export const compares = [
   },
   {
     slug: 'subtrade-vs-knowify',
+    metaDescription: `Knowify leads with bidding, contracts and QuickBooks. SubTrade leads with the field: crews, time tracking, change orders and job costing. Compare both.`,
+    updated: '2026-10-07',
     competitor: 'Knowify',
     eyebrow: 'Honest Comparison',
     headline: 'Office-first or field-first?',

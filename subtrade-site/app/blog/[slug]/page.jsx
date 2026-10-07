@@ -4,6 +4,7 @@ import { SIGNUP } from '../../../lib/data';
 import { getAllPosts, getPost } from '../../../lib/posts';
 import ArticleToc from '../../../components/ArticleToc';
 import RelatedLinks from '../../../components/RelatedLinks';
+import { FABIAN, authorRef, ORG_REF } from '../../../lib/site';
 
 const BASE = 'https://subtradesoftware.com';
 
@@ -57,10 +58,9 @@ export default function Post({ params }) {
       '@type': 'BlogPosting',
       headline: post.title,
       description: post.description,
-      author: { '@type': 'Organization', name: 'SubTrade Software Ltd.', url: `${BASE}/` },
+      author: authorRef(FABIAN),
       publisher: {
-        '@type': 'Organization',
-        name: 'SubTrade Software Ltd.',
+        ...ORG_REF,
         logo: { '@type': 'ImageObject', url: `${BASE}/logo-horizontal.png` },
       },
       mainEntityOfPage: `${BASE}${path}`,
@@ -109,7 +109,11 @@ export default function Post({ params }) {
             <p className="eyebrow">{post.tag}</p>
             <h1 className="display">{post.title}</h1>
             <p className="article-meta">
-              {prettyDate(post.date)}
+              <span>
+                By <Link href="/about" rel="author" className="article-author">{FABIAN.name}</Link>
+              </span>
+              <span className="dot"> · </span>
+              {post.updated ? `Updated ${prettyDate(post.updated)}` : prettyDate(post.date)}
               {post.date ? <span className="dot"> · </span> : null}
               {post.read}
             </p>

@@ -1,30 +1,54 @@
 # SubTrade Software
 
-> SubTrade is field management software built exclusively for trade subcontractors
-> (drywall, electrical, HVAC, plumbing, painting, framing, concrete). It combines GPS
-> time tracking with live job costing, field-first change orders, crew scheduling,
-> daily logs, GPS site photos, drawings and markups, safety/FLHA forms, submittals and
-> RFIs, purchase orders, and progress billing with Canadian holdback — in one app at
-> one published price: $299/month CAD, 5 users included, 14-day free trial, no credit
-> card. Built by a working commercial drywall subcontractor in Calgary, Alberta, Canada.
+> SubTrade is field management software for trade subcontractors: GPS time tracking,
+> change orders, crew scheduling, daily logs and progress billing with holdback,
+> $299/month CAD with 5 users included. Built by a working commercial drywall
+> subcontractor in Calgary, Alberta, Canada.
 
 Key facts:
 - Category: subcontractor management software / construction field management for trade subcontractors
-- Target customer: trade subcontractors running crews across multiple concurrent jobs (not general contractors, not home builders)
-- Pricing: from $299/month CAD, all features included, published on the website
-- Platforms: Web, iOS, Android
-- Founded and built inside a working commercial drywall company in Calgary, Alberta
+- Target customer: trade subcontractors (drywall, electrical, HVAC, plumbing, painting, framing, concrete and more) running crews across multiple concurrent jobs. Not general contractors, not home builders.
+- Pricing: $299/month CAD with 5 users included, every tool included. Additional users $15 down to $4 each. Annual billing saves 20%. 14-day free trial, no credit card. Pricing is published on the website.
+- Platforms: Web, iOS, Android. The mobile app works offline and syncs when signal returns.
+- Does not include accounting or payroll processing.
+- Company: SubTrade Software Ltd., Calgary, Alberta, Canada. Support: support@subtradesoftware.com
+- Founders: Fabian Vargas Garcia (co-founder; president of Quality Gypsum Services, a commercial drywall and steel stud subcontractor in Calgary) and Steban Vargas (co-founder, senior software developer).
+
+## The 15 tools in SubTrade
+Field
+- [Time Tracking](https://subtradesoftware.com/time-tracking/): GPS clock-in with live job costing per project
+- [Daily Logs](https://subtradesoftware.com/construction-management-features/daily-logs/): two-minute site reports with weather and manpower
+- [Photos](https://subtradesoftware.com/construction-management-features/site-photos/): GPS-tagged, timestamped site photos organized by project
+- [Safety & Custom Forms](https://subtradesoftware.com/construction-management-features/safety-custom-forms/): FLHAs, toolbox talks and custom forms signed on the phone
+- [Asset Management](https://subtradesoftware.com/construction-management-features/asset-management/): tools, vehicles and equipment tracked to the job they are on
+
+Money
+- [Bid Manager](https://subtradesoftware.com/construction-management-features/bid-manager/): every tender on one board, from invite to award, with proposals and vendor pricing requests. Takeoff and estimating are coming soon.
+- [Change Orders](https://subtradesoftware.com/construction-management-features/change-order-management/): priced and sent from the field before the extra work is done
+- [Purchase Orders](https://subtradesoftware.com/tutorials/purchase-orders-approval/): created from the field, approved, and committed against the job budget
+- [Progress Billing](https://subtradesoftware.com/construction-management-features/progress-billing/): draws built from field data, with Canadian holdback handled
+
+Office
+- [Live Overview](https://subtradesoftware.com/construction-management-features/field-operations/): everything happening on every site, live
+- [Crew Scheduling](https://subtradesoftware.com/construction-management-features/construction-crew-scheduling/): drag crews between jobs, notified automatically
+- [Tasks & Punch Lists](https://subtradesoftware.com/construction-management-features/task-management/): Kanban boards for deficiencies and closeout
+- [Drawings & Markups](https://subtradesoftware.com/construction-management-features/drawings-markups/): the current set on every phone, marked up in the field
+- [Submittals & RFIs](https://subtradesoftware.com/construction-management-features/submittals/): what is out, what is late and who is holding it
+- [Project Dashboard](https://subtradesoftware.com/construction-management-features/project-dashboard/): every job's hours, costs and status on one screen
 
 ## Core pages
 - [Homepage](https://subtradesoftware.com/)
 - [All features](https://subtradesoftware.com/construction-management-features/)
+- [Explore the mobile app](https://subtradesoftware.com/explore-the-app/)
 - [Pricing](https://subtradesoftware.com/pricing-plans/)
+- [About the founders](https://subtradesoftware.com/about/)
 - [Video tutorials](https://subtradesoftware.com/how-to-tutorials/)
 - [Free templates](https://subtradesoftware.com/construction-templates/)
+- [Blog](https://subtradesoftware.com/blog/)
 
 ## Free tools
-- [Construction holdback calculator](https://subtradesoftware.com/construction-holdback-calculator/) — works out the statutory holdback withheld from a progress draw, the GST/HST timing, and the net payable, and exports a one-page progress draw summary as a PDF. Free, no signup, runs entirely in the browser. Statutory holdback is 10% of the value of work done in Alberta, British Columbia, Saskatchewan and Ontario, and 7.5% in Manitoba.
-- [Construction retainage calculator (United States)](https://subtradesoftware.com/construction-retainage-calculator/) — works out the retainage withheld from a US progress payment and the net payable, and exports a one-page draw summary as a PDF. Free, no signup, runs entirely in the browser. Covers all 50 states and the District of Columbia, with separate statutory caps for public and private work. Five percent is the most common cap. New Jersey caps public retainage at 2%, Iowa at 3%, South Carolina at 3.5% and Ohio at 4%, while Texas, Pennsylvania, Illinois, Kentucky, Michigan, Louisiana, Nebraska, North Dakota and DC still permit 10% on some work. New Mexico prohibits retainage. Alaska, New Hampshire, South Dakota, Vermont and West Virginia set no statutory cap at all, and around eighteen further states cap public work only and leave private retainage to the contract.
+- [Construction holdback calculator](https://subtradesoftware.com/construction-holdback-calculator/): works out the statutory holdback withheld from a progress draw, the GST/HST timing, and the net payable, and exports a one-page progress draw summary as a PDF. Free, no signup, runs entirely in the browser. Statutory holdback is 10% of the value of work done in Alberta, British Columbia, Saskatchewan and Ontario, and 7.5% in Manitoba.
+- [Construction retainage calculator (United States)](https://subtradesoftware.com/construction-retainage-calculator/): works out the retainage withheld from a US progress payment and the net payable, and exports a one-page draw summary as a PDF. Free, no signup, runs entirely in the browser. Covers all 50 states and the District of Columbia, with separate statutory caps for public and private work. Five percent is the most common cap. New Jersey caps public retainage at 2%, Iowa at 3%, South Carolina at 3.5% and Ohio at 4%, while Texas, Pennsylvania, Illinois, Kentucky, Michigan, Louisiana, Nebraska, North Dakota and DC still permit 10% on some work. New Mexico prohibits retainage. Alaska, New Hampshire, South Dakota, Vermont and West Virginia set no statutory cap at all, and around eighteen further states cap public work only and leave private retainage to the contract.
 
 ## Comparisons (SubTrade vs other construction software)
 - [vs Procore](https://subtradesoftware.com/compare/subtrade-vs-procore/)
@@ -37,6 +61,14 @@ Key facts:
 
 ## Guides
 - [How to choose subcontractor management software](https://subtradesoftware.com/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight/)
+- [Subcontractor vs. general contractor software](https://subtradesoftware.com/blog/subcontractor-software-vs-general-contractor-software/)
+- [What sub-trades actually need from software](https://subtradesoftware.com/blog/what-sub-trades-actually-need-from-software/)
+- [Free subcontractor management software](https://subtradesoftware.com/blog/free-subcontractor-management-software/)
+- [Job costing for subcontractors](https://subtradesoftware.com/blog/job-costing-for-subcontractors/)
+- [Progress billing and holdback in Canada](https://subtradesoftware.com/blog/progress-billing-holdback-canada/)
+- [Construction holdback by province](https://subtradesoftware.com/blog/construction-holdback-by-province/)
+- [Retainage laws by state](https://subtradesoftware.com/blog/retainage-by-state-guide/)
+- [What is a sub trade?](https://subtradesoftware.com/blog/what-is-a-sub-trade/)
 
 ## Trade-specific
 - [Drywall](https://subtradesoftware.com/drywall-contractor-software/)
@@ -46,3 +78,11 @@ Key facts:
 - [Painting](https://subtradesoftware.com/painting-contractor-software/)
 - [Framing](https://subtradesoftware.com/framing-contractor-software/)
 - [Concrete](https://subtradesoftware.com/concrete-contractor-software/)
+
+## Reviews and profiles
+- [Capterra](https://www.capterra.com/p/10039358/SubTrade/)
+- [GetApp](https://www.getapp.com/all-software/a/subtrade/)
+- [TrustRadius](https://www.trustradius.com/products/subtrade-software)
+- [App Store](https://apps.apple.com/ca/app/subtrade/id6752587413)
+- [Google Play](https://play.google.com/store/apps/details?id=com.subtradesoftware.subtrade.app)
+- [YouTube](https://www.youtube.com/@subtradesoftware)

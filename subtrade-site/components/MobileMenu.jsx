@@ -36,8 +36,8 @@ const cols = [
   {
     title: 'Financial & Compliance',
     items: [
-      ['🧾', 'Change Orders', 'Draft, submit & invoice COs', '/construction-management-features/change-order-management'],
-      ['🧰', 'Purchase Orders', 'Track material orders & costs', '/construction-management-features/change-order-management'],
+      ['🧾', 'Change Orders', 'Draft, submit & track COs', '/construction-management-features/change-order-management'],
+      ['🧰', 'Purchase Orders', 'Track material orders & costs', '/tutorials/purchase-orders-approval'],
       ['📄', 'Submittals & RFIs', 'Shop drawings & RFI tracking', '/construction-management-features/submittals'],
       ['💵', 'Progress Billing', 'Draws with holdback handled', '/construction-management-features/progress-billing'],
     ],

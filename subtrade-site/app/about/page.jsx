@@ -1,4 +1,7 @@
+import { FABIAN, STEBAN, personSchema, ORG_REF, BASE } from '../../lib/site';
+
 export const metadata = {
+  alternates: { canonical: '/about/' },
   title: 'About',
   description:
     'SubTrade was built by Fabian Vargas Garcia, president of a Calgary commercial drywall company, after years of using field software designed for GCs instead of subs.',
@@ -7,9 +10,29 @@ export const metadata = {
 const PORTAL = 'https://portal.subtradesoftware.com';
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 
+// The founders as Person entities, so AI assistants can tie the content and the
+// company to real, named people in the trade.
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  url: `${BASE}/about/`,
+  about: ORG_REF,
+  mainEntity: [
+    personSchema(FABIAN, {
+      description:
+        'President of Quality Gypsum Services, a commercial drywall and steel stud subcontractor in Calgary, Alberta, and co-founder of SubTrade.',
+      knowsAbout: ['Commercial drywall', 'Steel stud framing', 'Construction estimating', 'Subcontractor field management'],
+    }),
+    personSchema(STEBAN, {
+      description: 'Senior software developer and co-founder of SubTrade, who built the platform from the first line of code.',
+    }),
+  ],
+};
+
 export default function About() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
       <section className="section" style={{ paddingTop: 100 }}>
         <div className="wrap prose">
           <p className="eyebrow">Why SubTrade began</p>
@@ -60,7 +83,7 @@ export default function About() {
                   alt="Fabian Vargas Garcia, Co-Founder of SubTrade Software"
                   loading="lazy"
                 />
-                <b>Fabian Vargas</b>
+                <b>{FABIAN.name}</b>
                 <span>Co-Founder · The Field</span>
                 <p>
                   President of Quality Gypsum Services, a Calgary commercial

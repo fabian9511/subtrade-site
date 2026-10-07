@@ -4,6 +4,7 @@ import AppShowcase from '../components/AppShowcase';
 import Reviews from '../components/Reviews';
 import AppDownload from '../components/AppDownload';
 import TutorialStrip from '../components/TutorialStrip';
+import { toolGroups, TOOL_COUNT, DEFINITION } from '../lib/tools';
 
 export const metadata = {
   alternates: { canonical: '/' },
@@ -62,39 +63,6 @@ const day = [
   },
 ];
 
-const featureGroups = [
-  {
-    key: 'field',
-    label: 'Field',
-    tools: [
-      ['⏱️', 'Time Tracking', 'GPS clock-in with live job costing per project.'],
-      ['📝', 'Daily Logs', 'Two-minute site reports with weather and manpower.'],
-      ['📷', 'Photos', 'GPS-tagged and timestamped, organized by project.'],
-      ['🛡️', 'Safety & Custom Forms', 'FLHAs, toolbox talks and your own forms, signed on the phone.'],
-    ],
-  },
-  {
-    key: 'money',
-    label: 'Money',
-    tools: [
-      ['🧾', 'Change Orders', 'Price, send and track extras before the work is done.'],
-      ['💵', 'Progress Billing', 'Draws built from real field data, with holdback handled.'],
-      ['🧰', 'Purchase Orders', 'Commit costs against budgets and see burn instantly.'],
-    ],
-  },
-  {
-    key: 'office',
-    label: 'Office',
-    tools: [
-      ['📅', 'Crew Scheduling', 'Drag crews between jobs, notify them automatically.'],
-      ['✅', 'Tasks & Punch Lists', 'Kanban boards for deficiencies and closeout.'],
-      ['📐', 'Drawings & Markups', 'Current set on every phone, marked up in the field.'],
-      ['📄', 'Submittals & RFIs', 'Track what is out, what is late and who is holding it.'],
-      ['📊', 'Project Dashboard', 'Every job, its hours, costs and status on one screen.'],
-    ],
-  },
-];
-
 export default function Home() {
   return (
     <>
@@ -124,6 +92,7 @@ export default function Home() {
               <br />
               <em>built in the field</em>
             </h1>
+            <p className="hero-def">{DEFINITION}</p>
             <p className="lede">
               Track hours, capture change orders, run crews and bill progress
               from one app your field crew will actually use. Built by a working
@@ -154,7 +123,7 @@ export default function Home() {
         <div className="wrap">
           <div className="dimstring" aria-label="Key numbers">
             <div className="dim">
-              <span className="mono">13</span>
+              <span className="mono">{TOOL_COUNT}</span>
               <small>tools in one app</small>
             </div>
             <div className="dim">
@@ -226,20 +195,20 @@ export default function Home() {
           </div>
 
           <div className="fset-cols">
-            {featureGroups.map((g) => (
+            {toolGroups.map((g) => (
               <div className={`fset-col cat-${g.key}`} key={g.key}>
                 <div className="fset-col-h">
                   <span className="fset-dot" aria-hidden="true" />
                   {g.label}
                   <b>{g.tools.length}</b>
                 </div>
-                {g.tools.map(([ico, title, body]) => (
+                {g.tools.map(([ico, title, body, href]) => (
                   <div className="fset-row" key={title}>
                     <span className="fset-ico" aria-hidden="true">
                       {ico}
                     </span>
                     <div className="fset-text">
-                      <h3>{title}</h3>
+                      <h3><Link href={href}>{title}</Link></h3>
                       <p>{body}</p>
                     </div>
                   </div>

@@ -1,6 +1,7 @@
 import { SIGNUP } from '../../lib/data';
 import Link from 'next/link';
 import ArticleToc from '../../components/ArticleToc';
+import { FABIAN, authorRef, ORG_REF } from '../../lib/site';
 
 const PATH =
   '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight/';
@@ -34,10 +35,9 @@ const schema = [
     headline: 'The ultimate guide to choosing subcontractor management software',
     description:
       'How to choose subcontractor management software as a trade contractor: the features that matter, real pricing, the traps to avoid, and a one-week evaluation that works.',
-    author: { '@type': 'Organization', name: 'SubTrade Software Ltd.', url: `${BASE}/` },
+    author: authorRef(FABIAN),
     publisher: {
-      '@type': 'Organization',
-      name: 'SubTrade Software Ltd.',
+      ...ORG_REF,
       logo: { '@type': 'ImageObject', url: `${BASE}/logo-horizontal.png` },
     },
     mainEntityOfPage: `${BASE}${PATH}`,
@@ -129,11 +129,13 @@ export default function Guide() {
               The ultimate guide to choosing subcontractor management software
             </h1>
             <div className="article-meta">
-              <span>Guide</span>
+              <span>
+                By <Link href="/about" rel="author" className="article-author">{FABIAN.name}</Link>
+              </span>
               <span className="dot">•</span>
               <span>9 min read</span>
               <span className="dot">•</span>
-              <span>Updated August 2026</span>
+              <span>Updated September 2026</span>
             </div>
             <p className="big">
               Most buying guides for construction software are written for general

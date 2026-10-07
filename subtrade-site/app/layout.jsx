@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Script from 'next/script';
 import MegaMenu from '../components/MegaMenu';
 import MobileMenu from '../components/MobileMenu';
+import { BASE, ORG_REF, SAME_AS, FABIAN, STEBAN, personSchema } from '../lib/site';
+import { DEFINITION, TOOL_NAMES } from '../lib/tools';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/barlow-condensed/700.css';
@@ -30,34 +32,47 @@ export const metadata = {
   },
 };
 
+// Site-wide structured data: the company, the founders and the product, linked by @id.
+// AI assistants and Google read this to confirm who SubTrade is and what it costs.
 const orgSchema = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'SubTrade',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web, iOS, Android',
-  offers: {
-    '@type': 'Offer',
-    price: '299',
-    priceCurrency: 'CAD',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: 'SubTrade Software Ltd.',
-    url: 'https://subtradesoftware.com/',
-    logo: 'https://subtradesoftware.com/logo-horizontal.png',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Calgary',
-      addressRegion: 'AB',
-      addressCountry: 'CA',
+  '@graph': [
+    {
+      ...ORG_REF,
+      logo: `${BASE}/logo-horizontal.png`,
+      description:
+        'SubTrade Software Ltd. builds field management software for trade subcontractors. Founded inside a working commercial drywall company in Calgary, Alberta.',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Calgary',
+        addressRegion: 'AB',
+        addressCountry: 'CA',
+      },
+      email: 'support@subtradesoftware.com',
+      founder: [personSchema(FABIAN), personSchema(STEBAN)],
+      sameAs: SAME_AS,
     },
-    sameAs: [
-      'https://apps.apple.com/ca/app/subtrade/id6752587413',
-      'https://play.google.com/store/apps/details?id=com.subtradesoftware.subtrade.app',
-      'https://www.youtube.com/@subtradesoftware',
-    ],
-  },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': `${BASE}/#software`,
+      name: 'SubTrade',
+      url: `${BASE}/`,
+      description: DEFINITION,
+      applicationCategory: 'BusinessApplication',
+      applicationSubCategory: 'Construction field management software for subcontractors',
+      operatingSystem: 'Web, iOS, Android',
+      featureList: TOOL_NAMES.join(', '),
+      offers: {
+        '@type': 'Offer',
+        price: '299',
+        priceCurrency: 'CAD',
+        url: `${BASE}/pricing-plans/`,
+        description: 'Per month, 5 users included. 14-day free trial, no credit card.',
+      },
+      publisher: { '@id': `${BASE}/#organization` },
+      sameAs: SAME_AS,
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {

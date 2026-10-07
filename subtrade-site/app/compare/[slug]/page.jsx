@@ -2,6 +2,12 @@ import { compares, SIGNUP } from '../../../lib/data';
 import RelatedLinks from '../../../components/RelatedLinks';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { BASE, ORG_REF, FABIAN, authorRef } from '../../../lib/site';
+
+function monthYear(iso) {
+  const d = new Date(`${iso}T12:00:00Z`);
+  return d.toLocaleDateString('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+}
 
 const GUIDE = '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight';
 
@@ -17,7 +23,7 @@ export function generateMetadata({ params }) {
     : `SubTrade vs ${c.competitor}`;
   return {
     title,
-    description: (c.positioning || '').slice(0, 155),
+    description: c.metaDescription || (c.positioning || '').slice(0, 155),
     alternates: { canonical: `/compare/${c.slug}/` },
   };
 }
@@ -33,6 +39,18 @@ export default function ComparePage({ params }) {
       name: q,
       acceptedAnswer: { '@type': 'Answer', text: a },
     })),
+  };
+  // Freshness for search engines and AI assistants: who wrote it and when it was last checked.
+  const pageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `SubTrade vs ${c.competitor}`,
+    description: c.metaDescription || c.positioning,
+    url: `${BASE}/compare/${c.slug}/`,
+    author: authorRef(FABIAN),
+    publisher: ORG_REF,
+    about: [{ '@id': `${BASE}/#software` }, { '@type': 'SoftwareApplication', name: c.competitor }],
+    ...(c.updated ? { dateModified: c.updated } : {}),
   };
   const relatedGroups = [
     {
@@ -55,6 +73,7 @@ export default function ComparePage({ params }) {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       {faqSchema && (
         <script
           type="application/ld+json"
@@ -77,6 +96,11 @@ export default function ComparePage({ params }) {
             </a>
           </div>
           {c.heroNote && <p className="hero-note">{c.heroNote}</p>}
+          {c.updated && (
+            <p className="hero-note">
+              Updated {monthYear(c.updated)} by <Link href="/about" rel="author">{FABIAN.name}</Link>
+            </p>
+          )}
         </div>
       </section>
 

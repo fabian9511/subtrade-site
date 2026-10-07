@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import { PROFILES } from '../lib/site';
 
 const reviews = [
   {
@@ -20,6 +21,7 @@ const reviews = [
     initials: 'GM',
     source: 'Capterra',
     sourceLogo: '/capterra-logo.webp',
+    sourceUrl: PROFILES.capterra,
   },
   // Add more reviews here; each becomes a slide automatically.
 ];
@@ -53,12 +55,17 @@ export default function Reviews() {
               <div className="rv-quote">
                 <div className="rv-top">
                   <div className="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                  {r.sourceLogo && (
+                  {r.sourceLogo && (r.sourceUrl ? (
+                    <a className="rv-src" href={r.sourceUrl} target="_blank" rel="noopener">
+                      Reviewed on
+                      <img src={r.sourceLogo} alt={`SubTrade reviews on ${r.source}`} className="rv-src-logo" loading="lazy" />
+                    </a>
+                  ) : (
                     <span className="rv-src">
                       Reviewed on
                       <img src={r.sourceLogo} alt={`${r.source} logo`} className="rv-src-logo" loading="lazy" />
                     </span>
-                  )}
+                  ))}
                 </div>
                 <blockquote>{r.quote}</blockquote>
               </div>

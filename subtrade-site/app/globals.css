@@ -256,6 +256,15 @@ a:focus-visible, button:focus-visible {
   margin-bottom: 36px;
 }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+/* plain one-line definition under the H1: what AI assistants quote */
+.hero p.hero-def {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--steel-400);
+  max-width: 620px;
+  margin: -10px 0 18px;
+}
+.hero.hero-photo p.hero-def { color: #9aa3ae; }
 .hero-note {
   margin-top: 18px;
   font-size: 14px;
@@ -1089,6 +1098,8 @@ main > section.section { padding: 96px 0; }
   font-size: 13px;
   white-space: nowrap;
 }
+a.rv-src { text-decoration: none; }
+a.rv-src:hover { color: var(--steel-200, inherit); }
 .rv-src-logo { height: 18px; width: auto; display: block; }
 .rv-who { display: flex; align-items: center; gap: 16px; }
 .rv-who b { display: block; font-size: 16px; }
@@ -1545,6 +1556,8 @@ main > section.section { padding: 96px 0; }
   letter-spacing: .02em;
   margin-bottom: 2px;
 }
+.fset-text h3 a { color: inherit; text-decoration: none; }
+.fset-text h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .fset-text p { font-size: 13.5px; color: var(--steel-400); line-height: 1.4; }
 
 @media (max-width: 900px) {
@@ -2039,6 +2052,8 @@ main > section.section { padding: 96px 0; }
   border-bottom: 1px solid var(--steel-800);
 }
 .article-meta .dot { color: var(--steel-700); }
+.article-meta .article-author { color: var(--steel-300); text-decoration: none; }
+.article-meta .article-author:hover { text-decoration: underline; text-underline-offset: 3px; }
 .article-body p { font-size: 18px; line-height: 1.72; color: var(--steel-300); margin-bottom: 22px; }
 .article-body p.big {
   font-family: var(--font-barlow), sans-serif;

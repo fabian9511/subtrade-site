@@ -2,6 +2,7 @@ import { compares, SIGNUP } from '../../lib/data';
 import Link from 'next/link';
 
 export const metadata = {
+  alternates: { canonical: '/compare/' },
   title: 'Compare SubTrade to Other Construction Software',
   description:
     'How SubTrade compares to Fieldwire, Buildertrend, eSUB, Contractor Foreman, Raken and Knowify for trade subcontractors.',

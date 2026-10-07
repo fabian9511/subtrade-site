@@ -2,6 +2,7 @@ import { features, SIGNUP } from '../../lib/data';
 import Link from 'next/link';
 
 export const metadata = {
+  alternates: { canonical: '/construction-management-features/' },
   title: 'Construction Management Features for Subcontractors',
   description:
     'Every SubTrade feature: GPS time tracking, change orders, crew scheduling, daily logs, drawings, submittals, safety forms and progress billing for trade contractors.',
