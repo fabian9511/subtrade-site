@@ -198,7 +198,7 @@ const GLANCE = [
     kicker: 'Money',
     title: 'Bill every extra',
     text: 'The work the GC asked for gets written up, signed and onto the next claim.',
-    items: ['Change orders signed on site', 'Progress claims with holdback', 'Job costing, budget vs actual', 'Purchase orders against the job'],
+    items: ['Bids and proposals the GC can sign', 'Change orders signed on site', 'Progress claims with holdback', 'Job costing, budget vs actual', 'Purchase orders against the job'],
     icon: ICON(<><path d="M12 3v18" /><path d="M16.5 7.5c0-1.7-2-3-4.5-3s-4.5 1.3-4.5 3 2 2.6 4.5 3 4.5 1.4 4.5 3.1-2 3-4.5 3-4.5-1.3-4.5-3" /></>),
   },
   {
@@ -519,11 +519,16 @@ export default function Funnel() {
               ['/sub-trade-foreman-reviewing-software-checklist-jobsite.webp', 'Tasks & punch lists', 'Assign the work, attach photos and close out deficiencies before the GC walks the floor.', 'Foreman checking off a punch list on his phone among steel studs and drywall'],
               ['/subcontractor-reviewing-lien-paperwork-site-office.webp', 'Submittals & RFIs', 'Send them, track them and keep every answer on the job, so nothing is stuck in someone’s inbox.', 'Subcontractor in a site office reviewing submittal paperwork next to a laptop'],
               ['/material-cost-increase-steel-copper-jobsite.webp', 'Purchase orders', 'Order material against the job, track what arrived, and see the cost land on the budget.', 'Supervisor checking a material delivery of steel studs and copper wire on a tablet'],
-            ].map(([src, title, text, alt]) => (
+              ['/subtrade-bid-proposals-card.webp', 'Bid management & proposals', 'Track every tender from invite to award, price it, and send a clean proposal the GC can sign.', 'Estimator tracking bids on a pipeline board in SubTrade'],
+              ['/subtrade-aerial-photo-takeoff.webp', 'Aerial photo takeoff', 'Measure roofs, lots and building footprints straight off the aerial photo, without a site visit.', 'Estimator measuring a commercial roof on an aerial photo on a tablet'],
+              ['/subtrade-takeoff-estimating-card.webp', 'Takeoff & estimating', 'Measure off the drawings and turn the quantities into a priced estimate, in the same app.', 'Estimator marking up construction drawings for a takeoff', 'Coming 2027'],
+              ['/job-costing-cost-codes-subcontractor-office.webp', 'Job costing + QuickBooks', 'Costs coded to the job and synced with QuickBooks, so budget against actual is always current.', 'Contractor reviewing job costs on a laptop in a site office', 'Coming 2027'],
+            ].map(([src, title, text, alt, soon, pos]) => (
               <article key={title} className="fx-feature">
                 <div className="fx-media">
-                  <img src={src} alt={alt} loading="lazy" />
+                  <img src={src} alt={alt} loading="lazy" style={pos ? { objectPosition: pos } : undefined} />
                   {FX_CHIPS[title]}
+                  {soon && <span className="fx-soon">{soon}</span>}
                 </div>
                 <h3 className="display">{title}</h3>
                 <p>{text}</p>
