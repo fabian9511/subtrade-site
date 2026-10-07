@@ -687,6 +687,74 @@ main > section.section { padding: 96px 0; }
 .cta-band h2 { color: #f2f0eb; }
 .cta-band p { color: #8a93a0; }
 
+/* ---------- one day, one app: horizontal timeline ---------- */
+.daytl-section {
+  border-top: 1px solid var(--steel-800);
+  border-bottom: 1px solid var(--steel-800);
+  background-color: var(--steel-900);
+  background-image: repeating-linear-gradient(90deg, var(--steel-800) 0, var(--steel-800) 1px, transparent 1px, transparent 120px);
+}
+.daytl-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 52px;
+}
+.daytl-title h2 {
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 0.95;
+  margin: 16px 0 0;
+}
+.daytl-intro { color: var(--steel-300); font-size: 18px; line-height: 1.6; margin: 0; }
+.daytl-intro a { color: var(--gypsum); text-decoration: underline; text-decoration-color: var(--chalk); text-underline-offset: 3px; }
+.daytl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 2px solid var(--gypsum);
+}
+.daytl-step { position: relative; padding: 26px 22px 8px 0; }
+.daytl-dot {
+  position: absolute;
+  left: 0; top: -7px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--chalk);
+}
+.daytl-time {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  color: var(--chalk-dim);
+  margin: 6px 0 10px;
+}
+.daytl-step h3 {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.daytl-step p { color: var(--steel-300); font-size: 15px; line-height: 1.6; margin: 0; }
+@media (max-width: 860px) {
+  .daytl-head { grid-template-columns: minmax(0, 1fr); gap: 20px; margin-bottom: 32px; }
+  .daytl {
+    grid-template-columns: minmax(0, 1fr);
+    border-top: none;
+    border-left: 2px solid var(--gypsum);
+    margin-left: 6px;
+  }
+  .daytl-step { padding: 0 0 26px 22px; }
+  .daytl-dot { left: -7px; top: 3px; }
+  .daytl-time { margin-top: 0; }
+  .daytl-step h3 { font-size: 24px; }
+}
+
 /* ---------- image as section complement, not centerpiece ---------- */
 .head-split {
   display: grid;

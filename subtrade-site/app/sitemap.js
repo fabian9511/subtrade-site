@@ -6,7 +6,7 @@ const base = 'https://subtradesoftware.com';
 const img = (p) => `${base}${p}`;
 
 const pageImages = {
-  '': [img('/subtrade-foreman-using-app-jobsite.webp'), img('/subtrade-app-project-tools-home.webp'), img('/subtrade-worker-capturing-site-photo.webp')],
+  '': [img('/subtrade-foreman-using-app-jobsite.webp'), img('/subtrade-app-project-tools-home.webp')],
   '/construction-management-features': [img('/subtrade-worker-capturing-site-photo-wide.webp')],
   '/explore-the-app': [img('/subtrade-app-project-tools-home.webp'), img('/subtrade-app-construction-drawing-markup.webp')],
   '/construction-management-features/site-photos': [img('/subtrade-before-after-construction-photos.webp'), img('/subtrade-photo-markup-install-access-panel.webp'), img('/subtrade-gps-site-photos-worker.webp')],

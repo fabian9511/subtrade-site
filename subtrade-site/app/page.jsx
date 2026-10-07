@@ -36,31 +36,11 @@ const PORTAL = 'https://portal.subtradesoftware.com';
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 
 const day = [
-  {
-    time: '6:52 AM',
-    title: 'Crew clocks in from the truck',
-    body: 'GPS clock-in stamps who is on site and when. Hours land on the right job automatically, so job costing is real from minute one.',
-  },
-  {
-    time: '9:15 AM',
-    title: 'Site condition gets documented',
-    body: 'Foreman snaps GPS-tagged photos of the blocked area and files a daily log in two minutes. Timestamped proof, tied to the project, searchable forever.',
-  },
-  {
-    time: '11:40 AM',
-    title: 'The GC asks for extra work',
-    body: 'A change order goes out from the phone before lunch, with photos attached. No more doing extras on a handshake and fighting for the money at month end.',
-  },
-  {
-    time: '2:30 PM',
-    title: 'Tomorrow gets scheduled',
-    body: 'Crews get moved between jobs on the scheduling board. Everyone sees where they are going before they leave site today.',
-  },
-  {
-    time: '4:45 PM',
-    title: 'Progress billing writes itself',
-    body: 'Percent complete rolls up from the field data your crew already entered. Your monthly draw is backed by logs, photos and hours, not guesswork.',
-  },
+  { time: '6:52 AM', title: 'Crew clocks in', body: 'GPS clock-in from the truck. Hours land on the right job, so job costing is real from minute one.' },
+  { time: '9:15 AM', title: 'Site gets documented', body: 'GPS-tagged photos and a two-minute daily log. Timestamped proof, tied to the project.' },
+  { time: '11:40 AM', title: 'GC asks for an extra', body: 'The change order goes out from the phone before lunch, photos attached.' },
+  { time: '2:30 PM', title: 'Tomorrow gets booked', body: 'Crews move between jobs on the board and see where they are going before they leave.' },
+  { time: '4:45 PM', title: 'The draw builds itself', body: 'Percent complete rolls up from the day. Holdback handled.' },
 ];
 
 export default function Home() {
@@ -141,38 +121,33 @@ export default function Home() {
 
       <AppShowcase />
 
-      <section className="section">
+      <section className="section daytl-section">
         <div className="wrap">
-          <div className="head-split">
-            <div className="section-head">
+          <div className="daytl-head">
+            <div className="daytl-title">
               <p className="eyebrow">One day, one app</p>
-              <h2 className="display">Follow a crew through Tuesday</h2>
-              <p>
-                Most construction software is built for the GC upstairs. SubTrade
-                follows your crew from the truck to the draw. Still comparing
-                tools? Start with our guide to{' '}
-                <Link href="/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight">
-                  choosing subcontractor management software
-                </Link>
-                .
-              </p>
+              <h2 className="display">From the truck to the draw</h2>
             </div>
-            <img
-              src="/subtrade-worker-capturing-site-photo.webp"
-              alt="Worker on a commercial jobsite using the SubTrade app on a phone"
-              className="media-inset"
-              loading="lazy"
-            />
+            <p className="daytl-intro">
+              Most construction software is built for the GC upstairs. SubTrade
+              follows your crew through the day, and every step feeds the next.
+              Still comparing tools? Start with our guide to{' '}
+              <Link href="/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight">
+                choosing subcontractor management software
+              </Link>
+              .
+            </p>
           </div>
-          <div className="workflow">
+          <ol className="daytl">
             {day.map((s) => (
-              <div className="step" key={s.time}>
-                <span className="step-time">{s.time}</span>
+              <li className="daytl-step" key={s.time}>
+                <span className="daytl-dot" aria-hidden="true" />
+                <span className="daytl-time">{s.time}</span>
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
