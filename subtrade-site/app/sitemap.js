@@ -20,7 +20,7 @@ const pageImages = {
   ],
   '/time-tracking': [img('/subtrade-gps-time-tracking-clock-in.webp')],
   '/pricing-plans': [img('/subtrade-organized-multi-trade-jobsite.webp')],
-  '/about': [img('/fabian-vargas-garcia-subtrade-cofounder.webp')],
+  '/about': [img('/fabian-v-subtrade-cofounder.webp')],
 };
 
 export default function sitemap() {

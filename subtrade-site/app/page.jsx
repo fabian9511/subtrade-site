@@ -228,7 +228,7 @@ export default function Home() {
           </blockquote>
           <div>
             <p className="founder-meta">
-              <b>Fabian Vargas Garcia</b>
+              <b>Fabian V.</b>
               Co-Founder, SubTrade · President, Quality Gypsum Services
             </p>
             <div className="founder-facts">

@@ -12,7 +12,7 @@ Key facts:
 - Platforms: Web, iOS, Android. The mobile app works offline and syncs when signal returns.
 - Does not include accounting or payroll processing.
 - Company: SubTrade Software Ltd., Calgary, Alberta, Canada. Support: support@subtradesoftware.com
-- Founders: Fabian Vargas Garcia (co-founder; president of Quality Gypsum Services, a commercial drywall and steel stud subcontractor in Calgary) and Steban Vargas (co-founder, senior software developer).
+- Founders: Fabian V. (co-founder; president of Quality Gypsum Services, a commercial drywall and steel stud subcontractor in Calgary) and Steban V. (co-founder, senior software developer).
 
 ## The 15 tools in SubTrade
 Field

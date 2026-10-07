@@ -23,18 +23,18 @@ export const SAME_AS = Object.values(PROFILES).filter(Boolean);
 
 // The founders. `sameAs` takes each person's LinkedIn profile URL once known.
 export const FABIAN = {
-  name: 'Fabian Vargas Garcia',
+  name: 'Fabian V.',
   jobTitle: 'Co-Founder, SubTrade · President, Quality Gypsum Services',
-  image: '/fabian-vargas-garcia-subtrade-cofounder.webp',
+  image: '/fabian-v-subtrade-cofounder.webp',
   sameAs: [
     // 'https://www.linkedin.com/in/...',
   ],
 };
 
 export const STEBAN = {
-  name: 'Steban Vargas',
+  name: 'Steban V.',
   jobTitle: 'Co-Founder and Senior Software Developer, SubTrade',
-  image: '/steban-vargas-subtrade-cofounder.webp',
+  image: '/steban-v-subtrade-cofounder.webp',
   sameAs: [],
 };
 

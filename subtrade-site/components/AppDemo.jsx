@@ -96,7 +96,7 @@ const TIMESHEET = [
   ['Wed, Aug 26', [
     ['Seton Commercial', [
       ['10:27', '7:06 AM – 5:34 PM', 'J. Piriz'],
-      ['10:32', '7:02 AM – 5:34 PM', 'J. Vargas'],
+      ['10:32', '7:02 AM – 5:34 PM', 'J. V.'],
     ]],
     ['Riverbend Retail', [
       ['10:32', '7:01 AM – 5:34 PM', 'Y. Ortega'],
@@ -212,7 +212,7 @@ const CONTACTS = [
 ];
 
 const NOTES_SEED = [
-  ['F. Vargas', 'Jun 27, 2026', 'The generator should not be shutting off at all. Calling the rental company to get it serviced before Monday.'],
+  ['Fabian V.', 'Jun 27, 2026', 'The generator should not be shutting off at all. Calling the rental company to get it serviced before Monday.'],
   ['M. Torres', 'Jun 27, 2026', 'Lockbox is on the temp panel by the north door. Latch is stiff — pull down before turning.'],
 ];
 
@@ -314,7 +314,7 @@ export default function AppDemo() {
     { x: 18, y: 47.5, n: 2, note: 'Cooler wall — bulkhead framed per RFI-039', ph: 1 },
     { x: 77, y: 69, n: 3, note: 'Soffit at dining — hat track in, waiting on board', ph: 1 },
     { x: 54.5, y: 31, n: 4, kind: 'task', note: 'Frame bulkhead at cooler wall before board arrives', who: 'M. Torres', due: 'Fri, Jun 26' },
-    { x: 70.5, y: 67.5, n: 5, kind: 'note', note: 'Dining drops go to 9\'-10" here, not 10\'-2" — confirmed with the super on site', who: 'F. Vargas', due: 'Jun 29' },
+    { x: 70.5, y: 67.5, n: 5, kind: 'note', note: 'Dining drops go to 9\'-10" here, not 10\'-2" — confirmed with the super on site', who: 'Fabian V.', due: 'Jun 29' },
     { x: 70, y: 60.5, n: 6, kind: 'scale', note: '19.49 ft across the dining ceiling, measured off the sheet at 1/8" = 1\'-0"', who: 'Scale set from the title block', due: '' },
   ]);
   const [openPin, setOpenPin] = useState(null);
@@ -753,7 +753,7 @@ export default function AppDemo() {
                 <span className="ad-member" key={ini}><span className="ad-ini">{ini}</span><small>{name}</small></span>
               ))}
             </div>
-            <span className="ad-created">Created by <span className="ad-ini sm">FV</span> <b>F. Vargas</b></span>
+            <span className="ad-created">Created by <span className="ad-ini sm">FV</span> <b>Fabian V.</b></span>
             <b className="ad-h">Description</b>
             <div className="ad-field-box tall">
               <span>I think we can use all the drywall left over from the last unit for the storage rooms.</span>
@@ -971,7 +971,7 @@ export default function AppDemo() {
             <button type="button" className="ad-composer"
               onClick={() => {
                 if (notes.length > NOTES_SEED.length) { setToast('Already added'); return; }
-                setNotes((n) => [['F. Vargas', 'Today', NEW_NOTE], ...n]);
+                setNotes((n) => [['Fabian V.', 'Today', NEW_NOTE], ...n]);
                 setToast('Note added · everyone on the job sees it');
               }}>
               <span className="ad-composer-in">Add a note…</span>
