@@ -815,6 +815,42 @@ main > section.section { padding: 96px 0; }
   .toolset-soon { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }
 
+/* ---------- homepage pricing card + FAQ accordion ---------- */
+.faqprice {
+  border-top: 1px solid var(--steel-800);
+  background-color: var(--steel-900);
+  background-image: repeating-linear-gradient(90deg, var(--steel-800) 0, var(--steel-800) 1px, transparent 1px, transparent 120px);
+}
+.faqprice-wrap { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: start; }
+.faqprice-card { background: #15181c; color: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 4px 14px rgba(21, 24, 28, 0.12); }
+.faqprice-kicker { font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #ff8a5c; margin: 0 0 8px; }
+.faqprice-price { margin: 0; color: #a2aab5; font-size: 18px; }
+.faqprice-price span { font-family: var(--font-barlow), sans-serif; font-weight: 700; font-size: 96px; line-height: 1; color: #fff; }
+.faqprice-note { color: #c3c9d2; font-size: 16px; line-height: 1.5; margin: 8px 0 24px; }
+.faqprice-card ul { list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 12px; }
+.faqprice-card li { position: relative; padding-left: 22px; font-size: 16px; line-height: 1.45; }
+.faqprice-card li::before { content: "+"; position: absolute; left: 0; color: var(--chalk); font-family: var(--font-mono), monospace; }
+.faqprice-card .btn { width: 100%; justify-content: center; }
+.faqprice-more { display: block; text-align: center; margin-top: 16px; color: #c3c9d2; font-size: 15px; }
+.faqprice-more:hover { color: #fff; }
+.faqprice-faq h2 { font-size: clamp(36px, 4.5vw, 56px); font-weight: 700; line-height: 0.95; margin: 0 0 24px; }
+.faqprice-faq details { border-top: 1px solid var(--steel-700); padding: 18px 0; }
+.faqprice-faq details:last-child { border-bottom: 1px solid var(--steel-700); }
+.faqprice-faq summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px; min-height: 32px; }
+.faqprice-faq summary::-webkit-details-marker { display: none; }
+.faqprice-faq summary::before { content: "+"; font-family: var(--font-mono), monospace; font-size: 20px; color: var(--chalk-dim); width: 16px; flex: none; }
+.faqprice-faq details[open] summary::before { content: "\2212"; }
+.faqprice-faq summary h3 {
+  margin: 0; font-family: var(--font-barlow), sans-serif; font-weight: 600; font-size: 22px;
+  text-transform: uppercase; letter-spacing: .01em; color: var(--gypsum);
+}
+.faqprice-faq details p { margin: 12px 0 0 28px; font-size: 16px; line-height: 1.6; color: var(--steel-300); }
+@media (max-width: 900px) {
+  .faqprice-wrap { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .faqprice-card { padding: 28px 22px; }
+  .faqprice-price span { font-size: 76px; }
+}
+
 /* ---------- coming soon block (features hub) ---------- */
 .soon-block { margin-top: 64px; }
 .soon-block-head h2 { font-size: clamp(32px, 4vw, 44px); margin: 14px 0 24px; }

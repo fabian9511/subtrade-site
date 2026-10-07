@@ -275,19 +275,29 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="wrap">
+      <section className="section faqprice">
+        <div className="wrap faqprice-wrap">
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-          <div className="section-head">
-            <p className="eyebrow">Questions subs actually ask</p>
-            <h2 className="display">Frequently asked questions</h2>
+          <div className="faqprice-card">
+            <p className="faqprice-kicker">One plan</p>
+            <p className="faqprice-price"><span>$299</span> /month CAD</p>
+            <p className="faqprice-note">5 users included. Run your whole company for about $10 a day. Annual billing saves 20%.</p>
+            <ul>
+              <li>All {TOOL_COUNT} tools on every plan</li>
+              <li>Extra users from $15 down to $4 each</li>
+              <li>Web, iOS and Android, works offline</li>
+              <li>14-day free trial</li>
+            </ul>
+            <a href={SIGNUP} className="btn btn-primary btn-lg">Start 14-day free trial</a>
+            <Link href="/pricing-plans" className="faqprice-more">See full pricing →</Link>
           </div>
-          <div className="workflow">
-            {faqs.map(([q, a]) => (
-              <div className="step" key={q} style={{ gridTemplateColumns: '1fr 1.4fr' }}>
-                <h3 style={{ textTransform: 'none', fontSize: 21 }}>{q}</h3>
+          <div className="faqprice-faq">
+            <h2 className="display">Questions subs actually ask</h2>
+            {faqs.map(([q, a], i) => (
+              <details key={q} open={i === 0}>
+                <summary><h3>{q}</h3></summary>
                 <p>{a}</p>
-              </div>
+              </details>
             ))}
           </div>
         </div>
