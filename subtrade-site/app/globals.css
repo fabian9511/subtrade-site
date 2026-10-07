@@ -3609,6 +3609,8 @@ main > section.section { padding: 96px 0; }
 .bl-cancel-note { color: var(--steel-400); font-size: 15px; }
 .fx-field textarea { width: 100%; font: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid var(--steel-700); border-radius: 6px; background: var(--steel-900); color: var(--gypsum); resize: vertical; }
 .fx-field textarea:focus { outline: 2px solid var(--chalk); outline-offset: 0; border-color: transparent; background: #fff; }
+.fx-field select { width: 100%; font: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid var(--steel-700); border-radius: 6px; background: var(--steel-900); color: var(--gypsum); }
+.fx-field select:focus { outline: 2px solid var(--chalk); outline-offset: 0; border-color: transparent; background: #fff; }
 @media (max-width: 560px) { .bl-card { padding: 22px 18px; } .bl-actions .btn { width: 100%; justify-content: center; } }
 /* /billing/manage/ layout */
 .bl-wide { max-width: 1120px; }

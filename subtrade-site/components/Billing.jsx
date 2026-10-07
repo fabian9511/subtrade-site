@@ -298,7 +298,7 @@ export function BillingManage() {
   const [token, setToken] = useState('');
   const [s, setS] = useState(null); // summary
   const [invoices, setInvoices] = useState([]);
-  const [step, setStep] = useState('loading'); // loading | ready | view | reason | offer | confirm | saved | cancelled | expired
+  const [step, setStep] = useState('loading'); // loading | ready | view | cancel | saved | cancelled | expired
   const [reason, setReason] = useState('');
   const [comment, setComment] = useState('');
   const [busy, setBusy] = useState(false);
@@ -479,7 +479,7 @@ export function BillingManage() {
             Keep my subscription
           </button>
         ) : (
-          <button type="button" className="bl-link" disabled={busy} onClick={() => setStep('reason')}>
+          <button type="button" className="bl-link" disabled={busy} onClick={() => setStep('cancel')}>
             Cancel subscription
           </button>
         )}
@@ -545,114 +545,17 @@ export function BillingManage() {
       </div>
     );
 
-  if (step === 'reason')
+  // Cancelling is one screen: what happens, the stay offer, an optional reason,
+  // and the confirm button. No extra steps between the customer and "cancel".
+  if (step === 'cancel') {
+    const gross = s.amount != null ? s.amount + (s.card_fee || 0) : null;
+    const yearSave = gross != null ? (per === 'year' ? gross * 0.2 : gross * 0.2 * 12) : null;
     return (
       <div className="bl-layout">
         <div className="bl-main">
           <div className="bl-card">
-            <p className="eyebrow">Cancel · step 1 of 2</p>
-            <h2 className="bl-title">Sorry to see you go. What&rsquo;s the main reason?</h2>
-            <div className="bl-reasons" role="radiogroup" aria-label="Reason for cancelling">
-              {REASONS.map(([id, label]) => (
-                <button
-                  key={id}
-                  type="button"
-                  role="radio"
-                  aria-checked={reason === id}
-                  className={`fx-choice${reason === id ? ' is-on' : ''}`}
-                  onClick={() => setReason(id)}
-                >
-                  <span className="fx-choice-radio" aria-hidden="true" />
-                  <span className="fx-choice-body"><b>{label}</b></span>
-                </button>
-              ))}
-            </div>
-            <label className="fx-field">
-              <span>Anything we should know? (optional)</span>
-              <textarea rows={3} value={comment} maxLength={500} onChange={(e) => setComment(e.target.value)} />
-            </label>
-            <div className="bl-actions">
-              <button
-                type="button"
-                className="btn btn-primary"
-                disabled={!reason}
-                onClick={() => setStep(s.save_offer_used ? 'confirm' : 'offer')}
-              >
-                Continue
-              </button>
-              <button type="button" className="bl-link" onClick={() => setStep('view')}>Never mind, go back</button>
-            </div>
-          </div>
-        </div>
-        <Sidebar />
-      </div>
-    );
-
-  if (step === 'offer' || step === 'confirm')
-    return (
-      <div className="bl-layout">
-        <div className="bl-main">
-          <div className="bl-card">
-            <p className="eyebrow">Cancel · step 2 of 2</p>
-            {step === 'offer' && (
-              <div className="bl-offer">
-                <span className="bl-offer-tag">Offer for you</span>
-                <h2 className="bl-title">Don&rsquo;t cancel, and save an extra 20%</h2>
-                {s.amount != null && (
-                  <div className="bl-save">
-                    <div>
-                      <span>You save</span>
-                      <b className="mono">{money(s.amount * 0.2)}</b>
-                      <small>every {per}</small>
-                    </div>
-                    <div>
-                      <span>Over the next 12 months</span>
-                      <b className="mono">{money(per === 'year' ? s.amount * 0.2 : s.amount * 0.2 * 12)}</b>
-                      <small>back in your pocket</small>
-                    </div>
-                    <div>
-                      <span>Your new price</span>
-                      <b className="mono">{money(s.amount * 0.8)}</b>
-                      <small><s>{money(s.amount)}</s> per {per} + tax</small>
-                    </div>
-                  </div>
-                )}
-                <p>
-                  {s.trial ? (
-                    <>
-                      Your plan starts today with 20% off for 12 months. Your free trial ends now and{' '}
-                      <b>{s.amount != null ? `${money(s.amount * 0.8)} + tax` : 'your first discounted payment'}</b> is charged to your card today,
-                      then every {per}.
-                    </>
-                  ) : (
-                    'The discount starts with your next charge and lasts 12 months. Same plan, same users, nothing else changes.'
-                  )}
-                </p>
-                {s.users && (
-                  <details className="pb-details">
-                    <summary>See the full price with your discount</summary>
-                    <PriceBreakdown users={s.users} annual={s.interval === 'year'} saveOffer compact />
-                  </details>
-                )}
-                <button
-                  type="button"
-                  className="btn btn-primary btn-lg fx-submit"
-                  disabled={busy}
-                  onClick={async () => {
-                    const r = await act('save');
-                    if (r) setStep(r.manual ? 'saved-manual' : r.charged ? 'started' : 'saved');
-                    if (r?.charged) act('view');
-                  }}
-                >
-                  {busy
-                    ? 'Applying…'
-                    : s.amount != null
-                      ? `${s.trial ? 'Start my plan today and save' : 'Keep SubTrade and save'} ${money(per === 'year' ? s.amount * 0.2 : s.amount * 0.2 * 12)}`
-                      : 'Yes, keep SubTrade with 20% off'}
-                </button>
-              </div>
-            )}
-            {step === 'confirm' && <h2 className="bl-title">Confirm cancellation</h2>}
+            <p className="eyebrow">Cancel subscription</p>
+            <h2 className="bl-title">Cancel your SubTrade subscription</h2>
 
             <div className="bl-lose">
               <p className="bl-lose-title">If you cancel</p>
@@ -666,6 +569,64 @@ export function BillingManage() {
               </p>
             </div>
 
+            {!s.save_offer_used && (
+              <div className="bl-offer">
+                <span className="bl-offer-tag">Or stay and save 20%</span>
+                {gross != null && (
+                  <div className="bl-save">
+                    <div>
+                      <span>You save</span>
+                      <b className="mono">{money(gross * 0.2)}</b>
+                      <small>every {per}</small>
+                    </div>
+                    <div>
+                      <span>Over the next 12 months</span>
+                      <b className="mono">{money(yearSave)}</b>
+                      <small>back in your pocket</small>
+                    </div>
+                    <div>
+                      <span>Your new price</span>
+                      <b className="mono">{money(gross * 0.8)}</b>
+                      <small><s>{money(gross)}</s> per {per} + tax</small>
+                    </div>
+                  </div>
+                )}
+                <p>
+                  {s.trial
+                    ? <>Taking the offer ends your free trial now: <b>{gross != null ? `${money(gross * 0.8)} + tax` : 'your first discounted payment'}</b> is charged today, then every {per}, with 20% off for 12 months.</>
+                    : 'The discount starts with your next charge and lasts 12 months. Same plan, same users, nothing else changes.'}
+                </p>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  disabled={busy}
+                  onClick={async () => {
+                    const r = await act('save');
+                    if (r) setStep(r.manual ? 'saved-manual' : r.charged ? 'started' : 'saved');
+                    if (r?.charged) act('view');
+                  }}
+                >
+                  {busy ? 'Applying…' : yearSave != null ? `Keep SubTrade and save ${money(yearSave)}` : 'Keep SubTrade with 20% off'}
+                </button>
+              </div>
+            )}
+
+            <label className="fx-field">
+              <span>Why are you leaving? (optional)</span>
+              <select value={reason} onChange={(e) => setReason(e.target.value)}>
+                <option value="">Choose a reason</option>
+                {REASONS.map(([id, label]) => (
+                  <option key={id} value={id}>{label}</option>
+                ))}
+              </select>
+            </label>
+            {reason && (
+              <label className="fx-field">
+                <span>Anything we should know? (optional)</span>
+                <textarea rows={2} value={comment} maxLength={500} onChange={(e) => setComment(e.target.value)} />
+              </label>
+            )}
+
             {error && <p className="fx-error" role="alert">{error}</p>}
             <div className="bl-actions">
               <button
@@ -676,7 +637,7 @@ export function BillingManage() {
                   if (await act('cancel')) setStep('cancelled');
                 }}
               >
-                {step === 'offer' ? 'No thanks, cancel my subscription' : 'Cancel my subscription'}
+                {busy ? 'Cancelling…' : 'Confirm cancellation'}
               </button>
               <button type="button" className="bl-link" onClick={() => setStep('view')}>Go back</button>
             </div>
@@ -685,6 +646,7 @@ export function BillingManage() {
         <Sidebar />
       </div>
     );
+  }
 
   if (step === 'change')
     return (
