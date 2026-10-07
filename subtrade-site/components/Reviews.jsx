@@ -1,6 +1,3 @@
-'use client';
-
-import { useRef } from 'react';
 import { PROFILES } from '../lib/site';
 
 const reviews = [
@@ -26,52 +23,34 @@ const reviews = [
   // Add more reviews here; each becomes a slide automatically.
 ];
 
+// Review cards side by side (they wrap to one column on phones). A review
+// with a sourceUrl shows a linked "Reviewed on" badge with the site's logo.
 export default function Reviews() {
-  const track = useRef(null);
-  const slide = (dir) => {
-    const el = track.current;
-    if (el) el.scrollBy({ left: dir * el.clientWidth, behavior: 'smooth' });
-  };
-  const many = reviews.length > 1;
-
   return (
     <section className="section">
       <div className="wrap">
-        <div className="section-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', maxWidth: 'none' }}>
-          <div>
-            <p className="eyebrow">From the field</p>
-            <h2 className="display">Subs on SubTrade</h2>
-          </div>
-          {many && (
-            <div className="rv-nav">
-              <button onClick={() => slide(-1)} aria-label="Previous review">←</button>
-              <button onClick={() => slide(1)} aria-label="Next review">→</button>
-            </div>
-          )}
+        <div className="section-head" style={{ marginBottom: 36 }}>
+          <p className="eyebrow">From the field</p>
+          <h2 className="display">Subs on SubTrade</h2>
         </div>
-        <div className="rv-track" ref={track}>
+        <div className="rvc-grid">
           {reviews.map((r) => (
-            <figure className="rv-slide" key={r.name}>
-              <div className="rv-quote">
-                <div className="rv-top">
-                  <div className="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                  {r.sourceLogo && (r.sourceUrl ? (
-                    <a className="rv-src" href={r.sourceUrl} target="_blank" rel="noopener">
-                      Reviewed on
-                      <img src={r.sourceLogo} alt={`SubTrade reviews on ${r.source}`} className="rv-src-logo" loading="lazy" />
-                    </a>
-                  ) : (
-                    <span className="rv-src">
-                      Reviewed on
-                      <img src={r.sourceLogo} alt={`${r.source} logo`} className="rv-src-logo" loading="lazy" />
-                    </span>
-                  ))}
-                </div>
-                <blockquote>{r.quote}</blockquote>
+            <figure className="rvc" key={r.name}>
+              <div className="rvc-top">
+                <span className="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+                {r.sourceLogo ? (
+                  <a className="rvc-src" href={r.sourceUrl} target="_blank" rel="noopener">
+                    Reviewed on
+                    <img src={r.sourceLogo} alt={r.source} loading="lazy" />
+                  </a>
+                ) : (
+                  <span className="rvc-label">Customer review</span>
+                )}
               </div>
-              <figcaption className="rv-who">
+              <blockquote>{r.quote}</blockquote>
+              <figcaption className="rvc-who">
                 {r.logo ? (
-                  <img src={r.logo} alt={`${r.name} logo`} className="rv-logo" loading="lazy" />
+                  <img src={r.logo} alt={`${r.name} logo`} className="rvc-logo" loading="lazy" />
                 ) : (
                   <span className="rv-mono" aria-hidden="true">{r.initials}</span>
                 )}

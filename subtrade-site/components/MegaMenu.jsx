@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { COMING_SOON } from '../lib/tools';
 
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
@@ -46,9 +46,24 @@ export default function MegaMenu() {
   const openNow = () => { clearTimeout(timer.current); setOpen(true); };
   const closeSoon = () => { clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(false), 220); };
   const close = () => { clearTimeout(timer.current); setOpen(false); };
+  const wrap = useRef(null);
+
+  // While open: Esc closes it, and so does a click or tap anywhere outside it.
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+    const onDown = (e) => { if (wrap.current && !wrap.current.contains(e.target)) close(); };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onDown);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onDown);
+    };
+  }, [open]);
 
   return (
     <div
+      ref={wrap}
       className={`nav-mega-wrap${open ? ' open' : ''}`}
       onMouseEnter={openNow}
       onMouseLeave={closeSoon}
