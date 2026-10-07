@@ -925,7 +925,13 @@ main > section.section { padding: 96px 0; }
 .qs-stepper { display: flex; align-items: center; border: 1.5px solid var(--gypsum); border-radius: 8px; overflow: hidden; }
 .qs-stepper button { width: 48px; height: 48px; border: none; background: #fff; font-size: 24px; color: var(--gypsum); cursor: pointer; }
 .qs-stepper button:hover { background: var(--steel-850); }
-.qs-stepper span { min-width: 68px; text-align: center; font-family: var(--font-barlow), sans-serif; font-weight: 700; font-size: 28px; }
+.qs-stepper input {
+  width: 72px; height: 48px; border: none; border-left: 1px solid var(--steel-800); border-right: 1px solid var(--steel-800);
+  text-align: center; font-family: var(--font-barlow), sans-serif; font-weight: 700; font-size: 28px; color: var(--gypsum); background: #fff;
+}
+.qs-stepper input:focus { outline: 2px solid var(--chalk); outline-offset: -2px; }
+.qs-stepper button:disabled { color: var(--steel-700); cursor: not-allowed; background: #fff; }
+.qs-range { font-size: 13px; color: var(--steel-400); }
 .qs-annual { display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer; min-height: 44px; }
 .qs-annual input { width: 20px; height: 20px; accent-color: var(--chalk); }
 .qs-table-wrap { overflow-x: auto; }
@@ -944,7 +950,8 @@ main > section.section { padding: 96px 0; }
 .qs-total > span:first-child { font-family: var(--font-barlow), sans-serif; font-weight: 600; font-size: 21px; text-transform: uppercase; letter-spacing: .04em; }
 .qs-total-num { font-family: var(--font-barlow), sans-serif; font-weight: 700; font-size: 52px; line-height: 1; color: #ff8a5c; }
 .qs-note { margin: 10px 0 0; text-align: right; font-size: 14px; color: var(--steel-400); }
-.qs-foot { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; justify-content: space-between; }
+.qs-foot { margin-top: 24px; }
+.qs-foot .btn { width: 100%; justify-content: center; }
 .qs-sign { flex: 1 1 200px; min-width: 0; }
 .qs-sign span { display: flex; align-items: flex-end; height: 34px; padding-bottom: 4px; border-bottom: 1.5px solid var(--gypsum); font-family: var(--font-mono), monospace; color: var(--steel-500); }
 .qs-sign small { display: block; margin-top: 6px; font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--steel-400); }

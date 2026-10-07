@@ -122,8 +122,8 @@ export default function Pricing() {
 
       <section className="cta-band">
         <div className="wrap">
-          <h2 className="display">The trial is the demo</h2>
-          <p>Load a real project and see it for yourself.</p>
+          <h2 className="display">Run your next job on it</h2>
+          <p>Set up takes an afternoon. Your foreman will get it by coffee break.</p>
           <a href={SIGNUP} className="btn btn-primary btn-lg">
             Start free trial
           </a>

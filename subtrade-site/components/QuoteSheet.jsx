@@ -9,9 +9,23 @@ const whole = (n) => n.toLocaleString('en-CA', { maximumFractionDigits: 0 });
 
 // The pricing page "quote": crew size and billing period in, line items and
 // total out. All numbers come from lib/pricing.js (the same math as billing).
+const MIN = 5; // base plan: 5 users, $299
+const MAX = 100;
+const clamp = (n) => Math.min(MAX, Math.max(MIN, Math.round(n)));
+
 export default function QuoteSheet() {
-  const [users, setUsers] = useState(12);
+  const [users, setUsers] = useState(MIN);
+  const [draft, setDraft] = useState(String(MIN)); // what is typed in the box
   const [annual, setAnnual] = useState(false);
+
+  const set = (n) => { const v = clamp(n); setUsers(v); setDraft(String(v)); };
+  const onType = (e) => {
+    const raw = e.target.value.replace(/[^0-9]/g, '').slice(0, 3);
+    setDraft(raw);
+    const n = parseInt(raw, 10);
+    if (!Number.isNaN(n) && n >= MIN && n <= MAX) setUsers(n);
+  };
+  const onBlur = () => set(parseInt(draft, 10) || MIN);
 
   const monthly = monthlyTotal(users);
   const total = annual ? annualMonthly(monthly) : monthly;
@@ -36,10 +50,19 @@ export default function QuoteSheet() {
         <div className="qs-controls">
           <span className="qs-label" id="qs-crew">Crew size</span>
           <div className="qs-stepper" role="group" aria-labelledby="qs-crew">
-            <button type="button" aria-label="One fewer user" onClick={() => setUsers((u) => Math.max(1, u - 1))}>−</button>
-            <span aria-live="polite">{users}</span>
-            <button type="button" aria-label="One more user" onClick={() => setUsers((u) => Math.min(200, u + 1))}>+</button>
+            <button type="button" aria-label="One fewer user" onClick={() => set(users - 1)} disabled={users <= MIN}>−</button>
+            <input
+              type="text"
+              inputMode="numeric"
+              aria-label={`Number of users, ${MIN} to ${MAX}`}
+              value={draft}
+              onChange={onType}
+              onBlur={onBlur}
+              onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }}
+            />
+            <button type="button" aria-label="One more user" onClick={() => set(users + 1)} disabled={users >= MAX}>+</button>
           </div>
+          <span className="qs-range">{MIN} to {MAX} users</span>
           <label className="qs-annual">
             <input type="checkbox" checked={annual} onChange={(e) => setAnnual(e.target.checked)} />
             Pay annually (save 20%)
@@ -82,10 +105,6 @@ export default function QuoteSheet() {
         </p>
 
         <div className="qs-foot">
-          <div className="qs-sign">
-            <span aria-hidden="true">x</span>
-            <small>Accepted by</small>
-          </div>
           <a href={SIGNUP} className="btn btn-primary btn-lg">Accept and start free trial</a>
         </div>
       </div>
