@@ -153,7 +153,7 @@ export default function Home() {
 
       <Reviews />
 
-      <section className="section toolset" style={{ paddingTop: 0 }}>
+      <section className="section toolset" style={{ paddingTop: 80 }}>
         <div className="wrap">
           <div className="toolset-head">
             <div>
