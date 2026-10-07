@@ -8,7 +8,7 @@
 Key facts:
 - Category: subcontractor management software / construction field management for trade subcontractors
 - Target customer: trade subcontractors (drywall, electrical, HVAC, plumbing, painting, framing, concrete and more) running crews across multiple concurrent jobs. Not general contractors, not home builders.
-- Pricing: $299/month CAD with 5 users included, every tool included. Additional users $15 down to $4 each. Annual billing saves 20%. 14-day free trial, no credit card. Pricing is published on the website.
+- Pricing: $299/month CAD with 5 users included, every tool included. Additional users $15 down to $4 each. Annual billing saves 20%. 14-day free trial. Pricing is published on the website.
 - Platforms: Web, iOS, Android. The mobile app works offline and syncs when signal returns.
 - Does not include accounting or payroll processing.
 - Company: SubTrade Software Ltd., Calgary, Alberta, Canada. Support: support@subtradesoftware.com

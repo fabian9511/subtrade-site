@@ -46,7 +46,7 @@ The units that decide a sub's bid are trade-specific: board hung per man-hour, d
 
 ### 7. Priced for a field-heavy team
 
-A sub might have twelve people in the field and two in the office. Per-seat pricing that charges full freight for a foreman who does exactly three things — clock the crew, log the day, take photos — turns a reasonable tool into an unreasonable invoice, and the usual result is that nobody buys enough licenses and half the crew stays on paper. Look hard at how a vendor charges for field users before anything else. SubTrade is [$299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, deliberately flat so you can put the whole crew on it.
+A sub might have twelve people in the field and two in the office. Per-seat pricing that charges full freight for a foreman who does exactly three things — clock the crew, log the day, take photos — turns a reasonable tool into an unreasonable invoice, and the usual result is that nobody buys enough licenses and half the crew stays on paper. Look hard at how a vendor charges for field users before anything else. SubTrade is [$299/month CAD](/pricing-plans/) with a 14-day free trial, deliberately flat so you can put the whole crew on it.
 
 ## Score it, don't feel it
 

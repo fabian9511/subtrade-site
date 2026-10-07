@@ -293,7 +293,7 @@ export default function ComparePage({ params }) {
       <section className="cta-band">
         <div className="wrap">
           <h2 className="display">Decide on a real job</h2>
-          <p>14-day free trial, full platform, no credit card.</p>
+          <p>14-day free trial, full platform.</p>
           <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
         </div>
       </section>

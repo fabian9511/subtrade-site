@@ -69,7 +69,7 @@ export default function RichFeature({ f }) {
                 <div className="hero-ctas">
                   <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
                 </div>
-                <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
+                <p className="hero-note">Up and running in under 10 minutes.</p>
               </div>
               <div className={!v ? 'hs-media hs-shortonly' : sh ? 'hs-media' : 'hs-media hs-solo'}>
                 {v && (
@@ -116,7 +116,7 @@ export default function RichFeature({ f }) {
             <div className="hero-ctas" style={{ marginTop: 34 }}>
               <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
             </div>
-            <p className="hero-note">No credit card. Up and running in under 10 minutes.</p>
+            <p className="hero-note">Up and running in under 10 minutes.</p>
             {v && (
               <div style={{ marginTop: 44 }}>
                 <VideoEmbed id={v.id} title={v.title} poster={v.poster} posterAlt={v.posterAlt} parts={v.parts} />
@@ -228,7 +228,7 @@ export default function RichFeature({ f }) {
       <section className="cta-band">
         <div className="wrap">
           <h2 className="display">Try it on a real job</h2>
-          <p>Full platform, 14-day free trial, no credit card.</p>
+          <p>Full platform, 14-day free trial.</p>
           <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
         </div>
       </section>

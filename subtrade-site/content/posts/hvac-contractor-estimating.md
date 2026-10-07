@@ -66,7 +66,7 @@ An estimate is only worth what you learn from it. The point of pricing labour by
 
 That only works if the field data comes back clean. Crew [time tracking](/time-tracking/) coded to the same cost codes you estimated against is what closes the loop. Without it, your "production rates" are just the last number you felt good about. With it, every finished job makes the next bid more accurate.
 
-If you want the full picture of how estimating, labour capture, and change orders fit together for a mechanical trade, our [HVAC contractor software](/hvac-contractor-software/) page walks through the workflow end to end. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so you can run your next bid through it before committing.
+If you want the full picture of how estimating, labour capture, and change orders fit together for a mechanical trade, our [HVAC contractor software](/hvac-contractor-software/) page walks through the workflow end to end. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so you can run your next bid through it before committing.
 
 ## A short pre-bid checklist
 

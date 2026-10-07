@@ -54,7 +54,7 @@ You are not looking for the lowest sticker price. You are looking for a model th
 
 **What happens as you grow.** Run the price at your busy-season headcount, not your winter one. A number that works with eight crew and breaks at twenty is a number that will punish you for growing.
 
-When you compare tools, put the pricing model next to the feature list, not after it. We lay our own model out plainly on the [pricing plans](/pricing-plans/) page, and our head-to-head breakdowns against the platforms subs most often weigh, including [SubTrade vs Procore](/compare/subtrade-vs-procore/), [SubTrade vs Knowify](/compare/subtrade-vs-knowify/), and [SubTrade vs eSUB](/compare/subtrade-vs-esub/), each put pricing structure on the table alongside what the tool does. SubTrade is a flat $299/month CAD with a 14-day free trial and no credit card required, specifically so you can put every foreman on it without doing seat arithmetic first.
+When you compare tools, put the pricing model next to the feature list, not after it. We lay our own model out plainly on the [pricing plans](/pricing-plans/) page, and our head-to-head breakdowns against the platforms subs most often weigh, including [SubTrade vs Procore](/compare/subtrade-vs-procore/), [SubTrade vs Knowify](/compare/subtrade-vs-knowify/), and [SubTrade vs eSUB](/compare/subtrade-vs-esub/), each put pricing structure on the table alongside what the tool does. SubTrade is a flat $299/month CAD with a 14-day free trial, specifically so you can put every foreman on it without doing seat arithmetic first.
 
 ## The test before you sign
 

@@ -1490,7 +1490,7 @@ export const compares = [
     eyebrow: 'Honest Comparison',
     headline: 'Plans on site, or the whole business?',
     positioning: `Fieldwire is an excellent jobsite coordination tool: plans, tasks, punch lists, and field markups, backed by Hilti. But it stops at the field. SubTrade covers the rest of running a trade sub: time tracking, change orders, scheduling, and job costing, in one app built for crews.`,
-    heroNote: `No credit card required. An honest look at where each tool stops.`,
+    heroNote: `An honest look at where each tool stops.`,
     shortAnswer: {
       them: [`Choose Fieldwire if`, `Your main need is jobsite plan management: drawings, tasks, punch lists, and field markups, and you handle costing and billing elsewhere.`],
       us: [`Choose SubTrade if`, `You want plans plus the business side: time tracking, change orders, scheduling, and job costing, in one app built for the trade sub.`],
@@ -1520,7 +1520,7 @@ export const compares = [
     theirWinsTitle: `Where Fieldwire wins`,
     theirWins: `For pure jobsite plan management, Fieldwire is excellent and well-backed by Hilti, with a free tier that is hard to beat if all you need is drawings, tasks, and punch lists. If you do not need costing, change orders, or billing in the same place, it is a strong, focused tool.`,
     pricingBody: [
-      `Fieldwire has a free tier, with paid plans publicly around $29 to $89 per user per month depending on features. SubTrade is $299 per month CAD all-in with every feature included, a 14-day free trial, and no credit card.`,
+      `Fieldwire has a free tier, with paid plans publicly around $29 to $89 per user per month depending on features. SubTrade is $299 per month CAD all-in with every feature included and a 14-day free trial.`,
       `As crews grow, per-user pricing adds up; SubTrade keeps it flat and bundles the field and office toolkit in one plan.`,
     ],
     pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
@@ -1544,7 +1544,7 @@ export const compares = [
     eyebrow: 'Honest Comparison',
     headline: 'Which is right for a subcontractor?',
     positioning: `Buildertrend is one of the best-known names in construction software, but it was built for general contractors and home builders managing a whole project, with subs as one piece of the puzzle. SubTrade is built for the opposite point of view: the trade sub running their own crews, bids, and billing.`,
-    heroNote: `No credit card required. If you run an electrical, drywall, HVAC, plumbing, or concrete crew, this one is for you.`,
+    heroNote: `If you run an electrical, drywall, HVAC, plumbing, or concrete crew, this one is for you.`,
     shortAnswer: {
       them: [`Choose Buildertrend if`, `You are a residential general contractor or home builder who needs client-facing tools, selections, and full project management across many trades.`],
       us: [`Choose SubTrade if`, `You are a trade subcontractor who needs field-first time tracking, fast change orders, crew scheduling, and real-time job costing, without paying for a platform built for someone else's job.`],
@@ -1559,7 +1559,7 @@ export const compares = [
       [`Change orders from the field`, `Core, under 2 minutes`, `Available, GC oriented`],
       [`Client / homeowner portal`, `Not needed by subs, so not in your way`, `Yes, core for builders`],
       [`Learning curve`, `Low, set up in a day`, `Steeper, more to configure`],
-      [`Free trial`, `14 days, no credit card`, `Demo led`],
+      [`Free trial`, `14 days`, `Demo led`],
     ],
     tableNote: `Pricing as publicly listed. Confirm current Buildertrend pricing on their site.`,
     winsIntro: `Every point below comes from being built around the sub's workflow instead of the GC's.`,
@@ -1574,7 +1574,7 @@ export const compares = [
     theirWinsTitle: `Where Buildertrend wins`,
     theirWins: `Buildertrend is a mature, full-suite platform. If you are a builder coordinating an entire residential project, client selections, homeowner communication, warranty, and managing multiple trades, it has depth SubTrade does not try to match. It is a strong tool for the GC's job.`,
     pricingBody: [
-      `SubTrade is a single all-inclusive plan from $299 per month CAD, save 20% annually, with tiered per-user pricing as your crew grows. Every feature included, 14-day free trial, no credit card.`,
+      `SubTrade is a single all-inclusive plan from $299 per month CAD, save 20% annually, with tiered per-user pricing as your crew grows. Every feature included, 14-day free trial.`,
       `Buildertrend uses tiered plans that publicly start around $399 per month and rise into the hundreds for higher tiers. For most trade subs, SubTrade delivers the tools you actually use at a lower total cost.`,
     ],
     pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
@@ -1599,7 +1599,7 @@ export const compares = [
     eyebrow: 'Honest Comparison',
     headline: 'Which is right for a subcontractor?',
     positioning: `Procore is the biggest name in construction software, a powerful enterprise platform built for large general contractors and owners running complex projects. SubTrade is built for the other side of the table: the trade sub running crews, change orders, and labor cost on the jobs they are hired for.`,
-    heroNote: `No credit card required. If you run an electrical, drywall, HVAC, plumbing, or concrete crew, this one is for you.`,
+    heroNote: `If you run an electrical, drywall, HVAC, plumbing, or concrete crew, this one is for you.`,
     shortAnswer: {
       them: [`Choose Procore if`, `You are a large GC or owner who needs enterprise project, financial, and document management across big commercial projects with many stakeholders.`],
       us: [`Choose SubTrade if`, `You are a trade sub who needs field-first time tracking, change orders, scheduling, and real-time job costing, without enterprise complexity or enterprise pricing.`],
@@ -1628,7 +1628,7 @@ export const compares = [
     theirWinsTitle: `Where Procore wins`,
     theirWins: `For a large general contractor or owner, Procore is hard to beat: deep financials, document control, an enormous subcontractor network, and a module for nearly everything. If you are running big commercial projects with many stakeholders, that breadth is the point.`,
     pricingBody: [
-      `SubTrade is a single all-inclusive plan from $299 per month CAD with a 14-day free trial and no credit card. Procore is quote-based and priced for enterprise, typically a much larger annual commitment with implementation.`,
+      `SubTrade is a single all-inclusive plan from $299 per month CAD with a 14-day free trial. Procore is quote-based and priced for enterprise, typically a much larger annual commitment with implementation.`,
       `For most trade subs, Procore is more platform, and more cost, than the job requires.`,
     ],
     pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
@@ -1653,7 +1653,7 @@ export const compares = [
     eyebrow: 'Honest Comparison',
     headline: 'Two tools built for subcontractors',
     positioning: `eSUB and SubTrade cover much of the same ground for trade subcontractors: full RFIs, submittals, document control, time tracking, change orders, and job costing, for crews of any size. The real difference is how they feel to use. SubTrade gives you that same capability in a simpler, mobile-first app that a crew actually adopts, at a transparent price.`,
-    heroNote: `No credit card required. Two sub-focused tools, compared straight.`,
+    heroNote: `Two sub-focused tools, compared straight.`,
     shortAnswer: {
       them: [`Choose eSUB if`, `You want a heavier, enterprise-style platform with deep configuration and structured workflows, and you have the team to run it.`],
       us: [`Choose SubTrade if`, `You want the same capabilities in a much simpler app, full paperwork and field tools, for any size of crew, that your people will actually use without training.`],
@@ -1683,7 +1683,7 @@ export const compares = [
     theirWinsTitle: `Where eSUB still fits`,
     theirWins: `eSUB is a long-established, enterprise-grade platform, and some large organizations prefer a heavier system with deep configuration and a dedicated admin to run it. That is a real preference, not a capability gap: SubTrade serves large commercial subs too, with the same full RFIs, submittals, and document control. If you would rather have that power in an app your whole crew can pick up, that is SubTrade.`,
     pricingBody: [
-      `eSUB is quote-based and priced per user for commercial operations. SubTrade is $299 per month CAD all-in with a 14-day free trial and no credit card.`,
+      `eSUB is quote-based and priced per user for commercial operations. SubTrade is $299 per month CAD all-in with a 14-day free trial.`,
       `For most trade subs, whatever the size, SubTrade is simpler to buy and lower in total cost.`,
     ],
     pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
@@ -1707,7 +1707,7 @@ export const compares = [
     eyebrow: 'Honest Comparison',
     headline: 'Which fits a trade sub?',
     positioning: `Contractor Foreman is one of the most affordable do-everything construction apps on the market: broad, budget-friendly, and popular with small contractors. SubTrade takes a different approach: instead of a little of everything for everyone, it is built specifically for trade subcontractors and the way crews actually run jobs.`,
-    heroNote: `No credit card required. An honest comparison for trade subs weighing price against fit.`,
+    heroNote: `An honest comparison for trade subs weighing price against fit.`,
     shortAnswer: {
       them: [`Choose Contractor Foreman if`, `You want the cheapest possible all-in-one with a huge feature checklist and you are comfortable with a more generic, general-contractor-style tool.`],
       us: [`Choose SubTrade if`, `You want software built around a trade sub's workflow, fast field change orders, GPS time tracking, and real-time job costing, with a cleaner, crew-friendly experience.`],
@@ -1760,7 +1760,7 @@ export const compares = [
     eyebrow: 'Honest Comparison',
     headline: 'Field reporting, or the whole operation?',
     positioning: `Raken is a well-liked field app for daily reports, time cards, photos, and toolbox talks. SubTrade does all of that, just as easily, and then keeps going: change orders, crew scheduling, drawings, and real-time job costing, all in one app that stays simple to use.`,
-    heroNote: `No credit card required. An honest comparison for trade subs.`,
+    heroNote: `An honest comparison for trade subs.`,
     shortAnswer: {
       them: [`Choose Raken if`, `You only ever need daily reports and time cards, and you are happy running change orders, scheduling, and costing in other tools.`],
       us: [`Choose SubTrade if`, `You want the same easy field reporting plus the whole operation, change orders, scheduling, drawings, and live job costing, in one simple app.`],
@@ -1813,7 +1813,7 @@ export const compares = [
     eyebrow: 'Honest Comparison',
     headline: 'Office-first or field-first?',
     positioning: `Knowify is a capable platform for trade contractors, with real strengths in bidding, contract management, invoicing, and tight QuickBooks integration. SubTrade overlaps on change orders and job costing but leads with the field, the crew on the jobsite.`,
-    heroNote: `No credit card required. An honest comparison to help you choose.`,
+    heroNote: `An honest comparison to help you choose.`,
     shortAnswer: {
       them: [`Choose Knowify if`, `Your priority is the office side, detailed bidding, contracts, invoicing, and deep QuickBooks accounting workflows.`],
       us: [`Choose SubTrade if`, `Your priority is the field, getting crews to clock in, capture change orders, log the day, and see labor cost in real time, with a mobile experience built for the jobsite.`],
@@ -1841,7 +1841,7 @@ export const compares = [
     theirWinsTitle: `Where Knowify wins`,
     theirWins: `If your business runs on detailed bids, contracts, and invoicing, and you live in QuickBooks, Knowify's office and accounting workflows are a genuine strength. For contractors who manage the money side closely from the desk, that depth matters.`,
     pricingBody: [
-      `Knowify uses tiered pricing publicly starting around $99+ per month depending on features and users. SubTrade is $299 per month CAD all-in with every feature included, a 14-day free trial, and no credit card.`,
+      `Knowify uses tiered pricing publicly starting around $99+ per month depending on features and users. SubTrade is $299 per month CAD all-in with every feature included and a 14-day free trial.`,
       `Compare on what you will actually use: SubTrade bundles the full field and office toolkit in one plan.`,
     ],
     pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,

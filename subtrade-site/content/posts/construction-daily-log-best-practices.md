@@ -65,7 +65,7 @@ The habit matters more than the tool. A workable routine looks like this:
 
 Do that every day and after a month it is muscle memory. Skip it and the one day you needed it will be the one day it is blank.
 
-Our [daily logs feature](/construction-management-features/daily-logs/) is built around that two-minute routine, and it ties into the rest of the [construction management features](/construction-management-features/) so the log, the photos, and the labour data all live in one place. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required.
+Our [daily logs feature](/construction-management-features/daily-logs/) is built around that two-minute routine, and it ties into the rest of the [construction management features](/construction-management-features/) so the log, the photos, and the labour data all live in one place. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 ## FAQ
 

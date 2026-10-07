@@ -68,7 +68,7 @@ Strip away the demos and a plumbing contractor's system has to do four things we
 
 Everything else is useful, but those four are the spine. If a tool cannot answer "what did this job cost me in labour, by phase" without an export to a spreadsheet, it was not built for a subcontractor's seat.
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so you can run last year's worst job through it and see whether the software would have caught it in time.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so you can run last year's worst job through it and see whether the software would have caught it in time.
 
 ## FAQ
 

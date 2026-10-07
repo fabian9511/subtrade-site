@@ -80,7 +80,7 @@ export default function MegaMenu() {
               <a href={SIGNUP} className="btn btn-primary" style={{ justifyContent: 'center' }}>Start free trial</a>
               <Link href="/explore-the-app" className="mega-demo">Explore the mobile app →</Link>
               <Link href="/construction-software-15min-demo" className="mega-demo">Book a demo →</Link>
-              <span className="mega-zero"><span className="mono">$0</span> to get started · no credit card</span>
+              <span className="mega-zero"><span className="mono">$0</span> to get started</span>
               <div className="mega-stores">
                 <a href="https://apps.apple.com/ca/app/subtrade/id6752587413" target="_blank" rel="noopener">App Store</a>
                 <a href="https://play.google.com/store/apps/details?id=com.subtradesoftware.subtrade.app" target="_blank" rel="noopener">Google Play</a>

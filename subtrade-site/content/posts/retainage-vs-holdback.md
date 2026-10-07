@@ -57,7 +57,7 @@ The practical problem is not understanding the difference, it is keeping two dif
 
 What works is tracking the withheld amount per job with its own release rule attached: the retainage percentage and step-down for US jobs, the statutory percentage and lien period for Canadian ones, both fed off your actual progress rather than a spreadsheet somebody updates on draw day. That way the release date is on the calendar before you need it, and the number you claim is backed by the work in place. You can see how we fold that into our [progress billing](/construction-management-features/progress-billing/) tools, with the rest of the system in our [construction management features](/construction-management-features/).
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, but both calculators are free to use right now with no signup.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, but both calculators are free to use right now with no signup.
 
 ## FAQ
 

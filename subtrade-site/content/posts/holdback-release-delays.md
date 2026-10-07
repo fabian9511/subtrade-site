@@ -80,7 +80,7 @@ Run that list on every job and six of the seven delays never happen.
 
 You cannot collect what you have not calculated. Before you pick up the phone, know exactly what holdback is owed and when it became payable, so the conversation is "release the $47,500 that came due last Tuesday," not "I think you owe us something." Run it through our free [construction holdback calculator](/construction-holdback-calculator/), which works out the holdback withheld and the release timing and exports a one-page summary you can attach to your claim. The draws that feed it come straight off your field data in our [progress billing](/construction-management-features/progress-billing/) tools.
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required. The calculator is free to use right now.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial. The calculator is free to use right now.
 
 ## FAQ
 

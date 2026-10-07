@@ -65,7 +65,7 @@ You do not need to file a lien on every job. You need to be ready to file on any
 4. Watch the aging on unpaid invoices and act well before the deadline, not on the last day.
 5. When a balance goes seriously past due and the deadline is approaching, talk to a construction lawyer before the window closes, not after.
 
-Most of this is record-keeping you should be doing anyway. A live view of what each job has billed, what is outstanding, and when work last happened on site is the same information that protects a lien claim, which is part of what our [construction management features](/construction-management-features/) are built to keep in one place. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required.
+Most of this is record-keeping you should be doing anyway. A live view of what each job has billed, what is outstanding, and when work last happened on site is the same information that protects a lien claim, which is part of what our [construction management features](/construction-management-features/) are built to keep in one place. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 ## FAQ
 

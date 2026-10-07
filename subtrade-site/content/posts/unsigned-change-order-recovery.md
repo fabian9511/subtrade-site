@@ -73,7 +73,7 @@ Dated field evidence is what makes both stick. The [site photos](/construction-m
 
 You can see how the field capture, the pricing, and the chase fit together in our [construction management features](/construction-management-features/).
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so you can run your open extras through it and see the total you are actually owed.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so you can run your open extras through it and see the total you are actually owed.
 
 ## FAQ
 

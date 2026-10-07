@@ -60,7 +60,7 @@ None of these is about working harder on collections. Each is about setting the 
 
 There are two halves to construction cash flow. One is getting paid faster, which is what this playbook covers: the contractual and statutory levers that control when money the job owes you actually arrives. The other is managing the cash you already have, forecasting, timing payroll and supplier terms, keeping a reserve. This guide is about the first half, because for most subs the fastest cash-flow win is not tighter budgeting, it is closing the weeks of delay built into how draws get billed, held, and released.
 
-The through-line is that every lever depends on the same thing: clean, connected records that let you bill right, prove your position, and know your numbers on demand. That is what our [construction management features](/construction-management-features/) are built around. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required.
+The through-line is that every lever depends on the same thing: clean, connected records that let you bill right, prove your position, and know your numbers on demand. That is what our [construction management features](/construction-management-features/) are built around. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 ## FAQ
 

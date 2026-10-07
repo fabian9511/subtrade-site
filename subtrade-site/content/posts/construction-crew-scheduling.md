@@ -83,7 +83,7 @@ Take last month. Count the days where a crew was split across two sites, and the
 
 That number is what scheduling is worth to you. For most sub trades running ten or more jobs it's larger than the software costs — which is the only argument for changing anything that's ever mattered.
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required. You can see how scheduling, time tracking and job costing fit together in our [construction management features](/construction-management-features/), or read why [subcontractor software differs from GC software](/blog/subcontractor-software-vs-general-contractor-software/) in the first place.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial. You can see how scheduling, time tracking and job costing fit together in our [construction management features](/construction-management-features/), or read why [subcontractor software differs from GC software](/blog/subcontractor-software-vs-general-contractor-software/) in the first place.
 
 ## FAQ
 

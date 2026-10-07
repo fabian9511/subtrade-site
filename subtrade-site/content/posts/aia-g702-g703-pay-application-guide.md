@@ -86,7 +86,7 @@ Two things replace the US retainage mechanics:
 
 **A CCDC 9A statutory declaration.** On many Canadian progress draws you also sign a [CCDC 9A statutory declaration](https://www.ccdc.org/document/ccdc9a-2018/), a sworn statement that you have paid your own subs and suppliers for prior draws. It is often required before the GC will release the current payment, so a missing or late 9A stalls the draw the same way a bad retainage column stalls a G702.
 
-The workflow rhymes with the US one: break the contract into a clean schedule of values, bill the percentage complete each period, account for the money held back, and back it up with the right paperwork. The forms differ; the discipline does not. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, and it runs the schedule of values, the progress draw, and the holdback in one place.
+The workflow rhymes with the US one: break the contract into a clean schedule of values, bill the percentage complete each period, account for the money held back, and back it up with the right paperwork. The forms differ; the discipline does not. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, and it runs the schedule of values, the progress draw, and the holdback in one place.
 
 ## FAQ
 

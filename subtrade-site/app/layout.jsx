@@ -67,7 +67,7 @@ const orgSchema = {
         price: '299',
         priceCurrency: 'CAD',
         url: `${BASE}/pricing-plans/`,
-        description: 'Per month, 5 users included. 14-day free trial, no credit card.',
+        description: 'Per month, 5 users included. 14-day free trial.',
       },
       publisher: { '@id': `${BASE}/#organization` },
       sameAs: SAME_AS,

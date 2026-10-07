@@ -98,7 +98,7 @@ If the answer involves an export, a custom report, or "you'd set that up in the 
 
 And run it soon. [Statistics Canada's construction data](https://www.statcan.gc.ca/en/subjects-start/construction) shows how much non-residential volume swings month to month — the shops that get squeezed in a soft quarter are almost always the ones who couldn't see their labour costs until the job was over.
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, because we think you should be able to run that test yourself before anyone asks for a purchase order.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, because we think you should be able to run that test yourself before anyone asks for a purchase order.
 
 ## FAQ
 

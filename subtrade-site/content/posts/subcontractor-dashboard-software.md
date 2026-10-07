@@ -88,7 +88,7 @@ Take your worst job from the last two years. The one that went sideways. Sit wit
 
 If they can do it, and the answer is week three rather than month three, the dashboard is real.
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so you can run that test on your own jobs rather than theirs. You can also see how the pieces fit together in our [construction management features](/construction-management-features/), or compare us directly against [Procore](/compare/subtrade-vs-procore/), [Knowify](/compare/subtrade-vs-knowify/) and [eSUB](/compare/subtrade-vs-esub/).
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so you can run that test on your own jobs rather than theirs. You can also see how the pieces fit together in our [construction management features](/construction-management-features/), or compare us directly against [Procore](/compare/subtrade-vs-procore/), [Knowify](/compare/subtrade-vs-knowify/) and [eSUB](/compare/subtrade-vs-esub/).
 
 ## FAQ
 

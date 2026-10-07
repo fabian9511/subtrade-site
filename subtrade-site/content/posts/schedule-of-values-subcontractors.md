@@ -56,7 +56,7 @@ An SOV is a billing tool, but it is also a chance to see whether the job is maki
 
 That connection only exists if the field data comes back coded to the same structure. Crew [time tracking](/time-tracking/) tied to the same cost codes as your SOV is what turns a billing document into a profit-and-loss you can read mid-job. Without it, the SOV tells you what you billed and nothing about what you kept.
 
-Our [progress billing feature](/construction-management-features/progress-billing/) is built around a schedule of values that carries holdback and reconciles to your cost codes, and it sits alongside the rest of our [construction management features](/construction-management-features/). SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required.
+Our [progress billing feature](/construction-management-features/progress-billing/) is built around a schedule of values that carries holdback and reconciles to your cost codes, and it sits alongside the rest of our [construction management features](/construction-management-features/). SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 ## FAQ
 

@@ -135,7 +135,7 @@ export default function Post({ params }) {
                 <b>Built by a subcontractor, for subcontractors</b>
                 <p>
                   SubTrade runs time tracking, change orders, daily logs and progress
-                  billing on one plan. 14-day trial, no credit card.
+                  billing on one plan. 14-day trial.
                 </p>
               </div>
               <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>

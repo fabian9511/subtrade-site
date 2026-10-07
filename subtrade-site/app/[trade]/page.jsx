@@ -57,7 +57,7 @@ export default function TradePage({ params }) {
             <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
             <Link href="/pricing-plans" className="btn btn-ghost btn-lg">See pricing</Link>
           </div>
-          <p className="hero-note">14-day free trial · $299/month CAD · 5 users included · No credit card</p>
+          <p className="hero-note">14-day free trial · $299/month CAD · 5 users included</p>
         </div>
       </section>
       <div className="wrap"><div className="chalkline" /></div>
@@ -103,7 +103,7 @@ export default function TradePage({ params }) {
       <section className="cta-band">
         <div className="wrap">
           <h2 className="display">Run your next {t.trade.toLowerCase()} job on it</h2>
-          <p>Built by a working subcontractor. 14-day free trial, no credit card.</p>
+          <p>Built by a working subcontractor. 14-day free trial.</p>
           <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
         </div>
       </section>

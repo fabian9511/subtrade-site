@@ -15,7 +15,7 @@ export const metadata = {
 
 const faqs = [
   ['What is SubTrade and who is it built for?', 'SubTrade is all-in-one subcontractor software built exclusively for trade contractors, including electrical, plumbing, HVAC, drywall, painting, framing and more. It is engineered around how subs actually work: mobile-first time tracking, fast change orders, crew scheduling and real-time job costing.'],
-  ['How much does SubTrade cost?', 'The plan is $299/month CAD with 5 users included, or save 20% with annual billing at $2,870/yr. Additional users are tiered from $15 down to $4 each. Every plan includes the full platform, with a 14-day free trial and no credit card required.'],
+  ['How much does SubTrade cost?', 'The plan is $299/month CAD with 5 users included, or save 20% with annual billing at $2,870/yr. Additional users are tiered from $15 down to $4 each. Every plan includes the full platform, with a 14-day free trial.'],
   ['How quickly can my crew get set up?', 'Most subcontractors are fully set up with crews clocking in within one business day. No IT team, no lengthy onboarding: your field crew starts on their phones the same day you sign up.'],
   ['Does SubTrade work on phones in the field?', 'Yes. SubTrade is fully mobile on iOS and Android, built for jobsite reality: GPS clock-in, daily logs with photos, and change orders created and sent from a phone.'],
   ['Can SubTrade replace my spreadsheets and paper timesheets?', 'That is exactly what it is designed to do. GPS-verified time tracking replaces paper timesheets, live dashboards replace status spreadsheets, and scheduling, logs and change orders all live in one place.'],

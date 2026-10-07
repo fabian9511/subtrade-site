@@ -126,7 +126,7 @@ export default function FeaturePage({ params }) {
       <section className="cta-band">
         <div className="wrap">
           <h2 className="display">Try it on a real job</h2>
-          <p>Full platform, 14-day free trial, no credit card.</p>
+          <p>Full platform, 14-day free trial.</p>
           <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
         </div>
       </section>

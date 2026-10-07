@@ -77,7 +77,7 @@ Larger subs sublet — a drywall contractor hiring a painter, a mechanical firm 
 
 You don't need a dedicated prequalification product on day one. You need your operational data organized well enough that a request is a five-minute export. Before you buy anything specialized, ask whether the system you already run your jobs in can produce a current certificate register, live safety stats, and a documented project list. If it can, you're most of the way there.
 
-If you do evaluate tools, run the honest test: take the last prequal you filled out and time how long the software would take to assemble the same package. If the answer is still half a day of hunting, it hasn't solved the problem. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, and keeping your field, safety and cost data in one place is exactly what makes a prequal fast — see the full [feature set](/construction-management-features/) for how the pieces fit.
+If you do evaluate tools, run the honest test: take the last prequal you filled out and time how long the software would take to assemble the same package. If the answer is still half a day of hunting, it hasn't solved the problem. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, and keeping your field, safety and cost data in one place is exactly what makes a prequal fast — see the full [feature set](/construction-management-features/) for how the pieces fit.
 
 ## FAQ
 
