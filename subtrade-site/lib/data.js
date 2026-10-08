@@ -212,16 +212,15 @@ export const features = [
         ['Service alerts', 'Before it goes overdue'],
       ],
       video: {
-        id: 'ZPfsfgjeNok',
-        caption: 'The whole thing in 50 seconds — register, deploy, map and QR labels.',
-        title: 'Track Every Tool, Vehicle and Machine — SubTrade Asset Management',
+        id: 'gTio1l8qAOE',
+        caption: 'Asset Management in 53 seconds: add a tool, deploy it to a job, see who has it, print the QR labels.',
+        title: 'Asset Management in SubTrade: Who Has Your Tools?',
         description:
-          'A walkthrough of Asset Management in SubTrade: the register of every tool, vehicle and machine you own, adding a unit, deploying it to a job site with the crew member who took it, the deployment history, the live map of your gear, and printable QR labels.',
-        poster: '/subtrade-asset-management-video-poster.webp',
-        posterAlt:
-          'Play the SubTrade Asset Management walkthrough — the asset register on screen behind the words who has your tools',
-        uploadDate: '2026-08-29',
-        duration: 'PT51S',
+          'A walkthrough of Asset Management in SubTrade: adding a tool as owned, rented or leased with its tag, serial, condition, purchase price, warranty and charge-out rate, service and calibration dates, deploying it to a job site with the worker who took it and condition photos going out, the deployment history, filtering by category, status and holder, the map of your equipment, and printing QR labels on Avery sheets.',
+        poster: '/subtrade-asset-management-video-poster-v2.webp',
+        posterAlt: 'Play the SubTrade Asset Management walkthrough, a crew group chat asking who has the rotary hammer beside the SubTrade asset register',
+        uploadDate: '2026-10-08',
+        duration: 'PT53S',
       },
       sections: [
         {
