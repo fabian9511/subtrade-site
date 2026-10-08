@@ -521,6 +521,18 @@ export const features = [
         ['7 days', 'Coverage ahead'],
         ['0', 'Monday scrambles'],
       ],
+      videoHero: true,
+      video: {
+        id: 'C8OljgpnCR8',
+        caption: 'Crew Scheduling in 52 seconds: add shifts for the whole crew, skip weekends, catch double-bookings.',
+        title: 'Crew Scheduling for Subcontractors: Your Whole Team on One Board',
+        description:
+          'A walkthrough of SubTrade Crew Scheduling: every worker and every job on one weekly board, adding shifts for several workers at once, repeating a shift through the week and skipping weekends, double-booking checks that skip the conflicting shift, hours, job and task on every shift, and the day view for the whole crew.',
+        poster: '/subtrade-crew-scheduling-video-poster.webp',
+        posterAlt: 'Play the SubTrade Crew Scheduling walkthrough, a weekly crew board with 263 scheduled hours under the words your team, one board',
+        uploadDate: '2026-10-08',
+        duration: 'PT52S',
+      },
       sections: [
         {
           eyebrow: 'The board',
@@ -605,7 +617,7 @@ export const features = [
     title: 'Construction Gantt Chart Software for Subcontractors',
     description:
       'Your scope as a Gantt chart: templates, dependencies, a baseline that measures slip, critical path and reminders, plus every job on one master schedule. New in SubTrade.',
-    h1: 'Your scope, on one timeline',
+    h1: 'Construction Gantt chart for your own scope',
     intro:
       'Project Schedule lays out your own scope on each job as a Gantt chart, from mobilise to close-out, and Master Schedule puts every job you are running on one timeline. Not the GC’s master schedule. Yours.',
     points: [
@@ -615,7 +627,7 @@ export const features = [
       ['Every job, one timeline', 'Master Schedule shows who is behind, what is starting and what is due.'],
     ],
     rich: {
-      heroTitle: ['Your scope, sequenced.', 'Every job on one timeline.'],
+      heroTitle: ['Construction Gantt chart', 'for your own scope.'],
       heroSub:
         'Not the GC’s master schedule. Yours. Lay out framing, board and tape on each job from a template, see the day a phase starts to slip, and put every job you are running on one master schedule.',
       stats: [
