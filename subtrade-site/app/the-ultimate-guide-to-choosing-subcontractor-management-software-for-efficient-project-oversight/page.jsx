@@ -8,13 +8,15 @@ const PATH =
 const BASE = 'https://subtradesoftware.com';
 
 export const metadata = {
-  title: 'How to Choose Subcontractor Management Software (2026 Guide)',
+  title: { absolute: "Subcontractor Management Software: 2026 Buyer's Guide" },
   description:
-    'How to choose subcontractor management software as a trade contractor: the features that matter, real pricing, the traps to avoid, and a one-week evaluation that works.',
+    'Subcontractor management software for trade contractors: the 5 features that matter, real pricing, an honest shortlist and a one-week test.',
   alternates: { canonical: PATH },
 };
 
 const toc = [
+  { id: 'quick-answer', title: 'The short answer' },
+  { id: 'at-a-glance', title: 'The shortlist at a glance' },
   { id: 'what-is-it', title: 'What is subcontractor management software?' },
   { id: 'the-uncomfortable-question', title: 'Start with the uncomfortable question' },
   { id: 'features-that-matter', title: 'The features that matter for subs' },
@@ -32,9 +34,10 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'The ultimate guide to choosing subcontractor management software',
+    headline: "Subcontractor management software: the 2026 buyer's guide for trade contractors",
     description:
-      'How to choose subcontractor management software as a trade contractor: the features that matter, real pricing, the traps to avoid, and a one-week evaluation that works.',
+      'Subcontractor management software for trade contractors: the 5 features that matter, real pricing, an honest shortlist and a one-week test.',
+    image: `${BASE}/change-orders.webp`,
     author: authorRef(FABIAN),
     publisher: {
       ...ORG_REF,
@@ -42,7 +45,7 @@ const schema = [
     },
     mainEntityOfPage: `${BASE}${PATH}`,
     datePublished: '2026-01-15',
-    dateModified: '2026-09-02',
+    dateModified: '2026-10-08',
   },
   {
     '@context': 'https://schema.org',
@@ -52,7 +55,7 @@ const schema = [
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'How to choose subcontractor management software',
+        name: 'Subcontractor management software buyer\'s guide',
         item: `${BASE}${PATH}`,
       },
     ],
@@ -126,7 +129,7 @@ export default function Guide() {
             <Link href="/blog" className="article-back">← All articles</Link>
             <p className="eyebrow">Buying guide</p>
             <h1 className="display">
-              The ultimate guide to choosing subcontractor management software
+              Subcontractor management software: the 2026 buyer&apos;s guide for trade contractors
             </h1>
             <div className="article-meta">
               <span>
@@ -135,13 +138,96 @@ export default function Guide() {
               <span className="dot">•</span>
               <span>9 min read</span>
               <span className="dot">•</span>
-              <span>Updated September 2026</span>
+              <span>Updated October 2026</span>
             </div>
             <p className="big">
               Most buying guides for construction software are written for general
               contractors. This one is written for subs, by a sub, because the
               software that fits a GC almost never fits you.
             </p>
+
+            <figure className="post-hero">
+              <img
+                src="/change-orders.webp"
+                alt="A subcontractor foreman sending a change order from his phone on a framed jobsite"
+                width="1200"
+                height="669"
+                style={{ height: 'auto' }}
+              />
+            </figure>
+
+            <div className="quick-answer" id="quick-answer">
+              <span className="quick-answer-label">The short answer</span>
+              <p>
+                The best <b>subcontractor management software</b> is the one built
+                for a company running many jobs at once, not a GC running one big
+                project. Look for five things before anything else:
+              </p>
+              <ol>
+                <li>GPS time tracking that feeds per-job labour costs every day</li>
+                <li>Priced change orders a foreman can send from a phone before the extra starts</li>
+                <li>Daily logs and GPS-tagged photos that file to the job automatically</li>
+                <li>Crew scheduling across many small concurrent jobs</li>
+                <li>Progress billing with holdback or retainage math built in</li>
+              </ol>
+              <p>
+                Then test it on one real job for one week. If your foreman stops
+                using it by day three, nothing else on the feature list matters.
+              </p>
+            </div>
+
+            <h2 id="at-a-glance">The shortlist at a glance</h2>
+            <p>
+              Most lists mix tools built for GCs, residential builders and trade
+              subs. Here is who each one was really built for. The full breakdown
+              is <a href="#the-shortlist">further down</a>.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Built mainly for</th>
+                  <th>Strongest at</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>SubTrade</b></td>
+                  <td>Trade subcontractors</td>
+                  <td>Time tracking with job costing, field change orders, holdback billing</td>
+                </tr>
+                <tr>
+                  <td>Fieldwire</td>
+                  <td>Large project teams</td>
+                  <td>Plans and task coordination</td>
+                </tr>
+                <tr>
+                  <td>Buildertrend</td>
+                  <td>Residential builders and remodelers</td>
+                  <td>Homeowner-facing project management</td>
+                </tr>
+                <tr>
+                  <td>eSUB</td>
+                  <td>Larger trade subs</td>
+                  <td>Document workflows, enterprise rollout</td>
+                </tr>
+                <tr>
+                  <td>Contractor Foreman</td>
+                  <td>Many contractor types</td>
+                  <td>A broad module list at a low price</td>
+                </tr>
+                <tr>
+                  <td>Raken</td>
+                  <td>Field reporting</td>
+                  <td>Daily reports and field data capture</td>
+                </tr>
+                <tr>
+                  <td>Knowify</td>
+                  <td>Specialty contractors</td>
+                  <td>Contracts and back-office workflows</td>
+                </tr>
+              </tbody>
+            </table>
 
             <h2 id="what-is-it">What is subcontractor management software?</h2>
             <p>
@@ -242,6 +328,14 @@ export default function Guide() {
               </Link>
               .
             </p>
+
+            <div className="article-cta">
+              <div>
+                <b>All five, one plan</b>
+                <p>SubTrade covers every feature above for $299 CAD a month with 5 users included. Try it on a live job.</p>
+              </div>
+              <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
+            </div>
 
             <h2 id="features-worth-having">Features worth having once the big five are covered</h2>
             <p>

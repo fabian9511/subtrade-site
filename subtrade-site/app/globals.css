@@ -2468,6 +2468,56 @@ a.rv-src:hover { color: var(--steel-200, inherit); }
 .article-cta p { color: #9aa3ae; font-size: 15px; margin: 6px 0 0; line-height: 1.5; }
 .article-cta .btn { flex: none; }
 
+/* tables inside hand-built articles */
+.article-body table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 28px;
+  font-size: 16px;
+}
+.article-body thead th {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--steel-500); font-weight: 500;
+  text-align: left;
+  padding: 10px 16px 10px 0;
+  border-bottom: 2px solid var(--steel-800);
+  white-space: nowrap;
+}
+.article-body td {
+  padding: 13px 16px 13px 0;
+  border-bottom: 1px solid var(--steel-800);
+  color: var(--steel-300);
+  line-height: 1.45;
+  vertical-align: top;
+  min-width: 140px;
+}
+.article-body td b { color: var(--gypsum); font-weight: 600; }
+
+/* quick answer box (buying guide) */
+.quick-answer {
+  margin: 0 0 10px;
+  padding: 24px 28px 6px;
+  border: 1px solid var(--steel-800);
+  border-left: 3px solid var(--chalk);
+  border-radius: 12px;
+  background: var(--steel-850);
+  scroll-margin-top: 100px;
+}
+.quick-answer-label {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--chalk);
+  margin-bottom: 10px;
+}
+.article-body .quick-answer p { font-size: 17px; margin-bottom: 14px; }
+.quick-answer ol { margin: 0 0 16px; padding-left: 22px; }
+.quick-answer li { font-size: 17px; line-height: 1.6; color: var(--steel-300); margin-bottom: 6px; }
+.quick-answer li::marker { color: var(--chalk); font-weight: 600; }
+
 /* table of contents */
 .article-toc { position: sticky; top: 104px; align-self: start; }
 .article-toc-label {
