@@ -370,21 +370,17 @@ export const features = [
         ['Vendor pricing', 'No account needed'],
         ['Auto-chase', '5, 2 and 1 days out'],
       ],
+      videoHero: true,
       video: {
-        id: 'JbtD3J8YEuI',
-        caption: 'Three short videos, about 2 minutes each. They play one after another, or pick a part.',
-        parts: [
-          { id: 'JbtD3J8YEuI', label: 'Part 1 · Your bid pipeline' },
-          { id: 'DsHGG-49omo', label: 'Part 2 · Inside a tender' },
-          { id: 'Aqhdu2CVox0', label: 'Part 3 · Proposals, vendors & follow-ups' },
-        ],
-        title: 'Bid Manager, Part 1: Your bid pipeline',
+        id: 'spNBODYnl6g',
+        caption: 'Bid Manager in 47 seconds: log a tender, get supplier pricing, build the proposal, chase it, win it.',
+        title: 'Bid Manager in SubTrade: Every Tender on One Board',
         description:
-          'A walkthrough of Bid Manager in SubTrade: the Kanban board of tenders by stage, open pipeline value, awarded value, win rate and active bids, search and estimator filters, tender cards with countdowns, list view, and adding a new tender.',
-        poster: '/subtrade-bid-manager-video-poster.webp',
-        posterAlt: 'Play the SubTrade Bid Manager walkthrough, every bid on one board',
-        uploadDate: '2026-09-27',
-        duration: 'PT2M32S',
+          'A walkthrough of Bid Manager in SubTrade: every tender on one board from incoming to awarded, open pipeline, awarded value and win rate, logging a new tender with the GC, due date and estimator, sending suppliers a pricing link with no account needed, building the proposal in the proposal builder with a live preview, follow-ups and auto-chase, and marking it awarded.',
+        poster: '/subtrade-bid-manager-video-poster-v2.webp',
+        posterAlt: 'Play the SubTrade Bid Manager walkthrough, the tender board beside a drywall proposal from the proposal builder',
+        uploadDate: '2026-10-08',
+        duration: 'PT47S',
       },
       sections: [
         {
