@@ -1,0 +1,2117 @@
+export const SIGNUP = 'https://portal.subtradesoftware.com/signup';
+export const PORTAL = 'https://portal.subtradesoftware.com';
+
+export const features = [
+  {
+    slug: 'field-operations',
+    name: 'Field Operations',
+    keyword: 'construction field operations software',
+    title: 'Field Operations Software for Subcontractors',
+    description:
+      'One live view of everything happening in your business: crews clocked in, photos coming off sites, logs, approvals and every active project. SubTrade Field Operations.',
+    h1: 'Your whole business, live',
+    intro:
+      'Field Operations is the command center: every project, every crew and every update from the field in one live view, so you always know what is happening across your company without a single status call.',
+    points: [
+      ['Everything, as it happens', 'Clock-ins, photos, logs and approvals stream in live from every site.'],
+      ['Every crew, located', 'See who is working where across all your projects right now.'],
+      ['Photos off every site', 'The latest field photos from every job surface automatically.'],
+      ['One place to run the day', 'Jump from the live view into any project, task or approval.'],
+    ],
+    rich: {
+      heroTitle: ['Your whole business,', 'live from the field'],
+      heroSub:
+        'Field Operations is your command center: every project, crew, photo and update in one live view. Run three sites or fifteen and always know exactly what is happening, without a single status call.',
+      stats: [
+        ['All sites', 'One live view'],
+        ['Live', 'Crew clock-ins'],
+        ['Auto', 'Photos & logs stream in'],
+        ['1 tap', 'Into any project'],
+      ],
+      videoHero: true,
+      video: {
+        id: 'qhFLBtlU6KI',
+        caption: 'Every job on one screen in 38 seconds: what needs you now, the live site map and today\'s crew.',
+        title: 'SubTrade Project Overview: Every Job on One Screen',
+        description:
+          'A walkthrough of the SubTrade overview: every active project on one screen, the Right Now list of overdue RFIs, tasks and hazards, the live site map with workers on each job, and today\'s crew status and 7-day schedule.',
+        poster: '/subtrade-field-operations-video-poster.webp',
+        posterAlt:
+          'Play the SubTrade overview walkthrough: the live command center with the site map and a project popup under the words every job, one screen',
+        uploadDate: '2026-10-04',
+        duration: 'PT38S',
+      },
+      sections: [
+        {
+          eyebrow: 'The command center',
+          title: 'See everything happening in your business',
+          body:
+            'Open Field Operations and the whole company is in front of you: task progress per project, every team member and their role, the latest photos coming off each site, and the project map. It is the view an owner actually needs at 7 AM.',
+          checks: [
+            'Right Now list: everything that needs action, ranked by urgency',
+            'Overdue tasks and waiting change orders with dollar values attached',
+            'Live site map: every project and who is working where',
+            'Critical, needs-attention and active status per project',
+            'Drill into any project, task or approval in one tap',
+          ],
+          images: ['/subtrade-field-operations-command-center.webp'],
+          imageAlt: 'SubTrade Field Operations command center with right-now action list, overdue tasks, change orders waiting, and a live site map of worker locations across projects',
+          browser: true,
+        },
+        {
+          eyebrow: 'The live feed',
+          title: 'From first clock-in to last log, watch the day happen',
+          body:
+            'Field data does not wait for Friday. As crews clock in, sign forms, take photos and file logs, everything streams into Field Operations in real time, timestamped and tied to its project. The office finally sees what the field sees.',
+          checks: [
+            'GPS clock-ins appear the moment crews start',
+            'Safety forms and FLHAs land as they are signed',
+            'Photos and daily logs stream in from every site',
+            'Change orders and approvals flag themselves for action',
+            'Everything timestamped and filed to its project automatically',
+          ],
+          images: ['/subtrade-crew-status-on-site.webp'],
+          imageAlt: 'Live crew status in SubTrade showing who is on site, check-in times and running hours per worker',
+          flip: true,
+        },
+        {
+          eyebrow: 'Coverage',
+          title: 'Know who is missing before the site calls you',
+          body:
+            'Today\u2019s coverage shows every project\u2019s planned shift against who actually showed up, missing crew flagged by name, and the next seven days of scheduling per site. The gap gets fixed before it becomes a lost day.',
+          checks: [
+            'Planned versus actual crew per project, live',
+            'Missing workers flagged by name, not discovered at noon',
+            'Partial coverage warnings before they cost you the day',
+            'Next 7 days of shifts across every project in one grid',
+            'Empty days are one tap from scheduled',
+          ],
+          images: ['/subtrade-shift-coverage-next-7-days.webp'],
+          imageAlt: 'Shift coverage in SubTrade showing partial coverage warning with missing crew named and a seven day schedule grid across projects',
+        },
+      ],
+      faqs: [
+        ['What is Field Operations in SubTrade?', 'Field Operations is the live company-wide view: every active project, every crew member, and every update from the field, clock-ins, photos, forms and logs, in one screen, updating in real time.'],
+        ['How is it different from the Project Dashboard?', 'The Project Dashboard goes deep on one job: its costs, billing and status. Field Operations goes wide across your whole business, showing everything happening on every site at once. Most owners live in Field Operations and drill into project dashboards from there.'],
+        ['Is the view real time?', 'Yes. As crews clock in, take photos, sign forms and file logs, the updates appear in Field Operations as they happen, each one timestamped and tied to its project.'],
+        ['Can I see where my crews are?', 'Yes. GPS-verified clock-ins show who is working on which site right now, across every active project.'],
+        ['Does Field Operations work on my phone?', 'Yes. The same live view works on desktop, tablet and phone, so you can run the day from the office or the truck.'],
+      ],
+    },
+  },
+  {
+    slug: 'project-dashboard',
+    name: 'Project Dashboard',
+    rich: {
+      heroTitle: ['Every job on', 'one screen'],
+      heroSub:
+        'The project dashboard is your company at a glance: every active job with its hours, costs, billing status and open items, updated as the crew works. Stop calling five foremen to find out where you stand.',
+      stats: [
+        ['Live', 'Hours & job costs'],
+        ['All jobs', 'One screen'],
+        ['Real-time', 'Crew clock-ins'],
+        ['0', 'Status phone calls'],
+      ],
+      sections: [
+        {
+          eyebrow: 'The overview',
+          title: 'Your whole operation, at a glance',
+          body:
+            'Open the dashboard and see every active project side by side: who is clocked in where, percent complete, budget health and what is waiting on you. It works the same on the office monitor and on your phone in the truck.',
+          checks: [
+            'Every active project with live status on one screen',
+            'See who is clocked in, on which site, right now',
+            'Latest photos and daily logs surface automatically',
+            'Open change orders and approvals waiting on you',
+            'Works on desktop, tablet and phone',
+          ],
+          images: ['/subtrade-dashboard-project-overview.webp'],
+          imageAlt: 'SubTrade project dashboard showing budget, margin, tasks, health score, financial performance and operational risk for a construction project',
+          browser: true,
+        },
+        {
+          eyebrow: 'Live job costing',
+          title: 'Know your margin while you can still fix it',
+          body:
+            'Labour flows in from GPS clock-ins and material commitments from purchase orders, so cost against estimate is current every single day. The job that is drifting shows up in week two, not in the accountant\u2019s report two months after closeout.',
+          checks: [
+            'Labour hours roll up from clock-ins by job and cost code',
+            'Committed PO costs counted the day you order',
+            'Burn against estimate visible per project',
+            'Spot the drifting job while there is time to correct it',
+            'Real production numbers feed your next estimate',
+          ],
+          images: ['/subtrade-dashboard-job-costing.webp'],
+          imageAlt: 'Financial performance card in SubTrade: contract value, change orders, purchase orders, labour cost, estimated final cost and projected margin',
+          flip: true,
+        },
+        {
+          eyebrow: 'From status to draw',
+          title: 'The dashboard that gets you paid',
+          body:
+            'Percent complete, approved change orders and field documentation live in the same place, so when billing day comes the draw is already backed by data. No month-end scramble to reconstruct what happened.',
+          checks: [
+            'Percent complete per project, backed by field data',
+            'Approved change orders ready to carry into billing',
+            'Draw status visible: draft, sent, paid',
+            'Email one-time PDF reports or share a live activity link with the GC',
+            'Holdback handled the Canadian way',
+          ],
+          images: ['/subtrade-schedule-of-values-progress-billing.webp'],
+          imageAlt: 'Schedule of values in SubTrade showing percent complete, this claim, previously invoiced and invoiced to date for progress billing',
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['What shows on the project dashboard?', 'Every active project with live hours, job costs, percent complete, billing status, latest photos and daily logs, plus anything waiting on your approval, all on one screen.'],
+        ['Is the dashboard real time?', 'Yes. It updates as your crews work: GPS clock-ins, photos, logs and purchase orders appear as they happen, so the numbers you see reflect today, not last week.'],
+        ['Can I see all my projects at once?', 'Yes. The dashboard is built for subs running multiple concurrent jobs. Every active project appears side by side with its own status, and you can drill into any one of them.'],
+        ['How does the job costing work?', 'Labour rolls up automatically from GPS clock-ins by job and cost code, and material costs are counted from purchase orders the day you commit them. Both are compared against your estimate per project.'],
+        ['Who on my team can see the dashboard?', 'You control access by role. Owners and project managers typically see everything, while field roles see their own projects and tasks. Everyone sees exactly what they need.'],
+        ['Does the dashboard work on my phone?', 'Yes. The full dashboard works on desktop, tablet and phone, so you can check every job from the office, the truck or the site.'],
+      ],
+    },
+    keyword: 'subcontractor project dashboard',
+    title: 'Project Dashboard for Subcontractors',
+    description:
+      'A live dashboard for trade contractors: hours, costs, billing status and open items for every job on one screen. Part of SubTrade subcontractor software.',
+    h1: 'Every job. One screen.',
+    intro:
+      'The project dashboard is the view from your desk, or your truck. Every active job with its hours, committed costs, billing status and open items, updated as the crew works. No calling five foremen to find out where you stand.',
+    points: [
+      ['Live job costing', 'Labour hours from GPS clock-ins and material commitments from purchase orders roll up per project, so margin is visible while you can still do something about it.'],
+      ['Right-now alerts', 'See who is clocked in where, which change orders are waiting on approval, and which jobs are drifting from budget.'],
+      ['Run it from anywhere', 'The dashboard works the same on a phone in the truck as on the office monitor. Owners running multiple sites live here.'],
+      ['Built for subs, not GCs', 'No GC-style portfolio views you never use. Just your jobs, your crews, your money.'],
+    ],
+  },
+  {
+    slug: 'asset-management',
+    name: 'Asset Management',
+    keyword: 'construction equipment and tool tracking software',
+    title: 'Tool & Equipment Tracking Software for Contractors',
+    description:
+      'Track every tool, vehicle and piece of equipment you own: who is holding it, which site it is on, a live map, printable QR labels and service due dates. New in SubTrade.',
+    h1: 'Know exactly who has your tools',
+    intro:
+      'Asset Management tracks every tool, vehicle and piece of equipment your company owns, down to the person holding it and the site it is sitting on. Print a QR label, stick it on the tool, and stop losing gear between jobs.',
+    points: [
+      ['Every unit on one register', 'Tools, vehicles, trailers and equipment with make, model, serial number, condition and value.'],
+      ['Loaned, transferred, returned', 'Every move is recorded against the asset, so the current holder is never in dispute.'],
+      ['A map of your gear', 'Positions are captured as assets move, so you can see what is parked on a job that finished three weeks ago.'],
+      ['QR labels you can print', 'A label for every asset on standard Avery sheets, thirty to a page.'],
+    ],
+    rich: {
+      heroTitle: ['Know exactly who', 'has your tools'],
+      heroSub:
+        'Every tool, vehicle and piece of equipment your company owns, tracked to a job site and to the person holding it. Print a QR label, stick it on the tool, and "who took the laser?" stops being a phone call.',
+      stats: [
+        ['Every unit', 'Tools, vehicles, equipment'],
+        ['Deploy', 'To a site and a person'],
+        ['QR labels', 'Printed on Avery sheets'],
+        ['Service alerts', 'Before it goes overdue'],
+      ],
+      video: {
+        id: 'ZPfsfgjeNok',
+        caption: 'The whole thing in 50 seconds — register, deploy, map and QR labels.',
+        title: 'Track Every Tool, Vehicle and Machine — SubTrade Asset Management',
+        description:
+          'A walkthrough of Asset Management in SubTrade: the register of every tool, vehicle and machine you own, adding a unit, deploying it to a job site with the crew member who took it, the deployment history, the live map of your gear, and printable QR labels.',
+        poster: '/subtrade-asset-management-video-poster.webp',
+        posterAlt:
+          'Play the SubTrade Asset Management walkthrough — the asset register on screen behind the words who has your tools',
+        uploadDate: '2026-08-29',
+        duration: 'PT51S',
+      },
+      sections: [
+        {
+          eyebrow: 'New in SubTrade',
+          title: 'Every tool you own, on one register',
+          isNew: true,
+          body:
+            'Asset Management is the register the whiteboard in the shop was never going to be. Tools, vehicles, trailers, lifts and small equipment in one list, each with its make, model, serial number and condition, and a running total of what the whole fleet is worth.',
+          checks: [
+            'Total units, in use, in the warehouse and service due, counted at the top of the page',
+            'An asset tag on every unit, plus manufacturer, model, serial number and quantity',
+            'Owned and rented gear tracked side by side, so rentals stop quietly running on',
+            'Condition and notes, so nobody re-reports the same broken chop saw twice',
+            'A running book value in the header, so you know what the fleet is worth without adding it up',
+          ],
+          images: ['/subtrade-asset-management-register.webp'],
+          imageAlt: 'SubTrade Asset Management register listing tools, vehicles and equipment with the crew member holding each one and the job site it is on, counts for total units, in use, in warehouse and service due, and a reminder flagging a truck overdue for service',
+          browser: true,
+        },
+        {
+          eyebrow: 'Adding a unit',
+          title: 'On the register in about a minute',
+          flip: true,
+          body:
+            'Adding a tool is one dialog with four tabs, and only the first one is required. Put the name, category and serial in, and you have a tracked asset. Fill in the rest when you have the invoice in front of you.',
+          checks: [
+            'Details: name, category, ownership, make, model, serial, barcode, quantity and condition',
+            'Purchase & rental: what it cost, who supplied it, warranty expiry and a charge-out rate',
+            'Service: next service due, calibration due and a repeating interval',
+            'Photos & docs: the manual, the certificate, a photo of the plate',
+            'Owned, rented or leased, set per unit',
+          ],
+          images: ['/subtrade-add-asset-details.webp'],
+          imageAlt: 'The Add Asset dialog in SubTrade on its Details tab, with asset name, category, ownership, manufacturer, model number, serial number, barcode, quantity, condition and notes filled in for a rotary hammer',
+          browser: true,
+        },
+        {
+          eyebrow: 'Who has it',
+          title: 'Deploy it to a site. Record who took it.',
+          flip: true,
+          body:
+            'Deploy a unit to a job site and record who took it, how many went out, when it is due back and what condition it left in. Every movement lands on that asset\u2019s deployment history, so "where is it and who has it?" is one filter, not three phone calls and a guess.',
+          checks: [
+            'Deploy to a job site, with the crew member who took it on the record',
+            'Partial quantities: send three of six screwguns out, the rest stay on the shelf',
+            'Date out and estimated return on every deployment',
+            'Condition photos going out, so a damage dispute has a before',
+            'A deployment history per asset, and a held-by filter across the whole register',
+            'Search by name, tag, model, site or crew',
+          ],
+          images: ['/subtrade-deploy-equipment-to-site.webp'],
+          imageAlt: 'The Deploy equipment dialog in SubTrade assigning a scissor lift to a job site and a named crew member, with quantity, date out, estimated return, delivery notes and condition photos',
+          browser: true,
+        },
+        {
+          eyebrow: 'The map',
+          title: 'See where your equipment actually is',
+          body:
+            'Positions are captured as assets move between sites, so the map view shows your gear spread across your jobs the way it really is. The generator that has been sitting on a finished job for three weeks is obvious at a glance instead of turning up on next month’s rental bill.',
+          checks: [
+            'A map of every asset with a known position, across every site',
+            'Location recorded when an asset is loaned, transferred or returned',
+            'Spot idle equipment parked on a job that closed out',
+            'Plan the next move without calling every foreman',
+          ],
+          images: ['/subtrade-asset-map-equipment-locations.webp'],
+          imageAlt: 'The map view in SubTrade Asset Management showing a located piece of equipment pinned on a job site across a city-wide view, with six units counted as in use',
+          browser: true,
+        },
+        {
+          eyebrow: 'QR labels',
+          title: 'Print a tag, stick it on the tool',
+          body:
+            'SubTrade generates a QR label for every asset and lays them out on standard Avery 5160 sheets, thirty to a page. Print, peel, stick. From then on the tag is the tool’s identity, so four identical hammer drills stop being interchangeable on paper.',
+          checks: [
+            'A QR label generated for every asset automatically',
+            'Avery 5160 sheets, 30 labels per page, on any office printer',
+            'Select the assets you want and print only those',
+            'Tag identical units so returns are never ambiguous',
+            'No scanner hardware and no third-party tagging service to buy',
+          ],
+          images: ['/subtrade-asset-qr-labels-avery-sheet.webp'],
+          imageAlt: 'The print asset labels view in SubTrade with every asset selected, each showing its own QR code and asset tag, set to Avery 5160 sheets at thirty labels per page',
+          browser: true,
+        },
+        {
+          eyebrow: 'Service and money',
+          title: 'Serviced before it fails. Costed onto the job.',
+          flip: true,
+          body:
+            'Each asset carries what it cost, who you bought it from, when the warranty runs out, when it is next due for service or calibration, and what you charge it out at. The compressor gets serviced on schedule, and the equipment you bill for carries a rate instead of being forgotten.',
+          checks: [
+            'Next service due, calibration due and a repeating service interval',
+            'Service reminders on your own thresholds \u2014 14 days out, 3 days out, whatever you set',
+            'A status that blocks deployment, so an overdue unit cannot go back out',
+            'Purchase price, purchase date, vendor and warranty expiry on the record',
+            'A charge-out rate, with its own unit, for equipment you bill',
+            'Photos, manuals and certificates attached to the asset itself',
+          ],
+          images: [
+            '/subtrade-add-asset-service.webp',
+            '/subtrade-add-asset-purchase-rental.webp',
+          ],
+          imageAlts: [
+            'The Service tab of the SubTrade asset dialog showing next service due, calibration due and a repeating service interval in days',
+            'The Purchase and rental tab of the SubTrade asset dialog showing purchase price, purchase date, warranty expiry and a charge-out rate billed to a project',
+          ],
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['What is Asset Management in SubTrade?', 'It is a register of every tool, vehicle and piece of equipment your company owns, showing who is holding each one, which site it is on, when it is next due for service and what it is worth. It replaces the spreadsheet and the whiteboard in the shop.'],
+        ['How do I know who has a tool?', 'You deploy a unit to a job site and record who took it, so the current holder sits on the asset. Every movement is kept in that asset\u2019s deployment history, and you can filter the whole register by who is holding something to see everything one person or one crew is carrying.'],
+        ['Do I need special scanners or tags?', 'No. SubTrade generates a QR label for each asset and prints them on standard Avery 5160 label sheets, thirty to a page, on any office printer. There is no scanner hardware to buy and no third-party tagging service.'],
+        ['Can I see where my equipment is on a map?', 'Yes. An asset’s position is recorded when it is loaned, transferred or returned from a device with location enabled, and the map view shows every asset with a known position across all your sites.'],
+        ['Does it track servicing and calibration?', 'Yes. Each asset can carry a next service date, a calibration date and a repeating service interval. Service reminders fire on thresholds you set \u2014 14 days before due, 3 days before, or whatever suits \u2014 and a unit whose status blocks deployment cannot go out until that status is cleared.'],
+        ['Can I track rented equipment too?', 'Yes. Ownership is recorded per asset, so rented and owned gear sit on the same register. Purchase or rental details, the vendor and the warranty or return date live on the asset record.'],
+        ['Can I manage assets from my phone?', 'Assets are added and managed on the web today. The mobile side of Asset Management is still in development, and when it launches it will be included in every plan like the rest of the platform.'],
+        ['Does Asset Management cost extra?', 'No. It is part of SubTrade on every plan, the same as time tracking, change orders and progress billing. No add-on module and no separate per-asset fee.'],
+      ],
+    },
+  },
+  {
+    slug: 'bid-manager',
+    name: 'Bid Manager',
+    keyword: 'construction bid management software for subcontractors',
+    title: 'Bid Management Software for Subcontractors',
+    description:
+      'Track every tender from invite to award on one board: pipeline value, win rate, drawings, proposals, vendor pricing requests and auto follow-ups. New in SubTrade.',
+    h1: 'Every bid on one board',
+    intro:
+      'Bid Manager tracks every tender you are invited to, from the day it lands in your inbox to the day it is awarded or lost. Drawings, proposals, vendor pricing and follow-ups all live on the bid.',
+    points: [
+      ['One board for every tender', 'Incoming, estimating, sent, follow-up, awarded and lost, with your pipeline value and win rate on top.'],
+      ['Everything on the bid', 'The GC contact, key dates, scope of work and every drawing and addendum, in one place.'],
+      ['Vendor pricing without the chase', 'Send the drawings to suppliers and subs. They price it on a link, no account needed.'],
+      ['Follow-ups that run themselves', 'Auto-chase reminds vendors before the due date so the numbers show up in time.'],
+    ],
+    rich: {
+      heroTitle: ['Every bid', 'on one board'],
+      heroSub:
+        'Bid Manager tracks every tender you are invited to, from the day it lands in your inbox to the day it is awarded or lost. Drawings, proposals, vendor pricing and follow-ups all live on the bid, so nothing gets missed at 4:55 on closing day.',
+      stats: [
+        ['Pipeline', 'Open value, awarded, win rate'],
+        ['Drawings', 'Every addendum, filed'],
+        ['Vendor pricing', 'No account needed'],
+        ['Auto-chase', '5, 2 and 1 days out'],
+      ],
+      video: {
+        id: 'JbtD3J8YEuI',
+        caption: 'Three short videos, about 2 minutes each. They play one after another, or pick a part.',
+        parts: [
+          { id: 'JbtD3J8YEuI', label: 'Part 1 · Your bid pipeline' },
+          { id: 'DsHGG-49omo', label: 'Part 2 · Inside a tender' },
+          { id: 'Aqhdu2CVox0', label: 'Part 3 · Proposals, vendors & follow-ups' },
+        ],
+        title: 'Bid Manager, Part 1: Your bid pipeline',
+        description:
+          'A walkthrough of Bid Manager in SubTrade: the Kanban board of tenders by stage, open pipeline value, awarded value, win rate and active bids, search and estimator filters, tender cards with countdowns, list view, and adding a new tender.',
+        poster: '/subtrade-bid-manager-video-poster.webp',
+        posterAlt: 'Play the SubTrade Bid Manager walkthrough, every bid on one board',
+        uploadDate: '2026-09-27',
+        duration: 'PT2M32S',
+      },
+      sections: [
+        {
+          eyebrow: 'New in SubTrade',
+          title: 'Your whole bid pipeline, one board',
+          isNew: true,
+          body:
+            'Every tender is a card in the column that matches its stage: Incoming Tender, Estimating, Sent, Follow-up, Awarded, Lost and Non-tendered. Move the card as the bid moves. Across the top sit the four numbers an estimator should know without opening a spreadsheet.',
+          checks: [
+            'Open pipeline, awarded value, win rate and active bids at the top of the page',
+            'Each column shows its bid count and what the bids add up to',
+            'Add your own custom columns if your shop works differently',
+            'Cards count down to closing and flag anything overdue',
+            'Search by tender, quote number or client, and filter by estimator',
+            'Switch to a list view sorted by due date',
+          ],
+          images: ['/subtrade-bid-manager-board.webp'],
+          imageAlt: 'SubTrade Bid Manager Kanban board with tenders in Incoming Tender, Estimating, Sent, Follow-up, Awarded, Lost and Non-tendered columns, and open pipeline, awarded, win rate and active bid totals across the top',
+          browser: true,
+        },
+        {
+          eyebrow: 'New Tender',
+          title: 'On the board in under a minute',
+          flip: true,
+          body:
+            'The invite comes in, you hit New Tender. Project name, status, bid value, the GC from your customer list or typed in fresh, the contact, the site, the due date and who on your team is on it.',
+          checks: [
+            'Pick the company from your customer list, or type a new name and it is created on the spot',
+            'Contact person, email and phone kept with the bid',
+            'Due date and estimated construction date',
+            'Assign team members and add notes',
+          ],
+          images: ['/subtrade-bid-manager-new-tender.webp'],
+          imageAlt: 'The New Tender dialog in SubTrade with project name, status, bid value, company, contact person, email, phone, location, due date, estimated construction date, assigned team members and notes',
+          browser: true,
+        },
+        {
+          eyebrow: 'Inside a tender',
+          title: 'Everything about the bid, in one place',
+          body:
+            'Open any card and the whole bid is there: the site on a map, every date that matters, the GC and their contact, your scope of work and the drawings. When the GC makes the call, mark it awarded or lost and your win rate updates.',
+          checks: [
+            'Project location on a map, with Open in Maps for the job walk',
+            'Date invited, job walk, RFIs due, due date, expected start and finish',
+            'Request type, tender number, trade names, GC and contact details',
+            'Scope of work and notes so anyone can pick up the bid',
+            'Tender documents and addenda as they arrived, sorted into folders',
+            'Mark as Awarded or Mark as Lost in one click',
+          ],
+          images: ['/subtrade-bid-manager-tender-overview.webp', '/subtrade-bid-manager-drawings.webp'],
+          imageAlts: [
+            'A tender in SubTrade Bid Manager showing the bid value, status, Edit, Mark as Awarded and Mark as Lost buttons, the Overview, Drawings, Estimating, Vendors and Follow-ups tabs, and the project location map',
+            'The Drawings tab of a tender in SubTrade listing the tender documents the general contractor sent, with upload, new folder, open, download and delete',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'Proposals',
+          title: 'Every number you send, on record',
+          flip: true,
+          body:
+            'Proposals live on the Estimating tab with their own quote numbers. When the GC asks for changes, make a revision. The old one is kept and marked superseded, so you always know which number went out. Takeoff and estimating are coming very soon.',
+          checks: [
+            'A quote number on every proposal, searchable later',
+            'Send the proposal straight from the tender',
+            'Revisions keep the earlier versions, marked superseded',
+            'Takeoff and estimating steps coming very soon',
+          ],
+          images: ['/subtrade-bid-manager-proposals.webp'],
+          imageAlt: 'The Estimating tab of a tender in SubTrade with Takeoff and Estimate marked coming soon, a Proposal step, and a proposal list with quote number, value and earlier revisions',
+          browser: true,
+        },
+        {
+          eyebrow: 'Vendor pricing',
+          title: 'Get supplier and sub pricing without the email chase',
+          body:
+            'Invite a vendor from the tender, pick the drawings to include and say what you need priced. The message fills itself in with the project, the address and your due date. They open one link, see the drawings and send their price back. No account needed.',
+          checks: [
+            'Pick vendors from your vendor list',
+            'Choose which drawings go out and attach site photos or extra specs',
+            'Send from SubTrade, or copy the link and send it yourself',
+            'Your logo on the email and the pricing page',
+            'Vendors enter a price, notes like exclusions or lead time, and attach their quote',
+            'The price lands back on the tender',
+          ],
+          images: ['/subtrade-bid-manager-invite-vendor.webp', '/subtrade-bid-manager-vendor-pricing-page.webp'],
+          imageAlts: [
+            'The Invite vendor dialog in SubTrade with the vendor, documents included, attachments, what we need priced, and a pre-filled pricing request message',
+            'The vendor pricing page from a SubTrade pricing request, showing the project, what needs pricing, the tender documents and fields for price, notes and a quote attachment, with no account needed',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'Follow-ups',
+          title: 'The bid keeps moving until it is in',
+          flip: true,
+          body:
+            'The Follow-ups tab shows the due date, how many vendors have priced and every open follow-up. Turn on auto-chase and vendors get reminders five, two and one day before the bid is due.',
+          checks: [
+            'Auto-chase reminders 5, 2 and 1 days before the due date',
+            'See how many vendors have priced at a glance',
+            'Open, snoozed and done follow-ups kept apart',
+            'Chase now, or open the estimate straight from the follow-up',
+            'Add your own follow-ups any time',
+          ],
+          images: ['/subtrade-bid-manager-follow-ups.webp'],
+          imageAlt: 'The Follow-ups tab of a tender in SubTrade showing the bid due date, vendors priced, the auto-chase toggle set to 5, 2 and 1 days before due, and open follow-ups with Chase now and Open estimate buttons',
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['What is Bid Manager in SubTrade?', 'It is where every tender you are invited to lives, from the invite to the award. A Kanban board shows every bid by stage with your pipeline value and win rate, and each tender holds its dates, contacts, scope, drawings, proposals, vendor pricing and follow-ups.'],
+        ['Do my vendors need a SubTrade account to price a job?', 'No. They get an email with your logo and one link. The link opens the drawings you chose and a pricing form for their price, notes and quote. No account and no login.'],
+        ['Can I track revisions to my proposals?', 'Yes. Every proposal has its own quote number. When you revise it, the earlier version is kept and marked superseded, so you always know which number went to the GC.'],
+        ['Does Bid Manager do takeoff and estimating?', 'Takeoff and estimating are coming very soon. Today the Estimating tab is where your proposals live, and the takeoff and estimate steps will slot in ahead of them.'],
+        ['Can I add my own bid stages?', 'Yes. The board comes with Incoming Tender, Estimating, Sent, Follow-up, Awarded, Lost and Non-tendered, and you can add custom columns to match how your shop works.'],
+        ['Does Bid Manager cost extra?', 'No. It is part of SubTrade on every plan, the same as time tracking, forms and progress billing. No add-on module.'],
+      ],
+    },
+  },
+  {
+    slug: 'construction-crew-scheduling',
+    image: '/subtrade-crew-scheduling-jobsite.webp',
+    imageAlt: 'Two workers reviewing the SubTrade crew schedule on a phone at a truck tailgate',
+
+    name: 'Crew Scheduling',
+    rich: {
+      heroTitle: ['Crews scheduled,', 'sites covered'],
+      heroSub:
+        'Construction crew scheduling built for subs running many jobs at once: drag crews between projects, everyone gets notified automatically, and coverage gaps show up before they cost you a day.',
+      stats: [
+        ['Drag & drop', 'Between any jobs'],
+        ['Auto', 'Crew notifications'],
+        ['7 days', 'Coverage ahead'],
+        ['0', 'Monday scrambles'],
+      ],
+      sections: [
+        {
+          eyebrow: 'The board',
+          title: 'The week, planned in minutes',
+          body:
+            'Every project and every day on one grid. Assign crews, spot the empty days, and fix partial coverage before it happens. When a site is not ready or an inspection slips, reassignment is a drag, not a phone tree.',
+          checks: [
+            'Every project and crew on one weekly grid',
+            'Planned versus actual coverage, live',
+            'Missing workers flagged by name',
+            'Partial coverage warnings before they cost the day',
+            'Empty days are one tap from scheduled',
+          ],
+          images: ['/subtrade-shift-coverage-next-7-days.webp'],
+          imageAlt: 'SubTrade crew scheduling grid showing seven days of shift coverage across projects with a partial coverage warning',
+        },
+        {
+          eyebrow: 'No phone tree',
+          title: 'Everyone knows before they leave site',
+          body:
+            'Change the schedule and the affected crew members are notified on their phones immediately. Nobody drives to the wrong site, nobody stands around Monday morning waiting for instructions, and the group text finally dies.',
+          checks: [
+            'Automatic notifications on every schedule change',
+            'Crews see where they are going before they leave today\u2019s site',
+            'Reassignments take seconds, not an evening of calls',
+            'Works across three jobs or fifteen',
+            'iOS and Android, every crew member',
+          ],
+          images: ['/subtrade-crew-scheduling-jobsite.webp'],
+          imageAlt: 'Two workers reviewing the SubTrade crew schedule on a phone at a truck tailgate',
+          flip: true,
+        },
+        {
+          eyebrow: 'Schedule meets timesheet',
+          title: 'The schedule that checks itself',
+          body:
+            'Scheduling connects to GPS clock-ins, so the plan and the reality meet every morning. Who was scheduled, who showed up, and where the hours actually went, without asking anyone.',
+          checks: [
+            'Scheduled crews matched against GPS clock-ins',
+            'No-shows visible by 8 AM, not at lunch',
+            'Hours land on the scheduled job automatically',
+            'Real manpower history per project',
+            'Feeds job costing without a single spreadsheet',
+          ],
+          metaCard: [
+            ['WingStop Chinook', 'Planned 5 \u00b7 on site 4 \u00b7 1 missing'],
+            ['POD Commercial', 'Planned 3 \u00b7 on site 3 \u00b7 covered'],
+            ['A. Valencia', 'Checked in 7:10 AM \u00b7 on site 2:39'],
+            ['Y. Ortega', 'Checked in 7:54 AM \u00b7 on site 1:55'],
+            ['This week', '46 shifts scheduled \u00b7 2 gaps left'],
+            ['Next week', '4 of 6 projects covered'],
+          ],
+        },
+      ],
+      faqs: [
+        ['How does crew scheduling work in SubTrade?', 'Every project and day sits on one grid. Assign crews by dragging, and the schedule shows planned versus actual coverage per site, with gaps and partial coverage flagged before they become lost days.'],
+        ['Do crews get notified when the schedule changes?', 'Yes, automatically. Any change notifies the affected crew members on their phones immediately, so everyone knows where they are going before they leave site.'],
+        ['Can I schedule across multiple projects?', 'That is exactly what it is built for. Subs running three to fifteen concurrent jobs see every project side by side and move crews between them in seconds.'],
+        ['How do I know if someone did not show up?', 'The schedule matches against GPS clock-ins, so planned versus actual coverage is live. A missing crew member is flagged by name in the morning, not discovered at noon.'],
+        ['Does scheduling connect to time tracking?', 'Yes. Clock-ins land against the scheduled job automatically, so hours, manpower history and job costing all flow from the same schedule.'],
+        ['Can I plan the job itself as a Gantt chart?', 'Yes. Crew scheduling plans who is on which site each day. Project Schedule plans the work on each job as a Gantt chart, with templates, a baseline and critical path, and Master Schedule puts every job on one timeline. Both are included on every plan.'],
+      ],
+    },
+    keyword: 'construction crew scheduling',
+    title: 'Construction Crew Scheduling Software',
+    description:
+      'Drag-and-drop construction crew scheduling for trade contractors. Move crews between jobs, notify everyone automatically, and stop the Monday morning scramble.',
+    h1: 'Crew scheduling without the whiteboard',
+    intro:
+      'Construction crew scheduling in SubTrade is a drag-and-drop board. Move a crew from one project to another and everyone gets notified on their phone before they leave site. No group texts, no double-booked crews, no standing around Monday morning.',
+    points: [
+      ['Drag and drop between jobs', 'See every crew and every project on one timeline. Reassign in seconds when a site is not ready or an inspection slips.'],
+      ['Automatic notifications', 'When the schedule changes, the affected crew members know immediately. Nobody shows up to the wrong site.'],
+      ['Scheduling meets time tracking', 'The schedule feeds clock-in expectations, so you see planned versus actual manpower per job.'],
+      ['Built for multi-site reality', 'Trade subs run three to fifteen jobs at once. The board is designed for exactly that, not for one megaproject.'],
+    ],
+  },
+  {
+    slug: 'construction-gantt-chart-software',
+    name: 'Project Schedule',
+    keyword: 'construction gantt chart software',
+    title: 'Construction Gantt Chart Software for Subcontractors',
+    description:
+      'Your scope as a Gantt chart: templates, dependencies, a baseline that measures slip, critical path and reminders, plus every job on one master schedule. New in SubTrade.',
+    h1: 'Your scope, on one timeline',
+    intro:
+      'Project Schedule lays out your own scope on each job as a Gantt chart, from mobilise to close-out, and Master Schedule puts every job you are running on one timeline. Not the GC’s master schedule. Yours.',
+    points: [
+      ['Start from a template', 'Five built-in job shapes, or your own, laid out on the job in seconds.'],
+      ['Move one, the rest follow', 'Dependencies push everything downstream when a phase moves.'],
+      ['See the slip', 'Set a baseline and the schedule counts the days you have lost.'],
+      ['Every job, one timeline', 'Master Schedule shows who is behind, what is starting and what is due.'],
+    ],
+    rich: {
+      heroTitle: ['Your scope, sequenced.', 'Every job on one timeline.'],
+      heroSub:
+        'Not the GC’s master schedule. Yours. Lay out framing, board and tape on each job from a template, see the day a phase starts to slip, and put every job you are running on one master schedule.',
+      stats: [
+        ['5 templates', 'Built in, or save your own'],
+        ['Baseline', 'Slip counted in days'],
+        ['Critical path', 'The work that can’t wait'],
+        ['Master Schedule', 'Every job, one timeline'],
+      ],
+      videoHero: true,
+      video: {
+        id: '7SNrOGFZVdA',
+        caption: 'Schedule and Master Schedule in 35 seconds.',
+        title: 'Plan the Work, See the Slip: SubTrade Schedule and Master Schedule',
+        description:
+          'A walkthrough of Project Schedule and Master Schedule in SubTrade: starting a job from a schedule template, dependencies that move everything downstream, setting a baseline and seeing the slip, the critical path, project reminders for draws, site visits and inspections, and every job on one master schedule.',
+        poster: '/subtrade-schedule-video-poster.webp',
+        posterAlt: 'Play the SubTrade Schedule walkthrough, a job schedule showing three days of slip against its baseline',
+        uploadDate: '2026-10-08',
+        duration: 'PT35S',
+      },
+      sections: [
+        {
+          eyebrow: 'New in SubTrade',
+          title: 'A schedule for the job in seconds',
+          isNew: true,
+          body:
+            'Pick a template and the whole shape of the job lands on the timeline: phases, items, durations, milestones and the waits between them. Dates and crews are not carried over, so it fits any job. Start from one of the five built in, or save a job you ran well and start the next one from it.',
+          checks: [
+            'Commercial interior fit-out, residential single family, multi-family one floor cycle, drywall board and tape, and small tenant improvement built in',
+            'Each template shows its workdays, item count, milestones and phases before you use it',
+            'Replace what is already on the schedule, or add the template to it',
+            'Save as template turns any schedule into your own starting point',
+            'Your saved templates sit beside the built-in ones',
+          ],
+          images: ['/subtrade-schedule-templates.webp'],
+          imageAlt: 'The Start from a template dialog in SubTrade with the commercial interior fit-out template selected, showing its workdays, items, milestones, phases and the list of items with durations',
+          browser: true,
+        },
+        {
+          eyebrow: 'The Gantt chart',
+          title: 'Move one bar. The rest follow.',
+          flip: true,
+          body:
+            'Every item is a bar inside its phase, linked to the work it waits on. When framing on level one runs two days long, everything after it moves two days. Nobody re-types a date, because the dates are worked out from the durations and the links, not typed in.',
+          checks: [
+            'Phases you can add, reorder, duplicate and collapse',
+            'Dependencies: ends before, starts with, or ends with, plus lag days',
+            'Milestones for inspections, ready for paint and handover',
+            'Durations counted in working days, with Saturdays, holidays and shutdowns set per job',
+            'Areas for levels, blocks and zones, so a floor-by-floor cycle reads by area',
+            'Each item carries a status and its own tasks, which show on the project task board',
+            'Days, weeks or months view, with today marked',
+          ],
+          images: ['/subtrade-schedule-gantt.webp'],
+          imageAlt: 'A SubTrade project schedule as a Gantt chart with mobilise, framing, board, finishing and close-out phases, each item as a bar with its duration, milestones for site ready, framing inspection and ready for paint, and today marked',
+          browser: true,
+        },
+        {
+          eyebrow: 'Baseline',
+          title: 'See the slip the day it happens',
+          body:
+            'Set a baseline when the plan is agreed. From then on the original dates sit under every bar, and the Date Slip card tells you how many days the job has lost. Board running three days long shows up that afternoon, not when the GC calls about the painter.',
+          checks: [
+            'One click to lock the plan as the baseline',
+            'Baseline bars under the live bars, so the drift is visible',
+            'Baseline, actual and date slip cards at the top of every schedule',
+            'Slip counted in days and carried through to Master Schedule',
+          ],
+          images: ['/subtrade-schedule-baseline.webp'],
+          imageAlt: 'A SubTrade schedule with baseline bars under the live bars and the Date Slip card reading three days late because board on the walls ran three days long',
+          browser: true,
+        },
+        {
+          eyebrow: 'Critical path',
+          title: 'Know what can’t wait',
+          flip: true,
+          body:
+            'Turn on critical path and the chain of work that decides the finish date is outlined. A day lost on one of those bars is a day lost on the job. A day lost anywhere else is float. Put your best crew where it counts.',
+          checks: [
+            'Critical items outlined, the rest dimmed',
+            'Open any item to see whether it sits on the critical path',
+            'Works with the baseline on, so you see slip and what drives it together',
+          ],
+          images: ['/subtrade-schedule-critical.webp'],
+          imageAlt: 'A SubTrade schedule with critical path switched on, the items that drive the finish date outlined in red and the rest dimmed',
+          browser: true,
+        },
+        {
+          eyebrow: 'Reminders',
+          title: 'Draws, site walks and inspections on the job',
+          body:
+            'Reminders live on the project, not in somebody’s phone. Set the progress draw to repeat on the 25th, the site walk with the GC every Tuesday, the framing inspection once. Everyone looking at the schedule sees them.',
+          checks: [
+            'Kinds for invoicing, site visit, meeting, submittal, safety and other',
+            'Once, daily, weekly, every two weeks, monthly or annually',
+            'Who it is for, where it happens and what the next person needs to know',
+            'The upcoming dates listed, so you can check the pattern before you save',
+          ],
+          images: ['/subtrade-schedule-reminders.webp'],
+          imageAlt: 'The Project reminders dialog in SubTrade with a monthly progress invoice reminder from the 25th, a framing inspection and a weekly site walk, and the upcoming reminder dates listed',
+          browser: true,
+        },
+        {
+          eyebrow: 'Master Schedule',
+          title: 'Every job you are running, one timeline',
+          flip: true,
+          body:
+            'Master Schedule puts every active job on one timeline with the numbers that matter across the company: how many jobs are behind their baseline, what is starting and finishing in the next 30 days, and the milestones coming up in the next two weeks. Expand any job to see its phases, or open it in one click.',
+          checks: [
+            'Active jobs, behind baseline, starting soon, finishing soon and percent complete',
+            'Milestones in the next 14 days, by job',
+            'Expand all, or one job at a time',
+            'Group by project, with baseline bars on',
+            'Days, weeks or months, and a PDF of the whole thing',
+          ],
+          images: ['/subtrade-schedule-master.webp'],
+          imageAlt: 'SubTrade Master Schedule with six active jobs on one timeline, one behind baseline, two starting soon, one finishing soon, 38 percent complete, upcoming milestones, and one job expanded to show its phases',
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['Is this the GC’s master schedule?', 'No. The GC’s schedule stays in the GC’s system. Project Schedule is your own scope on the job, in the order your crews do it, and Master Schedule is every job you are running, side by side.'],
+        ['How is this different from crew scheduling?', 'Crew scheduling decides who is on which site each day. Project Schedule decides what happens on a job and in what order. One plans people, the other plans the work, and both are included.'],
+        ['Can I start from a template?', 'Yes. There are five built in: commercial interior fit-out, residential single family, multi-family one floor cycle, drywall board and tape, and small tenant improvement. You can also save any schedule as your own template and start the next job from it.'],
+        ['What happens when one item runs late?', 'Items are linked to the work they wait on, so when one moves, everything downstream moves with it. Durations are counted in working days, so the dates are recalculated, not re-typed.'],
+        ['How does the baseline work?', 'Set a baseline when the plan is agreed. The original dates stay under the live bars and the Date Slip card counts how many days the job has drifted. Jobs behind baseline are counted on Master Schedule too.'],
+        ['What is the critical path?', 'It is the chain of work that decides the finish date. Turn it on and those items are outlined, so you can see which delays cost you the job and which ones have float.'],
+        ['Can I count Saturdays or plan around a shutdown?', 'Yes. Working days are set per job. Switch Saturday on and every span recalculates, and add holidays and shutdowns so nothing is scheduled on them.'],
+        ['Does it cost extra?', 'No. Project Schedule and Master Schedule are part of SubTrade on every plan, the same as time tracking, change orders and progress billing.'],
+      ],
+    },
+  },
+  {
+    slug: 'change-order-management',
+    image: '/subtrade-change-order-from-the-field.webp',
+    imageAlt: 'Tradesman creating a change order in the SubTrade app in front of a wall opening',
+    rich: {
+      heroTitle: ['Get the extra signed', 'before you build it'],
+      heroSub:
+        'Where subs bleed money: extras done on a handshake and fought over at month end. SubTrade lets your foreman create a professional change order on a phone in about a minute, attach photos, send it, and track approval, before the work happens.',
+      stats: [
+        ['~60 sec', 'From field to sent'],
+        ['Photos', 'Attached as backup'],
+        ['Tracked', 'Approved \u00b7 pending \u00b7 rejected'],
+        ['$0', 'Extras done for free'],
+      ],
+      sections: [
+        {
+          eyebrow: 'In the field',
+          title: 'How change orders work on site',
+          body:
+            'The GC asks for extra work. Instead of a handshake and a hope, your foreman opens SubTrade at the wall: scope, price, photos of the condition, send. The paper exists before the work does, which is the whole game.',
+          checks: [
+            'Create and price a change order from any phone',
+            'Attach GPS-tagged photos of the condition as backup',
+            'Send it for approval before the extra work starts',
+            'Professional format the GC takes seriously',
+            'No more remembering extras at billing time',
+          ],
+          images: ['/subtrade-change-order-from-the-field.webp'],
+          imageAlt: 'Tradesman creating a change order in the SubTrade app in front of a wall opening',
+        },
+        {
+          eyebrow: 'Approval tracking',
+          title: 'Every extra has a status, nothing gets forgotten',
+          body:
+            'Sent is not approved, and approved is not invoiced. SubTrade keeps a live register of every change order and where it stands, so slow approvals get chased, rejections get re-scoped, and nothing quietly dies in a GC inbox.',
+          checks: [
+            'Live status on every CO: draft, sent, approved, rejected',
+            'See how long each one has been waiting',
+            'Photos and scope stay attached through the whole life of the CO',
+            'The full history in one place when the dispute lands',
+            'Chase the slow ones before they become free work',
+          ],
+          metaCard: [
+            ['CO-018', 'Approved \u00b7 $4,250'],
+            ['CO-019', 'Sent \u00b7 awaiting GC'],
+            ['CO-021', 'Pending \u00b7 3 days waiting'],
+            ['CO-014', 'Rejected \u00b7 re-scoped'],
+            ['Approved this month', '+$12,750'],
+            ['Avg response time', '2.1 days'],
+          ],
+          flip: true,
+        },
+        {
+          eyebrow: 'Into the draw',
+          title: 'Approved extras become invoiced extras',
+          body:
+            'The change order you captured in the field carries straight into progress billing. Approved COs sit alongside your schedule of values, so when the draw goes out, every extra is on it, priced, documented and impossible to argue with.',
+          checks: [
+            'Approved change orders flow into progress billing',
+            'Extras appear alongside the schedule of values',
+            'Percent complete and claims backed by field records',
+            'Holdback handled the Canadian way',
+            'The month-end scramble stops existing',
+          ],
+          images: ['/subtrade-change-orders-billed-in-claim.webp'],
+          imageAlt: 'Approved change orders in SubTrade billed into a progress claim with percent complete, this claim and invoiced to date columns',
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['How fast can I create a change order in the field?', 'About a minute. Open the project, describe the extra, price it, attach photos of the condition, and send. It is designed to be faster than the phone call it replaces.'],
+        ['Can I attach photos to a change order?', 'Yes. GPS-tagged, timestamped photos attach directly to the CO, documenting the condition that triggered the extra work. That backup travels with the change order permanently.'],
+        ['How does approval tracking work?', 'Every change order has a live status: draft, sent, approved or rejected, plus how long it has been waiting. You always know which extras are captured and which need chasing.'],
+        ['What happens after a change order is approved?', 'It carries into progress billing automatically. Approved COs appear alongside your schedule of values so every extra lands on the next draw, priced and documented.'],
+        ['What if the GC does not use SubTrade?', 'No problem. You send the change order to them directly from SubTrade, they do not need an account to receive, review or respond to it.'],
+        ['Does this work on my phone?', 'Yes. Change orders are built field-first: create, price, photograph and send from any phone, iOS or Android.'],
+      ],
+    },
+
+    name: 'Change Orders',
+    keyword: 'change order management software',
+    title: 'Change Order Management Software for Subcontractors',
+    description:
+      'Create, price and send change orders from the field before the extra work happens. Digital approval tracking so trade contractors stop working for free.',
+    h1: 'Get the extra signed before you build it',
+    intro:
+      'Where subs bleed money: extras done on a handshake and fought over at month end. SubTrade lets your foreman create a professional change order on a phone in under a minute, attach photos, send it to the GC and track approval status. The work does not start until the paper exists.',
+    points: [
+      ['Sixty seconds from the field', 'Scope, price, photos, send. Faster than the phone call it replaces.'],
+      ['Approval tracking', 'Approved, pending, rejected. Every change order has a status and a history, so nothing gets forgotten in an inbox.'],
+      ['Photos as backup', 'GPS-tagged photos attach directly, documenting the condition that triggered the extra.'],
+      ['Flows into billing', 'Approved change orders carry into progress billing, so captured scope becomes invoiced scope.'],
+    ],
+  },
+  {
+    slug: 'progress-billing',
+    image: '/subtrade-schedule-of-values-progress-billing.webp',
+    imageAlt: 'Schedule of values in SubTrade showing percent complete, this claim, previously invoiced and invoiced to date for progress billing',
+
+    name: 'Progress Billing',
+    rich: {
+      heroTitle: ['Bill the work.', 'Get the draw paid.'],
+      heroSub:
+        'Progress billing software built for trade subcontractors: a schedule of values per contract, percent complete backed by field data, holdback handled the Canadian way, and a claim your GC approves instead of questions.',
+      stats: [
+        ['SOV', 'Per contract'],
+        ['Auto', 'Holdback math'],
+        ['COs', 'On every draw'],
+        ['PDF', 'Claim in one click'],
+      ],
+            video: {
+        id: 'uQTLHVyawno',
+        caption: 'The full walkthrough in under 3 minutes: SOV, claims, change orders and holdback.',
+        title: 'Progress Billing in SubTrade: schedule of values, claims and holdback',
+        description:
+          'A walkthrough of Progress Billing in SubTrade: the billing dashboard, starting billing from an SOV template with holdback and warranty holdback, claiming by percent or amount, billing approved change orders, the project reconciliation and the holdback tracker.',
+        poster: '/subtrade-progress-billing-video-poster.webp',
+        posterAlt: 'Play the SubTrade Progress Billing walkthrough, bill the job and track the holdback',
+        uploadDate: '2026-09-29',
+        duration: 'PT2M53S',
+      },
+      sections: [
+        {
+          eyebrow: 'The schedule of values',
+          title: 'Every draw starts from the same table',
+          body:
+            'Set up your schedule of values once, straight from the contract. From then on, every draw is the same four columns: percent complete, this claim, previously invoiced and invoiced to date. No rebuilt spreadsheets, no formulas to break, no wondering what you billed last month.',
+          checks: [
+            'Schedule of values built once per contract',
+            'Percent complete, this claim, previously invoiced, invoiced to date',
+            'Previous draws carry forward automatically',
+            'Overbilling impossible: the math will not let a line exceed 100%',
+            'Every claim stored with its project, forever',
+          ],
+          images: ['/subtrade-schedule-of-values-progress-billing.webp'],
+          imageAlt: 'Schedule of values in SubTrade showing percent complete, this claim, previously invoiced and invoiced to date columns for a progress claim',
+          browser: true,
+        },
+        {
+          eyebrow: 'Holdback and extras',
+          title: 'Holdback the Canadian way, extras on every draw',
+          body:
+            'Statutory holdback is calculated on every claim automatically, tracked per project, and ready to release when the lien period runs out. Approved change orders carry straight from the field into the draw, priced and documented, so extras get billed the month they happen instead of fought over at closeout.',
+          checks: [
+            'Statutory holdback deducted and tracked automatically',
+            'Holdback receivable visible per project, not lost in a spreadsheet',
+            'Approved change orders appear alongside the schedule of values',
+            'Every extra billed with its photos and approval attached',
+            'Release claims ready when the lien period expires',
+          ],
+          metaCard: [
+            ['This claim', '$48,200.00 work completed'],
+            ['Change orders', '+ $6,450.00 approved this period'],
+            ['Holdback (10%)', '\u2212 $5,465.00 retained'],
+            ['Net claim', '$49,185.00 payable'],
+            ['Holdback to date', '$21,340.00 receivable'],
+          ],
+          flip: true,
+        },
+        {
+          eyebrow: 'Out the door',
+          title: 'A claim your GC approves, not questions',
+          body:
+            'One click turns the draw into a clean PDF progress claim with the schedule of values, change orders and holdback laid out the way GCs expect. Behind every percent complete sits the field record: daily logs, photos and signed extras. Send it, track it, and know at a glance which draws are draft, sent or paid.',
+          checks: [
+            'One-click PDF progress claim, formatted for GCs',
+            'Draw status per project: draft, sent, paid',
+            'Percent complete backed by logs and GPS-tagged photos',
+            'Email the claim or share a live project link',
+            'Full billing history per contract, always one tap away',
+          ],
+          images: ['/progress-billing-template-canadian-subcontractor.webp'],
+          imageAlt: 'PDF progress claim generated in SubTrade with schedule of values, approved change orders and statutory holdback ready to send to the general contractor',
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['What is progress billing in construction?', 'Progress billing means invoicing a percentage of the contract as work completes, usually monthly, instead of billing everything at the end. Each draw claims the value of work done that period against a schedule of values, minus statutory holdback.'],
+        ['How does SubTrade handle holdback?', 'Statutory holdback is deducted from every claim automatically and tracked as a receivable per project. When the lien period runs out, the amount owed to you is already calculated and ready to claim.'],
+        ['Do change orders show up on the draw?', 'Yes. Approved change orders carry into progress billing automatically and appear alongside your schedule of values, priced and documented, so every extra lands on the next claim instead of waiting for closeout.'],
+        ['Can I send the progress claim to my GC?', 'Yes. One click generates a clean PDF progress claim with the schedule of values, change orders and holdback laid out the way GCs expect. Email it directly or share a live project link.'],
+        ['How do I back up my percent complete?', 'Every project carries its daily logs, GPS-tagged photos and signed change orders in the same system, so when a GC questions a line, the field record that proves it is one tap away.'],
+        ['Does SubTrade replace my accounting software?', 'No. SubTrade builds and tracks the progress claim, the draw history and the holdback receivable. Your accountant keeps working in your accounting system; you just stop building draws in spreadsheets.'],
+      ],
+    },
+    keyword: 'progress billing software for subcontractors',
+    title: 'Progress Billing Software for Subcontractors',
+    description:
+      'Progress billing built for trade contractors: schedule of values, automatic holdback, change orders on every draw, one-click PDF claims. Part of SubTrade.',
+    h1: 'Draws without the spreadsheet',
+    intro:
+      'Progress billing built for subs: a schedule of values per contract, automatic holdback, approved change orders on every draw, and a PDF claim your GC approves instead of questions.',
+    points: [
+      ['Schedule of values, once', 'Set it up from the contract and every draw uses the same table. Previous claims carry forward automatically.'],
+      ['Holdback, handled', 'Statutory holdback deducted on every claim and tracked as a receivable per project until release.'],
+      ['Extras billed, not forgotten', 'Approved change orders carry into the draw automatically, priced and documented.'],
+      ['Backed by the field', 'Percent complete sits on top of daily logs, photos and signed extras, so claims survive scrutiny.'],
+    ],
+  },
+  {
+    slug: 'daily-logs',
+    image: '/subtrade-daily-log-foreman-end-of-day.webp',
+    imageAlt: 'Foreman filing a daily log in the SubTrade app at end of day on a commercial site',
+
+    name: 'Daily Logs',
+    rich: {
+      heroTitle: ['The dispute file that', 'writes itself'],
+      heroSub:
+        'A daily log that takes twenty minutes does not get filled out. SubTrade logs take two: weather, manpower, work completed, delays and photos, filed to the project forever. Eight months later, when the claim lands, you have every day on record.',
+      stats: [
+        ['~2 min', 'Per daily log'],
+        ['Auto', 'Weather stamped'],
+        ['Photos', 'Attached in line'],
+        ['Forever', 'Searchable by date'],
+      ],
+      sections: [
+        {
+          eyebrow: 'In the field',
+          title: 'Two minutes, on a phone, on site',
+          body:
+            'Foremen fill logs at the end of the day with the crew still around them, not from memory at the kitchen table. Weather and date stamp automatically, manpower carries from clock-ins, and photos drop straight into the day they belong to.',
+          checks: [
+            'Weather, date and time stamped automatically',
+            'Manpower pulled from the day\u2019s clock-ins',
+            'Work completed, delays and visitors in plain fields',
+            'Photos attach directly to the day',
+            'Signed and filed to the project in one tap',
+          ],
+          images: ['/subtrade-daily-log-foreman-end-of-day.webp'],
+          imageAlt: 'Foreman filing a daily log in the SubTrade app at end of day on a commercial site',
+        },
+        {
+          eyebrow: 'A real day',
+          title: 'What a log looks like',
+          body:
+            'Every log is a complete snapshot of the day: conditions, crew, progress, problems and proof. Individually they take two minutes. Together they are a defensible record of the entire project.',
+          checks: [
+            'Every day of the project, one tap away',
+            'Delays documented the day they happen, not reconstructed later',
+            'The other trade\u2019s slowdown, on the record',
+            'Site conditions and visitors captured',
+            'Search any project by date in seconds',
+          ],
+          metaCard: [
+            ['Weather', '20\u00b0 \u00b7 clear \u00b7 wind 4.7 km/h'],
+            ['Manpower', '6 on site \u00b7 46.5 hrs'],
+            ['Completed', 'Boarding L3 east \u00b7 82%'],
+            ['Delays', 'Electrical rough-in behind \u00b7 area blocked'],
+            ['Photos', '4 attached \u00b7 GPS tagged'],
+            ['Signed', 'M. Torres \u00b7 4:52 PM'],
+          ],
+          flip: true,
+        },
+      ],
+      faqs: [
+        ['How long does a daily log take?', 'About two minutes on a phone. Weather, date and manpower fill themselves, the foreman adds work completed, delays and photos, signs, and the log files to the project.'],
+        ['Is the weather recorded automatically?', 'Yes. Every log stamps the day\u2019s weather and conditions automatically, the context that wins delay disputes.'],
+        ['Can I attach photos to a daily log?', 'Yes. Site photos drop straight into the day they belong to, GPS-tagged and timestamped alongside the notes.'],
+        ['Can I find old logs later?', 'Every log is filed to its project and searchable by date. What happened on any day of any job is seconds away, even years later.'],
+        ['Why do daily logs matter for disputes?', 'Because a contemporaneous, timestamped record beats memory every time. When a delay claim or backcharge lands months later, the log from that exact day, with weather, manpower and photos, is your defence file.'],
+      ],
+    },
+    keyword: 'construction daily log software',
+    title: 'Construction Daily Log Software for Trade Contractors',
+    description:
+      'Two-minute daily logs from the field: weather, manpower, work completed, delays. Build a dispute defence file automatically with SubTrade.',
+    h1: 'The dispute file that writes itself',
+    intro:
+      'A daily log that takes twenty minutes does not get filled out. SubTrade logs take two: weather, manpower, work completed, delays, photos. Eight months later, when the delay claim lands, you have a timestamped record for every day on site.',
+    points: [
+      ['Two minutes, on a phone', 'Foremen fill logs on site with the crew still around them, not from memory at the kitchen table.'],
+      ['Weather and manpower stamped', 'The context that wins disputes gets captured automatically alongside the notes.'],
+      ['Searchable forever', 'Every log filed to its project. Find what happened on any date on any job in seconds.'],
+      ['Photos in line', 'Site photos drop straight into the day they belong to.'],
+    ],
+  },
+  {
+    slug: 'site-photos',
+    image: '/subtrade-gps-site-photos-worker.webp',
+    imageAlt: 'Worker capturing a GPS-tagged jobsite photo with the SubTrade app',
+    rich: {
+      heroTitle: ['Site photos that', 'prove your work'],
+      heroSub:
+        'Every photo tagged with who took it, when, and exactly where on site. Now with before and after comparisons and markups drawn right on the photo, so the record does not just exist, it makes your point.',
+      stats: [
+        ['GPS', 'Tagged from mobile'],
+        ['Before / After', 'Side-by-side proof'],
+        ['Markups', 'Draw on any photo'],
+        ['500', 'Chars of notes per photo'],
+      ],
+      short: {
+        id: 'tRIpyWK8EfY',
+        caption: 'Mark it up, stamp it, file it by job. 42 seconds on the phone.',
+        title: 'Site Photos That Stay on the Right Job | SubTrade',
+        description:
+          'Site photos in SubTrade: every photo lands on the right job, sorted by date and album. Share it clean or as a card with notes, mark it up with boxes, arrows and text, stamp the date and time, file it in an album, and add a description and tags the office can search.',
+        poster: '/subtrade-site-photos-short-poster.webp',
+        posterAlt: 'Play the SubTrade site photos short: the gallery and a marked-up column photo under the words every photo, on the right job',
+        uploadDate: '2026-10-04',
+        duration: 'PT42S',
+      },
+      sections: [
+        {
+          eyebrow: 'New feature',
+          title: 'Before & after photos',
+          isNew: true,
+          body:
+            'Pair a before shot with an after shot and SubTrade puts them side by side. The proof speaks for itself, to the GC, the adjuster, or the owner who does not remember it looking that bad.',
+          checks: [
+            'Pair any two photos into a before and after comparison',
+            'Side-by-side comparison on mobile and desktop',
+            'Both photos keep their own GPS tag, date, and uploader',
+            'Share the pair with the GC as one link',
+            'Perfect for restoration, repairs, and progress claims',
+          ],
+          motion: 'beforeAfter',
+          before: '/subtrade-before-photo-restaurant-ceiling.webp',
+          after: '/subtrade-after-photo-restaurant-ceiling.webp',
+          beforeAlt: 'Before photo: restaurant ceiling during framing and boarding, debris on the floor',
+          afterAlt: 'After photo: the same restaurant finished, ceiling painted and seating installed',
+        },
+        {
+          eyebrow: 'New feature',
+          title: 'Mark up your photos',
+          isNew: true,
+          body:
+            'A photo shows the wall. A markup shows the problem. Draw, circle, drop arrows, and add text right on any site photo, so the crew, the GC, or the inspector sees exactly what you mean without a phone call.',
+          checks: [
+            'Draw freehand, circles, and arrows on any photo',
+            'Add text labels right where the issue is',
+            'Original photo stays untouched, markups save as a layer',
+            'Share marked-up photos with the GC or your crew',
+            'Use them in tasks, punch lists, and change orders',
+          ],
+          motion: 'markup',
+          markupImage: '/subtrade-photo-markup-clean.webp',
+          imageAlt: 'Site photo marked up in SubTrade with an arrow and install access panel note',
+          flip: true,
+        },
+        {
+          eyebrow: 'GPS + notes',
+          title: 'Every photo knows who, when & where',
+          body:
+            'Photos taken from the SubTrade mobile app are automatically GPS-tagged with the exact coordinates where they were taken. Add up to 500 characters of notes, and every upload carries the crew member\u2019s profile icon, so accountability is built in.',
+          checks: [
+            'Automatic GPS geotag on every mobile photo',
+            'Map view shows the exact location on site',
+            'Date, time, and uploader stamped automatically',
+            'Latest photos visible right on the project dashboard',
+            'Share photos directly from the app',
+          ],
+          metaMap: '51.064810, \u2212114.093210',
+          metaCard: [
+            ['Photo', 'Mar 31, 2026 \u00b7 2:14 PM'],
+            ['Taken by', 'Derek Santos'],
+            ['Location', '51.064810, \u2212114.093210'],
+            ['Notes', 'Install blocking before boarding ceiling. Coordinate with electrical on conduit routing.'],
+            ['Markups', '1 circle \u00b7 1 arrow \u00b7 1 label'],
+            ['Compared', 'Paired with Apr 02 after photo'],
+          ],
+        },
+      ],
+      faqs: [
+        ['Are photos automatically GPS tagged?', 'Yes. Photos taken from the SubTrade mobile app are automatically tagged with GPS coordinates, and a map view in the photo detail shows exactly where on site the photo was taken.'],
+        ['How do before and after photos work?', 'Pair any two photos into a comparison. SubTrade shows them side by side, and both photos keep their own date, GPS tag, and uploader. Share the pair as one link.'],
+        ['Can I draw on my photos?', 'Yes. Mark up any photo with freehand drawing, circles, arrows, and text labels. The original photo stays untouched, your markups save as a layer on top.'],
+        ['Can I see who uploaded each photo?', 'Yes. Every photo displays the uploader\u2019s profile icon, in the grid view, the dashboard quick view, and the full photo detail. You always know who took what.'],
+        ['Can I add notes to photos?', 'Yes. Add up to 500 characters of notes to any photo, describe what needs to happen, flag an issue, or leave instructions for the crew. Notes are visible to the whole project team.'],
+        ['Can I share photos with the GC?', 'Yes. Share any photo, marked-up photo, or before and after pair directly from the app. The GC receives it with the date, uploader, notes, and GPS location, no phone call needed.'],
+      ],
+    },
+
+    name: 'Photos',
+    keyword: 'construction photo documentation',
+    title: 'GPS-Tagged Construction Photos',
+    description:
+      'Every jobsite photo GPS-tagged, timestamped and filed to its project automatically. Photo documentation for trade contractors that holds up in disputes.',
+    h1: 'Proof that holds up when memories do not',
+    intro:
+      'Camera rolls lose arguments. SubTrade photos are GPS-tagged, timestamped and filed to their project the moment they are taken. When someone claims the area was ready, or the damage was yours, you have the evidence in ten seconds.',
+    points: [
+      ['Location and time stamped', 'Every photo carries where and when. That metadata is the difference between a photo and evidence.'],
+      ['Filed automatically', 'Photos land in the right project without anyone organizing folders.'],
+      ['Markup in the field', 'Circle the issue, add a note, attach it to a task or change order.'],
+      ['Findable months later', 'Search by project and date instead of scrolling a 4,000-photo camera roll.'],
+    ],
+  },
+  {
+    slug: 'task-management',
+    name: 'Tasks & Punch Lists',
+    rich: {
+      heroTitle: ['Punch lists that', 'actually close'],
+      heroSub:
+        'Sticky notes and text threads are where deficiencies go to be forgotten. SubTrade tasks are boards built for construction closeout: assign the item, attach the photo, track it to done. Faster closeout means faster holdback release.',
+      stats: [
+        ['Kanban', 'Built for closeout'],
+        ['Photos', 'On every task'],
+        ['Assigned', 'Every item owned'],
+        ['Faster', 'Holdback release'],
+      ],
+      sections: [
+        {
+          eyebrow: 'The board',
+          title: 'Every deficiency, moving or visible',
+          body:
+            'Columns that match how deficiencies actually move: open, in progress, ready for review, closed. Nothing hides in a group text, and the board tells you at a glance whether closeout is moving or stuck.',
+          checks: [
+            'Boards per project: open, in progress, review, closed',
+            'Every item assigned to a person, not a hope',
+            'Overdue tasks flag themselves',
+            'Filter by trade, area or assignee',
+            'Watch the board burn down instead of walking with a legal pad',
+          ],
+          metaCard: [
+            ['Open', '12 items \u00b7 3 overdue'],
+            ['In progress', '7 items'],
+            ['Ready for review', '4 items'],
+            ['Closed this week', '23 items'],
+            ['Oldest open', 'Corridor B bulkhead \u00b7 9 days'],
+            ['Closeout pace', 'On track for Friday'],
+          ],
+        },
+        {
+          eyebrow: 'Proof attached',
+          title: 'Every task carries its own evidence',
+          body:
+            'The deficiency photo and the completion photo live on the task itself. Whoever picks it up sees exactly what and where, and whoever reviews it sees the fix, without a site walk or a phone call.',
+          checks: [
+            'Deficiency photo attached when the task is created',
+            'Completion photo attached when the work is done',
+            'GPS and timestamps on both',
+            'Notes and history stay with the task forever',
+            'Created from photos, logs or change orders in one tap',
+          ],
+          metaCard: [
+            ['Task', 'Patch bulkhead \u00b7 corridor B'],
+            ['Assigned', 'J. Piriz \u00b7 due Friday'],
+            ['Created from', 'Site photo \u00b7 GPS tagged'],
+            ['Before', 'Photo attached \u00b7 Jun 11'],
+            ['After', 'Photo attached \u00b7 Jun 14'],
+            ['Status', 'Ready for review'],
+          ],
+          flip: true,
+        },
+      ],
+      faqs: [
+        ['How do punch lists work in SubTrade?', 'Every deficiency becomes a task on a board with columns for open, in progress, ready for review and closed. Items are assigned, photographed and tracked until the board is empty.'],
+        ['Can I attach photos to tasks?', 'Yes, and you should: the deficiency photo when the task is created and the completion photo when it is done, both GPS-tagged, both permanently on the task.'],
+        ['Can tasks be assigned to specific people?', 'Every task has an owner and a due date. Overdue items flag themselves, so nothing dies quietly in a list.'],
+        ['Why does closeout speed matter?', 'Because holdback release waits on deficiency completion. A punch list that closes in days instead of weeks is money released sooner.'],
+        ['Can I create a task from a photo?', 'Yes. A marked-up site photo becomes a task in one tap, with the photo, location and notes already attached.'],
+      ],
+    },
+    keyword: 'construction task management',
+    title: 'Task Management & Punch Lists for Subcontractors',
+    description:
+      'Kanban boards built for deficiencies and closeout, not software sprints. Assign tasks, attach photos, close punch lists faster with SubTrade.',
+    h1: 'Punch lists that actually close',
+    intro:
+      'Sticky notes and text threads are where deficiencies go to be forgotten. SubTrade tasks are Kanban boards built for construction closeout: assign the item, attach the photo, track it to done. Faster closeout means faster holdback release.',
+    points: [
+      ['Kanban for construction', 'Columns that match how deficiencies actually move: open, in progress, ready for review, closed.'],
+      ['Photo on every task', 'The deficiency photo and the completion photo live on the task itself.'],
+      ['Assigned and visible', 'Every item has an owner. Nothing dies in a group text.'],
+      ['Closeout velocity', 'Watch the board burn down instead of walking the site with a legal pad.'],
+    ],
+  },
+  {
+    slug: 'drawings-markups',
+    name: 'Drawings & Markups',
+    rich: {
+      heroTitle: ['The current set,', 'in every pocket'],
+      heroSub:
+        'Building from a superseded drawing is one of the most expensive mistakes on any job. SubTrade puts the current set on every phone with markups, measurements and photo pins right on the sheet. When a revision lands, everyone has it instantly.',
+      stats: [
+        ['Current rev', 'On every device'],
+        ['Measure', 'Right on the sheet'],
+        ['Pins', 'Photos & notes placed'],
+        ['Instant', 'Revision push'],
+      ],
+      sections: [
+        {
+          eyebrow: 'On site',
+          title: 'Drawings that work with gloves on',
+          body:
+            'The full set on every phone and tablet, built for the field: pinch, zoom, measure and mark up right on the sheet. Your foreman stops calling to ask where the drawings are. They are in his pocket, and they are the right revision.',
+          checks: [
+            'Full drawing set on every phone and tablet',
+            'Measure spans and take off areas right on the sheet',
+            'Drop photo pins exactly where the issue is',
+            'Markups, clouds and notes on the drawing',
+            'Auto-named sheets on upload',
+          ],
+          images: ['/subtrade-app-construction-drawing-markup.webp'],
+          imageAlt: 'Construction drawing in the SubTrade mobile app with measurements, markups and photo pins on a reflected ceiling plan',
+          tablet: 'portrait',
+        },
+        {
+          eyebrow: 'Precision',
+          title: 'Measurements the whole crew can trust',
+          body:
+            'Set the scale once and measure anything: spans, runs, areas. Layout questions get answered at the wall in seconds instead of back at the trailer, and takeoff checks happen on the spot.',
+          checks: [
+            'Scale-accurate measurements on any sheet',
+            'Span and distance measuring in feet and inches',
+            'Area takeoffs for quick quantity checks',
+            'Photo pins tie site reality to the drawing',
+            'Every markup saved as a layer, original untouched',
+          ],
+          metaCard: [
+            ['Sheet', '1.0102.1M \u00b7 Reflected ceiling'],
+            ['Scale', '1/8\u2033 = 1\u2032-0\u2033'],
+            ['Measured', '19.49 ft \u00b7 system span'],
+            ['Area', '121.36 sq ft \u00b7 washrooms'],
+            ['Pins', '2 photos \u00b7 1 note placed'],
+            ['Revision', 'C \u00b7 current on 12 devices'],
+          ],
+          flip: true,
+        },
+        {
+          eyebrow: 'Revision control',
+          title: 'Revisions without casualties',
+          body:
+            'Upload the new set and the old one is superseded everywhere at once. Every device shows the current revision, the old sheets are archived, not deleted, and nobody builds a wall from drawing rev B on a rev C job.',
+          checks: [
+            'New revisions push to every device instantly',
+            'Superseded sheets archived with full history',
+            'Markups carry forward where they still apply',
+            'See which revision anyone is looking at',
+            'The rev B wall never gets built',
+          ],
+          metaCard: [
+            ['Rev C uploaded', 'Tuesday 4:51 PM'],
+            ['Pushed to', '12 devices \u00b7 instantly'],
+            ['A-301', 'Superseded \u00b7 archived'],
+            ['Markups', 'Carried forward \u00b7 3 sheets'],
+            ['History', 'Rev A \u00b7 B \u00b7 C retained'],
+            ['Wrong-rev builds', '0'],
+          ],
+        },
+      ],
+      faqs: [
+        ['Can my crew see drawings on their phones?', 'Yes. The full current set works on every phone and tablet, iOS and Android, built for field conditions: pinch, zoom, measure and mark up on the sheet.'],
+        ['Can I measure on the drawings?', 'Yes. Set the scale and measure spans, runs and areas directly on the sheet, scale-accurate, in feet and inches.'],
+        ['What happens when a new revision comes in?', 'Upload it and every device updates instantly. Old sheets are superseded and archived with history, so nobody builds from an outdated drawing.'],
+        ['Can I put photos on a drawing?', 'Yes. Drop a photo pin exactly where the issue is, and the site photo lives on the sheet at that location.'],
+        ['Do markups change the original drawing?', 'No. Markups save as a layer on top. The original sheet stays untouched underneath.'],
+      ],
+    },
+    keyword: 'construction drawings app',
+    title: 'Construction Drawings & Markups in the Field',
+    description:
+      'The current drawing set on every phone. Mark up plans, pin photos and kill the wrong-revision callback with SubTrade drawings for trade contractors.',
+    h1: 'The current set, in every pocket',
+    intro:
+      'Building from a superseded drawing is one of the most expensive mistakes on any job. SubTrade puts the current set on every device, with markups, measurements and photo pins right on the sheet. When a revision lands, everyone has it instantly.',
+    points: [
+      ['Always the current revision', 'Upload the new set and the old one is superseded everywhere at once.'],
+      ['Markup on the sheet', 'Dimensions, clouds, notes and photo pins directly on the drawing.'],
+      ['No more drawing phone calls', 'Your foreman stops calling to ask where the drawings are. They are in his pocket.'],
+      ['Works on site', 'Built for phones and tablets in the field, gloves-on.'],
+    ],
+  },
+  {
+    slug: 'safety-custom-forms',
+    name: 'Safety & Custom Forms',
+    rich: {
+      heroTitle: ['Compliance without', 'the binder'],
+      heroSub:
+        'Paper hazard assessments get pencil-whipped in the truck and lost in the glovebox. SubTrade puts FLHAs, toolbox talks, inspections and any form you build on the crew\u2019s phones, signed digitally and filed automatically.',
+      stats: [
+        ['FLHA', 'Signed on phones'],
+        ['Any form', 'You can build it'],
+        ['Auto-filed', 'By project & date'],
+        ['Audit-ready', 'Always'],
+      ],
+      sections: [
+        {
+          eyebrow: 'In the field',
+          title: 'Signed at the tailgate, filed forever',
+          body:
+            'The pre-shift inspection happens where it should: at the equipment, on a phone, with real checks. A Not Okay answer flags immediately instead of hiding on page three of a binder nobody opens.',
+          checks: [
+            'FLHAs and inspections completed on phones',
+            'Digital signatures, timestamped and tied to the worker',
+            'Not Okay answers flag for action immediately',
+            'Reference images built into the form',
+            'Every completed form filed by project and date',
+          ],
+          images: ['/subtrade-app-safety-inspection-checklist.webp'],
+          imageAlt: 'Scissor lift pre-shift inspection checklist completed in the SubTrade app with okay and not okay checks',
+          tablet: 'portrait',
+        },
+        {
+          eyebrow: 'Your program',
+          title: 'Any form your safety program runs on',
+          body:
+            'FLHA, toolbox talks, equipment inspections, incident reports, or the custom form your GC insists on. Build it once, and the crew fills it on their phones from then on. Two-minute phone forms get filled honestly; twenty-minute paper ones get faked.',
+          checks: [
+            'Build any custom form your program or GC requires',
+            'Checklists, signatures, photos and reference images',
+            'Recurring forms scheduled: daily FLHA, weekly toolbox talk',
+            'Completion visible per crew and per project',
+            'COR audit prep drops from weeks to hours',
+          ],
+          metaCard: [
+            ['FLHA', 'Daily \u00b7 6 signed today'],
+            ['Toolbox talk', 'Weekly \u00b7 fall protection'],
+            ['Scissor lift inspection', '1 Not Okay \u00b7 flagged'],
+            ['Incident reports', '0 this month'],
+            ['Custom forms', '4 active \u00b7 your program'],
+            ['Audit file', 'Complete \u00b7 by project & date'],
+          ],
+          flip: true,
+        },
+      ],
+      faqs: [
+        ['Can crews complete FLHAs on their phones?', 'Yes. Field level hazard assessments are completed and signed on phones at the start of shift, timestamped and tied to the worker and project.'],
+        ['Can I build my own custom forms?', 'Yes. Any form your safety program or GC requires: checklists, text fields, signatures, photos and reference images. Build it once and it is on every crew phone.'],
+        ['What happens when something is marked Not Okay?', 'It flags immediately for action instead of disappearing into a binder. The deficiency is visible the moment the form is signed.'],
+        ['Where do completed forms go?', 'Filed automatically by project and date. When the safety audit or COR review comes, everything is already organized.'],
+        ['Does this help with COR certification?', 'Substantially. The documentation trail COR audits demand, completed forms, signatures, dates, corrective actions, builds itself as your crews work.'],
+      ],
+    },
+    keyword: 'construction safety forms software',
+    title: 'Construction Safety Forms & Custom Forms Software',
+    description:
+      'FLHAs, toolbox talks, inspections and any custom form, completed and signed on a phone. Digital safety compliance for trade contractors.',
+    h1: 'Compliance without the binder',
+    intro:
+      'Paper hazard assessments get pencil-whipped in the truck and lost in the glovebox. SubTrade puts FLHAs, toolbox talks, inspections and any form you build on the crew\u2019s phones, signed digitally and filed automatically. When the safety audit comes, everything is already organized.',
+    points: [
+      ['Your forms, digitized', 'Build any form your safety program or GC requires. FLHA, toolbox talk, equipment inspection, incident report.'],
+      ['Signed on the phone', 'Digital signatures in the field, timestamped and tied to the worker and the project.'],
+      ['Audit-ready always', 'Every completed form filed by project and date. COR audit prep goes from weeks to hours.'],
+      ['Actually gets done', 'A two-minute phone form gets filled out honestly. A paper one gets faked.'],
+    ],
+  },
+  {
+    slug: 'submittals',
+    name: 'Submittals & RFIs',
+    rich: {
+      heroTitle: ['Know who is sitting', 'on your paperwork'],
+      heroSub:
+        'The submittal you sent three weeks ago is holding up your material order, and nobody upstairs is in a hurry. SubTrade logs every submittal and RFI with dates and status, so you always know what is out, what is late, and you have the record when the delay becomes a claim.',
+      stats: [
+        ['Logged', 'Every submittal & RFI'],
+        ['Dated', 'Sent \u00b7 due \u00b7 answered'],
+        ['Visible', 'Who is holding it'],
+        ['On record', 'When it becomes a claim'],
+      ],
+      sections: [
+        {
+          eyebrow: 'The register',
+          title: 'Every open item, aging in plain sight',
+          body:
+            'Shop drawings, product data, samples, questions: everything you have sent up the chain sits in one register with its status and how long it has been waiting. The slow ones get chased before they slow you.',
+          checks: [
+            'Every submittal logged: sent date, response due, status',
+            'RFIs asked once, in writing, with the answer attached',
+            'Waiting time visible on every open item',
+            'Resubmittals and revisions tracked in the chain',
+            'Nothing falls through, nothing lives in sent mail',
+          ],
+          metaCard: [
+            ['SUB-014 \u00b7 Shop drawings', 'Sent \u00b7 waiting 12 days'],
+            ['SUB-015 \u00b7 Product data', 'Approved \u00b7 order released'],
+            ['RFI-160 \u00b7 Wall furring', 'Answered \u00b7 3 days'],
+            ['RFI-162 \u00b7 Ceiling detail', 'Open \u00b7 due Friday'],
+            ['Oldest open', 'SUB-014 \u00b7 chase today'],
+            ['Avg response', '6.4 days this project'],
+          ],
+        },
+        {
+          eyebrow: 'Paper trail',
+          title: 'When their delay costs you, the log proves it',
+          body:
+            'Slow answers become schedule impacts, and schedule impacts become claims. The register is your evidence: what you asked, when you asked it, and how long the answer took. Verbal answers on site become written records the same day.',
+          checks: [
+            'Complete dated history on every item',
+            'Delay documentation built as you work',
+            'Answers attached permanently to the question',
+            'Site-issued verbal answers captured in writing',
+            'The record exists before the dispute does',
+          ],
+          metaCard: [
+            ['RFI-160', 'Asked Jun 2 \u00b7 site verbal Jun 5'],
+            ['Written answer', 'Logged same day \u00b7 attached'],
+            ['SUB-014 impact', 'Material order held 12 days'],
+            ['Schedule note', 'Linked to daily log Jun 14'],
+            ['Claim file', 'Building itself'],
+            ['Phone calls required', '0'],
+          ],
+          flip: true,
+        },
+      ],
+      faqs: [
+        ['What can I track with submittals?', 'Shop drawings, product data, samples, anything you send up the chain: each with sent date, response due date, current status and how long it has been waiting.'],
+        ['How do RFIs work in SubTrade?', 'Ask the question once, in writing, tied to the project. The answer attaches permanently, and the full dated history stays on record.'],
+        ['Can I see how long the GC has been sitting on something?', 'Yes. Waiting time is visible on every open item, so the slow ones get chased before they slow your schedule.'],
+        ['Why does the paper trail matter?', 'Because slow responses become delay claims. A dated register of what you asked and when it was answered is the evidence that wins those conversations.'],
+        ['Can I capture verbal answers from site?', 'Yes, and you should: log the verbal answer the day it is given, and it becomes part of the written record attached to the RFI.'],
+      ],
+    },
+    keyword: 'submittals and RFI software',
+    title: 'Submittals & RFI Tracking for Subcontractors',
+    description:
+      'Track shop drawings, submittals and RFIs: what went out, when, and who is sitting on it. Paper trail without the paper, built for trade contractors.',
+    h1: 'Know who is sitting on your paperwork',
+    intro:
+      'The submittal you sent three weeks ago is holding up your material order, and nobody upstairs is in a hurry. SubTrade logs every submittal and RFI with dates and status, so you always know what is out, what is late, and you have the record when the delay becomes a claim.',
+    points: [
+      ['Every submittal logged', 'Shop drawings, product data, samples. Sent date, response due, current status.'],
+      ['RFIs with a paper trail', 'Ask the question once, in writing, with the answer attached forever.'],
+      ['Delay documentation', 'When their slow response costs you time, the log proves it.'],
+      ['Nothing falls through', 'Open items are visible until they close, not buried in sent mail.'],
+    ],
+  },
+];
+
+export const trades = [
+  {
+    slug: 'drywall-contractor-software',
+    trade: 'Drywall',
+    keyword: 'drywall contractor software',
+    title: 'Drywall Contractor Software',
+    description:
+      'Software built by a working drywall contractor: track hours per unit, capture extras, schedule tapers and boarders, and bill progress draws. Free trial.',
+    h1: 'Software that has actually hung board',
+    intro:
+      'SubTrade was built inside a commercial drywall company. Not inspired by one, built inside one. Boarding, taping, texture: the founder runs a Calgary drywall sub to this day, which is why the workflow fits yours.',
+    pains: [
+      'Labour per unit or per floor is a guess until the job is over',
+      'Patching and extras done verbally and never billed',
+      'Boarders, tapers and texture crews double-booked across sites',
+      'Draw disputes with nothing but memory as backup',
+    ],
+    wins: [
+      'GPS clock-ins tie hours to the job and cost code, so you see labour burn per phase while it happens',
+      'Change orders created at the wall, with photos, before the patch gets mudded',
+      'Crew scheduling built for the boarding-taping-texture sequence across multiple sites',
+      'Daily logs and photos that back up every progress draw',
+    ],
+  },
+  {
+    slug: 'electrical-contractor-software',
+    trade: 'Electrical',
+    keyword: 'electrical contractor software',
+    title: 'Electrical Contractor Software',
+    description:
+      'Field software for electrical subcontractors: time tracking by circuit of work, change orders, drawings on every phone, and progress billing. Free trial.',
+    h1: 'Built for sparkies running multiple sites',
+    intro:
+      'Electrical subs live and die on labour productivity and captured extras. SubTrade tracks both from the field, keeps the current drawing set in every journeyman\u2019s pocket, and turns site directives into signed change orders before the wire is pulled.',
+    pains: [
+      'Site instructions become free work when nobody writes the CO',
+      'Hours tracked on paper and allocated to jobs from memory on Friday',
+      'Crews working from superseded drawings after a revision',
+      'RFIs answered verbally with no record when it matters',
+    ],
+    wins: [
+      'Change orders created and sent for approval the moment the directive lands',
+      'GPS time tracking that allocates hours to the right job automatically',
+      'Current drawings with markups on every phone, revisions pushed instantly',
+      'RFIs and submittals logged with dates, so slow answers are documented',
+    ],
+  },
+  {
+    slug: 'hvac-contractor-software',
+    trade: 'HVAC',
+    keyword: 'HVAC contractor software',
+    title: 'HVAC Contractor Software',
+    description:
+      'HVAC subcontractor software for mechanical trades: crew scheduling, equipment and material POs, change orders and progress billing in one app. Free trial.',
+    h1: 'Mechanical work, managed from the field',
+    intro:
+      'HVAC and mechanical subs juggle long-lead equipment, multi-phase installs and coordination with every other trade on site. SubTrade keeps the schedule, the paperwork and the money visible in one place, from rough-in to startup.',
+    pains: [
+      'Equipment and material orders disconnected from job budgets',
+      'Coordination delays absorbed silently instead of documented',
+      'Rough-in and finish crews scheduled by group text',
+      'Percent-complete billing argued from memory',
+    ],
+    wins: [
+      'Purchase orders committed against the job the day you order, not when the invoice lands',
+      'Daily logs that document the trades ahead of you running late',
+      'Drag-and-drop scheduling across rough-in, set and finish phases',
+      'Progress billing built from field data, with holdback handled correctly',
+    ],
+  },
+  {
+    slug: 'plumbing-contractor-software',
+    trade: 'Plumbing',
+    keyword: 'plumbing contractor software',
+    title: 'Plumbing Contractor Software',
+    description:
+      'Field management software for plumbing subcontractors: GPS time tracking, change orders, inspections and scheduling across rough-in and finish. Free trial.',
+    h1: 'From ground rough to final fixture',
+    intro:
+      'Plumbing subs run crews across ground rough, top-out and finish on multiple sites at once, with inspections gating every phase. SubTrade keeps crews, hours, extras and inspection paperwork organized so the office always knows where every job stands.',
+    pains: [
+      'Inspection results and deficiencies scattered across texts and voicemail',
+      'Extra work from site conflicts done without paper',
+      'Hours split across phases and jobs by guesswork',
+      'Material runs with no PO and no cost code',
+    ],
+    wins: [
+      'Tasks and punch lists that track deficiencies from inspection to sign-off',
+      'Sixty-second change orders with photos of the conflict',
+      'Clock-ins tied to job and phase for real labour costing',
+      'POs from the field matched to the job budget',
+    ],
+  },
+  {
+    slug: 'painting-contractor-software',
+    trade: 'Painting',
+    keyword: 'painting contractor software',
+    title: 'Painting Contractor Software',
+    description:
+      'Software for commercial painting subcontractors: crew scheduling, production tracking, touch-up punch lists and progress billing in one app. Free trial.',
+    h1: 'Production and touch-ups, tracked',
+    intro:
+      'Commercial painting margins live in production rates and die in unpaid touch-ups. SubTrade tracks hours against jobs in real time, documents the damage other trades cause, and turns endless touch-up lists into managed punch lists that actually close.',
+    pains: [
+      'Touch-ups from other trades\u2019 damage eaten as free work',
+      'Production rates unknown until the job closes',
+      'Crews bounced between sites with no record of where hours went',
+      'Final payment held hostage by an unmanaged deficiency list',
+    ],
+    wins: [
+      'Photos and change orders documenting damage before you repaint it',
+      'Live hours per job showing production against estimate',
+      'GPS clock-ins that put labour on the right project automatically',
+      'Punch list boards that drive closeout and release your holdback',
+    ],
+  },
+  {
+    slug: 'framing-contractor-software',
+    trade: 'Framing',
+    keyword: 'framing contractor software',
+    title: 'Framing Contractor Software',
+    description:
+      'Field software for framing and steel stud subcontractors: crew scheduling, layout drawings on site, hours by phase and change orders. Free trial.',
+    h1: 'Wood or steel, keep the crews moving',
+    intro:
+      'Framing subs, wood or steel stud, run production crews that need the right drawings, the right site and the right scope every morning. SubTrade was built alongside a steel stud and drywall operation, so layout changes, extras and crew moves are its home turf.',
+    pains: [
+      'Layout revisions reaching the site after the walls are up',
+      'Extra blocking, backing and openings framed for free',
+      'Crews idle because the site was not ready and nobody rescheduled',
+      'Labour by phase invisible until the estimator asks what went wrong',
+    ],
+    wins: [
+      'Revision-controlled drawings with markups on every phone',
+      'Change orders for extras captured at layout, not remembered at billing',
+      'Drag-and-drop crew moves with automatic notifications',
+      'Hours by job and phase feeding real production numbers back to estimating',
+    ],
+  },
+  {
+    slug: 'concrete-contractor-software',
+    trade: 'Concrete',
+    keyword: 'concrete contractor software',
+    title: 'Concrete Contractor Software',
+    description:
+      'Field software for concrete and formwork subcontractors: pour scheduling, crew management, extras captured, QC documentation and progress billing. Free trial.',
+    h1: 'From formwork to finish, documented',
+    intro:
+      'Concrete subs live on schedule windows that weather and other trades love to break. SubTrade keeps pours, crews, extras and QC paperwork in one place, so every delay is documented and every extra yard, pump hour and additive gets billed.',
+    pains: [
+      'Pour delays from site conditions absorbed without paper',
+      'Pump time, additives and extra yards billed from memory',
+      'Form, pour and strip crews juggled across sites by phone',
+      'QC tests and inspection records scattered when the dispute lands',
+    ],
+    wins: [
+      'Daily logs with weather stamps that document every delayed pour',
+      'Change orders for extras created at the truck, photos attached',
+      'Drag-and-drop scheduling across form, pour and strip phases',
+      'Photos, tests and inspection forms filed by project, audit-ready',
+    ],
+  },
+];
+
+export const compares = [
+  {
+    slug: 'subtrade-vs-fieldwire',
+    metaDescription: `Fieldwire handles plans and tasks. SubTrade adds time tracking, change orders, crew scheduling and job costing for trade subs, all in one app.`,
+    updated: '2026-10-07',
+    competitor: 'Fieldwire',
+    eyebrow: 'Honest Comparison',
+    headline: 'Plans on site, or the whole business?',
+    positioning: `Fieldwire is an excellent jobsite coordination tool: plans, tasks, punch lists, and field markups, backed by Hilti. But it stops at the field. SubTrade covers the rest of running a trade sub: time tracking, change orders, scheduling, and job costing, in one app built for crews.`,
+    heroNote: `An honest look at where each tool stops.`,
+    shortAnswer: {
+      them: [`Choose Fieldwire if`, `Your main need is jobsite plan management: drawings, tasks, punch lists, and field markups, and you handle costing and billing elsewhere.`],
+      us: [`Choose SubTrade if`, `You want plans plus the business side: time tracking, change orders, scheduling, and job costing, in one app built for the trade sub.`],
+    },
+    glanceIntro: `Fieldwire is strong on plans and field coordination. SubTrade runs the whole sub workflow. Here is how they line up.`,
+    table: [
+      [`Built for`, `Running the whole trade-sub business`, `Jobsite plan and task coordination`],
+      [`Plans, drawings & markups`, `Included`, `Core strength`],
+      [`Tasks & punch lists`, `Yes`, `Core strength`],
+      [`Time tracking & job costing`, `Core feature`, `Not the focus`],
+      [`Change orders`, `Core, field-first`, `Not the focus`],
+      [`Scheduling`, `Crew & job scheduling`, `Task-level`],
+      [`Pricing`, `From $299/mo CAD, all-in`, `Free tier; paid about $29–$89/user/mo`],
+      [`Best for`, `Subs who want one app for field and office`, `Teams who just need plan coordination`],
+    ],
+    tableNote: `Pricing as publicly listed. Confirm current tiers on their site.`,
+    winsIntro: `Fieldwire keeps the plans organized. SubTrade runs the business those plans are part of.`,
+    wins: [
+      [`The Whole Workflow`, `Plans and field coordination plus time, change orders, scheduling, and costing, instead of just one slice.`],
+      [`Field-First Change Orders`, `Price extras on the spot and see margin in real time, from the jobsite.`],
+      [`Real-Time Job Costing`, `Labor and cost tracked as the crew works, not pieced together after the fact.`],
+      [`Transparent Pricing`, `One all-inclusive plan instead of stacking per-user seats as the crew grows.`],
+      [`Plans & Markups Too`, `Drawings, markups, and punch lists are included, so you do not lose what Fieldwire does well.`],
+      [`One App, Not Two`, `No bolting a separate costing or billing tool onto your plan viewer.`],
+      [`Built By A Real Sub`, `Out of a working commercial drywall company in Calgary. Every feature survived a real jobsite.`],
+    ],
+    theirWinsTitle: `Where Fieldwire wins`,
+    theirWins: `For pure jobsite plan management, Fieldwire is excellent and well-backed by Hilti, with a free tier that is hard to beat if all you need is drawings, tasks, and punch lists. If you do not need costing, change orders, or billing in the same place, it is a strong, focused tool.`,
+    pricingBody: [
+      `Fieldwire has a free tier, with paid plans publicly around $29 to $89 per user per month depending on features. SubTrade is $299 per month CAD all-in with every feature included and a 14-day free trial.`,
+      `As crews grow, per-user pricing adds up; SubTrade keeps it flat and bundles the field and office toolkit in one plan.`,
+    ],
+    pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
+    chooseHeading: `Who should choose SubTrade?`,
+    chooseList: [
+      `You want field and office in one app`,
+      `Change orders, time, and costing matter, not just plans`,
+      `Per-user pricing is getting expensive as you grow`,
+      `Time tracking, change orders, scheduling, logs, drawings, costing`,
+    ],
+    faq: [
+      [`Is SubTrade a good Fieldwire alternative?`, `Yes, if you want more than plan coordination. SubTrade includes drawings and markups but adds time tracking, change orders, scheduling, and job costing in one app for the trade sub.`],
+      [`Does SubTrade do plans and markups like Fieldwire?`, `Yes. SubTrade includes drawings, markups, and punch lists, plus the costing and change-order tools Fieldwire leaves to other software.`],
+    ],
+  },
+  {
+    slug: 'subtrade-vs-buildertrend',
+    metaDescription: `Buildertrend is built for GCs and home builders. SubTrade is built for trade subs running their own crews, change orders and billing. See how they compare.`,
+    updated: '2026-10-07',
+    competitor: 'Buildertrend',
+    eyebrow: 'Honest Comparison',
+    headline: 'Which is right for a subcontractor?',
+    positioning: `Buildertrend is one of the best-known names in construction software, but it was built for general contractors and home builders managing a whole project, with subs as one piece of the puzzle. SubTrade is built for the opposite point of view: the trade sub running their own crews, bids, and billing.`,
+    heroNote: `If you run an electrical, drywall, HVAC, plumbing, or concrete crew, this one is for you.`,
+    shortAnswer: {
+      them: [`Choose Buildertrend if`, `You are a residential general contractor or home builder who needs client-facing tools, selections, and full project management across many trades.`],
+      us: [`Choose SubTrade if`, `You are a trade subcontractor who needs field-first time tracking, fast change orders, crew scheduling, and real-time job costing, without paying for a platform built for someone else's job.`],
+    },
+    glanceIntro: `Same category on paper. Built for two different companies. Here is how they line up for a trade subcontractor.`,
+    table: [
+      [`Built for`, `Trade subcontractors`, `General contractors and home builders`],
+      [`Best fit`, `Electrical, drywall, HVAC, plumbing, concrete subs`, `Residential builders and remodelers`],
+      [`Starting price`, `From $299/mo CAD, all features included`, `From about $399/mo, tiered plans, higher tiers $500 to $900+`],
+      [`Field-first mobile app`, `Designed for crews on a phone`, `Yes, but office and client heavy`],
+      [`GPS time tracking & job costing`, `Core feature`, `Available`],
+      [`Change orders from the field`, `Core, under 2 minutes`, `Available, GC oriented`],
+      [`Client / homeowner portal`, `Not needed by subs, so not in your way`, `Yes, core for builders`],
+      [`Learning curve`, `Low, set up in a day`, `Steeper, more to configure`],
+      [`Free trial`, `14 days`, `Demo led`],
+    ],
+    tableNote: `Pricing as publicly listed. Confirm current Buildertrend pricing on their site.`,
+    winsIntro: `Every point below comes from being built around the sub's workflow instead of the GC's.`,
+    wins: [
+      [`Built Around The Sub`, `You are not paying for client portals and selection tools you will never use. The whole app is your workflow.`],
+      [`Field-First`, `Your foreman opens the app, clocks in by GPS, snaps photos, logs the day, and prices a change order on the spot. No training day.`],
+      [`Capture More Revenue`, `Price and send a change order before the extra work is done, with GC sign-off. Subs who switch capture far more of their scope.`],
+      [`Real-Time Margin`, `Labor cost and margin per job as you go, so you know if a job is profitable before the accountant tells you months later.`],
+      [`Simpler Price`, `One all-inclusive plan instead of tiered packages that climb fast as you add what you actually need.`],
+      [`Built By A Real Sub`, `SubTrade came out of a working commercial drywall company in Calgary. Every feature survived a real jobsite.`],
+    ],
+    theirWinsTitle: `Where Buildertrend wins`,
+    theirWins: `Buildertrend is a mature, full-suite platform. If you are a builder coordinating an entire residential project, client selections, homeowner communication, warranty, and managing multiple trades, it has depth SubTrade does not try to match. It is a strong tool for the GC's job.`,
+    pricingBody: [
+      `SubTrade is a single all-inclusive plan from $299 per month CAD, save 20% annually, with tiered per-user pricing as your crew grows. Every feature included, 14-day free trial.`,
+      `Buildertrend uses tiered plans that publicly start around $399 per month and rise into the hundreds for higher tiers. For most trade subs, SubTrade delivers the tools you actually use at a lower total cost.`,
+    ],
+    pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
+    chooseHeading: `Who should switch?`,
+    chooseList: [
+      `You signed up for Buildertrend or inherited it from a GC`,
+      `You use only a fraction of what you pay for`,
+      `You want time tracking, change orders, scheduling, daily logs, drawings, and job costing`,
+      `You want one simpler app built for your trade`,
+    ],
+    faq: [
+      [`Is SubTrade a good Buildertrend alternative for subcontractors?`, `Yes. Buildertrend is built for general contractors and builders. SubTrade is built specifically for trade subcontractors, with field-first time tracking, change orders, and job costing at a lower starting price.`],
+      [`Is SubTrade cheaper than Buildertrend?`, `SubTrade starts at $299 per month CAD with all features included. Buildertrend's public pricing starts around $399 per month and rises by tier, so SubTrade is generally lower cost for trade subs.`],
+      [`Can SubTrade do change orders like Buildertrend?`, `Yes. SubTrade lets you price and send a change order from the field in under two minutes with GC digital sign-off, designed around how subs capture extras.`],
+    ],
+  },
+  {
+    slug: 'subtrade-vs-procore',
+    metaDescription: `Procore is enterprise software for large GCs and owners. SubTrade is built for trade subs: time tracking, change orders and job costing at $299/month CAD.`,
+    updated: '2026-10-07',
+    competitor: 'Procore',
+    eyebrow: 'Honest Comparison',
+    headline: 'Which is right for a subcontractor?',
+    positioning: `Procore is the biggest name in construction software, a powerful enterprise platform built for large general contractors and owners running complex projects. SubTrade is built for the other side of the table: the trade sub running crews, change orders, and labor cost on the jobs they are hired for.`,
+    heroNote: `If you run an electrical, drywall, HVAC, plumbing, or concrete crew, this one is for you.`,
+    shortAnswer: {
+      them: [`Choose Procore if`, `You are a large GC or owner who needs enterprise project, financial, and document management across big commercial projects with many stakeholders.`],
+      us: [`Choose SubTrade if`, `You are a trade sub who needs field-first time tracking, change orders, scheduling, and real-time job costing, without enterprise complexity or enterprise pricing.`],
+    },
+    glanceIntro: `One is an enterprise platform for the GC's whole project. One is right-sized for the sub doing the work. Here is how they line up.`,
+    table: [
+      [`Built for`, `Trade subcontractors`, `Large GCs, owners, enterprise`],
+      [`Best fit`, `Small to mid trade crews`, `Large commercial projects`],
+      [`Pricing`, `From $299/mo CAD, all-in`, `Custom quote, typically enterprise-level, often tens of thousands per year`],
+      [`Setup`, `Up and running in a day`, `Longer onboarding and implementation`],
+      [`Field-first mobile app`, `Designed for crews`, `Yes, but built for full project teams`],
+      [`Change orders from the field`, `Core, under 2 minutes`, `Yes, GC and enterprise oriented`],
+      [`Real-time labor cost & margin`, `Core feature`, `Available within a larger suite`],
+      [`Complexity`, `Low`, `High, lots of modules`],
+    ],
+    tableNote: `Pricing as publicly available. Procore pricing is quote-based, confirm on their site.`,
+    winsIntro: `Right-sized, field-first, and priced for a trade business instead of an enterprise.`,
+    wins: [
+      [`Right-Sized For Subs`, `You are not buying or learning an enterprise platform built for the GC's whole project.`],
+      [`Field-First & Fast`, `Your foreman clocks in, snaps photos, logs the day, and prices a change order on the spot. No implementation project required.`],
+      [`Transparent Pricing`, `One all-inclusive plan instead of a custom enterprise quote and a long contract.`],
+      [`Live Margin Per Job`, `Labor cost and margin per job, the numbers a sub actually lives on, in real time.`],
+      [`Set Up In A Day`, `No onboarding project. Create your account, add your crews, and start the same day.`],
+      [`Built By A Real Sub`, `Born inside a working commercial drywall company in Calgary. Every feature survived a real jobsite.`],
+    ],
+    theirWinsTitle: `Where Procore wins`,
+    theirWins: `For a large general contractor or owner, Procore is hard to beat: deep financials, document control, an enormous subcontractor network, and a module for nearly everything. If you are running big commercial projects with many stakeholders, that breadth is the point.`,
+    pricingBody: [
+      `SubTrade is a single all-inclusive plan from $299 per month CAD with a 14-day free trial. Procore is quote-based and priced for enterprise, typically a much larger annual commitment with implementation.`,
+      `For most trade subs, Procore is more platform, and more cost, than the job requires.`,
+    ],
+    pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
+    chooseHeading: `Who should choose SubTrade?`,
+    chooseList: [
+      `Subs asked to work inside a GC's Procore`,
+      `Subs considering Procore for their own shop`,
+      `Crews that want the sub-specific tools they will actually use`,
+      `Anyone who wants one simple app at a fraction of the cost`,
+    ],
+    faq: [
+      [`Is SubTrade a good Procore alternative for subcontractors?`, `Yes. Procore is enterprise software for large GCs. SubTrade is built and priced for trade subcontractors, with field-first time tracking, change orders, and job costing.`],
+      [`Is SubTrade cheaper than Procore?`, `Generally, yes. SubTrade starts at $299 per month CAD all-in, while Procore is quote-based at enterprise pricing.`],
+      [`Can I use SubTrade if my GC uses Procore?`, `Yes. Many subs run their own operations in SubTrade while still delivering to a GC who uses Procore.`],
+    ],
+  },
+  {
+    slug: 'subtrade-vs-esub',
+    metaDescription: `eSUB and SubTrade both serve trade subs. Compare features, ease of use and pricing: SubTrade is mobile-first with a published price of $299/month CAD.`,
+    updated: '2026-10-07',
+    competitor: 'eSUB',
+    eyebrow: 'Honest Comparison',
+    headline: 'Two tools built for subcontractors',
+    positioning: `eSUB and SubTrade cover much of the same ground for trade subcontractors: full RFIs, submittals, document control, time tracking, change orders, and job costing, for crews of any size. The real difference is how they feel to use. SubTrade gives you that same capability in a simpler, mobile-first app that a crew actually adopts, at a transparent price.`,
+    heroNote: `Two sub-focused tools, compared straight.`,
+    shortAnswer: {
+      them: [`Choose eSUB if`, `You want a heavier, enterprise-style platform with deep configuration and structured workflows, and you have the team to run it.`],
+      us: [`Choose SubTrade if`, `You want the same capabilities in a much simpler app, full paperwork and field tools, for any size of crew, that your people will actually use without training.`],
+    },
+    glanceIntro: `Both cover the core sub workflows for any size of crew. The honest difference is not what they do, it is how simple they are to run. Here is how they line up.`,
+    table: [
+      [`Built for`, `Trade subcontractors`, `Commercial trade subcontractors`],
+      [`Style`, `Same depth, simpler and mobile-first`, `Capable but heavier, enterprise-leaning`],
+      [`Pricing`, `From $299/mo CAD, all-in`, `Quote-based, per user`],
+      [`Setup`, `A day`, `Longer onboarding`],
+      [`Time tracking & job costing`, `Core feature`, `Yes`],
+      [`Change orders`, `Core, field-first`, `Yes`],
+      [`RFIs / submittals / doc control`, `Full RFIs, submittals, and document control`, `Deep, a core strength`],
+      [`Best for`, `Trade subs of every size, from small crews to large commercial operations`, `Larger commercial subs`],
+    ],
+    tableNote: `Pricing as publicly available. eSUB is quote-based, confirm on their site.`,
+    winsIntro: `SubTrade matches eSUB on the capabilities that matter. Where it pulls ahead is simplicity, speed, and price, the things that decide whether your crew actually uses it.`,
+    wins: [
+      [`The Same Power, Simpler`, `The capabilities are there, but mobile-first and set up in a day, so a crew uses it without a training session.`],
+      [`Transparent Pricing`, `One all-inclusive plan instead of a custom per-user quote and a sales process.`],
+      [`Field-First Change Orders`, `Price extras on the spot and see margin in real time, from the jobsite.`],
+      [`Scales With You`, `From a single crew to a large commercial sub running many jobs at once. The same app grows with the company.`],
+      [`Streamlined Docs`, `RFIs and submittals are included and kept simple, so they get used instead of avoided.`],
+      [`Paperwork Handled`, `Full RFIs, submittals, and document control included, so you get the heavy paperwork and the field tools in one place.`],
+      [`Built By A Real Sub`, `Out of a working commercial drywall company in Calgary. Every feature survived a real jobsite.`],
+    ],
+    theirWinsTitle: `Where eSUB still fits`,
+    theirWins: `eSUB is a long-established, enterprise-grade platform, and some large organizations prefer a heavier system with deep configuration and a dedicated admin to run it. That is a real preference, not a capability gap: SubTrade serves large commercial subs too, with the same full RFIs, submittals, and document control. If you would rather have that power in an app your whole crew can pick up, that is SubTrade.`,
+    pricingBody: [
+      `eSUB is quote-based and priced per user for commercial operations. SubTrade is $299 per month CAD all-in with a 14-day free trial.`,
+      `For most trade subs, whatever the size, SubTrade is simpler to buy and lower in total cost.`,
+    ],
+    pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
+    chooseHeading: `Who should choose SubTrade?`,
+    chooseList: [
+      `You run anything from one crew to many`,
+      `eSUB feels pricier than the job requires`,
+      `You want core sub workflows in a lighter app`,
+      `Time tracking, change orders, scheduling, logs, drawings, costing`,
+    ],
+    faq: [
+      [`Is SubTrade a good eSUB alternative?`, `Yes. SubTrade serves trade subs of every size and covers the same heavy paperwork, full RFIs, submittals, and document control, plus field-first time tracking, change orders, and job costing, in a simpler, mobile-first, lower-cost platform than eSUB's enterprise approach.`],
+      [`Do both eSUB and SubTrade do change orders and time tracking?`, `Yes. SubTrade emphasizes a fast, field-first experience and transparent pricing.`],
+    ],
+  },
+  {
+    slug: 'subtrade-vs-contractor-foreman',
+    metaDescription: `Contractor Foreman is a budget do-everything app. SubTrade is built only for trade subcontractors and how crews run jobs. Features and pricing compared.`,
+    updated: '2026-10-07',
+    competitor: 'Contractor Foreman',
+    eyebrow: 'Honest Comparison',
+    headline: 'Which fits a trade sub?',
+    positioning: `Contractor Foreman is one of the most affordable do-everything construction apps on the market: broad, budget-friendly, and popular with small contractors. SubTrade takes a different approach: instead of a little of everything for everyone, it is built specifically for trade subcontractors and the way crews actually run jobs.`,
+    heroNote: `An honest comparison for trade subs weighing price against fit.`,
+    shortAnswer: {
+      them: [`Choose Contractor Foreman if`, `You want the cheapest possible all-in-one with a huge feature checklist and you are comfortable with a more generic, general-contractor-style tool.`],
+      us: [`Choose SubTrade if`, `You want software built around a trade sub's workflow, fast field change orders, GPS time tracking, and real-time job costing, with a cleaner, crew-friendly experience.`],
+    },
+    glanceIntro: `One is the cheapest do-everything tool. One is purpose-built for the trade sub. Here is how they line up.`,
+    table: [
+      [`Built for`, `Trade subcontractors`, `General and small contractors, broad`],
+      [`Approach`, `Focused, trade-specific`, `Many features, generalist`],
+      [`Pricing`, `From $299/mo CAD, all-in`, `From about $49/mo, tiered, per limited users`],
+      [`Field-first mobile app`, `Built for crews`, `Yes, but feature-dense`],
+      [`Change orders from the field`, `Core, under 2 minutes`, `Available`],
+      [`Real-time labor cost & margin`, `Core feature`, `Available`],
+      [`Ease of use for crews`, `High, low learning curve`, `More to navigate`],
+      [`Built by`, `A working subcontractor`, `A software company`],
+    ],
+    tableNote: `Pricing as publicly listed. Confirm current tiers on their site.`,
+    winsIntro: `Focused beats generic when the software has to match how a trade crew actually works.`,
+    wins: [
+      [`Built For Trades`, `Workflows match how subs bid scope, run crews, and bill, not a generic GC checklist.`],
+      [`Change Orders That Pay`, `Priced and sent from the field before the extra work happens, with GC sign-off.`],
+      [`Crews Actually Use It`, `Less clutter, faster on a phone, set up in a day. The difference between a tool you use and one you bought.`],
+      [`Costing Front And Center`, `Real-time job costing and margin up front, not buried three menus deep in a module.`],
+      [`Per-Trade Fit`, `Dedicated solutions for drywall, electrical, HVAC, plumbing, and more.`],
+      [`Built By A Real Sub`, `Out of a working commercial drywall company in Calgary. Every feature survived a real jobsite.`],
+    ],
+    theirWinsTitle: `Where Contractor Foreman wins`,
+    theirWins: `Price and breadth. Contractor Foreman packs a long feature list at a low entry point, which is attractive if budget is the deciding factor and you want one tool that technically does almost everything. For a very small, cost-sensitive shop, that value is real.`,
+    pricingBody: [
+      `Contractor Foreman wins on sticker price, with entry plans around $49 per month for a few users. SubTrade is $299 per month CAD all-in.`,
+      `The trade-off: with SubTrade you are paying for software purpose-built for your trade and a workflow your crew adopts fast, often the difference between a tool you use and a tool you bought.`,
+    ],
+    pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
+    chooseHeading: `Who should choose SubTrade?`,
+    chooseList: [
+      `You tried a cheap all-in-one and found it generic`,
+      `The tool felt cluttered for real trade work`,
+      `You want a focused, crew-friendly platform`,
+      `You want change orders and costing built for subs`,
+    ],
+    faq: [
+      [`Is SubTrade worth more than Contractor Foreman's lower price?`, `For trade subs, often yes. SubTrade is purpose-built for your workflow with deeper change-order and job-costing tools your crew will actually adopt.`],
+      [`Is Contractor Foreman built for subcontractors?`, `It is a broad, general-purpose contractor tool. SubTrade is designed specifically for trade subcontractors.`],
+    ],
+  },
+  {
+    slug: 'subtrade-vs-raken',
+    metaDescription: `Raken covers daily reports and time cards. SubTrade does that too, plus change orders, crew scheduling, drawings and real-time job costing in one app.`,
+    updated: '2026-10-07',
+    competitor: 'Raken',
+    eyebrow: 'Honest Comparison',
+    headline: 'Field reporting, or the whole operation?',
+    positioning: `Raken is a well-liked field app for daily reports, time cards, photos, and toolbox talks. SubTrade does all of that, just as easily, and then keeps going: change orders, crew scheduling, drawings, and real-time job costing, all in one app that stays simple to use.`,
+    heroNote: `An honest comparison for trade subs.`,
+    shortAnswer: {
+      them: [`Choose Raken if`, `You only ever need daily reports and time cards, and you are happy running change orders, scheduling, and costing in other tools.`],
+      us: [`Choose SubTrade if`, `You want the same easy field reporting plus the whole operation, change orders, scheduling, drawings, and live job costing, in one simple app.`],
+    },
+    glanceIntro: `SubTrade does everything Raken does in the field, just as simply, and then covers the rest of the operation too. Here is how they line up.`,
+    table: [
+      [`Built for`, `Trade subcontractors, the full operation`, `Field reporting and time cards`],
+      [`Daily logs & photos`, `Yes, just as easy`, `Yes, a core strength`],
+      [`Time tracking`, `Yes, same ease, plus job costing`, `Yes, time cards`],
+      [`Change order management`, `Core, field-first`, `Limited, not a focus`],
+      [`Crew scheduling`, `Yes`, `Limited`],
+      [`Drawings & markups`, `Yes`, `Limited`],
+      [`Real-time labor cost & margin`, `Core feature`, `Time data, less margin focus`],
+      [`Pricing`, `From $299/mo CAD, all-in`, `Quote-based, per user`],
+    ],
+    tableNote: `Pricing as publicly available. Raken is quote-based, confirm on their site.`,
+    winsIntro: `SubTrade matches Raken on easy field reporting, then covers the rest of the operation, without making the app any harder to use.`,
+    wins: [
+      [`The Whole Job, Still Simple`, `Change orders, scheduling, drawings, and costing alongside your daily logs, and the app stays as easy as Raken to actually use.`],
+      [`Change Orders That Pay`, `Priced and sent from the field before the extra is done, so the revenue does not slip away.`],
+      [`Real-Time Margin`, `Labor cost and margin per project, not just hours captured on a time card.`],
+      [`Scheduling & Drawings`, `Crew scheduling and current drawings live in the same place as your logs and photos.`],
+      [`Just As Easy In The Field`, `GPS and time-stamped daily logs with photos, every bit as quick as Raken, so you give up nothing on ease.`],
+      [`Built By A Real Sub`, `Out of a working commercial drywall company in Calgary. Every feature survived a real jobsite.`],
+    ],
+    theirWinsTitle: `Where Raken wins`,
+    theirWins: `Raken is polished and genuinely easy for field documentation. If daily reporting is the only thing you will ever need, it does that one job nicely. SubTrade is built for the same ease, so the question is less about who reports better and more about whether you want the rest of the operation in the same simple app.`,
+    pricingBody: [
+      `Raken is quote-based and priced per user, focused on field reporting. SubTrade is $299 per month CAD all-in, covering reporting and change orders, scheduling, drawings, and job costing.`,
+      `For a sub running the whole job, SubTrade replaces several separate tools with one simple app, without adding the complexity that usually comes with more features.`,
+    ],
+    pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
+    chooseHeading: `Who should choose SubTrade?`,
+    chooseList: [
+      `You like Raken's daily reports`,
+      `But you stitch it together with other apps`,
+      `For change orders, scheduling, and costing`,
+      `You want the whole operation in one app`,
+    ],
+    faq: [
+      [`Is SubTrade a good Raken alternative?`, `Yes, if you need more than daily reports. SubTrade includes daily logs plus change orders, scheduling, drawings, and job costing in one app.`],
+      [`Does SubTrade do daily reports like Raken?`, `Yes. GPS and time-stamped daily logs with photos, plus the broader sub toolkit Raken does not focus on.`],
+    ],
+  },
+  {
+    slug: 'subtrade-vs-knowify',
+    metaDescription: `Knowify leads with bidding, contracts and QuickBooks. SubTrade leads with the field: crews, time tracking, change orders and job costing. Compare both.`,
+    updated: '2026-10-07',
+    competitor: 'Knowify',
+    eyebrow: 'Honest Comparison',
+    headline: 'Office-first or field-first?',
+    positioning: `Knowify is a capable platform for trade contractors, with real strengths in bidding, contract management, invoicing, and tight QuickBooks integration. SubTrade overlaps on change orders and job costing but leads with the field, the crew on the jobsite.`,
+    heroNote: `An honest comparison to help you choose.`,
+    shortAnswer: {
+      them: [`Choose Knowify if`, `Your priority is the office side, detailed bidding, contracts, invoicing, and deep QuickBooks accounting workflows.`],
+      us: [`Choose SubTrade if`, `Your priority is the field, getting crews to clock in, capture change orders, log the day, and see labor cost in real time, with a mobile experience built for the jobsite.`],
+    },
+    glanceIntro: `Both serve trade contractors. One leads from the office, one leads from the field. Here is how they line up.`,
+    table: [
+      [`Built for`, `Trade subcontractors, field-first`, `Trade and specialty contractors, office-first`],
+      [`Strengths`, `Time tracking, change orders, scheduling, daily logs, drawings`, `Bidding, contracts, invoicing, QuickBooks`],
+      [`Mobile / field experience`, `Core focus`, `Available`],
+      [`Real-time labor cost & margin`, `Core feature`, `Yes`],
+      [`Accounting integration`, `Job costing built in`, `Deep QuickBooks integration`],
+      [`Pricing`, `From $299/mo CAD, all-in`, `Tiered, publicly from about $99+/mo`],
+      [`Ease for crews`, `High`, `More office-oriented`],
+    ],
+    tableNote: `Pricing as publicly listed. Confirm current tiers on their site.`,
+    winsIntro: `When the bottleneck is the jobsite, the software has to start there.`,
+    wins: [
+      [`Field-First By Design`, `Your crew opens the app and clocks in, snaps photos, logs the day, and prices change orders on site. No desk required.`],
+      [`Change Orders In The Moment`, `Captured before the extra work is done, with GC sign-off, so the revenue does not slip away.`],
+      [`Built For The Jobsite`, `Drawings, daily logs, and scheduling designed for the field, not just the office.`],
+      [`Real-Time Margin`, `Labor cost and margin per job as the crew works, not at month end.`],
+      [`Crews Adopt It`, `Many subs find the field-first approach drives adoption their office-first tool never got.`],
+      [`Built By A Real Sub`, `Out of a working commercial drywall company in Calgary. Every feature survived a real jobsite.`],
+    ],
+    theirWinsTitle: `Where Knowify wins`,
+    theirWins: `If your business runs on detailed bids, contracts, and invoicing, and you live in QuickBooks, Knowify's office and accounting workflows are a genuine strength. For contractors who manage the money side closely from the desk, that depth matters.`,
+    pricingBody: [
+      `Knowify uses tiered pricing publicly starting around $99+ per month depending on features and users. SubTrade is $299 per month CAD all-in with every feature included and a 14-day free trial.`,
+      `Compare on what you will actually use: SubTrade bundles the full field and office toolkit in one plan.`,
+    ],
+    pricingTagline: `Built for the trades, by the trades. Confirm current competitor pricing before relying on these figures.`,
+    chooseHeading: `Who should choose SubTrade?`,
+    chooseList: [
+      `Your bottleneck is the field, not the desk`,
+      `Crews, hours, change orders, daily documentation`,
+      `You want adoption your office-first tool never got`,
+      `You want field and office in one plan`,
+    ],
+    faq: [
+      [`Is SubTrade a good Knowify alternative?`, `Yes, especially if you want a field-first experience your crew adopts, with change orders, scheduling, daily logs, and job costing in one app.`],
+      [`Does SubTrade integrate with accounting like Knowify?`, `SubTrade includes built-in job costing. Knowify's standout is deep QuickBooks integration. Choose based on whether your priority is field operations or office accounting.`],
+    ],
+  },
+];
+
+export const timeTrackingRich = {
+  name: 'Time Tracking',
+  rich: {
+    heroTitle: ['Every hour, on the', 'right job'],
+    heroSub:
+      'GPS time tracking built for construction crews: clock in from the truck, hours land on the right project and cost code automatically, and Friday payroll prep takes minutes instead of an evening of deciphering texts.',
+    stats: [
+      ['GPS', 'Verified clock-ins'],
+      ['Live', 'Who is on site now'],
+      ['By job', 'Hours & cost codes'],
+      ['~6 min', 'Friday payroll prep'],
+    ],
+    video: {
+      id: 'cOcVMgDpr4Y',
+      caption: 'From the jobsite to payroll in 38 seconds: totals, one-click approvals, overtime and GPS check-ins.',
+      title: 'SubTrade Timesheets: From the Jobsite to Payroll',
+      description:
+        'A walkthrough of SubTrade Timesheets: pay period totals for gross, break and payable hours, approving the week in one click, overtime flagged automatically, every entry and break per crew member, on-site and off-site check-ins, and the check-in location map.',
+      poster: '/subtrade-timesheets-video-poster.webp',
+      posterAlt:
+        'Play the SubTrade Timesheets walkthrough: the desktop timesheet and the mobile app behind the words jobsite to payroll',
+      uploadDate: '2026-10-04',
+      duration: 'PT39S',
+    },
+    short: {
+      id: 'HfGKHFKq8YY',
+      caption: 'On the phone: clock in at the job.',
+      title: 'Clock In From the Jobsite | SubTrade Timesheets',
+      description:
+        'Crews clock in and out from their phone right at the job, add a note on what they worked on, and every hour lands on the right project. Foremen can add time for the whole crew.',
+      poster: '/subtrade-timesheets-short-poster.webp',
+      posterAlt: 'Play the SubTrade mobile timesheet short: the phone app showing net paid hours under the words clock in at the job',
+      uploadDate: '2026-10-04',
+      duration: 'PT24S',
+    },
+    sections: [
+      {
+        eyebrow: 'In the field',
+        title: 'Clock in from the truck',
+        body:
+          'Crews clock in on their own phones when they arrive, GPS confirms they are on site, and the timer runs against the right project. No shared kiosk, no paper cards, no 4 PM guess about when Tuesday started.',
+        checks: [
+          'Clock in and out from any phone, iOS or Android',
+          'GPS verification: on site means on site',
+          'Hours land on the right project automatically',
+          'Breaks and site switches handled cleanly',
+          'Works offline, syncs when signal returns',
+        ],
+        images: ['/subtrade-gps-time-tracking-clock-in.webp'],
+        imageAlt: 'Worker clocking in with GPS on the SubTrade app at sunrise beside his truck',
+      },
+      {
+        eyebrow: 'The timesheet',
+        title: 'Friday takes six minutes',
+        body:
+          'Timesheets build themselves from the week\u2019s clock-ins, organized by person and by job. Review, adjust the odd entry, approve. What used to be an evening of texts and memory is a coffee-length task.',
+        checks: [
+          'Timesheets assemble automatically from clock-ins',
+          'Review by person, by crew or by project',
+          'One-tap approvals with an audit trail',
+          'Exceptions flagged: missed punches, long days',
+          'Export for payroll in the format you need',
+        ],
+        metaCard: [
+          ['M. Torres', '8.0 hrs \u00b7 Site 4 \u00b7 framing'],
+          ['A. Valencia', '7.5 hrs \u00b7 WingStop \u00b7 boarding'],
+          ['Y. Ortega', '8.0 hrs \u00b7 POD \u00b7 taping'],
+          ['Crew total', '46.5 hrs today'],
+          ['Flagged', '1 missed punch \u00b7 fixed'],
+          ['Week status', 'Approved \u00b7 exported'],
+        ],
+        flip: true,
+      },
+      {
+        eyebrow: 'Job costing',
+        title: 'Hours become job costs, live',
+        body:
+          'Every tracked hour feeds labour cost per project and per cost code, compared against your estimate as the job runs. Labour is the number that decides whether a drywall job made money, and now you watch it live instead of discovering it at closeout.',
+        checks: [
+          'Labour cost per project, updating as crews work',
+          'Cost codes show where the hours actually went',
+          'Burn against estimate, visible mid-job',
+          'The drifting job surfaces in week two, not month four',
+          'Real production rates feed your next bid',
+        ],
+        metaCard: [
+          ['Capitol Hill \u00b7 U204', 'Labour 61% of estimate \u00b7 on pace'],
+          ['Boarding', '1,120 hrs \u00b7 $42,300'],
+          ['Taping', '369 hrs \u00b7 $14,760'],
+          ['vs estimate', '+2.1% margin projected'],
+          ['This week', '212 crew hours captured'],
+          ['Spreadsheets involved', '0'],
+        ],
+      },
+    ],
+    faqs: [
+      ['How does GPS time tracking work?', 'Crews clock in on their own phones when they arrive, and GPS confirms the clock-in happened on site. Hours run against the right project automatically from that moment.'],
+      ['Can I see who is on site right now?', 'Yes. Live status shows every crew member currently clocked in, on which site, with their running hours.'],
+      ['How do timesheets and payroll work?', 'Timesheets assemble automatically from the week\u2019s clock-ins, organized by person and project. Review, approve and export for payroll, most subs get Friday prep down to minutes.'],
+      ['Does it work without cell signal?', 'Yes. Clock-ins work offline, in the parkade or the basement, and sync the moment the phone finds signal again.'],
+      ['How does this feed job costing?', 'Every hour lands on a project and cost code, so labour cost per job updates live against your estimate. You see the drifting job while there is still time to fix it.'],
+      ['What do my crews need?', 'Just their own phones, iOS or Android. No kiosks, no cards, no extra hardware.'],
+    ],
+  },
+};
