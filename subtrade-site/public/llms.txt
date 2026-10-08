@@ -14,7 +14,7 @@ Key facts:
 - Company: SubTrade Software Ltd., Calgary, Alberta, Canada. Support: support@subtradesoftware.com
 - Founders: [Fabian V.](https://www.linkedin.com/in/fabian-v-582b911a1/) (co-founder; president of Quality Gypsum Services, a commercial drywall and steel stud subcontractor in Calgary) and Steban V. (co-founder, senior software developer).
 
-## The 15 tools in SubTrade
+## The 16 tools in SubTrade
 Field
 - [Time Tracking](https://subtradesoftware.com/time-tracking/): GPS clock-in with live job costing per project
 - [Daily Logs](https://subtradesoftware.com/construction-management-features/daily-logs/): two-minute site reports with weather and manpower
@@ -31,6 +31,7 @@ Money
 Office
 - [Live Overview](https://subtradesoftware.com/construction-management-features/field-operations/): everything happening on every site, live
 - [Crew Scheduling](https://subtradesoftware.com/construction-management-features/construction-crew-scheduling/): drag crews between jobs, notified automatically
+- [Project Schedule](https://subtradesoftware.com/construction-management-features/construction-gantt-chart-software/): each job's scope as a Gantt chart with templates, dependencies, a baseline that measures slip, critical path and reminders, plus Master Schedule with every job on one timeline
 - [Tasks & Punch Lists](https://subtradesoftware.com/construction-management-features/task-management/): Kanban boards for deficiencies and closeout
 - [Drawings & Markups](https://subtradesoftware.com/construction-management-features/drawings-markups/): the current set on every phone, marked up in the field
 - [Submittals & RFIs](https://subtradesoftware.com/construction-management-features/submittals/): what is out, what is late and who is holding it

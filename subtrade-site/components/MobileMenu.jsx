@@ -19,7 +19,7 @@ const cols = [
       ['📡', 'Field Operations', 'Everything happening, live', '/construction-management-features/field-operations'],
       ['📷', 'Photos', 'GPS-tagged site photos', '/construction-management-features/site-photos'],
       ['⏱️', 'Time Tracking', 'GPS clock-in & job costing', '/time-tracking'],
-      ['📅', 'Scheduling', 'Drag-and-drop crew timelines', '/construction-management-features/construction-crew-scheduling'],
+      ['📅', 'Crew Scheduling', 'Drag-and-drop crew timelines', '/construction-management-features/construction-crew-scheduling'],
       ['🛡️', 'Safety & Forms', 'Hazard reports & custom forms', '/construction-management-features/safety-custom-forms'],
       ['🔧', 'Asset Management', 'Tools, vehicles & equipment', '/construction-management-features/asset-management'],
     ],
@@ -28,6 +28,7 @@ const cols = [
     title: 'Project Management',
     items: [
       ['🏆', 'Bid Manager', 'Tenders, vendor pricing & win rate', '/construction-management-features/bid-manager'],
+      ['🗓️', 'Project Schedule', 'Gantt, baseline & master schedule', '/construction-management-features/construction-gantt-chart-software'],
       ['📊', 'Dashboard', 'Live cost & project overview', '/construction-management-features/project-dashboard'],
       ['✅', 'Tasks', 'Kanban boards & punch lists', '/construction-management-features/task-management'],
       ['📐', 'Drawings', 'Plans & markups in the field', '/construction-management-features/drawings-markups'],

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { monthlyTotal, annualMonthly, annualYearly, userLines } from '../lib/pricing';
+import { TOOL_COUNT } from '../lib/tools';
 
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 const money = (n) => `$${n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -64,7 +65,7 @@ export default function QuoteSheet() {
             </thead>
             <tbody>
               <tr>
-                <td><b>SubTrade plan</b><small>All 15 tools, 5 users included</small></td>
+                <td><b>SubTrade plan</b><small>All {TOOL_COUNT} tools, 5 users included</small></td>
                 <td>1</td><td>$299</td><td>{money(299)}</td>
               </tr>
               {lines.map((l) => (

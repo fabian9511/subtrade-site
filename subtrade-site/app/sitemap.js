@@ -13,6 +13,11 @@ const pageImages = {
   '/construction-management-features/change-order-management': [img('/subtrade-change-order-from-the-field.webp')],
   '/construction-management-features/daily-logs': [img('/subtrade-daily-log-foreman-end-of-day.webp')],
   '/construction-management-features/construction-crew-scheduling': [img('/subtrade-crew-scheduling-jobsite.webp')],
+  '/construction-management-features/construction-gantt-chart-software': [
+    img('/subtrade-schedule-gantt.webp'),
+    img('/subtrade-schedule-baseline.webp'),
+    img('/subtrade-schedule-master.webp'),
+  ],
   '/construction-management-features/asset-management': [
     img('/subtrade-asset-management-register.webp'),
     img('/subtrade-deploy-equipment-to-site.webp'),

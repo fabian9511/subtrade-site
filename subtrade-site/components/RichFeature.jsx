@@ -24,7 +24,7 @@ export default function RichFeature({ f }) {
   };
   // A feature that has a walkthrough on YouTube describes it to search engines
   // and answer engines as well as showing it.
-  const v = r.video;
+  const v = r.video && r.video.id ? r.video : null;
   // An optional vertical YouTube Short plays beside the main video.
   const sh = r.short;
   const toSchema = (x, url) => ({

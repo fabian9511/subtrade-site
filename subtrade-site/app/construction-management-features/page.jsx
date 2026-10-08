@@ -6,7 +6,7 @@ export const metadata = {
   alternates: { canonical: '/construction-management-features/' },
   title: 'Construction Management Features for Subcontractors',
   description:
-    'Every SubTrade feature: GPS time tracking, change orders, crew scheduling, daily logs, drawings, submittals, safety forms and progress billing for trade contractors.',
+    'Every SubTrade feature: GPS time tracking, change orders, crew scheduling, Gantt schedules, daily logs, drawings, submittals, safety forms and progress billing for trade contractors.',
 };
 
 export default function FeaturesHub() {

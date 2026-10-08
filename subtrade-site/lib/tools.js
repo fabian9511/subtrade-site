@@ -35,6 +35,7 @@ export const toolGroups = [
     tools: [
       ['📡', 'Live Overview', 'Everything happening on every site, as it happens.', `${F}/field-operations`],
       ['📅', 'Crew Scheduling', 'Drag crews between jobs, notify them automatically.', `${F}/construction-crew-scheduling`],
+      ['🗓️', 'Project Schedule', 'Gantt chart per job, baseline slip and every job on one timeline.', `${F}/construction-gantt-chart-software`],
       ['✅', 'Tasks & Punch Lists', 'Kanban boards for deficiencies and closeout.', `${F}/task-management`],
       ['📐', 'Drawings & Markups', 'Current set on every phone, marked up in the field.', `${F}/drawings-markups`],
       ['📄', 'Submittals & RFIs', 'Track what is out, what is late and who is holding it.', `${F}/submittals`],

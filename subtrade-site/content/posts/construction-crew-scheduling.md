@@ -75,7 +75,7 @@ Short list, in priority order:
 - **Cost-code awareness**, so hours land where they belong without retyping
 - **A week view that fits your job count** — if you run twenty-five jobs, a view built for three won't survive contact
 
-What you don't need: a Gantt chart of the GC's master schedule. You don't control it, you can't change it, and it already exists in their platform. Read it there and plan your crews here.
+What you don't need: a Gantt chart of the GC's master schedule. You don't control it, you can't change it, and it already exists in their platform. Read it there and plan your crews here. Your own scope is different: the order your framing, board and tape go in on each job is yours to plan, and a [construction Gantt chart](/construction-management-features/construction-gantt-chart-software/) built around your scope, with a baseline that shows slip, is worth keeping.
 
 ## The honest test
 

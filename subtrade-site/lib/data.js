@@ -581,6 +581,7 @@ export const features = [
         ['Can I schedule across multiple projects?', 'That is exactly what it is built for. Subs running three to fifteen concurrent jobs see every project side by side and move crews between them in seconds.'],
         ['How do I know if someone did not show up?', 'The schedule matches against GPS clock-ins, so planned versus actual coverage is live. A missing crew member is flagged by name in the morning, not discovered at noon.'],
         ['Does scheduling connect to time tracking?', 'Yes. Clock-ins land against the scheduled job automatically, so hours, manpower history and job costing all flow from the same schedule.'],
+        ['Can I plan the job itself as a Gantt chart?', 'Yes. Crew scheduling plans who is on which site each day. Project Schedule plans the work on each job as a Gantt chart, with templates, a baseline and critical path, and Master Schedule puts every job on one timeline. Both are included on every plan.'],
       ],
     },
     keyword: 'construction crew scheduling',
@@ -596,6 +597,158 @@ export const features = [
       ['Scheduling meets time tracking', 'The schedule feeds clock-in expectations, so you see planned versus actual manpower per job.'],
       ['Built for multi-site reality', 'Trade subs run three to fifteen jobs at once. The board is designed for exactly that, not for one megaproject.'],
     ],
+  },
+  {
+    slug: 'construction-gantt-chart-software',
+    name: 'Project Schedule',
+    keyword: 'construction gantt chart software',
+    title: 'Construction Gantt Chart Software for Subcontractors',
+    description:
+      'Your scope as a Gantt chart: templates, dependencies, a baseline that measures slip, critical path and reminders, plus every job on one master schedule. New in SubTrade.',
+    h1: 'Your scope, on one timeline',
+    intro:
+      'Project Schedule lays out your own scope on each job as a Gantt chart, from mobilise to close-out, and Master Schedule puts every job you are running on one timeline. Not the GC’s master schedule. Yours.',
+    points: [
+      ['Start from a template', 'Five built-in job shapes, or your own, laid out on the job in seconds.'],
+      ['Move one, the rest follow', 'Dependencies push everything downstream when a phase moves.'],
+      ['See the slip', 'Set a baseline and the schedule counts the days you have lost.'],
+      ['Every job, one timeline', 'Master Schedule shows who is behind, what is starting and what is due.'],
+    ],
+    rich: {
+      heroTitle: ['Your scope, sequenced.', 'Every job on one timeline.'],
+      heroSub:
+        'Not the GC’s master schedule. Yours. Lay out framing, board and tape on each job from a template, see the day a phase starts to slip, and put every job you are running on one master schedule.',
+      stats: [
+        ['5 templates', 'Built in, or save your own'],
+        ['Baseline', 'Slip counted in days'],
+        ['Critical path', 'The work that can’t wait'],
+        ['Master Schedule', 'Every job, one timeline'],
+      ],
+      videoHero: true,
+      // Paste the YouTube ID into `id` once the video is uploaded. While it is
+      // empty the page shows the plain hero and no video schema.
+      video: {
+        id: '',
+        caption: 'Schedule and Master Schedule in 35 seconds.',
+        title: 'Plan the Work, See the Slip: SubTrade Schedule and Master Schedule',
+        description:
+          'A walkthrough of Project Schedule and Master Schedule in SubTrade: starting a job from a schedule template, dependencies that move everything downstream, setting a baseline and seeing the slip, the critical path, project reminders for draws, site visits and inspections, and every job on one master schedule.',
+        poster: '/subtrade-schedule-video-poster.webp',
+        posterAlt: 'Play the SubTrade Schedule walkthrough, a job schedule showing three days of slip against its baseline',
+        uploadDate: '2026-10-08',
+        duration: 'PT35S',
+      },
+      sections: [
+        {
+          eyebrow: 'New in SubTrade',
+          title: 'A schedule for the job in seconds',
+          isNew: true,
+          body:
+            'Pick a template and the whole shape of the job lands on the timeline: phases, items, durations, milestones and the waits between them. Dates and crews are not carried over, so it fits any job. Start from one of the five built in, or save a job you ran well and start the next one from it.',
+          checks: [
+            'Commercial interior fit-out, residential single family, multi-family one floor cycle, drywall board and tape, and small tenant improvement built in',
+            'Each template shows its workdays, item count, milestones and phases before you use it',
+            'Replace what is already on the schedule, or add the template to it',
+            'Save as template turns any schedule into your own starting point',
+            'Your saved templates sit beside the built-in ones',
+          ],
+          images: ['/subtrade-schedule-templates.webp'],
+          imageAlt: 'The Start from a template dialog in SubTrade with the commercial interior fit-out template selected, showing its workdays, items, milestones, phases and the list of items with durations',
+          browser: true,
+        },
+        {
+          eyebrow: 'The Gantt chart',
+          title: 'Move one bar. The rest follow.',
+          flip: true,
+          body:
+            'Every item is a bar inside its phase, linked to the work it waits on. When framing on level one runs two days long, everything after it moves two days. Nobody re-types a date, because the dates are worked out from the durations and the links, not typed in.',
+          checks: [
+            'Phases you can add, reorder, duplicate and collapse',
+            'Dependencies: ends before, starts with, or ends with, plus lag days',
+            'Milestones for inspections, ready for paint and handover',
+            'Durations counted in working days, with Saturdays, holidays and shutdowns set per job',
+            'Areas for levels, blocks and zones, so a floor-by-floor cycle reads by area',
+            'Each item carries a status and its own tasks, which show on the project task board',
+            'Days, weeks or months view, with today marked',
+          ],
+          images: ['/subtrade-schedule-gantt.webp'],
+          imageAlt: 'A SubTrade project schedule as a Gantt chart with mobilise, framing, board, finishing and close-out phases, each item as a bar with its duration, milestones for site ready, framing inspection and ready for paint, and today marked',
+          browser: true,
+        },
+        {
+          eyebrow: 'Baseline',
+          title: 'See the slip the day it happens',
+          body:
+            'Set a baseline when the plan is agreed. From then on the original dates sit under every bar, and the Date Slip card tells you how many days the job has lost. Board running three days long shows up that afternoon, not when the GC calls about the painter.',
+          checks: [
+            'One click to lock the plan as the baseline',
+            'Baseline bars under the live bars, so the drift is visible',
+            'Baseline, actual and date slip cards at the top of every schedule',
+            'Slip counted in days and carried through to Master Schedule',
+          ],
+          images: ['/subtrade-schedule-baseline.webp'],
+          imageAlt: 'A SubTrade schedule with baseline bars under the live bars and the Date Slip card reading three days late because board on the walls ran three days long',
+          browser: true,
+        },
+        {
+          eyebrow: 'Critical path',
+          title: 'Know what can’t wait',
+          flip: true,
+          body:
+            'Turn on critical path and the chain of work that decides the finish date is outlined. A day lost on one of those bars is a day lost on the job. A day lost anywhere else is float. Put your best crew where it counts.',
+          checks: [
+            'Critical items outlined, the rest dimmed',
+            'Open any item to see whether it sits on the critical path',
+            'Works with the baseline on, so you see slip and what drives it together',
+          ],
+          images: ['/subtrade-schedule-critical.webp'],
+          imageAlt: 'A SubTrade schedule with critical path switched on, the items that drive the finish date outlined in red and the rest dimmed',
+          browser: true,
+        },
+        {
+          eyebrow: 'Reminders',
+          title: 'Draws, site walks and inspections on the job',
+          body:
+            'Reminders live on the project, not in somebody’s phone. Set the progress draw to repeat on the 25th, the site walk with the GC every Tuesday, the framing inspection once. Everyone looking at the schedule sees them.',
+          checks: [
+            'Kinds for invoicing, site visit, meeting, submittal, safety and other',
+            'Once, daily, weekly, every two weeks, monthly or annually',
+            'Who it is for, where it happens and what the next person needs to know',
+            'The upcoming dates listed, so you can check the pattern before you save',
+          ],
+          images: ['/subtrade-schedule-reminders.webp'],
+          imageAlt: 'The Project reminders dialog in SubTrade with a monthly progress invoice reminder from the 25th, a framing inspection and a weekly site walk, and the upcoming reminder dates listed',
+          browser: true,
+        },
+        {
+          eyebrow: 'Master Schedule',
+          title: 'Every job you are running, one timeline',
+          flip: true,
+          body:
+            'Master Schedule puts every active job on one timeline with the numbers that matter across the company: how many jobs are behind their baseline, what is starting and finishing in the next 30 days, and the milestones coming up in the next two weeks. Expand any job to see its phases, or open it in one click.',
+          checks: [
+            'Active jobs, behind baseline, starting soon, finishing soon and percent complete',
+            'Milestones in the next 14 days, by job',
+            'Expand all, or one job at a time',
+            'Group by project, with baseline bars on',
+            'Days, weeks or months, and a PDF of the whole thing',
+          ],
+          images: ['/subtrade-schedule-master.webp'],
+          imageAlt: 'SubTrade Master Schedule with six active jobs on one timeline, one behind baseline, two starting soon, one finishing soon, 38 percent complete, upcoming milestones, and one job expanded to show its phases',
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['Is this the GC’s master schedule?', 'No. The GC’s schedule stays in the GC’s system. Project Schedule is your own scope on the job, in the order your crews do it, and Master Schedule is every job you are running, side by side.'],
+        ['How is this different from crew scheduling?', 'Crew scheduling decides who is on which site each day. Project Schedule decides what happens on a job and in what order. One plans people, the other plans the work, and both are included.'],
+        ['Can I start from a template?', 'Yes. There are five built in: commercial interior fit-out, residential single family, multi-family one floor cycle, drywall board and tape, and small tenant improvement. You can also save any schedule as your own template and start the next job from it.'],
+        ['What happens when one item runs late?', 'Items are linked to the work they wait on, so when one moves, everything downstream moves with it. Durations are counted in working days, so the dates are recalculated, not re-typed.'],
+        ['How does the baseline work?', 'Set a baseline when the plan is agreed. The original dates stay under the live bars and the Date Slip card counts how many days the job has drifted. Jobs behind baseline are counted on Master Schedule too.'],
+        ['What is the critical path?', 'It is the chain of work that decides the finish date. Turn it on and those items are outlined, so you can see which delays cost you the job and which ones have float.'],
+        ['Can I count Saturdays or plan around a shutdown?', 'Yes. Working days are set per job. Switch Saturday on and every span recalculates, and add holidays and shutdowns so nothing is scheduled on them.'],
+        ['Does it cost extra?', 'No. Project Schedule and Master Schedule are part of SubTrade on every plan, the same as time tracking, change orders and progress billing.'],
+      ],
+    },
   },
   {
     slug: 'change-order-management',
