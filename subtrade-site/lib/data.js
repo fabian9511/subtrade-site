@@ -521,6 +521,18 @@ export const features = [
         ['7 days', 'Coverage ahead'],
         ['0', 'Monday scrambles'],
       ],
+      videoHero: true,
+      video: {
+        id: 'C8OljgpnCR8',
+        caption: 'Crew Scheduling in 52 seconds: add shifts for the whole crew, skip weekends, catch double-bookings.',
+        title: 'Crew Scheduling for Subcontractors: Your Whole Team on One Board',
+        description:
+          'A walkthrough of SubTrade Crew Scheduling: every worker and every job on one weekly board, adding shifts for several workers at once, repeating a shift through the week and skipping weekends, double-booking checks that skip the conflicting shift, hours, job and task on every shift, and the day view for the whole crew.',
+        poster: '/subtrade-crew-scheduling-video-poster.webp',
+        posterAlt: 'Play the SubTrade Crew Scheduling walkthrough, a weekly crew board with 263 scheduled hours under the words your team, one board',
+        uploadDate: '2026-10-08',
+        duration: 'PT52S',
+      },
       sections: [
         {
           eyebrow: 'The board',
