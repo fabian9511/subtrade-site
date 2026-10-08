@@ -617,7 +617,7 @@ export const features = [
     title: 'Construction Gantt Chart Software for Subcontractors',
     description:
       'Your scope as a Gantt chart: templates, dependencies, a baseline that measures slip, critical path and reminders, plus every job on one master schedule. New in SubTrade.',
-    h1: 'Your scope, on one timeline',
+    h1: 'Construction Gantt chart for your own scope',
     intro:
       'Project Schedule lays out your own scope on each job as a Gantt chart, from mobilise to close-out, and Master Schedule puts every job you are running on one timeline. Not the GC’s master schedule. Yours.',
     points: [
@@ -627,7 +627,7 @@ export const features = [
       ['Every job, one timeline', 'Master Schedule shows who is behind, what is starting and what is due.'],
     ],
     rich: {
-      heroTitle: ['Your scope, sequenced.', 'Every job on one timeline.'],
+      heroTitle: ['Construction Gantt chart', 'for your own scope.'],
       heroSub:
         'Not the GC’s master schedule. Yours. Lay out framing, board and tape on each job from a template, see the day a phase starts to slip, and put every job you are running on one master schedule.',
       stats: [
@@ -637,10 +637,8 @@ export const features = [
         ['Master Schedule', 'Every job, one timeline'],
       ],
       videoHero: true,
-      // Paste the YouTube ID into `id` once the video is uploaded. While it is
-      // empty the page shows the plain hero and no video schema.
       video: {
-        id: '',
+        id: '7SNrOGFZVdA',
         caption: 'Schedule and Master Schedule in 35 seconds.',
         title: 'Plan the Work, See the Slip: SubTrade Schedule and Master Schedule',
         description:
