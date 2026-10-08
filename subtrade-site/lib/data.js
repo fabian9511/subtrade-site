@@ -211,6 +211,7 @@ export const features = [
         ['QR labels', 'Printed on Avery sheets'],
         ['Service alerts', 'Before it goes overdue'],
       ],
+      videoHero: true,
       video: {
         id: 'gTio1l8qAOE',
         caption: 'Asset Management in 53 seconds: add a tool, deploy it to a job, see who has it, print the QR labels.',
