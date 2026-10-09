@@ -112,6 +112,18 @@ export const features = [
         ['Real-time', 'Crew clock-ins'],
         ['0', 'Status phone calls'],
       ],
+      videoHero: true,
+      video: {
+        id: '5mvFOJc24k4',
+        caption: 'The Project Dashboard in 52 seconds: job health, margin, red flags, crew hours, site photos and weather on one screen.',
+        title: 'Project Dashboard in SubTrade: How Is the Job Really Going?',
+        description:
+          'A walkthrough of the Project Dashboard in SubTrade: budget used, margin, schedule, tasks and a health score, contract value, change orders, purchase orders and labour rolled into a projected margin, open RFIs, overdue tasks and pending approvals, the team and their hours, the latest site photos, the customer and contract, weather with a crane check and forecast, the activity feed, and the side menu to every part of the job.',
+        poster: '/subtrade-project-dashboard-video-poster.webp',
+        posterAlt: 'Play the SubTrade Project Dashboard walkthrough, a job dashboard with budget, margin and financial performance',
+        uploadDate: '2026-10-08',
+        duration: 'PT52S',
+      },
       sections: [
         {
           eyebrow: 'The overview',
