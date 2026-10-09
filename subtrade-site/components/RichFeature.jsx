@@ -155,6 +155,13 @@ export default function RichFeature({ f }) {
                   ))}
                 </div>
               )}
+              {s.phones && (
+                <div className="fphones">
+                  {s.phones.map((img, j) => (
+                    <img key={img} src={img} alt={s.phoneAlts ? s.phoneAlts[j] : ''} loading="lazy" />
+                  ))}
+                </div>
+              )}
               {s.images && !s.browser && (
                 <div className={s.tablet ? `tablet tablet-${s.tablet}` : 'fimg-stack'}>
                   {s.images.map((img, j) => (

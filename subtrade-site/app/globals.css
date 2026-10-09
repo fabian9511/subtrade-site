@@ -1680,6 +1680,9 @@ a.rv-src:hover { color: var(--steel-200, inherit); }
   transform: translateY(2px);
 }
 .fimg-stack { display: flex; flex-direction: column; gap: 14px; }
+.fphones { display: flex; gap: 18px; justify-content: center; align-items: flex-start; }
+.fphones img { width: min(46%, 250px); height: auto; display: block; filter: drop-shadow(0 18px 28px rgba(21, 24, 28, 0.22)); }
+.fphones img:only-child { width: min(62%, 280px); }
 .fimg-stack img {
   width: 100%; height: auto; display: block;
   border-radius: 8px;
