@@ -93,13 +93,20 @@ const step = (name, data = {}) => {
   } catch {}
 };
 
-const save = (payload) =>
-  fetch('/api/lead/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-    keepalive: true,
-  }).catch(() => {});
+// Saving a lead takes GoHighLevel a few seconds, so nobody waits for it: each
+// save goes out behind the last one (in order), while the page moves on.
+let saving = Promise.resolve();
+const save = (payload) => {
+  saving = saving.then(() =>
+    fetch('/api/lead/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(() => {}),
+  );
+  return saving;
+};
 
 const STORE = 'subtrade-start-funnel';
 
@@ -203,7 +210,6 @@ export default function Funnel() {
   const [answers, setAnswers] = useState({});
   const [qi, setQi] = useState(0);
   const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
   const cardRef = useRef(null);
   const started = useRef(false);
   const [cardSeen, setCardSeen] = useState(true);
@@ -270,7 +276,7 @@ export default function Funnel() {
     cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  async function register(e) {
+  function register(e) {
     e.preventDefault();
     setError('');
     if (!lead.firstName.trim()) return fail('first_name', 'Please add your first name.');
@@ -279,9 +285,7 @@ export default function Funnel() {
     if (phoneDigits(lead.phone).length !== 10) return fail('phone', 'Please enter a 10-digit phone number, like +1 403-555-0100.');
     if (!lead.company.trim()) return fail('company', 'Please add your company name.');
     if (!consent.terms) return fail('terms', 'Please agree to the Terms & Conditions and Privacy Policy.');
-    setBusy(true);
-    await save({ ...lead, phone: phoneE164(lead.phone), consent: { ...consent, at: new Date().toISOString() }, stage: 'registered' });
-    setBusy(false);
+    save({ ...lead, phone: phoneE164(lead.phone), consent: { ...consent, at: new Date().toISOString() }, stage: 'registered' });
     track('track', 'Lead', { content_name: 'SubTrade /start register' });
     setStage('questions');
   }
@@ -392,9 +396,7 @@ export default function Funnel() {
                   </Check>
                 </div>
                 {error && <p className="fx-error" role="alert">{error}</p>}
-                <button className="btn btn-primary btn-lg fx-submit" disabled={busy}>
-                  {busy ? 'One second…' : 'Continue'}
-                </button>
+                <button className="btn btn-primary btn-lg fx-submit">Continue</button>
                 <ul className="fx-safe">
                   <li>Free to check, no card for this step</li>
                   <li>If you start the trial: $0 for 14 days</li>

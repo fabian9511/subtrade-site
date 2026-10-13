@@ -108,6 +108,7 @@ export async function POST(req) {
     .filter((f) => f.field_value);
 
   const tags = ['fb-ads-funnel'];
+  if (body.stage === 'registered') tags.push('fb-funnel-stopped-at-q1');
   if (body.stage === 'qualified') tags.push('fb-funnel-qualified');
   if (body.stage === 'trial') tags.push('fb-funnel-trial-path');
   if (a.price === 'No') tags.push('fb-price-no');
@@ -159,15 +160,14 @@ export async function POST(req) {
     // than replacing them.
     const id = data?.contact?.id;
 
-    // Between questions: only mark how far they got (fb-funnel-reached-q3),
-    // replacing the mark from the question before. Nothing else is touched.
+    // Between questions: only mark the question they are on now
+    // (fb-funnel-stopped-at-q3), replacing the mark from the question before.
+    // Whoever never comes back keeps the mark; finishing removes it.
     if (body.stage === 'progress') {
       const n = Math.round(Number(body.reached));
       if (id && n >= 1 && n <= 20) {
-        await fetch(`${GHL}/contacts/${id}/tags`, { method: 'POST', headers, body: JSON.stringify({ tags: [`fb-funnel-reached-q${n}`] }) }).catch(() => {});
-        if (n > 1) {
-          await fetch(`${GHL}/contacts/${id}/tags`, { method: 'DELETE', headers, body: JSON.stringify({ tags: [`fb-funnel-reached-q${n - 1}`] }) }).catch(() => {});
-        }
+        await fetch(`${GHL}/contacts/${id}/tags`, { method: 'POST', headers, body: JSON.stringify({ tags: [`fb-funnel-stopped-at-q${n + 1}`] }) }).catch(() => {});
+        await fetch(`${GHL}/contacts/${id}/tags`, { method: 'DELETE', headers, body: JSON.stringify({ tags: [`fb-funnel-stopped-at-q${n}`] }) }).catch(() => {});
       }
       return NextResponse.json({ ok: true, stored: Boolean(id) });
     }
@@ -238,6 +238,12 @@ export async function POST(req) {
 
       // After the questions, leave the answers as a note so they read in one place.
       if (body.stage === 'qualified' || body.stage === 'trial') {
+        // They finished, so the "stopped at" mark comes off.
+        await fetch(`${GHL}/contacts/${id}/tags`, {
+          method: 'DELETE',
+          headers,
+          body: JSON.stringify({ tags: Array.from({ length: 12 }, (_, i) => `fb-funnel-stopped-at-q${i + 1}`) }),
+        }).catch(() => {});
         const lines = [
           `Facebook ads funnel (/start/) — ${body.stage === 'qualified' ? 'shown the booking calendar' : 'sent to free trial'}`,
           `Trade: ${clean(a.trade) || '-'}`,
