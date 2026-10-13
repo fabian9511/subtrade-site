@@ -1593,6 +1593,18 @@ export const features = [
         ['Assigned', 'Every item owned'],
         ['Faster', 'Holdback release'],
       ],
+      videoHero: true,
+      video: {
+        id: 'ZhkDThwRGNs',
+        caption: 'Tasks in 60 seconds: one board, task cards with checklists and markups, reminders, shifts, calendar and team views, and comments with your crew.',
+        title: 'Task Management for Subcontractors: Every Task on One Board',
+        description:
+          'A walkthrough of SubTrade Tasks: a kanban board from not started to completed, dragging cards, adding columns and filtering by priority, creating a task with type, dates, priority and crew, hazards, deficiencies, incidents and maintenance, task cards with dates, assignees, checklists, drawing markups and resolutions, reminders and shifts, the calendar and team views, comments with photos, and the activity log.',
+        poster: '/subtrade-tasks-video-poster.webp',
+        posterAlt: 'Play the SubTrade Tasks walkthrough, a kanban task board beside an open task card with a checklist under the words who is on what, one board',
+        uploadDate: '2026-10-12',
+        duration: 'PT1M',
+      },
       sections: [
         {
           eyebrow: 'The board',
