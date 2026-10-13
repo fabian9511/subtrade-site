@@ -50,6 +50,7 @@ export function generateMetadata({ params }) {
   return {
     title: `${t.title} | SubTrade Tutorial`,
     description: `${t.blurb} Step-by-step SubTrade video tutorial.`,
+    alternates: { canonical: `/tutorials/${t.slug}/` },
   };
 }
 

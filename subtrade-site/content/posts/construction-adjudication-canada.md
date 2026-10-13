@@ -77,7 +77,7 @@ Most of the value of adjudication shows up before you ever file. A payer who kno
 
 That leverage only holds if your paperwork backs it up. Adjudication is won on documents, so the same habits that keep your business running, dated photos, coded labour, priced change orders, and a clean draw history, are exactly what make a claim credible. You can see how we assemble that record in our [construction management features](/construction-management-features/), and you can size up a holdback dispute in seconds with our free [construction holdback calculator](/construction-holdback-calculator/).
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, because the shops that get paid on time are usually the ones who can produce the paper on demand.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, because the shops that get paid on time are usually the ones who can produce the paper on demand.
 
 ## FAQ
 

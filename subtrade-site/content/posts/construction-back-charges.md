@@ -72,7 +72,7 @@ Photograph existing conditions before you start and the finished area before you
 
 Back-charges also interact with the money already being held from you. A deduction stacked on top of statutory holdback can put a real dent in cash flow, and it is worth knowing exactly how much of your billing is legitimately withheld before you agree to anything more. Our [construction holdback calculator](/construction-holdback-calculator/) shows the statutory amount by province so you can tell a lawful holdback from an opportunistic deduction.
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, because the documentation that beats a back-charge only helps if it was captured the day the work happened, not reconstructed the day the deduction lands.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, because the documentation that beats a back-charge only helps if it was captured the day the work happened, not reconstructed the day the deduction lands.
 
 ## FAQ
 

@@ -95,7 +95,7 @@ Faster estimating is nice. Estimating that gets more accurate every quarter is w
 
 The drywall contractors we see doing best aren't the ones with the slickest takeoff tool. They're the ones who closed the loop — where field hours feed job costing, job costing feeds production rates, and production rates feed the next bid. Three years in, they know their numbers cold, and they can bid tight without gambling.
 
-SubTrade is built for that loop, by a commercial drywall contractor who needed it. See how it fits your shop with our [drywall contractor software](/drywall-contractor-software/) overview. It [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card.
+SubTrade is built for that loop, by a commercial drywall contractor who needed it. See how it fits your shop with our [drywall contractor software](/drywall-contractor-software/) overview. It [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 ## FAQ
 
@@ -121,4 +121,4 @@ For the software to make your estimates more accurate over time, yes. Without ac
 
 **What does it cost?**
 
-SubTrade starts at $299/month CAD with a 14-day free trial and no credit card required. Watch for per-project or per-bid pricing elsewhere — it adds up fast at normal bidding volumes.
+SubTrade starts at $299/month CAD with a 14-day free trial. Watch for per-project or per-bid pricing elsewhere — it adds up fast at normal bidding volumes.

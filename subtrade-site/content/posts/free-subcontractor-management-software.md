@@ -68,7 +68,7 @@ Any two of those and the "free" stack is costing you more than a subscription wo
 
 Strip away the marketing and a paid sub-built system is buying back three things free can't give you: the field data entered once and never rekeyed, a live job-cost number you can act on this week, and a change-order paper trail that gets you paid. That's the trade. You're not paying for features — you're paying to stop the leaks that don't show up on any invoice.
 
-The right way to settle it is to try it against your own jobs, which is why SubTrade is [$299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required. Run a couple of real jobs through it beside your spreadsheet and see which one tells you sooner that a job's going sideways. If a proper cost-code structure is new to you, [Statistics Canada's construction figures](https://www.statcan.gc.ca/en/subjects-start/construction) are a reminder of how much non-residential volume swings quarter to quarter — the shops that survive the soft stretches are the ones that could see their labour costs in real time, not the ones running the cheapest stack.
+The right way to settle it is to try it against your own jobs, which is why SubTrade is [$299/month CAD](/pricing-plans/) with a 14-day free trial. Run a couple of real jobs through it beside your spreadsheet and see which one tells you sooner that a job's going sideways. If a proper cost-code structure is new to you, [Statistics Canada's construction figures](https://www.statcan.gc.ca/en/subjects-start/construction) are a reminder of how much non-residential volume swings quarter to quarter — the shops that survive the soft stretches are the ones that could see their labour costs in real time, not the ones running the cheapest stack.
 
 ## FAQ
 

@@ -122,7 +122,7 @@ Document substantial completion the day it happens. Retainage release almost alw
 
 Then follow up on a schedule. Retainage does not chase itself, and the party holding it is in no hurry. A standing reminder tied to each contract's release trigger is worth real money over a year of jobs.
 
-Run your specific state and contract value through the free [construction retainage calculator](/construction-retainage-calculator/) to see the cap and a clean summary you can hand to your GC. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, and it tracks retainage receivable across every job so you always know what is owed.
+Run your specific state and contract value through the free [construction retainage calculator](/construction-retainage-calculator/) to see the cap and a clean summary you can hand to your GC. SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, and it tracks retainage receivable across every job so you always know what is owed.
 
 ## FAQ
 

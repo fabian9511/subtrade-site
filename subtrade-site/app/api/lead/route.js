@@ -158,6 +158,19 @@ export async function POST(req) {
     // Tags go through their own endpoint so we add to a contact's tags rather
     // than replacing them.
     const id = data?.contact?.id;
+
+    // Between questions: only mark how far they got (fb-funnel-reached-q3),
+    // replacing the mark from the question before. Nothing else is touched.
+    if (body.stage === 'progress') {
+      const n = Math.round(Number(body.reached));
+      if (id && n >= 1 && n <= 20) {
+        await fetch(`${GHL}/contacts/${id}/tags`, { method: 'POST', headers, body: JSON.stringify({ tags: [`fb-funnel-reached-q${n}`] }) }).catch(() => {});
+        if (n > 1) {
+          await fetch(`${GHL}/contacts/${id}/tags`, { method: 'DELETE', headers, body: JSON.stringify({ tags: [`fb-funnel-reached-q${n - 1}`] }) }).catch(() => {});
+        }
+      }
+      return NextResponse.json({ ok: true, stored: Boolean(id) });
+    }
     if (id && body.stage === 'registered') {
       const consentNow = body.consent || {};
       const anySms = consentNow.smsMarketing || consentNow.smsService;

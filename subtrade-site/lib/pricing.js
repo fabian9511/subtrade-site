@@ -65,3 +65,21 @@ export function priceBreakdown(users, annual) {
   const monthly = monthlyTotal(u);
   return { users: u, lines, monthly, annual, period: periodPrice(u, annual) };
 }
+
+// Helpers used by the pricing-page quote sheet (same math, same rounding).
+// What the customer pays per month on annual billing.
+export const annualMonthly = (monthly) => Math.round(monthly * (1 - ANNUAL_DISCOUNT));
+
+// What the customer pays per year on annual billing.
+export const annualYearly = (monthly) => Math.round(monthly * 12 * (1 - ANNUAL_DISCOUNT));
+
+// Extra-user brackets, for showing line items. Each entry: users in the
+// bracket for a given crew size, and the per-user rate.
+export function userLines(users) {
+  return [
+    { label: 'Users 6 to 15', rate: 15, qty: users > 5 ? Math.min(users, 15) - 5 : 0 },
+    { label: 'Users 16 to 25', rate: 10, qty: users > 15 ? Math.min(users, 25) - 15 : 0 },
+    { label: 'Users 26 to 29', rate: 7, qty: users > 25 ? Math.min(users, 29) - 25 : 0 },
+    { label: 'Users 30 and up', rate: 4, qty: users > 29 ? users - 29 : 0 },
+  ].filter((l) => l.qty > 0);
+}

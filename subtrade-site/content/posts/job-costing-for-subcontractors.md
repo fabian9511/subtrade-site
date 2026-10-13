@@ -80,7 +80,7 @@ The same coded hours that drive your job cost also back your billing. When you b
 
 You can see how labour, costing, change orders, and billing fit into one loop in our [construction management features](/construction-management-features/). The trade specifics matter too: what you cost by the square foot in [drywall contractor software](/drywall-contractor-software/) is a different unit from what you cost by the device in [electrical contractor software](/electrical-contractor-software/), and generic costing that only understands "dollars" understands neither.
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so you can run your next few jobs through it and see your real installed cost before month-end instead of after.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so you can run your next few jobs through it and see your real installed cost before month-end instead of after.
 
 ## FAQ
 

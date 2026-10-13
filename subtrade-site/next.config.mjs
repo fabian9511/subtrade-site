@@ -10,6 +10,10 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Founder photos renamed (names shortened to Fabian V. / Steban V.)
+      { source: '/fabian-vargas-garcia-subtrade-cofounder.webp', destination: '/fabian-v-subtrade-cofounder.webp', permanent: true },
+      { source: '/steban-vargas-subtrade-cofounder.webp', destination: '/steban-v-subtrade-cofounder.webp', permanent: true },
+
       // App access
       { source: '/login', destination: 'https://portal.subtradesoftware.com', permanent: true },
       { source: '/portal', destination: 'https://portal.subtradesoftware.com', permanent: true },

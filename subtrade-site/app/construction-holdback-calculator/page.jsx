@@ -4,9 +4,9 @@ import RelatedLinks from '../../components/RelatedLinks';
 import { SIGNUP } from '../../lib/data';
 
 export const metadata = {
-  title: 'Construction Holdback Calculator (Canada)',
+  title: { absolute: 'Free Holdback Calculator for Canada: AB, BC, SK, MB, ON' },
   description:
-    'Free holdback and progress billing calculator for Canadian subcontractors. Work out your draw, the statutory holdback withheld, GST timing and net payable — Alberta, BC, Saskatchewan, Manitoba and Ontario. Download the draw summary as a PDF.',
+    'Work out your progress draw, the statutory holdback, GST and net payable in seconds. Alberta, BC, Saskatchewan, Manitoba and Ontario. Free, no signup, PDF.',
   alternates: { canonical: '/construction-holdback-calculator/' },
 };
 

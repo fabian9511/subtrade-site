@@ -64,7 +64,7 @@ For the statutory detail on the fastest-moving province, [Alberta's prompt payme
 
 The reason so many subs get holdback wrong is not that the rules are hard, it is that the inputs live in a spreadsheet that nobody updates until draw day. When your accumulated holdback, your approved change orders and your percent complete all come off your actual field data, the draw assembles itself and the release dates are already on the calendar. That is the loop we built into our [progress billing](/construction-management-features/progress-billing/) tools, and you can see the rest of the system in our [construction management features](/construction-management-features/).
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, but the holdback calculator is free to use right now, no account needed.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, but the holdback calculator is free to use right now, no account needed.
 
 ## FAQ
 

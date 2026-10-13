@@ -23,9 +23,14 @@ export default function SiteNav({ portal, signup }) {
       <Link href="/explore-the-app" className="hide-m nav-explore">Explore the app</Link>
       <Link href="/pricing-plans" className="hide-m">Pricing</Link>
       <a href={portal} className="hide-m">Log in</a>
-      <a href={signup} className="btn btn-primary">
-        Start free trial
-      </a>
+      {/* On the ad page the button goes to the form on the page, not the portal. */}
+      {/^\/start\/?$/.test(path) ? (
+        <a href="#get-started" className="btn btn-primary">Get started</a>
+      ) : (
+        <a href={signup} className="btn btn-primary">
+          Start free trial
+        </a>
+      )}
       <MobileMenu />
     </nav>
   );

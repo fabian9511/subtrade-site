@@ -1,15 +1,38 @@
+import { FABIAN, STEBAN, personSchema, ORG_REF, BASE } from '../../lib/site';
+
 export const metadata = {
+  alternates: { canonical: '/about/' },
   title: 'About',
   description:
-    'SubTrade was built by Fabian Vargas Garcia, president of a Calgary commercial drywall company, after years of using field software designed for GCs instead of subs.',
+    'SubTrade was built by Fabian V., president of a Calgary commercial drywall company, after years of using field software designed for GCs instead of subs.',
 };
 
 const PORTAL = 'https://portal.subtradesoftware.com';
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 
+// The founders as Person entities, so AI assistants can tie the content and the
+// company to real, named people in the trade.
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  url: `${BASE}/about/`,
+  about: ORG_REF,
+  mainEntity: [
+    personSchema(FABIAN, {
+      description:
+        'President of Quality Gypsum Services, a commercial drywall and steel stud subcontractor in Calgary, Alberta, and co-founder of SubTrade.',
+      knowsAbout: ['Commercial drywall', 'Steel stud framing', 'Construction estimating', 'Subcontractor field management'],
+    }),
+    personSchema(STEBAN, {
+      description: 'Senior software developer and co-founder of SubTrade, who built the platform from the first line of code.',
+    }),
+  ],
+};
+
 export default function About() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
       <section className="section" style={{ paddingTop: 100 }}>
         <div className="wrap prose">
           <p className="eyebrow">Why SubTrade began</p>
@@ -39,7 +62,7 @@ export default function About() {
           </p>
           <p>
             So SubTrade got built, feature by feature, against real jobs. Fabian
-            brought the problem and the jobsites; his co-founder Steban Vargas, a
+            brought the problem and the jobsites; his co-founder Steban V., a
             senior software developer, saw the idea and made it real, turning
             field frustrations into working software. Every tool shipped because
             a working subcontracting business needed it on an actual project
@@ -56,11 +79,11 @@ export default function About() {
             <div className="founders">
               <div className="founder-card">
                 <img
-                  src="/fabian-vargas-garcia-subtrade-cofounder.webp"
-                  alt="Fabian Vargas Garcia, Co-Founder of SubTrade Software"
+                  src="/fabian-v-subtrade-cofounder.webp"
+                  alt="Fabian V., Co-Founder of SubTrade Software"
                   loading="lazy"
                 />
-                <b>Fabian Vargas</b>
+                <b>{FABIAN.name}</b>
                 <span>Co-Founder · The Field</span>
                 <p>
                   President of Quality Gypsum Services, a Calgary commercial
@@ -71,11 +94,11 @@ export default function About() {
               </div>
               <div className="founder-card">
                 <img
-                  src="/steban-vargas-subtrade-cofounder.webp"
-                  alt="Steban Vargas, Co-Founder and Senior Software Developer at SubTrade Software"
+                  src="/steban-v-subtrade-cofounder.webp"
+                  alt="Steban V., Co-Founder and Senior Software Developer at SubTrade Software"
                   loading="lazy"
                 />
-                <b>Steban Vargas</b>
+                <b>Steban V.</b>
                 <span>Co-Founder · Senior Software Developer</span>
                 <p>
                   The engineer who saw the idea and made it come true. Steban

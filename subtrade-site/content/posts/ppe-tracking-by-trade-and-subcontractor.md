@@ -79,7 +79,7 @@ First, prime contractors and owners increasingly ask subs to demonstrate their s
 
 Second, and more important, the right gear is actually on the right person. The Canadian Centre for Occupational Health and Safety keeps a clear, free reference on [selecting and maintaining PPE](https://www.ccohs.ca/oshanswers/prevention/ppe/designin.html) — the point they make repeatedly is that PPE only protects when it's the right type, in good condition, and correctly maintained. A tracking system is how you prove all three are true on a Tuesday afternoon, not just on the day of the audit.
 
-If you're building out the rest of your field safety and documentation stack, our [construction management features](/construction-management-features/) show how PPE tracking, daily logs, photos, and custom forms sit on one system. SubTrade starts at [$299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required.
+If you're building out the rest of your field safety and documentation stack, our [construction management features](/construction-management-features/) show how PPE tracking, daily logs, photos, and custom forms sit on one system. SubTrade starts at [$299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 ## FAQ
 

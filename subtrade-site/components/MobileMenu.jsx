@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
+import { COMING_SOON } from '../lib/tools';
 
 const PORTAL = 'https://portal.subtradesoftware.com';
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
@@ -18,7 +19,7 @@ const cols = [
       ['📡', 'Field Operations', 'Everything happening, live', '/construction-management-features/field-operations'],
       ['📷', 'Photos', 'GPS-tagged site photos', '/construction-management-features/site-photos'],
       ['⏱️', 'Time Tracking', 'GPS clock-in & job costing', '/time-tracking'],
-      ['📅', 'Scheduling', 'Drag-and-drop crew timelines', '/construction-management-features/construction-crew-scheduling'],
+      ['📅', 'Crew Scheduling', 'Drag-and-drop crew timelines', '/construction-management-features/construction-crew-scheduling'],
       ['🛡️', 'Safety & Forms', 'Hazard reports & custom forms', '/construction-management-features/safety-custom-forms'],
       ['🔧', 'Asset Management', 'Tools, vehicles & equipment', '/construction-management-features/asset-management'],
     ],
@@ -27,6 +28,7 @@ const cols = [
     title: 'Project Management',
     items: [
       ['🏆', 'Bid Manager', 'Tenders, vendor pricing & win rate', '/construction-management-features/bid-manager'],
+      ['🗓️', 'Project Schedule', 'Gantt, baseline & master schedule', '/construction-management-features/construction-gantt-chart-software'],
       ['📊', 'Dashboard', 'Live cost & project overview', '/construction-management-features/project-dashboard'],
       ['✅', 'Tasks', 'Kanban boards & punch lists', '/construction-management-features/task-management'],
       ['📐', 'Drawings', 'Plans & markups in the field', '/construction-management-features/drawings-markups'],
@@ -36,8 +38,8 @@ const cols = [
   {
     title: 'Financial & Compliance',
     items: [
-      ['🧾', 'Change Orders', 'Draft, submit & invoice COs', '/construction-management-features/change-order-management'],
-      ['🧰', 'Purchase Orders', 'Track material orders & costs', '/construction-management-features/change-order-management'],
+      ['🧾', 'Change Orders', 'Draft, submit & track COs', '/construction-management-features/change-order-management'],
+      ['🧰', 'Purchase Orders', 'Track material orders & costs', '/tutorials/purchase-orders-approval'],
       ['📄', 'Submittals & RFIs', 'Shop drawings & RFI tracking', '/construction-management-features/submittals'],
       ['💵', 'Progress Billing', 'Draws with holdback handled', '/construction-management-features/progress-billing'],
     ],
@@ -124,6 +126,18 @@ export default function MobileMenu() {
               ))}
             </div>
           ))}
+          <div className="mnav-group">
+            <b>Coming soon</b>
+            {COMING_SOON.map(([icon, name, sub]) => (
+              <div className="mnav-item mnav-item-soon" key={name}>
+                <span className="mnav-ico" aria-hidden="true">{icon}</span>
+                <span className="mnav-text">
+                  <span className="mnav-name">{name} <span className="soon-tag">Soon</span></span>
+                  <span className="mnav-sub">{sub}</span>
+                </span>
+              </div>
+            ))}
+          </div>
 
           <div className="mnav-links">
             <Link href="/explore-the-app" className="mnav-explore" onClick={close}>Explore the mobile app</Link>
@@ -139,7 +153,11 @@ export default function MobileMenu() {
             <span className="mega-chip">For the Trades</span>
             <b>Built by a subcontractor, for subcontractors</b>
             <p>Every feature designed around how trade subs actually work, from the field to the office.</p>
-            <a href={SIGNUP} className="btn btn-primary mnav-cta">Start free trial</a>
+            {/^\/start\/?$/.test(pathname || '') ? (
+              <a href="#get-started" onClick={close} className="btn btn-primary mnav-cta">Get started</a>
+            ) : (
+              <a href={SIGNUP} className="btn btn-primary mnav-cta">Start free trial</a>
+            )}
             <Link href="/construction-software-15min-demo" className="mnav-demo" onClick={close}>
               Book a 15-min demo →
             </Link>

@@ -81,7 +81,7 @@ You do not need a law degree to protect yourself from these changes. You need a 
 4. Keep your invoice backup tight, so nobody can reset the clock by calling your invoice deficient.
 5. In BC, watch for the in-force date before assuming the new rules apply.
 
-Software helps here only because the alternative is a spreadsheet nobody updates. Tracking holdback per project, flagging payment deadlines, and keeping the invoice backup in one place is exactly what a system built for subs should do, and it is part of how we think about [progress billing](/construction-management-features/progress-billing/). SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required.
+Software helps here only because the alternative is a spreadsheet nobody updates. Tracking holdback per project, flagging payment deadlines, and keeping the invoice backup in one place is exactly what a system built for subs should do, and it is part of how we think about [progress billing](/construction-management-features/progress-billing/). SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 For the deeper mechanics of holdback across the country, our post on [holdback by province](/blog/construction-holdback-by-province/) breaks down the percentages and release rules, and [why holdback release gets delayed](/blog/holdback-release-delays/) covers what to do when the money does not show up on time.
 

@@ -79,7 +79,7 @@ So give notice as soon as you identify the increase, and never later than the co
 
 The quiet way material inflation kills a job is that nobody notices until closeout. The estimate said one number, the actuals crept past it week by week, and by the time anyone runs the comparison the money is gone and the notice deadlines are blown. Catching cost drift early is a job-costing discipline: compare committed and actual material costs against the estimate as the job runs, not after it ends. When your [job costing](/blog/job-costing-for-subcontractors/) flags a line running hot in week three, you still have time to issue notice, document the increase, and bill it. In week thirty, you are just measuring the loss.
 
-That is the whole case for handling this in a system instead of a spreadsheet. Logging the change the day the cost hits, attaching the quotes and photos, and tracking it against your estimate is exactly what [change order management](/construction-management-features/change-order-management/) built for subs is supposed to do, and it ties straight into how you [bill progress](/blog/progress-billing-holdback-canada/). SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required.
+That is the whole case for handling this in a system instead of a spreadsheet. Logging the change the day the cost hits, attaching the quotes and photos, and tracking it against your estimate is exactly what [change order management](/construction-management-features/change-order-management/) built for subs is supposed to do, and it ties straight into how you [bill progress](/blog/progress-billing-holdback-canada/). SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 ## FAQ
 

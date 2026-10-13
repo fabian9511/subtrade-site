@@ -57,7 +57,7 @@ An estimate is a prediction. The only way it gets sharper is by comparing it aga
 
 Do that for a year and your labour units stop being borrowed and start being yours. That's the whole game: every completed job makes the next bid a little less of a guess. It only works when estimating and field labour live in the same system rather than two disconnected tools — which is the case we make across the [full feature set](/construction-management-features/).
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so you can price a real job against your own history before committing to anything.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so you can price a real job against your own history before committing to anything.
 
 ## FAQ
 

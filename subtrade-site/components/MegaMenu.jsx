@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { COMING_SOON } from '../lib/tools';
 
 const SIGNUP = 'https://portal.subtradesoftware.com/signup';
 
@@ -12,7 +14,7 @@ const cols = [
       ['📡', 'Live Overview', 'Everything happening, live', '/construction-management-features/field-operations'],
       ['📷', 'Photos', 'GPS-tagged site photos', '/construction-management-features/site-photos'],
       ['⏱️', 'Time Tracking', 'GPS clock-in & job costing', '/time-tracking'],
-      ['📅', 'Scheduling', 'Drag-and-drop crew timelines', '/construction-management-features/construction-crew-scheduling'],
+      ['📅', 'Crew Scheduling', 'Drag-and-drop crew timelines', '/construction-management-features/construction-crew-scheduling'],
       ['🛡️', 'Safety & Forms', 'Hazard reports & custom forms', '/construction-management-features/safety-custom-forms'],
       ['🔧', 'Asset Management', 'Tools, vehicles & equipment', '/construction-management-features/asset-management'],
     ],
@@ -21,6 +23,7 @@ const cols = [
     title: 'Project Management',
     items: [
       ['🏆', 'Bid Manager', 'Tenders, vendor pricing & win rate', '/construction-management-features/bid-manager'],
+      ['🗓️', 'Project Schedule', 'Gantt, baseline & master schedule', '/construction-management-features/construction-gantt-chart-software'],
       ['📊', 'Dashboard', 'Live cost & project overview', '/construction-management-features/project-dashboard'],
       ['✅', 'Tasks', 'Kanban boards & punch lists', '/construction-management-features/task-management'],
       ['📐', 'Drawings', 'Plans & markups in the field', '/construction-management-features/drawings-markups'],
@@ -29,9 +32,10 @@ const cols = [
   },
   {
     title: 'Financial & Compliance',
+    soon: true,
     items: [
-      ['🧾', 'Change Orders', 'Draft, submit & invoice COs', '/construction-management-features/change-order-management'],
-      ['🧰', 'Purchase Orders', 'Track material orders & costs', '/construction-management-features/change-order-management'],
+      ['🧾', 'Change Orders', 'Draft, submit & track COs', '/construction-management-features/change-order-management'],
+      ['🧰', 'Purchase Orders', 'Track material orders & costs', '/tutorials/purchase-orders-approval'],
       ['📄', 'Submittals & RFIs', 'Shop drawings & RFI tracking', '/construction-management-features/submittals'],
       ['💵', 'Progress Billing', 'Draws with holdback handled', '/construction-management-features/progress-billing'],
     ],
@@ -39,14 +43,31 @@ const cols = [
 ];
 
 export default function MegaMenu() {
+  // On the ad page the trial button goes to the form on the page.
+  const onStart = /^\/start\/?$/.test(usePathname() || '');
   const [open, setOpen] = useState(false);
   const timer = useRef(null);
   const openNow = () => { clearTimeout(timer.current); setOpen(true); };
   const closeSoon = () => { clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(false), 220); };
   const close = () => { clearTimeout(timer.current); setOpen(false); };
+  const wrap = useRef(null);
+
+  // While open: Esc closes it, and so does a click or tap anywhere outside it.
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+    const onDown = (e) => { if (wrap.current && !wrap.current.contains(e.target)) close(); };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onDown);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onDown);
+    };
+  }, [open]);
 
   return (
     <div
+      ref={wrap}
       className={`nav-mega-wrap${open ? ' open' : ''}`}
       onMouseEnter={openNow}
       onMouseLeave={closeSoon}
@@ -71,16 +92,27 @@ export default function MegaMenu() {
                     </span>
                   </Link>
                 ))}
+                {c.soon && (
+                  <div className="mega-soon">
+                    <b>Coming soon</b>
+                    {COMING_SOON.map(([, name, sub]) => (
+                      <div className="mega-item mega-item-soon" key={name}>
+                        <span className="mega-item-name">{name}</span>
+                        <span className="mega-item-sub">{sub}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
             <div className="mega-promo">
               <span className="mega-chip">For the Trades</span>
               <b>Built by a subcontractor, for subcontractors</b>
               <p>Every feature designed around how trade subs actually work, from the field to the office.</p>
-              <a href={SIGNUP} className="btn btn-primary" style={{ justifyContent: 'center' }}>Start free trial</a>
+              <a href={onStart ? '#get-started' : SIGNUP} onClick={onStart ? close : undefined} className="btn btn-primary" style={{ justifyContent: 'center' }}>{onStart ? 'Get started' : 'Start free trial'}</a>
               <Link href="/explore-the-app" className="mega-demo">Explore the mobile app →</Link>
               <Link href="/construction-software-15min-demo" className="mega-demo">Book a demo →</Link>
-              <span className="mega-zero"><span className="mono">$0</span> to get started · no credit card</span>
+              <span className="mega-zero"><span className="mono">$0</span> to get started</span>
               <div className="mega-stores">
                 <a href="https://apps.apple.com/ca/app/subtrade/id6752587413" target="_blank" rel="noopener">App Store</a>
                 <a href="https://play.google.com/store/apps/details?id=com.subtradesoftware.subtrade.app" target="_blank" rel="noopener">Google Play</a>

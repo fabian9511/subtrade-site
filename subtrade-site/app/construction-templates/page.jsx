@@ -32,7 +32,7 @@ export default function Templates() {
           <div className="hero-ctas">
             <a href="#get-templates" className="btn btn-primary btn-lg">Get the free pack</a>
           </div>
-          <p className="hero-note">Six templates, Word format. No credit card, no trial required.</p>
+          <p className="hero-note">Six templates, Word format. No trial required.</p>
         </div>
       </section>
       <div className="wrap"><div className="chalkline" /></div>

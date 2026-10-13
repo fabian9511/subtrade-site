@@ -57,7 +57,7 @@ const faqs = [
   ],
   [
     'What does it cost after the trial?',
-    '$299 per month with five users included, and additional users on top. The free trial does not ask for a credit card. Full pricing is on the pricing page.',
+    '$299 per month with five users included, and additional users on top. Full pricing is on the pricing page.',
   ],
 ];
 
@@ -209,7 +209,7 @@ export default function ExploreTheAppPage() {
           <h2 className="display">Now try it on your own job</h2>
           <p>
             The free trial takes a project, a crew and about ten minutes to set up.
-            $299/month after that, five users included, no credit card to start.
+            $299/month after that, five users included.
           </p>
           <a href={SIGNUP} className="btn btn-primary btn-lg">
             Start free trial

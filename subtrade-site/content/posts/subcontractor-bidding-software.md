@@ -65,7 +65,7 @@ Bidding and estimating are often sold as one thing, but they're two jobs. Biddin
 
 The same connection matters after you win. A bid that flows straight into a live job — with its scope, its schedule of values and its budget intact — means the number you priced is the number the field is measured against. That's the loop that keeps you honest: bid it, build it, compare, and price the next one better. It only works when bidding, [time tracking](/time-tracking/) and job costing live in one place rather than three, which is the case we make across the [full feature set](/construction-management-features/).
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so you can run a few live invitations through a real pipeline before deciding.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so you can run a few live invitations through a real pipeline before deciding.
 
 ## FAQ
 

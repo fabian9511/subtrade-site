@@ -6,6 +6,7 @@ import { BASE, INCLUDED_USERS, MIN_USERS, MAX_USERS, periodPrice, shownMonthly, 
 import PriceBreakdown from './PriceBreakdown';
 import VideoEmbed from './VideoEmbed';
 import Reviews from './Reviews';
+import { TOOL_COUNT } from '../lib/tools';
 
 /**
  * The Facebook-ads funnel on /start/:
@@ -80,6 +81,15 @@ function isQualified(a) {
 const track = (...args) => {
   try {
     window.fbq && window.fbq(...args);
+  } catch {}
+};
+
+// Where people stop: one event per step, sent to the Facebook pixel (custom
+// events) and to Google Tag Manager. Counts only, never names or emails.
+const step = (name, data = {}) => {
+  track('trackCustom', `Start_${name}`, data);
+  try {
+    (window.dataLayer = window.dataLayer || []).push({ event: 'start_funnel', funnel_step: name, ...data });
   } catch {}
 };
 
@@ -195,6 +205,27 @@ export default function Funnel() {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const cardRef = useRef(null);
+  const started = useRef(false);
+  const [cardSeen, setCardSeen] = useState(true);
+
+  // The phone bar at the bottom shows only while the form is off screen.
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(([e]) => setCardSeen(e.isIntersecting), { threshold: 0.15 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [stage]);
+
+  const formStarted = () => {
+    if (started.current) return;
+    started.current = true;
+    step('FormStarted');
+  };
+  const fail = (field, msg) => {
+    step('FormError', { field });
+    setError(msg);
+  };
 
   // Pick up where they left off after a refresh.
   useEffect(() => {
@@ -234,17 +265,20 @@ export default function Funnel() {
     if (stage === 'result') window.scrollTo(0, 0);
   }, [stage]);
 
-  const toForm = () => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const toForm = (from) => {
+    step('ButtonToForm', { from: typeof from === 'string' ? from : 'page' });
+    cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   async function register(e) {
     e.preventDefault();
     setError('');
-    if (!lead.firstName.trim()) return setError('Please add your first name.');
-    if (!lead.lastName.trim()) return setError('Please add your last name.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim())) return setError('Please check your email address.');
-    if (phoneDigits(lead.phone).length !== 10) return setError('Please enter a 10-digit phone number, like +1 403-555-0100.');
-    if (!lead.company.trim()) return setError('Please add your company name.');
-    if (!consent.terms) return setError('Please agree to the Terms & Conditions and Privacy Policy.');
+    if (!lead.firstName.trim()) return fail('first_name', 'Please add your first name.');
+    if (!lead.lastName.trim()) return fail('last_name', 'Please add your last name.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim())) return fail('email', 'Please check your email address.');
+    if (phoneDigits(lead.phone).length !== 10) return fail('phone', 'Please enter a 10-digit phone number, like +1 403-555-0100.');
+    if (!lead.company.trim()) return fail('company', 'Please add your company name.');
+    if (!consent.terms) return fail('terms', 'Please agree to the Terms & Conditions and Privacy Policy.');
     setBusy(true);
     await save({ ...lead, phone: phoneE164(lead.phone), consent: { ...consent, at: new Date().toISOString() }, stage: 'registered' });
     setBusy(false);
@@ -262,7 +296,10 @@ export default function Funnel() {
   function answer(key, value) {
     const next = value === undefined ? answers : { ...answers, [key]: value };
     setAnswers(next);
+    step('QuestionAnswered', { number: qi + 1, question: key });
     if (qi < QUESTIONS.length - 1) {
+      // Marks on the contact how far they got, so a lead who stops shows where.
+      save({ ...lead, phone: phoneE164(lead.phone), consent, stage: 'progress', reached: qi + 1 });
       setQi(qi + 1);
       return;
     }
@@ -314,10 +351,15 @@ export default function Funnel() {
           {/* ---------- 2 + 3. register, then qualify ---------- */}
           <div className="fx-card" ref={cardRef} id="get-started">
             {stage === 'register' ? (
-              <form onSubmit={register} noValidate>
+              <form onSubmit={register} onFocus={formStarted} noValidate>
                 <p className="fx-step mono">Step 1 of 2</p>
                 <h2 className="display fx-card-title">See if SubTrade fits your company</h2>
                 <p className="fx-card-sub">Two minutes. Then watch how it works and grab a time with us.</p>
+                <p className="fx-proof">
+                  <span className="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+                  <span>“10/10 experience.” Goose Mechanical, reviewed on</span>
+                  <img src="/capterra-logo.webp" alt="Capterra" loading="lazy" />
+                </p>
                 <div className="fx-row">
                   <Field label="First name" value={lead.firstName} name="given-name" onChange={(v) => setLead((l) => ({ ...l, firstName: v }))} autoComplete="given-name" />
                   <Field label="Last name" value={lead.lastName} name="family-name" onChange={(v) => setLead((l) => ({ ...l, lastName: v }))} autoComplete="family-name" />
@@ -353,6 +395,11 @@ export default function Funnel() {
                 <button className="btn btn-primary btn-lg fx-submit" disabled={busy}>
                   {busy ? 'One second…' : 'Continue'}
                 </button>
+                <ul className="fx-safe">
+                  <li>Free to check, no card for this step</li>
+                  <li>If you start the trial: $0 for 14 days</li>
+                  <li>Cancel anytime</li>
+                </ul>
               </form>
             ) : (
               <div>
@@ -510,21 +557,31 @@ export default function Funnel() {
       </section>
 
       {/* ---------- FAQ ---------- */}
-      <section className="section">
-        <div className="wrap" style={{ maxWidth: 820 }}>
-          <div className="section-head">
-            <p className="eyebrow">Questions</p>
-            <h2 className="display">Straight answers</h2>
+      <section className="section faqprice">
+        <div className="wrap faqprice-wrap">
+          <div className="faqprice-card">
+            <p className="faqprice-kicker">One plan</p>
+            <p className="faqprice-price"><span>${BASE}</span> /month CAD</p>
+            <p className="faqprice-note">{INCLUDED_USERS} users included, plus applicable taxes. Run your whole company for about $10 a day. Annual billing saves 20%.</p>
+            <ul>
+              <li>All {TOOL_COUNT} tools on every plan</li>
+              <li>Extra users from $15 down to $4 each</li>
+              <li>Web, iOS and Android, works offline</li>
+              <li>14-day free trial</li>
+            </ul>
+            <button type="button" className="btn btn-primary btn-lg" onClick={toForm}>See if it fits my company</button>
+            <a href="/pricing-plans/" target="_blank" rel="noopener" className="faqprice-more">See full pricing →</a>
           </div>
-          <div className="fx-faq">
+          <div className="faqprice-faq">
+            <h2 className="display">Straight answers</h2>
             {[
               ['How much does it cost?', '$299/month CAD plus applicable taxes, with 5 users included. Extra users are $4 to $15 each, and paying yearly saves 20%. The price is on our pricing page, no sales call needed to find it out.'],
               ['Which trades is it for?', 'Subcontractors running crews: drywall, framing, electrical, plumbing, HVAC, painting, concrete and more.'],
               ['Will my guys actually use it?', 'Clocking in, taking photos and filling a form are all one tap from the phone app (iPhone and Android).'],
               ['Can I try it first?', 'Yes. The free trial is the full platform, and you can cancel anytime during the trial and pay nothing.'],
-            ].map(([q, a]) => (
-              <details key={q}>
-                <summary>{q}</summary>
+            ].map(([q, a], i) => (
+              <details key={q} open={i === 0}>
+                <summary><h3>{q}</h3></summary>
                 <p>{a}</p>
               </details>
             ))}
@@ -539,6 +596,14 @@ export default function Funnel() {
           <button type="button" className="btn btn-primary btn-lg" onClick={toForm}>Get started</button>
         </div>
       </section>
+
+      {/* ---------- phones: the button stays on screen ---------- */}
+      <div className={`fx-bar${cardSeen ? '' : ' is-on'}`} aria-hidden={cardSeen}>
+        <button type="button" className="btn btn-primary" tabIndex={cardSeen ? -1 : 0} onClick={() => toForm('phone-bar')}>
+          {stage === 'questions' ? 'Back to my questions' : 'See if it fits my company'}
+        </button>
+        <span>2 minutes · no card</span>
+      </div>
     </>
   );
 }
@@ -621,7 +686,7 @@ function Result({ lead, qualified }) {
               aria-selected={path === c.id}
               aria-controls={`fx-panel-${c.id}`}
               className={`fx-choice${path === c.id ? ' is-on' : ''}`}
-              onClick={() => setPath(c.id)}
+              onClick={() => { step('ResultChoice', { choice: c.id }); setPath(c.id); }}
             >
               <span className="fx-choice-radio" aria-hidden="true" />
               <span className="fx-choice-body">

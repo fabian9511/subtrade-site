@@ -1,6 +1,7 @@
 import { effective, intro, sections } from './billing-text';
 
 export const metadata = {
+  alternates: { canonical: '/fair-billing-policy/' },
   title: 'Fair Billing Policy',
   description: 'Fair Billing Policy for the SubTrade platform by Subtrade Software Ltd: transparent pricing, billing cycles, proration and cancellations.',
 };

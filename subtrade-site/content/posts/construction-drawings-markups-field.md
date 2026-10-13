@@ -70,7 +70,7 @@ The reason to get this right is not tidiness. It is recovery. The two places fie
 
 On the change order side, a dated, attributed markup is the difference between a signed extra and an argument. The extra work has to be documented the day it happens, and the drawing is where it lands most clearly. On the [back charge](/blog/construction-back-charges/) side, when someone tries to charge you for damage or rework, your marked-up set showing the condition you actually left is your defence. Either way, the marked drawing is evidence, and evidence is what gets paid.
 
-You can see how markups, photos, logs, and change orders connect across a job in our [construction management features](/construction-management-features/). SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so a crew can try marking up a live set before committing.
+You can see how markups, photos, logs, and change orders connect across a job in our [construction management features](/construction-management-features/). SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so a crew can try marking up a live set before committing.
 
 ## A field markup routine that takes two minutes
 

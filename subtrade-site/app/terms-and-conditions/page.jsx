@@ -1,6 +1,7 @@
 import { effective, intro, sections } from './terms-text';
 
 export const metadata = {
+  alternates: { canonical: '/terms-and-conditions/' },
   title: 'Terms & Conditions',
   description: 'Terms and Conditions for the SubTrade construction project management platform by Subtrade Software Ltd.',
 };

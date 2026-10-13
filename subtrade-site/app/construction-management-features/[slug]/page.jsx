@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 const TUTORIALS_FOR = {
   'field-operations': ['workflow-efficiency-with-employee-time-sheets', 'crew-scheduling-subtrade-software', 'how-to-create-a-project-subtrade-software', 'forms-dashboard-subtrade-software'],
   'project-dashboard': ['how-to-create-a-project-subtrade-software', 'project-reports-subtrade-software', 'forms-in-projects-subtrade-software', 'crew-scheduling-subtrade-software'],
+  'construction-gantt-chart-software': ['crew-scheduling-subtrade-software', 'how-to-create-a-project-subtrade-software'],
   'construction-crew-scheduling': ['crew-scheduling-subtrade-software', 'scheduling-feature-workflow-construction-drawings-upload', 'workflow-efficiency-with-employee-time-sheets'],
   'safety-custom-forms': ['forms-dashboard-subtrade-software', 'build-a-form-subtrade-software', 'forms-in-projects-subtrade-software', 'review-form-submissions-subtrade-software'],
   'change-order-management': ['manage-change-orders-subtrade-software', 'purchase-orders-approval'],
@@ -28,7 +29,11 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const f = features.find((x) => x.slug === params.slug);
   if (!f) return {};
-  return { title: f.title, description: f.description };
+  return {
+    title: f.title,
+    description: f.description,
+    alternates: { canonical: `/construction-management-features/${f.slug}/` },
+  };
 }
 
 export default function FeaturePage({ params }) {
@@ -122,7 +127,7 @@ export default function FeaturePage({ params }) {
       <section className="cta-band">
         <div className="wrap">
           <h2 className="display">Try it on a real job</h2>
-          <p>Full platform, 14-day free trial, no credit card.</p>
+          <p>Full platform, 14-day free trial.</p>
           <a href={SIGNUP} className="btn btn-primary btn-lg">Start free trial</a>
         </div>
       </section>

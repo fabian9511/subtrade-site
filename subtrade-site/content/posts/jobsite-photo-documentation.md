@@ -77,7 +77,7 @@ Three moments, all about money.
 
 A documentation system only works if the crew uses it, and crews abandon anything that costs them more than a minute. The rule we settled on: photos have to be a two-tap habit inside the same app the foreman already opens for the daily log and time. Open, shoot, done, filed automatically against the job. If capturing a photo means emailing it to the office or naming a file, it will not happen on a busy day.
 
-SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial and no credit card required, so you can run a job through it and see whether your worst dispute would have been a ten-second search instead of a lost afternoon.
+SubTrade [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, so you can run a job through it and see whether your worst dispute would have been a ten-second search instead of a lost afternoon.
 
 ## FAQ
 
