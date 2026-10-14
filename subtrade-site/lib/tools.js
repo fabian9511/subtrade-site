@@ -24,6 +24,7 @@ export const toolGroups = [
     label: 'Money',
     tools: [
       ['🏆', 'Bid Manager', 'Every tender on one board, with proposals. Takeoff and estimating coming soon.', `${F}/bid-manager`],
+      ['✍️', 'Custom Proposal + E-Signature', 'Build the proposal from blocks, attach your contract, get it signed online.', `${F}/construction-proposal-software`],
       ['🧾', 'Change Orders', 'Price, send and track extras before the work is done.', `${F}/change-order-management`],
       ['🧰', 'Purchase Orders', 'Commit costs against budgets and see burn instantly.', '/tutorials/purchase-orders-approval'],
       ['💵', 'Progress Billing', 'Draws built from real field data, with holdback handled.', `${F}/progress-billing`],

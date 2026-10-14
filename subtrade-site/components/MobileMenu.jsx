@@ -28,6 +28,7 @@ const cols = [
     title: 'Project Management',
     items: [
       ['🏆', 'Bid Manager', 'Tenders, vendor pricing & win rate', '/construction-management-features/bid-manager'],
+      ['✍️', 'Custom Proposal + E-Signature', 'Proposal builder, signed online', '/construction-management-features/construction-proposal-software'],
       ['🗓️', 'Project Schedule', 'Gantt, baseline & master schedule', '/construction-management-features/construction-gantt-chart-software'],
       ['📊', 'Dashboard', 'Live cost & project overview', '/construction-management-features/project-dashboard'],
       ['✅', 'Tasks', 'Kanban boards & punch lists', '/construction-management-features/task-management'],

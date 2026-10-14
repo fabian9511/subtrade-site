@@ -708,6 +708,196 @@ export const features = [
     },
   },
   {
+    slug: 'construction-proposal-software',
+    name: 'Custom Proposal + E-Signature',
+    keyword: 'construction proposal software for subcontractors',
+    title: 'Construction Proposal Software with E-Signature',
+    description:
+      'Build custom proposals on the bid with drag-in blocks, your own images and attached PDFs, then send a link your client signs online. Part of SubTrade Bid Manager.',
+    h1: 'Proposals your client signs online',
+    intro:
+      'Build the proposal right on the bid in SubTrade. Start from your template or one of ours, drag in the blocks the job needs, attach your contract, and send a link your client reads and signs online.',
+    points: [
+      ['Templates and ready-made designs', 'Start from your own template or a designed one for your trade.'],
+      ['A builder made of blocks', 'Scope, price, options, team, photos, charts and more, placed anywhere on the page.'],
+      ['Your images and documents', 'Add your own pictures and attach contracts or any PDF to the proposal.'],
+      ['Signed online', 'Your client opens a link, accepts and signs. Questions come back as notes on the bid.'],
+    ],
+    rich: {
+      heroTitle: ['Proposals your client', 'signs online'],
+      heroSub:
+        'Your quote is the first thing a client sees from you. Build it right on the bid: pick a template, enter your price once, drag in the blocks the job needs, attach your contract, and send a link your client signs online.',
+      stats: [
+        ['Templates', 'Yours or ready-made'],
+        ['Blocks', 'Placed anywhere on the page'],
+        ['Attachments', 'Contracts and PDFs included'],
+        ['E-signature', 'Signed from one link'],
+      ],
+      videoHero: true,
+      video: {
+        id: 'wP183oWWhUo',
+        caption: 'Custom Proposal + E-Signature: templates, the block builder, your brand, and a client who signs online.',
+        title: 'Custom Proposal + E-Signature | SubTrade Bid Management',
+        description:
+          'A walkthrough of custom proposals in SubTrade Bid Management: starting from your own template or a ready-made design, entering the price once so the price card, table and chart match, options beside the total, dragging in blocks like stat tiles, charts, photo galleries and client quotes, moving and layering them anywhere on the page, showing the price as a card or table with a deposit, the page overflow warning, your brand kit, sending with the email already written, and the client signing online with notes back on the bid.',
+        poster: '/subtrade-proposal-video-poster.webp',
+        posterAlt: 'Play the SubTrade Custom Proposal and E-Signature walkthrough, a proposal price card beside a signed acceptance and client notes',
+        uploadDate: '2026-10-14',
+        duration: 'PT1M13S',
+      },
+      sections: [
+        {
+          eyebrow: 'New in SubTrade',
+          title: 'Start from your template, or one of ours',
+          isNew: true,
+          body:
+            'Hit New proposal on any bid and pick where to start. Use one of your own templates, or a ready-made design: Drywall and Interiors, Basement Renovations, Concrete, Electrical, Exterior Finishes or Flooring. Every one is a full proposal, ready for your price.',
+          checks: [
+            'Keep a template for each kind of job: commercial, residential, or a particular client',
+            'Six ready-made designs with their own covers, layouts and fonts',
+            'Use a design, then make it yours with your own photos and wording',
+            'Set a default template so every new proposal starts the way you like',
+            'Changing a template never changes proposals already made',
+          ],
+          images: ['/subtrade-proposal-templates.webp', '/subtrade-proposal-ready-made-designs.webp'],
+          imageAlts: [
+            'The Proposal Templates page in SubTrade listing your own templates with edit, rename, duplicate and make default, above the ready-made designs',
+            'Six ready-made proposal designs in SubTrade: Drywall and Interiors, Basement Renovations, Concrete, Electrical, Exterior Finishes and Flooring, each shown as a cover and an inside page',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'Price once',
+          title: 'One price list, and every block agrees',
+          flip: true,
+          body:
+            'Enter your price in the price list once, by section. The price card, the pricing table and the chart all read from it, so they match every time. Options are priced on their own, as an add or a deduct, and sit beside the total, never inside it.',
+          checks: [
+            'Show the price as a card or a table',
+            'One lump sum, or broken out by section',
+            'Ask for a deposit as a percentage or a fixed amount',
+            'Options and alternates kept apart from the base price',
+            'A chart that shows where the price goes, built from the same numbers',
+            'Unit rates for extra work, in their own block',
+          ],
+          images: ['/subtrade-proposal-price-list.webp', '/subtrade-proposal-price-card-chart.webp'],
+          imageAlts: [
+            'The price list in the SubTrade proposal builder with sections for steel stud framing, drywall board and tape and acoustic ceilings, an add option and the subtotal',
+            'A SubTrade proposal page with the lump sum price card, a donut chart of where the price goes, the options list and the acceptance block',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'The proposal builder',
+          title: 'Drag in any block, put it anywhere',
+          body:
+            'Every proposal is built from blocks. Add the ones the job needs, drop them on any page, and move and layer them until the page looks right. Save a block you like and reuse it on the next proposal.',
+          checks: [
+            'Cover, quote details, text and scope of work',
+            'Inclusions, exclusions, or both side by side',
+            'Price, pricing table, options, unit rates and terms',
+            'Stat tiles, charts, a timeline of how the job runs and your project team',
+            'Photo galleries and a word from a happy client',
+            'Layers on every page: bring a block to the front or send it back',
+            'Saved blocks you can drop into any proposal',
+          ],
+          images: ['/subtrade-proposal-add-a-block.webp', '/subtrade-proposal-stat-tiles.webp'],
+          imageAlts: [
+            'The Add a block menu in the SubTrade proposal builder listing cover, quote details, text, scope of work, inclusions, exclusions, price, pricing table, options, unit rates, terms, image, attachments, picture and chart',
+            'A stat tiles block selected on a SubTrade proposal page, with its settings panel for tile heading, style and the numbers shown',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'Images and attachments',
+          title: 'Your photos, your documents, one proposal',
+          flip: true,
+          body:
+            'Add your own pictures anywhere on the page, at any size, or as a gallery of jobs you have finished. Attach your contract, your insurance certificate, a spec sheet or any PDF, and it goes out attached to the proposal your client receives.',
+          checks: [
+            'Picture block: any image, anywhere on the page, any size',
+            'Image block: one to three pictures with a caption',
+            'Photo galleries of your finished work',
+            'Attachments block: contracts, certificates, drawings or any PDF',
+            'Attachments are listed in the proposal and sent with it',
+            'Preview every page before it goes out, then download the PDF',
+          ],
+          images: ['/subtrade-proposal-gallery-client-quote.webp', '/subtrade-proposal-preview-attachments.webp'],
+          imageAlts: [
+            'A photo gallery block of finished jobs and a client quote on a SubTrade proposal page',
+            'The SubTrade proposal preview showing all seven pages, from the cover to the closing page that lists the attached documents',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'Your brand',
+          title: 'Every quote looks like your company',
+          body:
+            'Set your brand kit once: logo, main and accent colours, and the fonts for headings and words. Every proposal and template picks it up. If a block runs past the end of its page, SubTrade tells you before your client ever sees it.',
+          checks: [
+            'Your logo, colours and fonts on every proposal',
+            'Footer and terms set once for every proposal',
+            'A warning when a block runs off the page, with what to do about it',
+          ],
+          images: ['/subtrade-proposal-brand-kit.webp', '/subtrade-proposal-page-overflow-warning.webp'],
+          imageAlts: [
+            'The brand kit in SubTrade with main and accent colour swatches, your colours, and the heading and body fonts with a live sample',
+            'A SubTrade proposal page with a warning bar that the options block runs past the foot of the page and the overflowing block outlined',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'Send',
+          title: 'Send it from the bid, the email already written',
+          flip: true,
+          body:
+            'Hit Send and the email fills itself in with the project, the quote number and your signature. The proposal PDF is generated and attached, and your client gets a link to read it online.',
+          checks: [
+            'Email pre-filled from the bid, edit it if you like',
+            'The proposal PDF attached automatically',
+            'A quote number on every proposal',
+            'Revisions keep earlier versions, marked superseded',
+            'See when your client has opened the link',
+          ],
+          images: ['/subtrade-proposal-send-email.webp', '/subtrade-proposal-sent-accepted.webp'],
+          imageAlts: [
+            'The Send quotation dialog in SubTrade with the recipient, subject and a pre-written message to the client',
+            'A sent proposal in SubTrade showing the client link with how many times it was opened, the acceptance with signature, and client notes',
+          ],
+          browser: true,
+        },
+        {
+          eyebrow: 'E-signature',
+          title: 'Your client reads it and signs it online',
+          body:
+            'Your client opens one link, no account needed. They read the proposal, download the PDF if they want it, and accept and sign online. Questions come back as notes, right on the bid, and you answer them there.',
+          checks: [
+            'No account or app for your client',
+            'Accept with name, title, email and a drawn signature',
+            'Signed acceptance shown on the proposal and on your side',
+            'Notes back and forth, kept with the bid',
+            'Your client can also decline, so you know where you stand',
+          ],
+          images: ['/subtrade-proposal-client-link.webp', '/subtrade-proposal-accept-and-sign.webp'],
+          imageAlts: [
+            'The client view of a SubTrade proposal with the price, Accept and sign, Download the PDF, and a notes box for questions',
+            'The Accept proposal dialog with the client name, title, email, a drawn signature and the authorization checkbox',
+          ],
+          browser: true,
+        },
+      ],
+      faqs: [
+        ['Can my client sign the proposal online?', 'Yes. Your client opens the proposal from a link, no account needed, and accepts it with their name, title, email and a drawn signature. The signed acceptance shows on the proposal and on the bid in SubTrade.'],
+        ['Can I attach a contract or other PDFs to the proposal?', 'Yes. Add an Attachments block and attach your contract, insurance certificate, spec sheets or any PDF. They are listed in the proposal and go out with it to your client.'],
+        ['Can I add my own pictures?', 'Yes. The Picture block puts any image anywhere on the page at any size, the Image block holds one to three pictures with a caption, and the gallery shows photos of jobs you have finished.'],
+        ['What blocks can I add?', 'Cover, quote details, text, scope of work, inclusions, exclusions, included and not included, price, pricing table, options, unit rates, terms, images, pictures, attachments, charts, stat tiles, your team, a timeline and client quotes. You can also save your own blocks to reuse.'],
+        ['Do I have to start from scratch?', 'No. Start from one of your own templates or a ready-made design for drywall and interiors, basements, concrete, electrical, exterior finishes or flooring, then make it yours.'],
+        ['Will the numbers match across the proposal?', 'Yes. You enter the price once in the price list. The price card, pricing table and chart all read from it, and options stay beside the total, never inside it.'],
+        ['Is this part of Bid Manager?', 'Yes. Proposals are built on the bid in Bid Manager, from the Estimating tab, and are included in every SubTrade plan with no add-on module.'],
+      ],
+    },
+  },
+  {
     slug: 'construction-crew-scheduling',
     image: '/subtrade-crew-scheduling-jobsite.webp',
     imageAlt: 'Two workers reviewing the SubTrade crew schedule on a phone at a truck tailgate',
