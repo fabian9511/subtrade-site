@@ -30,14 +30,16 @@ The tool that fixes this is a rolling 13-week cash flow forecast. Thirteen weeks
 
 The idea is simple: for each of the next 13 weeks, lay out the cash you expect in and the cash you know is going out, and carry the running balance forward. The week the running balance goes negative is the week you have to act on today, not then.
 
+Opening balance: $35,000.
+
 | Week | Cash in (collections) | Cash out (payroll, suppliers, overhead) | Net | Running balance |
 |---|---|---|---|---|
 | 1 | $48,000 | $61,000 | -$13,000 | $22,000 |
 | 2 | $0 | $58,000 | -$58,000 | -$36,000 |
 | 3 | $92,000 | $60,000 | +$32,000 | -$4,000 |
-| 4 | $55,000 | $59,000 | -$4,000 | -$8,000 |
+| 4 | $75,000 | $59,000 | +$16,000 | $12,000 |
 
-The table above is the whole point: the business is profitable, but week 2 goes negative because a big collection does not land until week 3. Seeing that in week 1 gives you options, such as pulling a draw forward, delaying a non-urgent purchase, or drawing on a line of credit on purpose instead of by surprise. Seeing it in week 2 gives you a crisis.
+The table above is the whole point: the business is profitable, but weeks 2 and 3 go negative because a big collection does not land until week 3, and it takes until week 4 to climb back out. Seeing that in week 1 gives you options, such as pulling a draw forward, delaying a non-urgent purchase, or drawing on a line of credit on purpose instead of by surprise. Seeing it in week 2 gives you a crisis.
 
 ### What goes in it
 
@@ -61,7 +63,7 @@ Even a perfect forecast cannot cover the thing you did not see: a client who pay
 
 Build the reserve in good quarters and protect it. The temptation when work is booming is to put every dollar back into more work, but that is exactly when the carried balance of unpaid labour and holdback is growing fastest, which is exactly when you are most exposed. The reserve is what lets you say yes to a big job without betting the company on one client paying on time. For the wider backdrop on how much construction volume swings quarter to quarter, [Statistics Canada's construction data](https://www.statcan.gc.ca/en/subjects-start/construction) is a useful reminder that the slow stretch always comes eventually.
 
-SubTrade was built inside a commercial subcontractor in Calgary, Alberta, so the billing, job costing and holdback tracking that feed a cash flow forecast all sit in one place instead of five spreadsheets. It [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial, no credit card required.
+SubTrade was built inside a commercial subcontractor in Calgary, Alberta. Its [progress billing](/construction-management-features/progress-billing/) handles holdback on every draw, so the billing numbers that feed your forecast sit in one place instead of five spreadsheets. It [starts at $299/month CAD](/pricing-plans/) with a 14-day free trial.
 
 ## FAQ
 
