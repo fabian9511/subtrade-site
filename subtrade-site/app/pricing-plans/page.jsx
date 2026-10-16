@@ -19,7 +19,8 @@ const ladder = [
 ];
 
 const faqs = [
-  ['Is every feature on every plan?', `Yes. There is one plan with all ${TOOL_COUNT} tools. No feature tiers and no add-on modules.`],
+  ['Is every feature on every plan?', `Yes. There is one plan with all ${TOOL_COUNT} tools and no feature tiers. The one optional add-on, Claude Connect, is coming soon.`],
+  ['What is Claude Connect?', 'A coming-soon optional add-on at $120 a year plus tax that lets you run SubTrade from Claude, the AI assistant by Anthropic. It requires your own Claude membership, purchased directly from Anthropic.'],
   ['How much is annual billing?', 'Annual billing saves 20%. The base plan is $2,870 a year instead of $3,588.'],
   ['Can I add people partway through a term?', 'Yes. Add users whenever you need them and the cost is prorated for the rest of the billing period.'],
   ['Is there a free trial?', 'Yes, 14 days with the full platform. Cancel during the trial and you pay nothing.'],
@@ -55,6 +56,7 @@ export default function Pricing() {
               <li>All {TOOL_COUNT} tools on every plan</li>
               <li>5 users included, more as you grow</li>
               <li>14-day free trial on a real job</li>
+              <li>Claude Connect add-on coming soon, $120/year + tax</li>
             </ul>
           </div>
           <QuoteSheet />
@@ -102,6 +104,7 @@ export default function Pricing() {
               {COMING_SOON.map(([, name, sub]) => (
                 <div key={name} className="pp-soon-item"><b>{name}</b><small>{sub}</small></div>
               ))}
+              <div className="pp-soon-item"><b>Claude Connect (MCP add-on)</b><small>$120/year + tax. Run SubTrade from Claude. Requires your own Claude membership.</small></div>
             </div>
           </div>
         </div>

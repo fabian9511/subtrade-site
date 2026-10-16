@@ -160,8 +160,8 @@ export default function Home() {
               <p className="eyebrow">The full set</p>
               <h2 className="display">{TOOL_COUNT} tools. Every plan.</h2>
               <p>
-                No modules to bolt on and no per-feature upsells. Field, money
-                and office, all on one screen.
+                No feature tiers and no locked modules. Field, money and office,
+                all on one screen. Claude Connect add-on coming soon.
               </p>
             </div>
             <img
@@ -274,6 +274,7 @@ export default function Home() {
               <li>Extra users from $15 down to $4 each</li>
               <li>Web, iOS and Android, works offline</li>
               <li>14-day free trial</li>
+              <li>Claude Connect add-on coming soon, $120/year + tax</li>
             </ul>
             <a href={SIGNUP} className="btn btn-primary btn-lg">Start 14-day free trial</a>
             <Link href="/pricing-plans" className="faqprice-more">See full pricing →</Link>
