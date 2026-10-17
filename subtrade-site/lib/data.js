@@ -735,15 +735,15 @@ export const features = [
       ],
       videoHero: true,
       video: {
-        id: 'wP183oWWhUo',
-        caption: 'Custom Proposal + E-Signature: templates, the block builder, your brand, and a client who signs online.',
-        title: 'Custom Proposal + E-Signature | SubTrade Bid Management',
+        id: 'LU8oBjt2agQ',
+        caption: 'Proposals in SubTrade: your template or one of ours, your brand kit, drag-in blocks, attachments, and a client who signs online.',
+        title: 'Proposals in SubTrade: Templates, Attachments and Online Sign-off',
         description:
-          'A walkthrough of custom proposals in SubTrade Bid Management: starting from your own template or a ready-made design, entering the price once so the price card, table and chart match, options beside the total, dragging in blocks like stat tiles, charts, photo galleries and client quotes, moving and layering them anywhere on the page, showing the price as a card or table with a deposit, the page overflow warning, your brand kit, sending with the email already written, and the client signing online with notes back on the bid.',
-        poster: '/subtrade-proposal-video-poster.webp',
-        posterAlt: 'Play the SubTrade Custom Proposal and E-Signature walkthrough, a proposal price card beside a signed acceptance and client notes',
-        uploadDate: '2026-10-14',
-        duration: 'PT1M13S',
+          'A walkthrough of proposals in SubTrade Bid Management: opening the Estimating tab on a bid, starting a new proposal from your default template or one of eleven ready-made designs, setting your brand kit once, keeping a template for each scope, building in the block editor with a live preview, editing a block, attaching contracts, insurance and site photos, sending by email or client link, and the client reading, downloading and signing online with notes coming back to the bid.',
+        poster: '/subtrade-proposal-video-poster-v4.webp',
+        posterAlt: 'Play the SubTrade Proposals walkthrough, a proposal attachments page beside the client portal with Accept and sign',
+        uploadDate: '2026-10-17',
+        duration: 'PT1M24S',
       },
       sections: [
         {
@@ -751,10 +751,10 @@ export const features = [
           title: 'Start from your template, or one of ours',
           isNew: true,
           body:
-            'Hit New proposal on any bid and pick where to start. Use one of your own templates, or a ready-made design: Drywall and Interiors, Basement Renovations, Concrete, Electrical, Exterior Finishes or Flooring. Every one is a full proposal, ready for your price.',
+            'Hit New proposal on any bid and pick where to start. Use one of your own templates, or one of eleven ready-made designs: Drywall and Interiors, Wood Framing, Basement Renovations, Concrete, Electrical, Mechanical and HVAC, Painting, Roofing, Exterior Finishes, Flooring or Standard. Every one is a full proposal, ready for your price.',
           checks: [
             'Keep a template for each kind of job: commercial, residential, or a particular client',
-            'Six ready-made designs with their own covers, layouts and fonts',
+            'Eleven ready-made designs with their own covers, layouts and fonts',
             'Use a design, then make it yours with your own photos and wording',
             'Set a default template so every new proposal starts the way you like',
             'Changing a template never changes proposals already made',
@@ -870,7 +870,7 @@ export const features = [
         ['Can I attach a contract or other PDFs to the proposal?', 'Yes. Add an Attachments block and attach your contract, insurance certificate, spec sheets or any PDF. They are listed in the proposal and go out with it to your client.'],
         ['Can I add my own pictures?', 'Yes. The Picture block puts any image anywhere on the page at any size, the Image block holds one to three pictures with a caption, and the gallery shows photos of jobs you have finished.'],
         ['What blocks can I add?', 'Cover, quote details, text, scope of work, inclusions, exclusions, included and not included, price, pricing table, options, unit rates, terms, images, pictures, attachments, charts, stat tiles, your team, a timeline and client quotes. You can also save your own blocks to reuse.'],
-        ['Do I have to start from scratch?', 'No. Start from one of your own templates or a ready-made design for drywall and interiors, basements, concrete, electrical, exterior finishes or flooring, then make it yours.'],
+        ['Do I have to start from scratch?', 'No. Start from one of your own templates or one of eleven ready-made designs for drywall and interiors, wood framing, basements, concrete, electrical, mechanical and HVAC, painting, roofing, exterior finishes or flooring, then make it yours.'],
         ['Will the numbers match across the proposal?', 'Yes. You enter the price once in the price list. The price card, pricing table and chart all read from it, and options stay beside the total, never inside it.'],
         ['Is this part of Bid Manager?', 'Yes. Proposals are built on the bid in Bid Manager, from the Estimating tab, and are included in every SubTrade plan with no add-on module.'],
       ],
