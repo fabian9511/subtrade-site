@@ -759,11 +759,8 @@ export const features = [
             'Set a default template so every new proposal starts the way you like',
             'Changing a template never changes proposals already made',
           ],
-          images: ['/subtrade-proposal-templates.webp', '/subtrade-proposal-ready-made-designs.webp'],
-          imageAlts: [
-            'The Proposal Templates page in SubTrade listing your own templates with edit, rename, duplicate and make default, above the ready-made designs',
-            'Six ready-made proposal designs in SubTrade: Drywall and Interiors, Basement Renovations, Concrete, Electrical, Exterior Finishes and Flooring, each shown as a cover and an inside page',
-          ],
+          images: ['/subtrade-proposal-templates.webp'],
+          imageAlts: ['The Proposal Templates page in SubTrade listing your own templates with edit, rename, duplicate and make default, above the ready-made designs'],
           browser: true,
         },
         {
@@ -780,11 +777,8 @@ export const features = [
             'A chart that shows where the price goes, built from the same numbers',
             'Unit rates for extra work, in their own block',
           ],
-          images: ['/subtrade-proposal-price-list.webp', '/subtrade-proposal-price-card-chart.webp'],
-          imageAlts: [
-            'The price list in the SubTrade proposal builder with sections for steel stud framing, drywall board and tape and acoustic ceilings, an add option and the subtotal',
-            'A SubTrade proposal page with the lump sum price card, a donut chart of where the price goes, the options list and the acceptance block',
-          ],
+          images: ['/subtrade-proposal-price-list.webp'],
+          imageAlts: ['The price list in the SubTrade proposal builder with sections for steel stud framing, drywall board and tape and acoustic ceilings, an add option and the subtotal'],
           browser: true,
         },
         {
@@ -801,11 +795,8 @@ export const features = [
             'Layers on every page: bring a block to the front or send it back',
             'Saved blocks you can drop into any proposal',
           ],
-          images: ['/subtrade-proposal-add-a-block.webp', '/subtrade-proposal-stat-tiles.webp'],
-          imageAlts: [
-            'The Add a block menu in the SubTrade proposal builder listing cover, quote details, text, scope of work, inclusions, exclusions, price, pricing table, options, unit rates, terms, image, attachments, picture and chart',
-            'A stat tiles block selected on a SubTrade proposal page, with its settings panel for tile heading, style and the numbers shown',
-          ],
+          images: ['/subtrade-proposal-add-a-block.webp'],
+          imageAlts: ['The Add a block menu in the SubTrade proposal builder listing cover, quote details, text, scope of work, inclusions, exclusions, price, pricing table, options, unit rates, terms, image, attachments, picture and chart'],
           browser: true,
         },
         {
@@ -822,11 +813,8 @@ export const features = [
             'Attachments are listed in the proposal and sent with it',
             'Preview every page before it goes out, then download the PDF',
           ],
-          images: ['/subtrade-proposal-gallery-client-quote.webp', '/subtrade-proposal-preview-attachments.webp'],
-          imageAlts: [
-            'A photo gallery block of finished jobs and a client quote on a SubTrade proposal page',
-            'The SubTrade proposal preview showing all seven pages, from the cover to the closing page that lists the attached documents',
-          ],
+          images: ['/subtrade-proposal-gallery-client-quote.webp'],
+          imageAlts: ['A photo gallery block of finished jobs and a client quote on a SubTrade proposal page'],
           browser: true,
         },
         {
@@ -839,11 +827,8 @@ export const features = [
             'Footer and terms set once for every proposal',
             'A warning when a block runs off the page, with what to do about it',
           ],
-          images: ['/subtrade-proposal-brand-kit.webp', '/subtrade-proposal-page-overflow-warning.webp'],
-          imageAlts: [
-            'The brand kit in SubTrade with main and accent colour swatches, your colours, and the heading and body fonts with a live sample',
-            'A SubTrade proposal page with a warning bar that the options block runs past the foot of the page and the overflowing block outlined',
-          ],
+          images: ['/subtrade-proposal-brand-kit.webp'],
+          imageAlts: ['The brand kit in SubTrade with main and accent colour swatches, your colours, and the heading and body fonts with a live sample'],
           browser: true,
         },
         {
@@ -859,11 +844,8 @@ export const features = [
             'Revisions keep earlier versions, marked superseded',
             'See when your client has opened the link',
           ],
-          images: ['/subtrade-proposal-send-email.webp', '/subtrade-proposal-sent-accepted.webp'],
-          imageAlts: [
-            'The Send quotation dialog in SubTrade with the recipient, subject and a pre-written message to the client',
-            'A sent proposal in SubTrade showing the client link with how many times it was opened, the acceptance with signature, and client notes',
-          ],
+          images: ['/subtrade-proposal-send-email.webp'],
+          imageAlts: ['The Send quotation dialog in SubTrade with the recipient, subject and a pre-written message to the client'],
           browser: true,
         },
         {
@@ -878,11 +860,8 @@ export const features = [
             'Notes back and forth, kept with the bid',
             'Your client can also decline, so you know where you stand',
           ],
-          images: ['/subtrade-proposal-client-link.webp', '/subtrade-proposal-accept-and-sign.webp'],
-          imageAlts: [
-            'The client view of a SubTrade proposal with the price, Accept and sign, Download the PDF, and a notes box for questions',
-            'The Accept proposal dialog with the client name, title, email, a drawn signature and the authorization checkbox',
-          ],
+          images: ['/subtrade-proposal-accept-and-sign.webp'],
+          imageAlts: ['The Accept proposal dialog with the client name, title, email, a drawn signature and the authorization checkbox'],
           browser: true,
         },
       ],
