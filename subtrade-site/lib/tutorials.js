@@ -7,6 +7,31 @@
 // series (optional): { name, part, of } links the parts with Previous / Next buttons.
 export const tutorials = [
   {
+    slug: 'proposal-templates-subtrade-software',
+    title: 'Proposals: build templates and send for e-signature',
+    blurb: 'Set your brand once, lay out the page your way, attach your docs and get the job signed online.',
+    videoId: 'VwkJFJZOhqo',
+    published: '2026-10-18',
+    pdf: '/guides/subtrade-proposals-guide.pdf',
+    content: {
+      lead: `Stop rebuilding the same quote letter in Word. Set your brand kit once, build a template for each scope you quote, and send it as a link your client can sign.`,
+      learnTitle: `In this video you'll learn how to:`,
+      learn: [
+        `Start a new proposal from your default template, your own templates or a ready-made design`,
+        `Set your brand kit: main color, accent and fonts on every proposal`,
+        `Add blocks for cover, scope, inclusions, exclusions, price, terms and acceptance`,
+        `Lay out the page your way: drag pictures, shapes, stat tiles and galleries anywhere`,
+        `Attach your contract, insurance, WCB letter and site photos to the client PDF`,
+        `Send it by email and get it accepted and signed online, with notes back on the bid`,
+      ],
+      body: [
+        `One template per scope means every quote goes out looking the same, with your logo and your terms. Attachments always land at the back of the client PDF.`,
+        `Your client opens the link, downloads the PDF, and accepts and signs right there. If they have a question, they leave a note and it shows up on the bid.`,
+        `Download the PDF guide below for your estimators and office.`,
+      ],
+    },
+  },
+  {
     slug: 'project-reports-subtrade-software',
     title: 'Project reports: share progress with your client',
     blurb: 'Build a client report from the job and send it as a one-time PDF or a live link locked with a PIN.',
