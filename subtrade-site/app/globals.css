@@ -160,19 +160,33 @@ a:focus-visible, button:focus-visible {
 /* dark photo hero: homepage only */
 .hero.hero-photo {
   background:
-    linear-gradient(100deg, rgba(10, 14, 20, 0.94) 0%, rgba(10, 14, 20, 0.72) 55%, rgba(10, 14, 20, 0.5) 100%),
-    url('/subtrade-commercial-construction-site.webp') center 40% / cover no-repeat;
+    linear-gradient(100deg, rgba(10, 14, 20, 0.62) 0%, rgba(10, 14, 20, 0.45) 50%, rgba(10, 14, 20, 0.3) 100%),
+    url('/subtrade-canada-map-hero.webp') left top / cover no-repeat #0a0e14;
   color: #f2f0eb;
+}
+/* tablet: the hero stacks tall, so show the photo across the top instead of blowing it up */
+@media (min-width: 700.1px) and (max-width: 960px) {
+  .hero.hero-photo {
+    background:
+      linear-gradient(180deg, rgba(10, 14, 20, 0.45), rgba(10, 14, 20, 0.45)),
+      linear-gradient(180deg, transparent 0, transparent 44vw, #0a0e14 66vw),
+      url('/subtrade-canada-map-hero.webp') center top / 100% auto no-repeat #0a0e14;
+  }
 }
 @media (max-width: 700px) {
   .hero.hero-photo {
     background:
-      linear-gradient(180deg, rgba(10, 14, 20, 0.86), rgba(10, 14, 20, 0.72)),
-      url('/subtrade-commercial-construction-site-mobile.webp') center / cover no-repeat;
+      linear-gradient(180deg, rgba(10, 14, 20, 0.35), rgba(10, 14, 20, 0.35)),
+      linear-gradient(180deg, transparent 0, transparent 66vw, #0a0e14 93vw),
+      url('/subtrade-canada-map-hero-mobile.webp') center top / 100% auto no-repeat #0a0e14;
+    padding-top: 46vw; /* map shows as a banner above the words on phones */
   }
 }
 .hero.hero-photo::before { display: none; }
 .hero.hero-photo .lede { color: #c3c9d2; }
+/* soft shadow so the headline stays crisp over the glowing map */
+.hero.hero-photo h1,
+.hero.hero-photo .lede { text-shadow: 0 2px 18px rgba(10, 14, 20, 0.85); }
 .hero.hero-photo .hero-note { color: #8a93a0; }
 
 /* Video hero: copy left, video right with a Short over its corner (feature pages with a Short) */

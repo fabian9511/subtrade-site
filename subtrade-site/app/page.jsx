@@ -52,14 +52,14 @@ export default function Home() {
       <link
         rel="preload"
         as="image"
-        href="/subtrade-commercial-construction-site-mobile.webp"
+        href="/subtrade-canada-map-hero-mobile.webp"
         media="(max-width: 700px)"
         fetchPriority="high"
       />
       <link
         rel="preload"
         as="image"
-        href="/subtrade-commercial-construction-site.webp"
+        href="/subtrade-canada-map-hero.webp"
         media="(min-width: 700.1px)"
         fetchPriority="high"
       />
