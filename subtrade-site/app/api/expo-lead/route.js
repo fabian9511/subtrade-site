@@ -20,10 +20,12 @@ const LOCATION_ID = process.env.GHL_LOCATION_ID || 'tvaEDkrxBWUrDUqzetBb';
 // "Builder Expo 2026" pipeline, used only by this page. Its own pipeline, so
 // none of the stage-triggered speed-to-lead or trial workflows fire for people
 // Fabian has just spoken to in person.
-const PIPELINE_ID = 'EXPO_PIPELINE_ID';
+// Later stages (Contacted, Demo booked, Trial started, Won – paying, Not a fit)
+// are moved by hand.
+const PIPELINE_ID = 'vpTfafN34efIUfV9MW2S';
 const STAGES = {
-  new: 'EXPO_STAGE_NEW', // New – met at the expo
-  hot: 'EXPO_STAGE_HOT', // Hot – call this week
+  new: '88399393-a1ec-457a-ab5a-0850e0508bf9', // New – met at the expo
+  hot: '2245a5e1-741d-4142-82ca-19bc0fd8a4de', // Hot – call this week
 };
 
 // Existing SubTrade custom fields in GoHighLevel. The pick-list values on the
@@ -178,19 +180,16 @@ export async function POST(req) {
   if (isNew && !consent) {
     jobs.push(ghl(`/contacts/${id}`, 'PUT', { dndSettings: { SMS: { status: 'active', message: 'No SMS consent given at Builder Expo 2026' } } }));
   }
-  if (!PIPELINE_ID.startsWith('EXPO_')) {
-    jobs.push(
-      ghl('/opportunities/upsert', 'POST', {
-        locationId: LOCATION_ID,
-        pipelineId: PIPELINE_ID,
-        contactId: id,
-        name: `${firstName} ${lastName}${company ? ` — ${company}` : ''}`.trim(),
-        status: 'open',
-        pipelineStageId: hot ? STAGES.hot : STAGES.new,
-        source: 'Builder Expo 2026',
-      }),
-    );
-  }
+  jobs.push(
+    ghl('/opportunities/upsert', 'POST', {
+      locationId: LOCATION_ID,
+      pipelineId: PIPELINE_ID,
+      contactId: id,
+      name: `${firstName} ${lastName}${company ? ` — ${company}` : ''}`.trim(),
+      status: 'open',
+      pipelineStageId: hot ? STAGES.hot : STAGES.new,
+    }),
+  );
   await Promise.allSettled(jobs);
 
   return NextResponse.json({ ok: true, stored: true });
