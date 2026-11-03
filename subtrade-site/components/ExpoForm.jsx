@@ -5,11 +5,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 /**
  * Builder Expo booth form (/expo/).
  *
- * Two ways in:
- * - Visitors scan the QR code at the booth and fill it in on their own phone.
- * - Staff open /expo/?staff=1 on the iPad once; the device remembers it and
- *   shows the extra booth fields (hot/warm/cold, notes, who met them), a list
- *   of everyone captured on this device and a CSV download.
+ * Fabian and Steban fill it in on the iPad while they talk to each visitor
+ * (no QR code at the booth). Staff mode is therefore on by default: the booth
+ * fields (hot/warm/cold, notes, who met them), a list of everyone captured on
+ * this device, a CSV download, and a conversation guide under every question
+ * (what to ask, and what to say back once an answer is picked).
+ * /expo/?staff=0 switches a device to the plain visitor form.
  *
  * Every lead is saved on the device first and then sent to /api/expo-lead.
  * If the expo Wi-Fi drops, leads wait on the device and go out by themselves
@@ -35,6 +36,88 @@ const TIMELINE = [
 ];
 const NEXT = ['Book a demo', 'Start a free trial', 'Send me info', 'Just looking'];
 const TEMPS = ['Hot', 'Warm', 'Cold'];
+const GUIDE_OFF = 'subtrade-expo-guide-off';
+
+// Booth conversation guide, staff only. `ask` is what to say to open the
+// question; `say` is the talking point once an answer is tapped. Only promise
+// what SubTrade does today (lib/tools.js); takeoff, QuickBooks job costing and
+// invoicing are "coming soon" there, so they are "coming soon" here too.
+const GUIDE = {
+  trade: {
+    ask: '“What trade are you in?”',
+    say: {
+      'Drywall / Framing': 'That’s us. We built SubTrade inside our own drywall company here in Calgary. Show Bid Manager and change orders. Takeoff & estimating is coming soon — put them on the list.',
+      Electrical: 'Crews spread over many sites: show crew scheduling (drag crews between jobs, they get notified) and GPS clock-in.',
+      Plumbing: 'Crews spread over many sites: show crew scheduling and GPS clock-in, then change orders for the extras.',
+      'HVAC / Mechanical': 'Show crew scheduling and GPS clock-in, then submittals & RFIs — what’s out, what’s late, who’s holding it.',
+      'Concrete Forming': 'Show the 2-minute daily log (weather + manpower), GPS photos and FLHAs signed on the phone.',
+      Painting: 'Show change orders (price and get the extra signed before the work) and progress billing with holdback.',
+      'General Contractor': 'SubTrade is built for subcontractors. Still take their details and ask which subs they work with — easy referral.',
+      Other: 'Ask: “What slows your jobs down the most?” and steer to that tool.',
+    },
+  },
+  role: {
+    ask: '“What’s your role in the company?”',
+    say: {
+      Owner: 'Decision maker. Talk money: $299/month CAD with 5 users included, 14-day free trial. Go for the demo.',
+      Partner: 'Decision maker. Talk money: $299/month CAD with 5 users included, 14-day free trial. Go for the demo.',
+      'Project manager': 'Talk schedules, change orders, submittals & RFIs. Ask: “Who signs off on new software?” — get the owner’s name in the notes.',
+      'Foreman / Superintendent': 'Show the phone side: clock-in, 2-minute daily log, drawings on the phone. Ask for the owner’s name and number for the notes.',
+      'Office / Admin': 'Talk timesheets that come in on their own, progress billing, no more chasing hours. Ask who decides on software.',
+    },
+  },
+  employees: {
+    ask: '“How many people work for you, office and field?”',
+    say: {
+      '1-5': 'Fits the base plan: $299/month CAD, 5 users included.',
+      '6-10': 'Sweet spot — hours and extras leak most at this size. 10 users ≈ $374/month (extra users $15 each). Push for a demo.',
+      '11-20': 'Sweet spot. 20 users ≈ $499/month (users 6–15 $15, 16–25 $10). Push for a demo.',
+      '21-50': 'Bigger crew: extra users get cheaper the more they add. Book a proper demo with Fabian. Annual billing saves 20%.',
+      '50+': 'Big crew: extra users drop to $4 each past 30. Book a proper demo with Fabian. Annual billing saves 20%.',
+    },
+  },
+  software: {
+    ask: '“What do you run your jobs with now?”',
+    say: {
+      'Pen & paper': 'Ask: “How long does payroll take you each week?” SubTrade replaces the paper timesheets — hours land on the job from the phone.',
+      Excel: 'Ask: “Who updates the spreadsheet, and when?” In SubTrade the field fills it in as they work.',
+      QuickBooks: 'Keep QuickBooks for the books — SubTrade runs the field. Job costing synced to QuickBooks is coming soon.',
+      Procore: 'Procore is mostly built for general contractors. SubTrade is built and priced for subcontractors.',
+      Buildertrend: 'Buildertrend is mostly built for home builders. SubTrade is built for the trades doing the work.',
+      Jobber: 'Jobber suits service calls. SubTrade handles project work: change orders, progress billing, holdback.',
+      Other: 'Ask what they like and what drives them nuts about it — write it in the notes.',
+    },
+  },
+  needs: {
+    ask: '“What’s the biggest headache right now?”',
+    say: {
+      'Time tracking': 'GPS clock-in on the phone; hours land on the right job with live labour cost.',
+      'Change orders': 'Price the extra on the phone, send it, get it signed before the work is done.',
+      Scheduling: 'Drag crews between jobs; the crew gets notified automatically. Gantt per job too.',
+      'Progress billing': 'Draws built from real field data, with holdback handled.',
+      'Daily logs & safety': 'Two-minute daily log with weather and manpower; FLHAs and toolbox talks signed on the phone.',
+      'Job costing': 'Live labour cost per job today from clock-ins. Full budget vs actual with QuickBooks sync is coming soon.',
+      'Estimating & takeoff': 'Bid Manager today (every tender on one board, proposals with e-signature). Takeoff & estimating coming soon.',
+    },
+  },
+  timeline: {
+    ask: '“When would you want something better in place?”',
+    say: {
+      Immediately: 'Hot. Book the demo now, or start the free trial with them on the spot. Mark them Hot below.',
+      '1-3 months': 'Book a demo for after the show. Mark Warm.',
+      '6+ Months': 'No pressure. Offer the free trial and say we’ll check in after the show. Mark Cold.',
+    },
+  },
+  next: {
+    ask: '“What’s the best next step for you?”',
+    say: {
+      'Book a demo': 'Goes straight to “Hot – call this week”. If you can, agree a day and time now and write it in the notes.',
+      'Start a free trial': '14-day free trial at subtradesoftware.com/free-trial. Offer to set it up with them.',
+      'Send me info': 'We follow up after the show. Ask the email question below so we’re allowed to.',
+      'Just looking': 'All good. Ask the email question below so we can keep in touch.',
+    },
+  },
+};
 
 const EMPTY = {
   firstName: '', lastName: '', company: '', phone: '', email: '', website: '',
@@ -56,13 +139,16 @@ const write = (key, value) => {
   } catch {}
 };
 
-function Chips({ label, hint, options, value, onChange, multi }) {
+function Chips({ label, hint, options, value, onChange, multi, guide }) {
+  const picked = multi ? value : value ? [value] : [];
+  const tips = guide ? picked.map((v) => [v, guide.say[v]]).filter(([, t]) => t) : [];
   return (
     <fieldset className="expo-field">
       <legend>
         {label}
         {hint && <span className="expo-hint"> {hint}</span>}
       </legend>
+      {guide && <p className="expo-ask"><b>Ask</b> {guide.ask}</p>}
       <div className="expo-chips">
         {options.map((o) => {
           const [val, text] = Array.isArray(o) ? o : [o, o];
@@ -80,6 +166,11 @@ function Chips({ label, hint, options, value, onChange, multi }) {
           );
         })}
       </div>
+      {tips.map(([v, t]) => (
+        <p key={v} className="expo-say">
+          <b>Say{multi ? ` · ${v}` : ''}</b> {t}
+        </p>
+      ))}
     </fieldset>
   );
 }
@@ -117,17 +208,20 @@ export default function ExpoForm() {
   const [done, setDone] = useState(null); // the lead just saved → thank-you screen
   const [error, setError] = useState('');
   const [showList, setShowList] = useState(false);
+  const [guideOn, setGuideOn] = useState(true);
   const sending = useRef(false);
   const top = useRef(null);
 
   const set = (k) => (v) => setForm((f) => ({ ...f, [k]: v && v.target ? v.target.value : v }));
 
-  // Staff mode: /expo/?staff=1 turns it on for this device, ?staff=0 turns it off.
+  // Staff mode is the default (staff fill the form in at the booth);
+  // ?staff=0 turns it off for this device, ?staff=1 turns it back on.
   useEffect(() => {
     const q = new URLSearchParams(window.location.search).get('staff');
     if (q === '1') write(STAFF, true);
     if (q === '0') write(STAFF, false);
-    setStaff(Boolean(read(STAFF, false)));
+    setStaff(Boolean(read(STAFF, true)));
+    setGuideOn(!read(GUIDE_OFF, false));
     setBy(read(STAFF_BY, ''));
     setLeads(read(STORE, []));
   }, []);
@@ -236,6 +330,11 @@ export default function ExpoForm() {
 
   const waiting = leads.filter((l) => l.status === 'pending').length;
   const failed = leads.filter((l) => l.status === 'failed').length;
+  const g = (key) => (staff && guideOn ? GUIDE[key] : undefined);
+  const toggleGuide = () => {
+    write(GUIDE_OFF, guideOn);
+    setGuideOn(!guideOn);
+  };
 
   return (
     <div className="expo" ref={top}>
@@ -247,10 +346,11 @@ export default function ExpoForm() {
       {staff && (
         <div className="expo-staffbar">
           <b>Staff mode</b>
-          <span>{leads.length} saved on this iPad</span>
+          <span>{leads.length} saved on this device</span>
           {waiting > 0 && <span className="expo-wait">{waiting} waiting for Wi-Fi</span>}
           {failed > 0 && <span className="expo-bad">{failed} need a look</span>}
           <span className="expo-staffbar-btns">
+            <button type="button" onClick={toggleGuide}>{guideOn ? 'Hide guide' : 'Show guide'}</button>
             <button type="button" onClick={() => setShowList((s) => !s)}>{showList ? 'Hide list' : 'Show list'}</button>
             <button type="button" onClick={downloadCsv} disabled={!leads.length}>Download CSV</button>
           </span>
@@ -297,11 +397,33 @@ export default function ExpoForm() {
         </section>
       ) : (
         <form className="expo-card" onSubmit={submit} noValidate>
-          <h1>Run your crew from your phone.</h1>
-          <p className="expo-lead">
-            Leave your details and we&rsquo;ll send you a free 15-minute walkthrough of SubTrade, built by a
-            Calgary drywall contractor for trade contractors. Takes 30 seconds.
-          </p>
+          {staff ? (
+            <>
+              <h1>New contact</h1>
+              {guideOn && (
+                <div className="expo-guide">
+                  <p className="expo-guide-title">How to open</p>
+                  <p>
+                    &ldquo;Hey, are you a contractor? We build SubTrade — the app we made to run our own drywall
+                    company here in Calgary: time tracking, change orders, scheduling and progress billing, all from
+                    the phone. Can I grab your details and show you two minutes of it?&rdquo;
+                  </p>
+                  <p className="expo-guide-small">
+                    Fill it in as you talk. Each question shows what to ask, and once you tap their answer, what to say
+                    back. Name plus a phone or email is all that&rsquo;s required.
+                  </p>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <h1>Run your crew from your phone.</h1>
+              <p className="expo-lead">
+                Leave your details and we&rsquo;ll send you a free 15-minute walkthrough of SubTrade, built by a
+                Calgary drywall contractor for trade contractors. Takes 30 seconds.
+              </p>
+            </>
+          )}
 
           <div className="expo-grid">
             <label className="expo-input">
@@ -328,18 +450,31 @@ export default function ExpoForm() {
           {/* Honeypot for bots; hidden from people and screen readers. */}
           <input className="expo-hp" tabIndex={-1} aria-hidden="true" autoComplete="off" value={form.website} onChange={set('website')} name="website" />
 
-          <Chips label="Your trade" options={TRADES} value={form.trade} onChange={set('trade')} />
-          <Chips label="Your role" options={ROLES} value={form.role} onChange={set('role')} />
-          <Chips label="People in the company" hint="office + field" options={PEOPLE} value={form.employees} onChange={set('employees')} />
-          <Chips label="What do you run your jobs with now?" hint="pick any" options={SOFTWARE} value={form.software} onChange={set('software')} multi />
-          <Chips label="What would you like help with?" hint="pick any" options={NEEDS} value={form.needs} onChange={set('needs')} multi />
-          <Chips label="When do you want a better system?" options={TIMELINE} value={form.timeline} onChange={set('timeline')} />
-          <Chips label="What would you like next?" options={NEXT} value={form.next} onChange={set('next')} />
+          <Chips label={staff ? 'Trade' : 'Your trade'} options={TRADES} value={form.trade} onChange={set('trade')} guide={g('trade')} />
+          <Chips label={staff ? 'Role' : 'Your role'} options={ROLES} value={form.role} onChange={set('role')} guide={g('role')} />
+          <Chips label="People in the company" hint="office + field" options={PEOPLE} value={form.employees} onChange={set('employees')} guide={g('employees')} />
+          <Chips label={staff ? 'What they run jobs with now' : 'What do you run your jobs with now?'} hint="pick any" options={SOFTWARE} value={form.software} onChange={set('software')} multi guide={g('software')} />
+          <Chips label={staff ? 'What they want help with' : 'What would you like help with?'} hint="pick any" options={NEEDS} value={form.needs} onChange={set('needs')} multi guide={g('needs')} />
+          <Chips label={staff ? 'When they want a better system' : 'When do you want a better system?'} options={TIMELINE} value={form.timeline} onChange={set('timeline')} guide={g('timeline')} />
+          <Chips label={staff ? 'Next step' : 'What would you like next?'} options={NEXT} value={form.next} onChange={set('next')} guide={g('next')} />
 
           {staff && (
             <div className="expo-staff">
-              <p className="expo-staff-title">Booth notes · only on the staff iPad</p>
-              <Chips label="Lead" options={TEMPS} value={form.temp} onChange={set('temp')} />
+              <p className="expo-staff-title">Booth notes · for us, not read out</p>
+              <Chips
+                label="Lead"
+                options={TEMPS}
+                value={form.temp}
+                onChange={set('temp')}
+                guide={guideOn ? {
+                  ask: 'Your gut call after the chat.',
+                  say: {
+                    Hot: 'Owner or decision maker who wants it soon. Lands in “Hot – call this week”.',
+                    Warm: 'Interested, but not now or not the one who decides. Follow up after the show.',
+                    Cold: 'Just browsing. Keep in touch, no hard follow-up.',
+                  },
+                } : undefined}
+              />
               <label className="expo-input">
                 <span>Notes</span>
                 <textarea rows={3} value={form.notes} onChange={set('notes')} placeholder="What they said, who to call, anything to remember" />
@@ -351,6 +486,11 @@ export default function ExpoForm() {
             </div>
           )}
 
+          {staff && guideOn && (
+            <p className="expo-ask expo-ask-consent">
+              <b>Ask</b> &ldquo;Is it OK if we email and text you about SubTrade?&rdquo; Only tick the box if they say yes.
+            </p>
+          )}
           <label className="expo-consent">
             <input type="checkbox" checked={form.consent} onChange={(e) => set('consent')(e.target.checked)} />
             <span>
@@ -359,8 +499,18 @@ export default function ExpoForm() {
             </span>
           </label>
 
+          {staff && guideOn && (
+            <div className="expo-guide expo-guide-close">
+              <p className="expo-guide-title">How to close</p>
+              <p>
+                &ldquo;Thanks, [name]. We&rsquo;ll reach out after the show
+                {form.next === 'Book a demo' ? ' to lock in your demo' : ''}.&rdquo; Hand them a card, pick Hot / Warm /
+                Cold, add a line in the notes, then save.
+              </p>
+            </div>
+          )}
           {error && <p className="expo-error" role="alert">{error}</p>}
-          <button type="submit" className="expo-submit">Send</button>
+          <button type="submit" className="expo-submit">{staff ? 'Save contact' : 'Send'}</button>
           <p className="expo-small">
             We only use this to follow up about SubTrade. <a href="/privacy-policy/">Privacy policy</a>
           </p>
