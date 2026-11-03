@@ -154,13 +154,13 @@ export async function POST(req) {
   const by = clean(staff.by, 40);
   const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
   const note = [
-    `Builder Expo 2026 — ${by ? `entered by ${by} on the booth iPad` : 'filled in by the visitor (QR code)'}`,
+    `Builder Expo 2026 — ${by ? `entered by ${by} at the booth` : 'entered at the booth'}`,
     staff.temp ? `Lead: ${clean(staff.temp, 10)}` : '',
     `Company: ${company || '-'}`,
-    `Trade: ${[clean(a.trade), clean(a.tradeOther, 80)].filter(Boolean).join(' — ') || '-'}`,
+    `Trade: ${[clean(a.trade), clean(a.tradeOther, 80)].filter(Boolean).join(': ') || '-'}`,
     `Role: ${clean(a.role) || '-'}`,
     `People: ${clean(a.employees) || '-'}`,
-    `Uses now: ${[...software, clean(a.softwareOther, 80) && `(other: ${clean(a.softwareOther, 80)})`].filter(Boolean).join(', ') || '-'}`,
+    `Uses now: ${software.map((s) => (s === 'Other' && clean(a.softwareOther, 80) ? `Other: ${clean(a.softwareOther, 80)}` : s)).join(', ') || '-'}`,
     `Wants help with: ${needs.join(', ') || '-'}`,
     `Wants a system: ${clean(a.timelineLabel) || '-'}`,
     `Next step they asked for: ${clean(a.next) || '-'}`,
