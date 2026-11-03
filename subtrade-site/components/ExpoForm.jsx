@@ -412,14 +412,15 @@ export default function ExpoForm() {
               {guideOn && (
                 <div className="expo-guide">
                   <p className="expo-guide-title">How to open</p>
-                  <p>
-                    &ldquo;Hey, are you a contractor? We build SubTrade — the app we made to run our own drywall
-                    company here in Calgary: time tracking, change orders, scheduling and progress billing, all from
-                    the phone. Can I grab your details and show you two minutes of it?&rdquo;
-                  </p>
+                  <ol className="expo-script">
+                    <li>&ldquo;Hi! Are you a contractor?&rdquo;</li>
+                    <li>&ldquo;We make SubTrade. It runs your crew from your phone.&rdquo;</li>
+                    <li>&ldquo;We built it for our own drywall company here in Calgary.&rdquo;</li>
+                    <li>&ldquo;Can I show you two minutes?&rdquo;</li>
+                  </ol>
                   <p className="expo-guide-small">
-                    Fill it in as you talk. Each question shows what to ask, and once you tap their answer, what to say
-                    back. Name plus a phone or email is all that&rsquo;s required.
+                    Read the blue line, tap their answer, read the green line. You only need a name and a phone or
+                    email.
                   </p>
                 </div>
               )}
