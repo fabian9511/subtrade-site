@@ -414,7 +414,7 @@ export default function ExpoForm() {
                   <p className="expo-guide-title">How to open</p>
                   <ol className="expo-script">
                     <li>&ldquo;Hi! Are you a contractor?&rdquo;</li>
-                    <li>&ldquo;We make SubTrade. It runs your crew from your phone.&rdquo;</li>
+                    <li>&ldquo;This is SubTrade, an app to run your crew from your phone.&rdquo;</li>
                     <li>&ldquo;We built it for our own drywall company here in Calgary.&rdquo;</li>
                     <li>&ldquo;Can I show you two minutes?&rdquo;</li>
                   </ol>
