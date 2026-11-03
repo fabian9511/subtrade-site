@@ -121,7 +121,7 @@ const GUIDE = {
 
 const EMPTY = {
   firstName: '', lastName: '', company: '', phone: '', email: '', website: '',
-  trade: '', role: '', employees: '', software: [], needs: [], timeline: '', next: '',
+  trade: '', tradeOther: '', role: '', employees: '', software: [], softwareOther: '', needs: [], timeline: '', next: '',
   consent: false, temp: '', notes: '',
 };
 
@@ -139,8 +139,9 @@ const write = (key, value) => {
   } catch {}
 };
 
-function Chips({ label, hint, options, value, onChange, multi, guide }) {
+function Chips({ label, hint, options, value, onChange, multi, guide, other, onOther, otherPlaceholder }) {
   const picked = multi ? value : value ? [value] : [];
+  const otherOn = onOther && picked.includes('Other');
   const tips = guide ? picked.map((v) => [v, guide.say[v]]).filter(([, t]) => t) : [];
   return (
     <fieldset className="expo-field">
@@ -166,6 +167,12 @@ function Chips({ label, hint, options, value, onChange, multi, guide }) {
           );
         })}
       </div>
+      {otherOn && (
+        <label className="expo-input expo-other">
+          <span>Other — type it in</span>
+          <input value={other} onChange={onOther} placeholder={otherPlaceholder} autoComplete="off" />
+        </label>
+      )}
       {tips.map(([v, t]) => (
         <p key={v} className="expo-say">
           <b>Say{multi ? ` · ${v}` : ''}</b> {t}
@@ -184,10 +191,10 @@ function toCsv(leads) {
     ['Company', (l) => l.payload.company],
     ['Phone', (l) => l.payload.phone],
     ['Email', (l) => l.payload.email],
-    ['Trade', (l) => l.payload.answers.trade],
+    ['Trade', (l) => [l.payload.answers.trade, l.payload.answers.tradeOther].filter(Boolean).join(': ')],
     ['Role', (l) => l.payload.answers.role],
     ['People', (l) => l.payload.answers.employees],
-    ['Uses now', (l) => l.payload.answers.software.join('; ')],
+    ['Uses now', (l) => [...l.payload.answers.software, l.payload.answers.softwareOther].filter(Boolean).join('; ')],
     ['Wants help with', (l) => l.payload.answers.needs.join('; ')],
     ['When', (l) => l.payload.answers.timelineLabel],
     ['Next step', (l) => l.payload.answers.next],
@@ -299,9 +306,11 @@ export default function ExpoForm() {
       consent: form.consent,
       answers: {
         trade: form.trade,
+        tradeOther: form.trade === 'Other' ? form.tradeOther.trim() : '',
         role: form.role,
         employees: form.employees,
         software: form.software,
+        softwareOther: form.software.includes('Other') ? form.softwareOther.trim() : '',
         needs: form.needs,
         timeline: form.timeline,
         timelineLabel: (TIMELINE.find(([v]) => v === form.timeline) || [])[1] || '',
@@ -450,10 +459,10 @@ export default function ExpoForm() {
           {/* Honeypot for bots; hidden from people and screen readers. */}
           <input className="expo-hp" tabIndex={-1} aria-hidden="true" autoComplete="off" value={form.website} onChange={set('website')} name="website" />
 
-          <Chips label={staff ? 'Trade' : 'Your trade'} options={TRADES} value={form.trade} onChange={set('trade')} guide={g('trade')} />
+          <Chips label={staff ? 'Trade' : 'Your trade'} options={TRADES} value={form.trade} onChange={set('trade')} guide={g('trade')} other={form.tradeOther} onOther={set('tradeOther')} otherPlaceholder="e.g. Roofing, Insulation, Flooring" />
           <Chips label={staff ? 'Role' : 'Your role'} options={ROLES} value={form.role} onChange={set('role')} guide={g('role')} />
           <Chips label="People in the company" hint="office + field" options={PEOPLE} value={form.employees} onChange={set('employees')} guide={g('employees')} />
-          <Chips label={staff ? 'What they run jobs with now' : 'What do you run your jobs with now?'} hint="pick any" options={SOFTWARE} value={form.software} onChange={set('software')} multi guide={g('software')} />
+          <Chips label={staff ? 'What they run jobs with now' : 'What do you run your jobs with now?'} hint="pick any" options={SOFTWARE} value={form.software} onChange={set('software')} multi guide={g('software')} other={form.softwareOther} onOther={set('softwareOther')} otherPlaceholder="e.g. Fieldwire, JobTread, ServiceTitan" />
           <Chips label={staff ? 'What they want help with' : 'What would you like help with?'} hint="pick any" options={NEEDS} value={form.needs} onChange={set('needs')} multi guide={g('needs')} />
           <Chips label={staff ? 'When they want a better system' : 'When do you want a better system?'} options={TIMELINE} value={form.timeline} onChange={set('timeline')} guide={g('timeline')} />
           <Chips label={staff ? 'Next step' : 'What would you like next?'} options={NEXT} value={form.next} onChange={set('next')} guide={g('next')} />

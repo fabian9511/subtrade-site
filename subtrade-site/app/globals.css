@@ -3967,6 +3967,7 @@ body:has(.expo) chat-widget { display: none !important; }
 .expo-guide-title { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #1d6fb8; }
 .expo-guide-small { font-size: 14px; color: var(--steel-400); }
 .expo-guide-close { margin: 22px 0 0; }
+.expo-other { margin-top: 12px; }
 .expo-staff {
   margin-top: 26px; padding: 18px; border-radius: 14px; background: #fff7e8; border: 1.5px dashed #e8a33b;
   display: grid; gap: 14px;
