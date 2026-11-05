@@ -270,7 +270,7 @@ export default function BuildersNight() {
       </section>
 
       <section className="section" id="register">
-        <div className="wrap bn-register">
+        <div className="wrap bn-register bn-centered">
           <div className="section-head">
             <p className="eyebrow">Register</p>
             <h2 className="display">Get on the list</h2>
@@ -283,7 +283,7 @@ export default function BuildersNight() {
       </section>
 
       <section className="section">
-        <div className="wrap">
+        <div className="wrap bn-centered">
           <div className="section-head">
             <p className="eyebrow">Questions</p>
             <h2 className="display">Builders Night FAQ</h2>
