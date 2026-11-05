@@ -34,6 +34,7 @@ export default function sitemap() {
     '/construction-holdback-calculator',
     '/construction-retainage-calculator',
     '/construction-software-15min-demo', '/contact-us', '/how-to-tutorials',
+    '/builders-night',
     '/the-ultimate-guide-to-choosing-subcontractor-management-software-for-efficient-project-oversight',
     '/terms-and-conditions', '/privacy-policy', '/fair-billing-policy',
   ];
