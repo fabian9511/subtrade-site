@@ -101,7 +101,7 @@ export default function BuildersNight() {
           <p className="bn-lead">
             One afternoon. Calgary general contractors and pre-qualified subcontractors from every trade, in one room.
             Every sub has to pre-qualify before they get a ticket: WCB coverage, at least $3M in liability and the
-            manpower to take on the work.
+            manpower to take on the work. Come enjoy the food and drinks, on us.
           </p>
           <div className="bn-ctas">
             <a className="btn btn-primary btn-lg" href="#register">
