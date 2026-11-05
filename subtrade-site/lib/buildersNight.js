@@ -5,7 +5,7 @@
  * follow.
  *
  * Venue: keep `confirmed: false` until the venue contract is signed. While it
- * is false the page only says "SE Calgary, venue confirmed soon" and the
+ * is false the page only says "Calgary Central, venue TBD" and the
  * street address stays off the site. Flip it to true once it's booked.
  */
 
@@ -29,14 +29,14 @@ export const EVENT = {
     street: '5000 12A St SE',
     city: 'Calgary',
     region: 'AB',
-    area: 'SE Calgary',
+    area: 'Calgary Central',
   },
 };
 
 export const venueLine = () =>
   EVENT.venue.confirmed
     ? `${EVENT.venue.name}, ${EVENT.venue.street}, ${EVENT.venue.city}`
-    : `${EVENT.venue.area}, venue confirmed soon`;
+    : `${EVENT.venue.area}, venue TBD`;
 
 export const SCHEDULE = [
   ['12:00 pm', 'Setup', 'Builders and suppliers set up their table, banner and promo items. The room is ours from noon.'],

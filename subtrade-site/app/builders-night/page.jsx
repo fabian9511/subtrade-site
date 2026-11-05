@@ -120,7 +120,7 @@ export default function BuildersNight() {
             <div>
               <dt>Where</dt>
               <dd>{v.confirmed ? v.name : v.area}</dd>
-              <dd className="bn-sub">{v.confirmed ? `${v.street}, ${v.city}` : 'Venue confirmed soon'}</dd>
+              <dd className="bn-sub">{v.confirmed ? `${v.street}, ${v.city}` : 'Venue TBD'}</dd>
             </div>
             <div>
               <dt>Builders</dt>
