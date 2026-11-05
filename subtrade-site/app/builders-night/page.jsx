@@ -207,7 +207,7 @@ export default function BuildersNight() {
                 <li>Subs work the builder tables during the open floor</li>
                 <li>The attendee list after the event, sorted by trade</li>
                 <li>
-                  Tables are limited. Miss one and your team can still come as guests at ${EVENT.entryFee} a person
+                  {`Table availability is limited. If they sell out, your team can still attend as individual guests for $${EVENT.entryFee} per person.`}
                 </li>
               </ul>
               <div className="bn-btnrow">
