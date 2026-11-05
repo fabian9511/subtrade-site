@@ -4067,6 +4067,9 @@ body:has(.expo) chat-widget { display: none !important; }
 .bn-schedule h3 { font-size: 22px; }
 .bn-schedule p { color: var(--steel-400); font-size: 15px; line-height: 1.45; }
 
+.bn-photo { margin: 28px 0 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--steel-800); box-shadow: 0 1px 3px rgba(21, 24, 28, 0.06); }
+.bn-photo img { display: block; width: 100%; height: auto; }
+
 .bn-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .bn-card {
   background: #fff; border: 1px solid var(--steel-800); border-radius: 10px; padding: 32px;

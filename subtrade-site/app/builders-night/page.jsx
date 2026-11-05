@@ -14,7 +14,13 @@ export const metadata = {
   title,
   description,
   alternates: { canonical: '/builders-night/' },
-  openGraph: { title, description, url: 'https://subtradesoftware.com/builders-night/', type: 'website' },
+  openGraph: {
+    title,
+    description,
+    url: 'https://subtradesoftware.com/builders-night/',
+    type: 'website',
+    images: [{ url: '/builders-night-builder-table-trades.webp', width: 1600, height: 893 }],
+  },
 };
 
 const faqs = [
@@ -128,6 +134,15 @@ export default function BuildersNight() {
               <dd className="bn-sub">Once you pre-qualify</dd>
             </div>
           </dl>
+          <figure className="bn-photo">
+            <img
+              src="/builders-night-builder-table-trades.webp"
+              alt="A builder at his Builders Night table talking with subcontractors, with the room full of trades behind them"
+              width="1600"
+              height="893"
+              decoding="async"
+            />
+          </figure>
         </div>
       </section>
 
