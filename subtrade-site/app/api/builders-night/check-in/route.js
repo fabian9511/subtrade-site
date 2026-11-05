@@ -44,6 +44,15 @@ export async function POST(req) {
     return NextResponse.json({ ok: false, error: 'Could not reach GoHighLevel' }, { status: 502 });
   }
 
+  // Re-read the contact itself: the search can lag a few seconds behind, and a
+  // stale tag list would let the same person check in twice.
+  if (contact?.id) {
+    try {
+      const fresh = await ghl(`/contacts/${contact.id}`, 'GET');
+      const c = (await fresh.json().catch(() => ({})))?.contact;
+      if (c?.id) contact = c;
+    } catch {}
+  }
   const tags = (contact?.tags || []).map(norm);
   if (!contact?.id || !tags.includes(norm('builders-night-2027'))) return NextResponse.json({ ok: true, status: 'not-found' });
   const firstName = cap(contact.firstNameRaw || contact.firstName || '');
@@ -51,10 +60,17 @@ export async function POST(req) {
   if (tags.includes(norm('bn-attended'))) return NextResponse.json({ ok: true, status: 'already', firstName });
 
   const at = new Date().toLocaleString('en-CA', { timeZone: 'America/Edmonton', dateStyle: 'medium', timeStyle: 'short' });
-  const jobs = [
-    ghl(`/contacts/${contact.id}/tags`, 'POST', { tags: ['bn-attended'] }),
-    ghl(`/contacts/${contact.id}/notes`, 'POST', { body: `Builders Night 2027: checked in at the door, ${at}` }),
-  ];
+  // The bn-attended tag is the attendance record: a contact can only carry it
+  // once, so checking someone in twice (two phones, the tablet, a re-scan)
+  // never counts them twice. Tag first, then the note.
+  try {
+    const t = await ghl(`/contacts/${contact.id}/tags`, 'POST', { tags: ['bn-attended'] });
+    if (!t.ok) throw new Error(`tag status ${t.status}`);
+  } catch (err) {
+    console.error('[builders-night check-in] tag error', err?.message);
+    return NextResponse.json({ ok: false, error: 'Could not reach GoHighLevel' }, { status: 502 });
+  }
+  const jobs = [ghl(`/contacts/${contact.id}/notes`, 'POST', { body: `Builders Night 2027: checked in at the door, ${at}` })];
 
   // Move their Builders Night card(s) to "Checked in". Cards in other pipelines are left alone.
   try {

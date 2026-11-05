@@ -4067,8 +4067,17 @@ body:has(.expo) chat-widget { display: none !important; }
 .bn-schedule h3 { font-size: 22px; }
 .bn-schedule p { color: var(--steel-400); font-size: 15px; line-height: 1.45; }
 
-.bn-photo { margin: 28px 0 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--steel-800); box-shadow: 0 1px 3px rgba(21, 24, 28, 0.06); }
-.bn-photo img { display: block; width: 100%; height: auto; }
+.bn-photo {
+  margin: 36px 0 0; height: clamp(160px, 24vw, 320px); overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  mask-composite: intersect;
+}
+.bn-photo img {
+  display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 45%;
+  filter: grayscale(0.85) contrast(0.85) brightness(1.08); opacity: 0.2; mix-blend-mode: multiply;
+}
 
 .bn-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .bn-card {

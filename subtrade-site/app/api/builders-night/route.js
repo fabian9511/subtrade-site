@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { TRADES, WCB, INSURANCE, CREW, SAFETY, YEARS, GC_WORK, qualify, crewToGhl } from '../../../lib/buildersNight';
-import { LOCATION_ID, PIPELINE_NAMES, STAGE_NAMES, makeGhl, findStage } from '../../../lib/buildersNightGhl';
+import { LOCATION_ID, PIPELINE_NAMES, STAGE_NAMES, makeGhl, findStage, norm } from '../../../lib/buildersNightGhl';
 
 /**
  * Registration for SubTrade Builders Night (/builders-night/).
@@ -130,6 +130,7 @@ export async function POST(req) {
 
   let id;
   let isNew = false;
+  let oldTags = [];
   try {
     const res = await ghl('/contacts/upsert', 'POST', {
       locationId: LOCATION_ID,
@@ -144,15 +145,27 @@ export async function POST(req) {
     const data = await res.json().catch(() => ({}));
     id = data?.contact?.id;
     isNew = Boolean(data?.new);
+    oldTags = (data?.contact?.tags || []).map(norm);
   } catch (err) {
     console.error('[builders-night] upsert error', err?.message);
   }
   if (!id) return NextResponse.json({ ok: false, error: 'GoHighLevel did not save it' }, { status: 502 });
 
+  // Already registered for Builders Night? Then this is a repeat: same contact
+  // (upsert matches on email), no second card, and a flag so it can be checked.
+  // A sub whose answers now give a different result than last time is not
+  // re-qualified automatically: they go to review instead of getting the pay link.
+  const repeat = oldTags.includes(norm('builders-night-2027'));
+  const wasQualified = oldTags.includes(norm('bn-qualified'));
+  const wasNotQualified = oldTags.includes(norm('bn-not-qualified'));
+  const review = repeat && isSub && ((result.qualified && wasNotQualified) || (!result.qualified && wasQualified));
+
   const tags = ['builders-night-2027'];
+  if (repeat) tags.push('bn-registered-twice');
   if (isSub) {
     tags.push('bn-sub', `bn-trade-${slug(ans.trade === 'Other' && ans.tradeOther ? ans.tradeOther : ans.trade)}`);
-    if (result.qualified) tags.push('bn-qualified', `bn-tier-${result.tier}`);
+    if (review) tags.push('bn-review');
+    else if (result.qualified) tags.push('bn-qualified', `bn-tier-${result.tier}`);
     else tags.push('bn-not-qualified');
     if (ans.safety === 'COR' || ans.safety === 'SECOR') tags.push('bn-cor-secor');
     if (share) tags.push('bn-share-ok');
@@ -195,6 +208,14 @@ export async function POST(req) {
             : `Next: send the $25 a person payment link (${attending} ${attending === 1 ? 'pass' : 'passes'}).`,
       ].filter(Boolean);
   const note = [
+    ...(repeat
+      ? [
+          review
+            ? 'REGISTERED AGAIN, ANSWERS CHANGED: the result is different from their first registration. Tagged bn-review, no payment link sent. Compare with the first note before qualifying them by hand.'
+            : 'REGISTERED AGAIN with this email. Same contact, no second card; their card was left where it was.',
+          '',
+        ]
+      : []),
     `Builders Night 2027: ${label}`,
     `Company: ${company}`,
     ...body1,
@@ -217,7 +238,7 @@ export async function POST(req) {
     : role === 'supplier'
       ? await findStage(ghl, PIPELINE_NAMES.suppliers, STAGE_NAMES.table)
       : await findStage(ghl, PIPELINE_NAMES.builders, role === 'table' ? STAGE_NAMES.table : STAGE_NAMES.guest);
-  if (target) {
+  if (target && !repeat) {
     jobs.push(
       ghl('/opportunities/upsert', 'POST', {
         locationId: LOCATION_ID,
@@ -262,5 +283,10 @@ export async function POST(req) {
     }),
   );
 
-  return NextResponse.json({ ok: true, ...(isSub ? { qualified: result.qualified, tier: result.tier } : {}) });
+  return NextResponse.json({
+    ok: true,
+    repeat,
+    review,
+    ...(isSub && !review ? { qualified: result.qualified, tier: result.tier } : {}),
+  });
 }

@@ -142,6 +142,19 @@ export default function BuildersNightForm() {
 
   if (state === 'done') {
     const notQualified = isSub && result && result.qualified === false;
+    if (result?.review || result?.repeat) {
+      return (
+        <div className="expo-card expo-thanks" role="status">
+          <div className="expo-tick" aria-hidden="true">✓</div>
+          <h3 className="display bn-thanks-h">You're already registered</h3>
+          <p>
+            {result.review
+              ? "We already have an application from this email, so our team will review your answers and email you."
+              : "We already had you on the list, so nothing was duplicated. Your details are updated and you'll keep getting the event emails."}
+          </p>
+        </div>
+      );
+    }
     return (
       <div className="expo-card expo-thanks" role="status">
         <div className={`expo-tick${notQualified ? ' bn-tick-no' : ''}`} aria-hidden="true">{notQualified ? '!' : '✓'}</div>
