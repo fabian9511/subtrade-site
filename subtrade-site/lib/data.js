@@ -8,7 +8,7 @@ export const features = [
     keyword: 'construction field operations software',
     title: 'Live Field Operations Software for Subcontractors',
     description:
-      'Every job on one live screen: what needs you right now, every crew on a live site map, who is on site or missing today, and the next 7 days of crew coverage.',
+      'Every job on one live screen: what needs you right now, every crew on a live site map, who is on site or missing today, and every date in one calendar.',
     h1: 'Your whole business, live',
     intro:
       'Field Operations is the command center: every project, every crew and every update from the field in one live view, so you always know what is happening across your company without a single status call.',
@@ -26,20 +26,20 @@ export const features = [
         ['Right Now', 'Ranked by urgency'],
         ['Live map', 'Every site, every crew'],
         ['Today', 'On site, missing, done'],
-        ['7 days', 'Crew coverage ahead'],
+        ['Calendar', 'Every date, every job'],
       ],
       videoHero: true,
       video: {
-        id: 'qhFLBtlU6KI',
-        caption: 'Every job on one screen in 38 seconds: what needs you now, the live site map and today\'s crew.',
-        title: 'SubTrade Project Overview: Every Job on One Screen',
+        id: 'wpukpcdDKPc',
+        caption: 'The full Field Operations walkthrough in under 3 minutes: the morning cards, the live site map, Right Now, crew status, approvals and the calendar.',
+        title: 'SubTrade Field Operations Dashboard: Your Whole Company on One Page',
         description:
-          'A walkthrough of the SubTrade overview: every active project on one screen, the Right Now list of overdue RFIs, tasks and hazards, the live site map with workers on each job, and today\'s crew status and 7-day schedule.',
-        poster: '/subtrade-field-operations-video-poster.webp',
+          'A walkthrough of the SubTrade Field Operations dashboard: the overdue, due this week, crew today and open bids cards, the live site map with workers from GPS clock-ins, the Right Now list ranked by urgency with wind alerts, crew status, approvals waiting on you, open tasks and project health, and one calendar for every date on every job.',
+        poster: '/subtrade-field-operations-explainer-poster.webp',
         posterAlt:
-          'Play the SubTrade overview walkthrough: the live command center with the site map and a project popup under the words every job, one screen',
-        uploadDate: '2026-10-04',
-        duration: 'PT38S',
+          'Play the SubTrade Field Operations walkthrough: the dashboard with the four summary cards, live site map, calendar and approvals under the words your whole company, one page',
+        uploadDate: '2026-11-07',
+        duration: 'PT2M54S',
       },
       sections: [
         {
@@ -161,7 +161,7 @@ export const features = [
         ['What does the Right Now list show?', 'Everything that needs action across every job, grouped into critical and needs attention: overdue tasks, overdue RFIs, site discrepancies, open hazards, signatures needed and expiring certifications, each with its project and how late it is.'],
         ['Can I see where my crews are?', 'Yes. The live site map shows every project and the workers on site, from their GPS clock-ins, with the total on site and any project that has nobody there.'],
         ['How do I know if someone did not show up?', 'The Today panel lists every scheduled worker with their check-in time, and marks anyone missing, in overtime or done for the day.'],
-        ['Can I see the week ahead?', 'Yes. The next seven days of crew counts per project sit beside today’s crew status, so gaps in the schedule show up before Monday.'],
+        ['Can I see the week ahead?', 'Yes. Switch to the calendar and every date on every job is in one place: tasks, RFIs, change orders, purchase orders, milestones, bids, crew and certifications, by day, week, month or year.'],
         ['How is it different from the Project Dashboard?', 'The Project Dashboard goes deep on one job: its money, risk, people and paperwork. Field Operations goes wide across your whole business, showing everything happening on every site at once. Most owners start here and open a project dashboard when a job needs a closer look.'],
         ['Is the view real time?', 'Yes. As crews clock in, take photos, sign forms and file logs, the updates appear as they happen, each one timestamped and tied to its project.'],
         ['Does Field Operations work on my phone?', 'Yes. The same live view works on desktop, tablet and phone, so you can run the day from the office or the truck.'],
