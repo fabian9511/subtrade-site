@@ -4,9 +4,9 @@ import RelatedLinks from '../../components/RelatedLinks';
 import { SIGNUP } from '../../lib/data';
 
 export const metadata = {
-  title: { absolute: 'Free Retainage Calculator: 2026 Caps for All 50 States' },
+  title: { absolute: 'Free Retainage Calculator: Withheld Amount and Net Pay' },
   description:
-    'See the retainage withheld and your net payable on any pay app in seconds. 2026 caps for every state plus DC, public and private. Free, no signup, PDF.',
+    "Enter your pay app amount and retainage rate to see what's withheld and what you get paid. Applies your state's cap automatically. Free, no signup, PDF.",
   alternates: { canonical: '/construction-retainage-calculator/' },
 };
 

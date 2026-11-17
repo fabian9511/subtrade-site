@@ -2608,11 +2608,11 @@ export const compares = [
   },
   {
     slug: 'subtrade-vs-procore',
-    metaDescription: `Procore is enterprise software for large GCs and owners. SubTrade is built for trade subs: time tracking, change orders and job costing at $299/month CAD.`,
-    updated: '2026-10-07',
+    metaDescription: `Is Procore good for subcontractors? It's built for large GCs and owners. Here's where it fits a trade sub, where it doesn't, and how SubTrade compares.`,
+    updated: '2026-11-16',
     competitor: 'Procore',
     eyebrow: 'Honest Comparison',
-    headline: 'Which is right for a subcontractor?',
+    headline: 'Is Procore good for subcontractors?',
     positioning: `Procore is the biggest name in construction software, a powerful enterprise platform built for large general contractors and owners running complex projects. SubTrade is built for the other side of the table: the trade sub running crews, change orders, and labor cost on the jobs they are hired for.`,
     heroNote: `If you run an electrical, drywall, HVAC, plumbing, or concrete crew, this one is for you.`,
     shortAnswer: {
@@ -2655,6 +2655,7 @@ export const compares = [
       `Anyone who wants one simple app at a fraction of the cost`,
     ],
     faq: [
+      [`Is Procore good for subcontractors?`, `Procore works well when a subcontractor is invited into a general contractor's Procore project to answer RFIs, submittals and drawings. It is a poor fit for running the sub's own business: it is enterprise software built for large GCs and owners, priced by custom quote, with a long setup. A trade sub who needs time tracking, change orders, crew scheduling and job costing is better served by software built for subcontractors, such as SubTrade.`],
       [`Is SubTrade a good Procore alternative for subcontractors?`, `Yes. Procore is enterprise software for large GCs. SubTrade is built and priced for trade subcontractors, with field-first time tracking, change orders, and job costing.`],
       [`Is SubTrade cheaper than Procore?`, `Generally, yes. SubTrade starts at $299 per month CAD all-in, while Procore is quote-based at enterprise pricing.`],
       [`Can I use SubTrade if my GC uses Procore?`, `Yes. Many subs run their own operations in SubTrade while still delivering to a GC who uses Procore.`],

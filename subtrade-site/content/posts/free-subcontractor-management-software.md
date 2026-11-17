@@ -1,12 +1,15 @@
 ---
-title: "Free subcontractor management software"
-description: "Free tools and spreadsheets look like they cost nothing. Here's the honest math on what free subcontractor management software actually costs a trade business."
+title: "Free Subcontractor Management Software (2026)"
+description: "Looking for free subcontractor management software? Where a spreadsheet or free app still works, what free really costs a trade business, and when to upgrade."
 blurb: "Free isn't zero — it's paid in rekeyed hours, lost extras, and invoices that go out late. The real math on free tools, and where a spreadsheet still wins."
 tag: "Choosing software"
 date: "2026-08-10"
+updated: "2026-11-16"
 image: "/free-subcontractor-software-spreadsheet-vs-app-jobsite-office.webp"
 imageAlt: "A jobsite office desk with a laptop showing a cluttered spreadsheet next to a phone showing a clean crew list, morning light through a trailer window."
 ---
+
+**The short answer:** yes, free subcontractor management software exists, in three forms: spreadsheets, free tiers of paid platforms, and free single-purpose apps for things like time clocks or photos. They work for a one-person shop on a single job. Once you run crews across several jobs, free tools cost more in retyped data, late invoices and unsigned extras than a paid plan does.
 
 "Free" is the most expensive word in construction software, because the price just moves somewhere you're not looking. There's nothing wrong with free tools — a spreadsheet is genuinely the right answer for some things, and we'll say where. But if you're a subcontractor searching for free subcontractor management software to run the whole business on, it's worth doing the real math first, because the bill still arrives. It just arrives as rekeyed hours, extras nobody signed, and invoices that went out a week late.
 
